@@ -375,6 +375,53 @@ function renderStageCards(){
   });
 }
 
+function renderCandles(history, pivot, baseStartDate){
+  const w = 460, h = 220, padTop = 24, padBottom = 20;
+  if(!history || history.length === 0){
+    return '<div class="empty" style="padding:20px;">No chart history for this stock.</div>';
+  }
+  const highs = history.map(d => d.h), lows = history.map(d => d.l);
+  const maxP = Math.max(...highs, pivot), minP = Math.min(...lows, pivot);
+  const range = (maxP - minP) || 1;
+  const y = p => padTop + (maxP - p) / range * (h - padTop - padBottom);
+  const n = history.length;
+  const slot = w / n;
+  const bw = Math.max(2, Math.min(7, slot * 0.6));
+
+  let baseStartIdx = baseStartDate ? history.findIndex(d => d.date >= baseStartDate) : -1;
+  if(baseStartIdx < 0) baseStartIdx = 0;
+
+  let svg = `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" style="background:#FAFAF7;border-radius:8px;">`;
+  const zoneX = baseStartIdx * slot, zoneW = w - zoneX;
+  svg += `<rect x="${zoneX.toFixed(1)}" y="${y(maxP).toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(y(minP)-y(maxP)).toFixed(1)}" fill="#ECFDF5" opacity="0.6"/>`;
+  svg += `<line x1="0" y1="${y(pivot).toFixed(1)}" x2="${w}" y2="${y(pivot).toFixed(1)}" stroke="var(--green)" stroke-width="1" stroke-dasharray="3 3"/>`;
+  svg += `<text x="4" y="${(y(pivot)-4).toFixed(1)}" font-size="9" fill="var(--green)" font-family="IBM Plex Mono">pivot ${pivot}</text>`;
+  history.forEach((d,i) => {
+    const x = i*slot + slot/2;
+    const up = d.c >= d.o;
+    const color = up ? 'var(--green)' : 'var(--red)';
+    svg += `<line x1="${x.toFixed(1)}" y1="${y(d.h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${y(d.l).toFixed(1)}" stroke="${color}" stroke-width="1"/>`;
+    const top=y(Math.max(d.o,d.c)), bot=y(Math.min(d.o,d.c));
+    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,(bot-top)).toFixed(1)}" fill="${color}"/>`;
+  });
+  svg += `</svg>`;
+  return svg;
+}
+
+function renderChartFor(row){
+  const panel = document.getElementById('stage-chart-panel');
+  if(!panel) return;
+  document.querySelectorAll('#stage-table tbody tr').forEach(tr => tr.classList.toggle('selected', tr.dataset.symbol===row.symbol));
+  const priceNow = row.close ?? row.current_price ?? row.exit_price;
+  panel.innerHTML = `<div class="card">
+    <div class="stock-header">
+      <div><div class="disp stock-name">${row.symbol}</div></div>
+      <div class="num stock-price">₹${(priceNow||0).toFixed(2)}</div>
+    </div>
+    ${renderCandles(row.history, row.pivot, row.base_start)}
+  </div>`;
+}
+
 function renderStageTable(){
   const el = document.getElementById('breakouts-content');
   const rows = LIFECYCLE_DATA.stages[ACTIVE_STAGE] || [];
@@ -383,10 +430,11 @@ function renderStageTable(){
     return;
   }
 
+  const hasChart = ACTIVE_STAGE !== 'played_out';
   let head, body;
   if(ACTIVE_STAGE === 'forming'){
     head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
-    body = rows.map(r => `<tr>
+    body = rows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num">${r.close.toFixed(2)}</td>
       <td class="r num" style="color:var(--muted);">${r.pivot.toFixed(2)}</td>
@@ -404,9 +452,8 @@ function renderStageTable(){
       <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`).join('');
   } else {
-    // fresh / climbing
     head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">Sessions</th><th class="r">RS</th>`;
-    body = rows.map(r => `<tr>
+    body = rows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
       <td class="r num">${r.current_price.toFixed(2)}</td>
@@ -419,10 +466,27 @@ function renderStageTable(){
   const truncNote = (ACTIVE_STAGE==='forming' && LIFECYCLE_DATA.forming_list_truncated)
     ? `<div class="note" style="margin-bottom:8px;">Showing the 60 closest to their pivot, out of ${LIFECYCLE_DATA.counts.forming} total forming bases.</div>` : '';
 
-  el.innerHTML = `<div class="card">
-    ${truncNote}
-    <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
-  </div>`;
+  if(hasChart){
+    el.innerHTML = `<div class="breakouts-layout">
+      <div class="breakouts-table-col card">
+        ${truncNote}
+        <table id="stage-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+      </div>
+      <div class="breakouts-chart-col" id="stage-chart-panel"></div>
+    </div>`;
+    document.querySelectorAll('#stage-table tbody tr').forEach(tr => {
+      tr.addEventListener('click', () => {
+        const row = rows.find(r => r.symbol === tr.dataset.symbol);
+        if(row) renderChartFor(row);
+      });
+    });
+    if(rows.length) renderChartFor(rows[0]);
+  } else {
+    el.innerHTML = `<div class="card">
+      ${truncNote}
+      <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+    </div>`;
+  }
 }
 
 async function loadBreakouts(){
