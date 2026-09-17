@@ -72,6 +72,12 @@
   .stock-price{font-size:19px;font-weight:700;text-align:right;}
   .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
   .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
+  .chart-stats-2col{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px;margin-top:14px;}
+  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F1EFE8;font-size:12.5px;}
+  .stat-row .lbl{color:var(--muted);}
+  .stat-row .val{font-weight:600;}
+  .info-icon{display:inline-block;color:#B8C0CC;font-size:11px;cursor:help;}
+  .chart-tooltip{display:none;position:absolute;background:var(--ink);color:#fff;font-size:10.5px;line-height:1.5;padding:6px 9px;border-radius:6px;pointer-events:none;white-space:nowrap;z-index:10;font-family:'IBM Plex Mono',monospace;}
   .range-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;}
   .range-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
   .chart-stats .v{font-weight:600;}
@@ -406,8 +412,8 @@ function computeChartStats(row, sliced){
   return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
 }
 
-function renderCandles(sliced, pivot, baseStartDate, showBaseLabel){
-  const w = 640, h = 260, padTop = 26, padRight = 46, priceH = 190, volH = 50, volGap = 6;
+function renderCandles(sliced, pivot, baseStartDate, showBaseLabel, isStillOpen, chartId){
+  const w = 640, padTop = 30, padRight = 52, padBottom = 20, priceH = 190, volH = 42, volGap = 8;
   if(!sliced || sliced.length === 0){
     return '<div class="empty" style="padding:20px;">No chart history for this stock.</div>';
   }
@@ -417,7 +423,8 @@ function renderCandles(sliced, pivot, baseStartDate, showBaseLabel){
   const plotW = w - padRight;
   const y = p => padTop + (maxP - p) / range * (priceH - padTop);
   const maxV = Math.max(...sliced.map(d=>d.v), 1);
-  const yv = v => (priceH + volGap) + (1 - v/maxV) * volH;
+  const volTop = priceH + volGap;
+  const yv = v => volTop + (1 - v/maxV) * volH;
 
   const n = sliced.length;
   const slot = plotW / n;
@@ -426,50 +433,80 @@ function renderCandles(sliced, pivot, baseStartDate, showBaseLabel){
   let baseStartIdx = baseStartDate ? sliced.findIndex(d => d.date >= baseStartDate) : -1;
   if(baseStartIdx < 0) baseStartIdx = 0;
 
-  let svg = `<svg width="100%" height="${priceH+volGap+volH+14}" viewBox="0 0 ${w} ${priceH+volGap+volH+14}">`;
+  const totalH = volTop + volH + padBottom;
+  let svg = `<svg id="${chartId}" width="100%" height="${totalH}" viewBox="0 0 ${w} ${totalH}" style="cursor:crosshair;">`;
+
+  // Horizontal gridlines behind everything, matched to the right-axis labels
+  for(let k=0;k<=3;k++){
+    const p = minP + (range*k/3);
+    svg += `<line x1="0" y1="${y(p).toFixed(1)}" x2="${plotW}" y2="${y(p).toFixed(1)}" stroke="#EEF1F5" stroke-width="1"/>`;
+  }
 
   if(pivot){
     const zoneX = baseStartIdx * slot, zoneW = plotW - zoneX;
     const zoneTop = y(maxP), zoneBot = y(minP);
-    svg += `<rect x="${zoneX.toFixed(1)}" y="${zoneTop.toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(zoneBot-zoneTop).toFixed(1)}" fill="var(--green)" opacity="0.08"/>`;
+    svg += `<rect x="${zoneX.toFixed(1)}" y="${zoneTop.toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(zoneBot-zoneTop).toFixed(1)}" fill="var(--green)" opacity="0.07" stroke="var(--green)" stroke-width="1" stroke-opacity="0.35"/>`;
+    if(showBaseLabel){
+      svg += `<text x="${(zoneX+zoneW/2).toFixed(1)}" y="${(zoneTop-6).toFixed(1)}" font-size="9.5" fill="var(--green)" font-weight="600" text-anchor="middle">${showBaseLabel}</text>`;
+    }
     svg += `<line x1="0" y1="${y(pivot).toFixed(1)}" x2="${plotW}" y2="${y(pivot).toFixed(1)}" stroke="var(--green)" stroke-width="1.2" stroke-dasharray="4 3"/>`;
     svg += `<rect x="2" y="${(y(pivot)-16).toFixed(1)}" width="${(58+String(pivot).length*5)}" height="14" fill="var(--green)" rx="3"/>`;
-    svg += `<text x="6" y="${(y(pivot)-5).toFixed(1)}" font-size="9" fill="#fff" font-family="IBM Plex Mono">pivot ₹${pivot}</text>`;
-  }
-  if(showBaseLabel){
-    svg += `<text x="${plotW-4}" y="16" font-size="10" fill="var(--green)" font-weight="700" text-anchor="end" font-family="IBM Plex Mono">${showBaseLabel} ↑</text>`;
+    svg += `<text x="6" y="${(y(pivot)-5).toFixed(1)}" font-size="9" fill="#fff">pivot ₹${pivot}</text>`;
   }
 
   sliced.forEach((d,i) => {
     const x = i*slot + slot/2;
     const up = d.c >= d.o;
     const color = up ? 'var(--green)' : 'var(--red)';
-    svg += `<line x1="${x.toFixed(1)}" y1="${y(d.h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${y(d.l).toFixed(1)}" stroke="${color}" stroke-width="1"/>`;
+    svg += `<line x1="${x.toFixed(1)}" y1="${y(d.h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${y(d.l).toFixed(1)}" stroke="${color}" stroke-width="1" pointer-events="none"/>`;
     const top=y(Math.max(d.o,d.c)), bot=y(Math.min(d.o,d.c));
-    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,(bot-top)).toFixed(1)}" fill="${color}"/>`;
-    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${yv(d.v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(priceH+volGap+volH-yv(d.v)).toFixed(1)}" fill="${color}" opacity="0.45"/>`;
+    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,(bot-top)).toFixed(1)}" fill="${color}" pointer-events="none"/>`;
+    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${yv(d.v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(volTop+volH-yv(d.v)).toFixed(1)}" fill="${color}" opacity="0.4" pointer-events="none"/>`;
+    // Invisible wide hit-target per candle for hover/click (data attrs picked up by the panel's mousemove handler)
+    svg += `<rect class="candle-hit" data-i="${i}" x="${(x-slot/2).toFixed(1)}" y="0" width="${slot.toFixed(1)}" height="${totalH}" fill="transparent"/>`;
   });
 
-  // Right-side price axis: 4 evenly spaced gridline labels
-  for(let k=0;k<=3;k++){
-    const p = minP + (range*k/3);
-    svg += `<text x="${plotW+6}" y="${(y(p)+3).toFixed(1)}" font-size="8" fill="var(--muted)" font-family="IBM Plex Mono">${p.toFixed(0)}</text>`;
+  if(isStillOpen){
+    const last = sliced[sliced.length-1];
+    const x = (n-1)*slot + slot/2;
+    const arrowY = y(last.h) - 10;
+    svg += `<path d="M ${x.toFixed(1)} ${(arrowY-6).toFixed(1)} l -5 8 l 10 0 z" fill="var(--green)" pointer-events="none"/>`;
   }
 
-  // Month tick labels along the bottom -- one per distinct month, evenly found
-  let lastMonth = null;
-  sliced.forEach((d,i) => {
-    const m = d.date.slice(0,7);
-    if(m !== lastMonth){
-      lastMonth = m;
-      const x = i*slot;
-      const label = new Date(d.date).toLocaleString('en-US',{month:'short'});
-      svg += `<text x="${x.toFixed(1)}" y="${priceH+volGap+volH+12}" font-size="8" fill="var(--muted)" font-family="IBM Plex Mono">${label}</text>`;
-    }
-  });
+  for(let k=0;k<=3;k++){
+    const p = minP + (range*k/3);
+    svg += `<text x="${plotW+6}" y="${(y(p)+3).toFixed(1)}" font-size="8.5" fill="var(--muted)">${p.toFixed(2)}</text>`;
+  }
+
+  const tickCount = 3;
+  for(let k=0;k<tickCount;k++){
+    const idx = Math.round((n-1) * k/(tickCount-1));
+    const x = idx*slot + slot/2;
+    const anchor = k===0 ? 'start' : (k===tickCount-1 ? 'end' : 'middle');
+    svg += `<text x="${x.toFixed(1)}" y="${totalH-4}" font-size="8.5" fill="var(--muted)" text-anchor="${anchor}">${sliced[idx].date}</text>`;
+  }
 
   svg += `</svg>`;
   return svg;
+}
+
+function wireChartTooltip(chartId, sliced){
+  const svg = document.getElementById(chartId);
+  const tooltip = document.getElementById(chartId+'-tooltip');
+  if(!svg || !tooltip) return;
+  svg.addEventListener('mousemove', (e) => {
+    const target = e.target.closest('.candle-hit');
+    if(!target) return;
+    const i = parseInt(target.dataset.i);
+    const d = sliced[i];
+    if(!d) return;
+    const up = d.c >= d.o;
+    tooltip.style.display = 'block';
+    tooltip.style.left = Math.min(e.offsetX+12, svg.clientWidth-150) + 'px';
+    tooltip.style.top = Math.max(e.offsetY-10, 0) + 'px';
+    tooltip.innerHTML = `<b>${d.date}</b><br>O ${d.o} &nbsp; H ${d.h}<br>L ${d.l} &nbsp; C <span style="color:${up?'var(--green)':'var(--red)'}">${d.c}</span><br>Vol ${(d.v/1000).toFixed(0)}K`;
+  });
+  svg.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 }
 
 let CURRENT_CHART_ROW = null;
@@ -515,43 +552,64 @@ function drawChartPanel(){
     : '';
   const volRsMcapLine = `Vol ${today ? (today.v/1e6).toFixed(2)+'M' : '—'} &nbsp;&nbsp; RS ${row.rs_pct ?? '—'} &nbsp;&nbsp; Mkt Cap ${row.market_cap_cr ? '₹'+row.market_cap_cr.toLocaleString('en-IN')+' Cr' : '—'}`;
 
+  // Prefer the backend's real fields (computed against FULL multi-year
+  // history) over any client-side estimate limited to the embedded window.
+  const medianTurnoverCr = row.median_turnover_cr ?? (sliced.length >= 20
+    ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
+    : null);
+
   const rangeBtns = ['6M','1Y'].map(r =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${r}</button>`
   ).join('');
 
-  const statRow = (label, val, color) =>
-    `<div><div class="v num" style="${color?`color:${color};`:''}">${val}</div><div class="l">${label}</div></div>`;
+  const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
+  const statRow = (label, tip, val, color) =>
+    `<div class="stat-row"><span class="lbl">${label} ${infoIcon(tip)}</span><span class="val num" style="${color?`color:${color};`:''}">${val}</span></div>`;
 
   const statsHtml = stats ? `
-    <div class="chart-stats">
-      ${statRow('Breakout-day gain', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
-      ${statRow('1-day gain', (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
-      ${statRow('Now vs pivot', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
-      ${statRow('Close-in-range', stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
-      ${statRow('Vol vs 20d avg', stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
-      ${statRow('Price vs 50-MA', stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—')}
-      ${statRow('RS rating', row.rs_pct ?? '—')}
-      ${statRow('Base weeks', row.base_weeks ?? '—')}
+    <div class="chart-stats-2col">
+      ${statRow('Breakout-day gain (%)', 'The % move on the day it actually broke out, not since entry.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('1-day gain (%)', "Today's close vs yesterday's close.", (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('Now vs pivot (%)', 'Current close vs the pivot it broke out above.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume (vs 20d avg)', "Volume vs the 20-session average, at today's bar.", stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
+      ${statRow('Breakout close-in-range', "Where today's close sits in today's range (1.0 = at the high).", stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
+      ${statRow('RS rating', 'Relative strength percentile vs the whole scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
     </div>` : '';
 
-  panel.innerHTML = `<div class="card">
+  const isOpenStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
+  // "Blue sky": real backend field, checked against the stock's FULL
+  // history (not just this chart's embedded window) -- current close
+  // within 1% of its all-time high, meaning no overhead resistance above.
+  const blueSkyBadge = (isOpenStage && row.blue_sky)
+    ? `<span style="display:inline-block;background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 12px;border-radius:14px;margin-top:10px;">Blue sky</span>` : '';
+
+  const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
+
+  panel.innerHTML = `<div class="card" style="position:relative;">
     <div class="stock-header">
       <div>
         <div class="disp stock-name">${row.symbol} <span style="color:var(--muted);font-weight:400;font-size:14px;">☆</span></div>
       </div>
-      <div style="display:flex;gap:8px;">${badgeHtml}</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
-      <div class="num stock-price">₹${(priceNow||0).toFixed(2)}</div>
-      ${stats && stats.oneDayGain!=null ? `<div class="num" style="font-weight:600;color:${stats.oneDayGain>=0?'var(--green)':'var(--red)'}">${stats.oneDayGain>=0?'+':''}${stats.oneDayGain.toFixed(2)}%</div>` : ''}
+      <div style="display:flex;gap:8px;align-items:center;">
+        ${badgeHtml}
+        <span class="num stock-price" style="font-size:16px;">₹${(priceNow||0).toFixed(2)}</span>
+        ${stats && stats.oneDayGain!=null ? `<span class="num" style="font-weight:600;font-size:13px;color:${stats.oneDayGain>=0?'var(--green)':'var(--red)'}">(${stats.oneDayGain>=0?'+':''}${stats.oneDayGain.toFixed(2)}%)</span>` : ''}
+      </div>
     </div>
     <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:2px;">${ohlcLine}</div>
     <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:10px;">${volRsMcapLine}</div>
     <div style="display:flex;gap:6px;margin-bottom:10px;">${rangeBtns}</div>
-    ${renderCandles(sliced, row.pivot, row.base_start, baseLabel)}
+    <div style="position:relative;">
+      ${renderCandles(sliced, row.pivot, row.base_start, baseLabel, isOpenStage, chartId)}
+      <div id="${chartId}-tooltip" class="chart-tooltip"></div>
+    </div>
     ${statsHtml}
+    ${blueSkyBadge}
     <button class="btn-secondary" style="margin-top:12px;width:100%;">☆ Add to Watchlist</button>
   </div>`;
+  wireChartTooltip(chartId, sliced);
 }
 
 function renderStageTable(){

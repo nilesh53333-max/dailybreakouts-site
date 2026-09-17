@@ -2262,7 +2262,9 @@
             "c": 191.7,
             "v": 4920152
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 23.97
       },
       {
         "symbol": "TATACOMM",
@@ -4512,7 +4514,9 @@
             "c": 1796.9,
             "v": 309373
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 41.95
       },
       {
         "symbol": "AVL",
@@ -6762,7 +6766,9 @@
             "c": 636.6,
             "v": 68768
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 10.46
       },
       {
         "symbol": "TATVA",
@@ -9012,7 +9018,9 @@
             "c": 1704.0,
             "v": 89446
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 6.74
       },
       {
         "symbol": "KSL",
@@ -11262,7 +11270,9 @@
             "c": 969.0,
             "v": 309162
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 10.69
       },
       {
         "symbol": "TALBROAUTO",
@@ -13512,7 +13522,9 @@
             "c": 435.5,
             "v": 360424
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 6.67
       },
       {
         "symbol": "KIMS",
@@ -15762,7 +15774,9 @@
             "c": 797.0,
             "v": 1081664
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 38.56
       },
       {
         "symbol": "TEGA",
@@ -18012,7 +18026,9 @@
             "c": 1909.4,
             "v": 3909271
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 32.52
       },
       {
         "symbol": "JKPAPER",
@@ -20262,7 +20278,9 @@
             "c": 418.0,
             "v": 1831668
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 15.76
       },
       {
         "symbol": "GNFC",
@@ -22512,7 +22530,9 @@
             "c": 584.3,
             "v": 8249295
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 26.49
       },
       {
         "symbol": "PNB",
@@ -24762,7 +24782,9 @@
             "c": 116.74,
             "v": 15682368
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 135.51
       },
       {
         "symbol": "WENDT",
@@ -27012,7 +27034,9 @@
             "c": 8777.0,
             "v": 10648
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 6.74
       },
       {
         "symbol": "CEIGALL",
@@ -29262,7 +29286,9 @@
             "c": 388.05,
             "v": 283020
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.75
       },
       {
         "symbol": "TATACHEM",
@@ -31512,7 +31538,9 @@
             "c": 774.65,
             "v": 14276741
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 32.85
       },
       {
         "symbol": "GESHIP",
@@ -33762,7 +33790,9 @@
             "c": 1423.0,
             "v": 830380
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 111.72
       },
       {
         "symbol": "NORTHARC",
@@ -36012,7 +36042,9 @@
             "c": 310.5,
             "v": 2356841
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 42.14
       },
       {
         "symbol": "MAHSEAMLES",
@@ -38262,7 +38294,9 @@
             "c": 721.85,
             "v": 436271
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 24.53
       },
       {
         "symbol": "IIFLCAPS",
@@ -40512,7 +40546,9 @@
             "c": 337.0,
             "v": 138476
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 11.33
       },
       {
         "symbol": "JUBLPHARMA",
@@ -42762,7 +42798,9 @@
             "c": 1014.95,
             "v": 87557
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 18.36
       },
       {
         "symbol": "LALPATHLAB",
@@ -45012,7 +45050,9 @@
             "c": 1927.0,
             "v": 353435
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 33.33
       },
       {
         "symbol": "APARINDS",
@@ -47262,7 +47302,9 @@
             "c": 17710.0,
             "v": 195481
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 184.59
       },
       {
         "symbol": "FINEORG",
@@ -49512,7 +49554,9 @@
             "c": 5200.0,
             "v": 11152
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 9.53
       },
       {
         "symbol": "YESBANK",
@@ -51762,7 +51806,9 @@
             "c": 23.17,
             "v": 68897192
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 113.5
       },
       {
         "symbol": "ABDL",
@@ -54012,7 +54058,9 @@
             "c": 654.0,
             "v": 558554
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 17.81
       },
       {
         "symbol": "AARTIDRUGS",
@@ -56262,7 +56310,9 @@
             "c": 430.7,
             "v": 120136
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 5.88
       },
       {
         "symbol": "KOTAKBANK",
@@ -58512,7 +58562,9 @@
             "c": 417.0,
             "v": 11128039
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 458.16
       },
       {
         "symbol": "CUPID",
@@ -60762,7 +60814,9 @@
             "c": 278.75,
             "v": 5897623
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 301.96
       },
       {
         "symbol": "SUPRIYA",
@@ -63012,7 +63066,9 @@
             "c": 904.0,
             "v": 126715
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 16.66
       },
       {
         "symbol": "JASH",
@@ -65262,7 +65318,9 @@
             "c": 514.0,
             "v": 158956
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 5.34
       },
       {
         "symbol": "MBAPL",
@@ -67512,7 +67570,9 @@
             "c": 164.6,
             "v": 1854784
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 16.3
       },
       {
         "symbol": "ETERNAL",
@@ -69762,7 +69822,9 @@
             "c": 323.1,
             "v": 26768918
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 720.38
       },
       {
         "symbol": "ORIENTHOT",
@@ -72012,7 +72074,9 @@
             "c": 140.15,
             "v": 497599
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 11.5
       },
       {
         "symbol": "GPPL",
@@ -74262,7 +74326,9 @@
             "c": 162.82,
             "v": 1046506
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 25.61
       },
       {
         "symbol": "OPTIEMUS",
@@ -76512,7 +76578,9 @@
             "c": 608.6,
             "v": 355565
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 8.35
       },
       {
         "symbol": "APLLTD",
@@ -78762,7 +78830,9 @@
             "c": 827.7,
             "v": 392037
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 10.51
       },
       {
         "symbol": "GNA",
@@ -81012,7 +81082,9 @@
             "c": 540.8,
             "v": 167241
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 13.9
       },
       {
         "symbol": "ADANIPORTS",
@@ -83262,7 +83334,9 @@
             "c": 1731.6,
             "v": 739701
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 288.68
       },
       {
         "symbol": "LICHSGFIN",
@@ -85512,7 +85586,9 @@
             "c": 548.9,
             "v": 3269674
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 182.17
       },
       {
         "symbol": "ABSLAMC",
@@ -87762,7 +87838,9 @@
             "c": 1088.1,
             "v": 206216
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.85
       },
       {
         "symbol": "KPIL",
@@ -90012,7 +90090,9 @@
             "c": 1400.0,
             "v": 230018
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 18.62
       },
       {
         "symbol": "GOODLUCK",
@@ -92262,7 +92342,9 @@
             "c": 506.2,
             "v": 343692
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.32
       },
       {
         "symbol": "BLACKBUCK",
@@ -94512,7 +94594,9 @@
             "c": 611.5,
             "v": 547967
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.21
       },
       {
         "symbol": "MANINFRA",
@@ -96762,7 +96846,9 @@
             "c": 125.72,
             "v": 1573956
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 25.19
       },
       {
         "symbol": "PREMEXPLN",
@@ -99012,7 +99098,9 @@
             "c": 668.5,
             "v": 348535
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 9.09
       },
       {
         "symbol": "AJANTPHARM",
@@ -101262,7 +101350,9 @@
             "c": 3509.5,
             "v": 97924
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 23.08
       },
       {
         "symbol": "INDGN",
@@ -103512,7 +103602,9 @@
             "c": 590.0,
             "v": 272251
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 21.03
       },
       {
         "symbol": "AEGISLOG",
@@ -105762,7 +105854,9 @@
             "c": 1357.2,
             "v": 461172
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 87.18
       },
       {
         "symbol": "EMIL",
@@ -108012,7 +108106,9 @@
             "c": 185.04,
             "v": 1960442
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 27.06
       },
       {
         "symbol": "KDDL",
@@ -110262,7 +110358,9 @@
             "c": 3850.0,
             "v": 10093
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 8.9
       },
       {
         "symbol": "ACUTAAS",
@@ -112512,7 +112610,9 @@
             "c": 3320.0,
             "v": 182390
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 80.15
       },
       {
         "symbol": "RELIGARE",
@@ -114762,7 +114862,9 @@
             "c": 250.5,
             "v": 238222
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 17.89
       },
       {
         "symbol": "ASAHIINDIA",
@@ -117012,7 +117114,9 @@
             "c": 951.0,
             "v": 43702
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 13.0
       },
       {
         "symbol": "GANDHAR",
@@ -119262,7 +119366,9 @@
             "c": 269.95,
             "v": 659132
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.75
       },
       {
         "symbol": "AXISCADES",
@@ -121512,7 +121618,9 @@
             "c": 1852.9,
             "v": 443850
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 26.88
       },
       {
         "symbol": "TI",
@@ -123762,7 +123870,9 @@
             "c": 550.0,
             "v": 1300815
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.04
       },
       {
         "symbol": "ZYDUSLIFE",
@@ -126012,7 +126122,9 @@
             "c": 1136.0,
             "v": 1074859
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 123.55
       },
       {
         "symbol": "DYNAMATECH",
@@ -128262,7 +128374,9 @@
             "c": 11824.0,
             "v": 22234
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 14.55
       },
       {
         "symbol": "NELCO",
@@ -130512,7 +130626,9 @@
             "c": 968.0,
             "v": 197234
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 18.52
       },
       {
         "symbol": "EMCURE",
@@ -132762,7 +132878,9 @@
             "c": 1908.3,
             "v": 136564
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 23.05
       },
       {
         "symbol": "HYUNDAI",
@@ -135012,7 +135130,9 @@
             "c": 2167.9,
             "v": 675287
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 148.25
       }
     ],
     "fresh": [],
@@ -137270,7 +137390,9 @@
             "c": 574.85,
             "v": 262093
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 82.78
       },
       {
         "symbol": "SHREEJISPG",
@@ -139389,7 +139511,9 @@
             "c": 689.2,
             "v": 1119700
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 59.96
       },
       {
         "symbol": "SHREEJISPG",
@@ -141508,7 +141632,9 @@
             "c": 689.2,
             "v": 1119700
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 59.96
       },
       {
         "symbol": "RISHABH",
@@ -143763,7 +143889,9 @@
             "c": 775.5,
             "v": 224618
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 17.55
       },
       {
         "symbol": "EBGNG",
@@ -146018,7 +146146,9 @@
             "c": 663.75,
             "v": 528712
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 62.01
       },
       {
         "symbol": "SSWL",
@@ -148273,7 +148403,9 @@
             "c": 349.05,
             "v": 439077
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 27.19
       },
       {
         "symbol": "EBGNG",
@@ -150528,7 +150660,9 @@
             "c": 663.75,
             "v": 528712
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 62.01
       },
       {
         "symbol": "VINDHYATEL",
@@ -152783,7 +152917,9 @@
             "c": 2613.5,
             "v": 49877
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.46
       },
       {
         "symbol": "EBGNG",
@@ -155038,7 +155174,9 @@
             "c": 663.75,
             "v": 528712
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 62.01
       },
       {
         "symbol": "MOREPENLAB",
@@ -157293,7 +157431,9 @@
             "c": 119.9,
             "v": 27476098
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 231.45
       },
       {
         "symbol": "ROSSTECH",
@@ -159548,7 +159688,9 @@
             "c": 1351.3,
             "v": 756569
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 19.14
       },
       {
         "symbol": "HATSUN",
@@ -161803,7 +161945,9 @@
             "c": 1179.7,
             "v": 45931
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.34
       },
       {
         "symbol": "QUADFUTURE",
@@ -164058,7 +164202,9 @@
             "c": 518.5,
             "v": 2248910
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.69
       },
       {
         "symbol": "GRAPHITE",
@@ -166313,7 +166459,9 @@
             "c": 813.2,
             "v": 2975709
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 64.44
       },
       {
         "symbol": "TALBROAUTO",
@@ -168568,7 +168716,9 @@
             "c": 435.5,
             "v": 360424
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 6.67
       },
       {
         "symbol": "AEGISVOPAK",
@@ -170823,7 +170973,9 @@
             "c": 310.85,
             "v": 6078989
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 21.34
       },
       {
         "symbol": "JINDWORLD",
@@ -173078,7 +173230,9 @@
             "c": 49.18,
             "v": 4224205
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 53.03
       },
       {
         "symbol": "AEGISVOPAK",
@@ -175333,7 +175487,9 @@
             "c": 310.85,
             "v": 6078989
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 21.34
       },
       {
         "symbol": "HATSUN",
@@ -177588,7 +177744,9 @@
             "c": 1179.7,
             "v": 45931
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.34
       },
       {
         "symbol": "AEGISVOPAK",
@@ -179843,7 +180001,9 @@
             "c": 310.85,
             "v": 6078989
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 21.34
       },
       {
         "symbol": "HATSUN",
@@ -182098,7 +182258,9 @@
             "c": 1179.7,
             "v": 45931
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.34
       },
       {
         "symbol": "HATSUN",
@@ -184353,7 +184515,9 @@
             "c": 1179.7,
             "v": 45931
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.34
       },
       {
         "symbol": "RGL",
@@ -186608,7 +186772,9 @@
             "c": 157.1,
             "v": 772497
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.47
       },
       {
         "symbol": "HATSUN",
@@ -188863,7 +189029,9 @@
             "c": 1179.7,
             "v": 45931
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.34
       },
       {
         "symbol": "GMMPFAUDLR",
@@ -191118,7 +191286,9 @@
             "c": 1368.9,
             "v": 547297
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.33
       },
       {
         "symbol": "RAMRAT",
@@ -193373,7 +193543,9 @@
             "c": 558.95,
             "v": 326071
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 16.1
       },
       {
         "symbol": "WINDLAS",
@@ -195628,7 +195800,9 @@
             "c": 1114.25,
             "v": 117302
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.59
       },
       {
         "symbol": "WOCKPHARMA",
@@ -197883,7 +198057,9 @@
             "c": 2084.0,
             "v": 601700
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 168.21
       },
       {
         "symbol": "FOSECOIND",
@@ -200138,7 +200314,9 @@
             "c": 6710.0,
             "v": 291873
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 7.56
       },
       {
         "symbol": "VENKEYS",
@@ -202393,7 +202571,9 @@
             "c": 1651.4,
             "v": 29348
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.82
       },
       {
         "symbol": "QUADFUTURE",
@@ -204648,7 +204828,9 @@
             "c": 518.5,
             "v": 2248910
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.69
       },
       {
         "symbol": "63MOONS",
@@ -206903,7 +207085,9 @@
             "c": 872.9,
             "v": 267977
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 23.09
       },
       {
         "symbol": "KROSS",
@@ -209158,7 +209342,9 @@
             "c": 243.8,
             "v": 1742579
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 7.06
       },
       {
         "symbol": "ECLERX",
@@ -211413,7 +211599,9 @@
             "c": 1923.4,
             "v": 231956
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 35.49
       },
       {
         "symbol": "GANDHAR",
@@ -213668,7 +213856,9 @@
             "c": 269.95,
             "v": 659132
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.75
       },
       {
         "symbol": "KROSS",
@@ -215923,7 +216113,9 @@
             "c": 243.8,
             "v": 1742579
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 7.06
       },
       {
         "symbol": "GMMPFAUDLR",
@@ -218178,7 +218370,9 @@
             "c": 1368.9,
             "v": 547297
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 31.33
       },
       {
         "symbol": "ECLERX",
@@ -220433,7 +220627,9 @@
             "c": 1923.4,
             "v": 231956
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 35.49
       },
       {
         "symbol": "KSL",
@@ -222688,7 +222884,9 @@
             "c": 969.0,
             "v": 309162
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 10.69
       },
       {
         "symbol": "VINCOFE",
@@ -224943,7 +225141,9 @@
             "c": 176.2,
             "v": 2254132
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 39.61
       },
       {
         "symbol": "VINCOFE",
@@ -227198,7 +227398,9 @@
             "c": 176.2,
             "v": 2254132
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 39.61
       },
       {
         "symbol": "WSTCSTPAPR",
@@ -229453,7 +229655,9 @@
             "c": 714.4,
             "v": 275085
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 19.55
       },
       {
         "symbol": "GANDHAR",
@@ -231708,7 +231912,9 @@
             "c": 269.95,
             "v": 659132
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 20.75
       },
       {
         "symbol": "MAHSEAMLES",
@@ -233963,7 +234169,9 @@
             "c": 721.85,
             "v": 436271
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 24.53
       },
       {
         "symbol": "WOCKPHARMA",
@@ -236218,7 +236426,9 @@
             "c": 2084.0,
             "v": 601700
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 168.21
       },
       {
         "symbol": "AXISCADES",
@@ -238473,7 +238683,9 @@
             "c": 1852.9,
             "v": 443850
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 26.88
       },
       {
         "symbol": "SOLARA",
@@ -240728,7 +240940,9 @@
             "c": 739.35,
             "v": 503094
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 37.89
       },
       {
         "symbol": "FIVESTAR",
@@ -242983,7 +243197,9 @@
             "c": 532.85,
             "v": 350926
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 25.09
       },
       {
         "symbol": "WINDLAS",
@@ -245238,7 +245454,9 @@
             "c": 1114.25,
             "v": 117302
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.59
       },
       {
         "symbol": "VENKEYS",
@@ -247493,7 +247711,9 @@
             "c": 1651.4,
             "v": 29348
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 12.82
       },
       {
         "symbol": "NOCIL",
@@ -249748,7 +249968,9 @@
             "c": 185.63,
             "v": 2002244
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 11.91
       },
       {
         "symbol": "ECLERX",
@@ -252003,7 +252225,9 @@
             "c": 1923.4,
             "v": 231956
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 35.49
       },
       {
         "symbol": "SUNPHARMA",
@@ -254258,7 +254482,9 @@
             "c": 1861.6,
             "v": 1316240
           }
-        ]
+        ],
+        "blue_sky": false,
+        "median_turnover_cr": 242.8
       }
     ],
     "played_out": [
