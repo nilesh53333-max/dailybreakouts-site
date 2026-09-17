@@ -416,7 +416,11 @@ function renderStageTable(){
     </tr>`).join('');
   }
 
+  const truncNote = (ACTIVE_STAGE==='forming' && LIFECYCLE_DATA.forming_list_truncated)
+    ? `<div class="note" style="margin-bottom:8px;">Showing the 60 closest to their pivot, out of ${LIFECYCLE_DATA.counts.forming} total forming bases.</div>` : '';
+
   el.innerHTML = `<div class="card">
+    ${truncNote}
     <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
   </div>`;
 }
