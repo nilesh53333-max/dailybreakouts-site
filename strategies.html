@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DailyBreakouts — Strategies</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#132A4C; --paper:#EEF2F8; --card:#FFFFFF; --border:#E2E8F0;
+    --accent:#2563EB; --green:#16A34A; --red:#DC2626; --muted:#64748B; --text:#0F172A;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;}
+  .num{font-family:'IBM Plex Mono',monospace;}
+  .disp{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  select,button,input{font-family:inherit;}
+
+  header{height:64px;background:var(--ink);display:flex;align-items:center;padding:0 24px;gap:20px;}
+  header .logo{color:#FFFFFF;font-weight:700;font-size:20px;line-height:1.1;}
+  header .logo span{color:var(--green);}
+  .logo-tagline{color:#94A3B8;font-size:10.5px;line-height:1.2;max-width:150px;margin-right:8px;}
+  .topnav{display:flex;gap:4px;flex:1 1 auto;}
+  .topnav-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:7px;font-size:13.5px;color:#CBD5E1;white-space:nowrap;}
+  .topnav-item.active{background:var(--accent);color:#FFFFFF;font-weight:600;}
+  .topsearch{display:flex;align-items:center;gap:8px;background:#1E3A5F;border:1px solid #2C4A70;border-radius:8px;padding:8px 12px;width:280px;}
+  .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
+
+  main{max-width:1200px;margin:0 auto;padding:24px 20px 60px;}
+  h1{font-size:24px;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+
+  .tabs{display:flex;gap:20px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+  .tab{padding:10px 2px;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+  .tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
+  .panel{margin-bottom:32px;}
+  .panel.active{display:block;}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+  .stat .v{font-size:20px;font-weight:700;}
+  .stat .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:9px 10px;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);background:#FAFAF7;}
+  td{padding:9px 10px;border-bottom:1px solid #F1EFE8;}
+  td.r{text-align:right;}
+  tr:last-child td{border-bottom:none;}
+
+  .badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;}
+  .badge.fresh{background:#FDF3E7;color:#B4700C;}
+  .badge.tight{background:#EEF3FB;color:#2C5FA8;}
+  .badge.extended{background:#F4EDF9;color:#7A3FA0;}
+
+  .controls{display:flex;gap:14px;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap;}
+  .field label{display:block;font-size:10.5px;color:var(--muted);margin-bottom:4px;}
+  .field select{border:1px solid #D9D5C9;border-radius:6px;padding:7px 10px;font-size:13px;background:#fff;}
+
+  .empty{padding:40px;text-align:center;color:var(--muted);font-size:13.5px;}
+  .note{font-size:11.5px;color:var(--muted);margin-top:10px;}
+
+  .breakouts-layout{display:flex;gap:18px;align-items:flex-start;}
+  .breakouts-table-col{flex:1.3;}
+  .breakouts-chart-col{flex:1;position:sticky;top:20px;}
+  table tr.selectable{cursor:pointer;}
+  table tr.selectable:hover{background:#FAFAF7;}
+  table tr.selected{background:#EFF6F1;}
+  .stock-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+  .stock-name{font-size:19px;font-weight:700;}
+  .stock-price{font-size:19px;font-weight:700;text-align:right;}
+  .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
+  .chart-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-top:14px;}
+  .chart-stats .v{font-weight:600;}
+  .chart-stats .l{color:var(--muted);margin-top:1px;}
+
+  .app-body{display:flex;max-width:1400px;margin:0 auto;align-items:flex-start;}
+  .sidebar{width:220px;flex:0 0 auto;background:var(--card);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:0;align-self:flex-start;}
+  .sidebar h3{font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;padding:0 8px 8px;margin:0;}
+  .sidebar .item{display:block;padding:8px 10px;border-radius:7px;font-size:13.5px;color:#4B5563;margin-bottom:2px;}
+  .sidebar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border:1px solid var(--green);}
+  .sidebar .section{margin-bottom:22px;}
+  .content-col{flex:1;min-width:0;}
+
+  .summary-strip{display:flex;gap:12px;margin-bottom:18px;}
+  .summary-strip .stat{flex:1;}
+  .btn-primary{background:var(--green);border:none;border-radius:8px;padding:0 18px;font-size:13px;font-weight:600;color:#FFFFFF;cursor:pointer;white-space:nowrap;}
+
+  .equity-tabs{display:flex;gap:16px;margin-bottom:10px;}
+  .equity-tab{font-size:12px;color:var(--muted);cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;}
+  .equity-tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
+  .keystats{display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:12.5px;margin-top:14px;}
+  .keystats .row{display:flex;justify-content:space-between;padding:7px 10px;border-bottom:1px solid #F1EFE8;}
+  .keystats .row .lbl{color:var(--muted);}
+  .keystats .row .val{font-weight:600;}
+
+  .lifecycle-header{margin-bottom:4px;}
+  .lifecycle-header h2{font-size:22px;margin:0 0 4px;}
+  .lifecycle-header .sub{color:var(--muted);font-size:13.5px;margin-bottom:16px;}
+  .lifecycle-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:border-color .15s;}
+  .stage-card:hover{border-color:var(--accent);}
+  .stage-card.active{background:#EFF6F1;border-color:var(--green);}
+  .stage-card .tap{font-size:11px;color:var(--muted);text-align:right;margin-bottom:8px;}
+  .stage-card.active .tap{color:var(--green);font-weight:600;}
+  .stage-card .count{font-size:26px;font-weight:700;}
+  .stage-card .title{font-size:14px;font-weight:600;margin-top:2px;}
+  .stage-card .desc{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo disp">daily<span>breakouts</span></div>
+  <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
+  <nav class="topnav">
+    <a href="index.html" class="topnav-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      Home
+    </a>
+    <a href="strategies.html" class="topnav-item active">Strategies</a>
+    <a href="#" class="topnav-item">Backtest</a>
+    <a href="#" class="topnav-item">Watchlist</a>
+    <a href="#" class="topnav-item">Resources</a>
+    <a href="#" class="topnav-item">Community</a>
+  </nav>
+  <div class="topsearch">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input aria-label="Search stock" placeholder="Search stock (e.g. RELIANCE, TCS, INFY)">
+  </div>
+  <button aria-label="Account menu" class="avatar">N</button>
+</header>
+
+<div class="app-body">
+  <div class="sidebar">
+    <div class="section">
+      <h3>Select strategy</h3>
+      <a href="#" class="item active">Base-1 RS Breakouts</a>
+    </div>
+    <div class="section">
+      <h3>Tools</h3>
+      <a href="#" class="item" onclick="switchTab('breakouts');return false;">Today's Breakouts</a>
+      <a href="#" class="item" onclick="switchTab('backtest');return false;">Backtesting</a>
+    </div>
+  </div>
+
+<main class="content-col">
+  <h1 class="disp">Base-1 RS Breakouts</h1>
+  <div class="sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="breakouts">Today's Breakouts</div>
+    <div class="tab" data-tab="backtest">Backtesting</div>
+  </div>
+
+  <!-- TODAY'S BREAKOUTS -->
+  <div class="panel active" id="panel-breakouts">
+    <div id="lifecycle-header" class="lifecycle-header"></div>
+    <div id="lifecycle-cards" class="lifecycle-cards"></div>
+    <div id="breakouts-content">
+      <div class="card"><div class="empty">Loading breakout stages…</div></div>
+    </div>
+    <div class="note">Reads <code>breakout_lifecycle.json</code>, produced by <code>breakout_lifecycle.py</code> against your live Kite-sourced universe data. Run <code>update_universe_daily.py</code> then <code>breakout_lifecycle.py</code> each trading day to refresh this. Climbing/Played-out uses a single exit rule (shown below the cards) to simulate forward from each breakout — change <code>EXIT_TRAIL_DMA</code> / <code>EXIT_STOP_PCT</code> in the script once your final config is locked.</div>
+  </div>
+
+  <!-- BACKTESTING -->
+  <div class="panel" id="panel-backtest">
+    <div class="card" style="margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:280px;">
+          <div class="disp" style="font-size:16px;font-weight:700;color:var(--accent);">📊 Backtest Base-1 RS Breakouts</div>
+          <div style="font-size:12px;color:var(--muted);margin:4px 0 14px;">Test historical performance with different parameters. Results are real output from vcm_engine.py.</div>
+          <div class="controls" style="margin-bottom:0;">
+            <div class="field">
+              <label>Max positions</label>
+              <select id="sel-maxpos">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Trail (DMA)</label>
+              <select id="sel-trail">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Stop loss %</label>
+              <select id="sel-stop">
+                <option value="4">4%</option>
+                <option value="8" selected>8%</option>
+                <option value="12">12%</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);min-width:180px;">
+          <div style="font-weight:600;color:var(--text);margin-bottom:4px;">Backtest period</div>
+          <div>Jan 2020 – Sep 2026</div>
+          <div style="font-weight:600;color:var(--text);margin:8px 0 4px;">Starting capital</div>
+          <div>₹10,00,000 (fixed)</div>
+          <div style="font-weight:600;color:var(--text);margin:8px 0 4px;">Compounding</div>
+          <div>No</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-4" id="bt-stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px;"></div>
+    <div class="grid-4" id="bt-stats-2" style="grid-template-columns:repeat(3,1fr);"></div>
+
+    <div class="card" style="margin:18px 0;">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px;">Year-by-year (fixed ₹10L, no compounding)</div>
+      <table>
+        <thead><tr><th>Year</th><th class="r">P&amp;L (₹)</th><th class="r">Return on ₹10L</th></tr></thead>
+        <tbody id="bt-year-rows"></tbody>
+      </table>
+      <div class="note" style="margin-top:8px;">Per-year Trade count and Win Rate aren't exported by the engine yet — real Year/P&amp;L/Return only, no placeholder columns.</div>
+    </div>
+
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;">
+      <div class="card" style="flex:1.4;min-width:340px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div style="font-size:14px;font-weight:700;color:var(--accent);">Equity Curve <span style="font-size:11px;font-weight:400;color:var(--muted);">(fixed capital ₹10L)</span></div>
+          <div style="text-align:right;">
+            <div style="font-size:10px;color:var(--muted);">Ending equity</div>
+            <div class="num" style="font-weight:700;color:var(--accent);" id="bt-ending-equity"></div>
+          </div>
+        </div>
+        <div id="bt-equity-chart"></div>
+        <div class="note">Year-end checkpoints from real backtest output — 7 points, not a smooth daily curve. A daily-resolution version needs one addition to <code>vcm_engine.py</code> (currently computed internally but not exported).</div>
+      </div>
+
+      <div class="card" style="flex:1;min-width:280px;">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Key Stats</div>
+        <div class="keystats" id="bt-keystats"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px;">All 27 tested combinations (ranked by total return)</div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Trail</th><th>Stop</th><th>Max Pos</th>
+              <th class="r">Total Return</th><th class="r">Max DD</th>
+              <th class="r">Profit Factor</th><th class="r">Win Rate</th><th class="r">Trades</th>
+            </tr>
+          </thead>
+          <tbody id="bt-all-rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note">Backtest: Jan 2020 – Sep 2026 · fixed ₹10,00,000 capital, no compounding · entries and exits both at that day's close · point-in-time market cap (≥₹500cr) applied per signal's own year, not today's snapshot.</div>
+  </div>
+</main>
+</div>
+
+<script>
+// ---- REAL backtest grid, exported from dailybreakouts_v29_27combo_summary.csv / _yearly.csv ----
+const BACKTEST_DATA = {"combos": [{"trail": 25, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3309983.24, "totalPnl": 2309983.24, "roi": 231.0, "maxDD": -14.92, "closedTrades": 507, "openAtEnd": 5, "winRate": 31.36, "profitFactor": 1.6, "avgWinner": 19.24, "avgLoser": -5.2}, {"trail": 25, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3491102.93, "totalPnl": 2491102.93, "roi": 249.11, "maxDD": -12.62, "closedTrades": 922, "openAtEnd": 10, "winRate": 33.84, "profitFactor": 1.77, "avgWinner": 18.33, "avgLoser": -5.03}, {"trail": 25, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3481166.77, "totalPnl": 2481166.77, "roi": 248.12, "maxDD": -9.83, "closedTrades": 1337, "openAtEnd": 15, "winRate": 33.28, "profitFactor": 1.78, "avgWinner": 18.77, "avgLoser": -4.99}, {"trail": 25, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3958340.3, "totalPnl": 2958340.3, "roi": 295.83, "maxDD": -17.15, "closedTrades": 408, "openAtEnd": 5, "winRate": 37.01, "profitFactor": 1.87, "avgWinner": 20.6, "avgLoser": -6.2}, {"trail": 25, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3671953.17, "totalPnl": 2671953.17, "roi": 267.2, "maxDD": -12.43, "closedTrades": 790, "openAtEnd": 10, "winRate": 38.61, "profitFactor": 1.87, "avgWinner": 18.76, "avgLoser": -6.03}, {"trail": 25, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3597176.35, "totalPnl": 2597176.35, "roi": 259.72, "maxDD": -10.34, "closedTrades": 1139, "openAtEnd": 15, "winRate": 39.42, "profitFactor": 1.89, "avgWinner": 18.41, "avgLoser": -6.07}, {"trail": 25, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3873192.4, "totalPnl": 2873192.4, "roi": 287.32, "maxDD": -14.62, "closedTrades": 400, "openAtEnd": 5, "winRate": 37.25, "profitFactor": 1.84, "avgWinner": 20.88, "avgLoser": -6.47}, {"trail": 25, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3623240.74, "totalPnl": 2623240.74, "roi": 262.32, "maxDD": -12.48, "closedTrades": 773, "openAtEnd": 10, "winRate": 38.81, "profitFactor": 1.84, "avgWinner": 18.98, "avgLoser": -6.26}, {"trail": 25, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3499632.25, "totalPnl": 2499632.25, "roi": 249.96, "maxDD": -11.3, "closedTrades": 1115, "openAtEnd": 15, "winRate": 38.83, "profitFactor": 1.85, "avgWinner": 18.81, "avgLoser": -6.19}, {"trail": 50, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3626828.86, "totalPnl": 2626828.86, "roi": 262.68, "maxDD": -17.5, "closedTrades": 323, "openAtEnd": 5, "winRate": 28.79, "profitFactor": 1.9, "avgWinner": 26.77, "avgLoser": -5.39}, {"trail": 50, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3300076.54, "totalPnl": 2300076.54, "roi": 230.01, "maxDD": -17.41, "closedTrades": 648, "openAtEnd": 10, "winRate": 28.4, "profitFactor": 1.82, "avgWinner": 26.32, "avgLoser": -5.42}, {"trail": 50, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3455977.14, "totalPnl": 2455977.14, "roi": 245.6, "maxDD": -14.42, "closedTrades": 932, "openAtEnd": 15, "winRate": 28.54, "profitFactor": 1.9, "avgWinner": 26.39, "avgLoser": -5.28}, {"trail": 50, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2868433.4, "totalPnl": 1868433.4, "roi": 186.84, "maxDD": -23.87, "closedTrades": 256, "openAtEnd": 5, "winRate": 38.67, "profitFactor": 1.76, "avgWinner": 23.0, "avgLoser": -7.7}, {"trail": 50, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2841298.96, "totalPnl": 1841298.96, "roi": 184.13, "maxDD": -16.76, "closedTrades": 514, "openAtEnd": 10, "winRate": 36.19, "profitFactor": 1.71, "avgWinner": 23.39, "avgLoser": -7.36}, {"trail": 50, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 2991229.53, "totalPnl": 1991229.53, "roi": 199.12, "maxDD": -16.29, "closedTrades": 745, "openAtEnd": 15, "winRate": 36.78, "profitFactor": 1.82, "avgWinner": 23.42, "avgLoser": -7.22}, {"trail": 50, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3351548.68, "totalPnl": 2351548.68, "roi": 235.15, "maxDD": -16.83, "closedTrades": 226, "openAtEnd": 5, "winRate": 42.48, "profitFactor": 1.99, "avgWinner": 22.02, "avgLoser": -7.79}, {"trail": 50, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2779806.63, "totalPnl": 1779806.63, "roi": 177.98, "maxDD": -17.49, "closedTrades": 469, "openAtEnd": 10, "winRate": 37.1, "profitFactor": 1.67, "avgWinner": 23.46, "avgLoser": -7.96}, {"trail": 50, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 2792032.91, "totalPnl": 1792032.91, "roi": 179.2, "maxDD": -15.52, "closedTrades": 687, "openAtEnd": 14, "winRate": 37.7, "profitFactor": 1.72, "avgWinner": 22.99, "avgLoser": -7.77}, {"trail": 100, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4275293.94, "totalPnl": 3275293.94, "roi": 327.53, "maxDD": -21.28, "closedTrades": 235, "openAtEnd": 5, "winRate": 20.85, "profitFactor": 1.4, "avgWinner": 31.0, "avgLoser": -5.43}, {"trail": 100, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3745730.7, "totalPnl": 2745730.7, "roi": 274.57, "maxDD": -19.3, "closedTrades": 460, "openAtEnd": 10, "winRate": 20.87, "profitFactor": 1.56, "avgWinner": 35.0, "avgLoser": -5.54}, {"trail": 100, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3847809.3, "totalPnl": 2847809.3, "roi": 284.78, "maxDD": -15.37, "closedTrades": 639, "openAtEnd": 15, "winRate": 21.91, "profitFactor": 1.85, "avgWinner": 38.12, "avgLoser": -5.5}, {"trail": 100, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3667802.51, "totalPnl": 2667802.51, "roi": 266.78, "maxDD": -19.84, "closedTrades": 158, "openAtEnd": 5, "winRate": 26.58, "profitFactor": 2.17, "avgWinner": 55.59, "avgLoser": -7.93}, {"trail": 100, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3738924.58, "totalPnl": 2738924.58, "roi": 273.89, "maxDD": -18.58, "closedTrades": 314, "openAtEnd": 10, "winRate": 27.39, "profitFactor": 2.26, "avgWinner": 51.08, "avgLoser": -8.06}, {"trail": 100, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3133531.03, "totalPnl": 2133531.03, "roi": 213.35, "maxDD": -19.13, "closedTrades": 453, "openAtEnd": 15, "winRate": 30.46, "profitFactor": 2.07, "avgWinner": 40.53, "avgLoser": -8.17}, {"trail": 100, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2720305.37, "totalPnl": 1720305.37, "roi": 172.03, "maxDD": -30.0, "closedTrades": 145, "openAtEnd": 5, "winRate": 28.28, "profitFactor": 1.73, "avgWinner": 49.53, "avgLoser": -9.3}, {"trail": 100, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3588210.28, "totalPnl": 2588210.28, "roi": 258.82, "maxDD": -16.68, "closedTrades": 272, "openAtEnd": 10, "winRate": 30.51, "profitFactor": 2.27, "avgWinner": 50.48, "avgLoser": -9.23}, {"trail": 100, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3379332.13, "totalPnl": 2379332.13, "roi": 237.93, "maxDD": -15.61, "closedTrades": 388, "openAtEnd": 15, "winRate": 34.28, "profitFactor": 2.26, "avgWinner": 41.63, "avgLoser": -9.3}], "yearly": {"25_4_5": [{"year": 2020, "returnPct": 117.66}, {"year": 2021, "returnPct": 66.57}, {"year": 2022, "returnPct": 0.14}, {"year": 2023, "returnPct": 29.99}, {"year": 2024, "returnPct": 19.43}, {"year": 2025, "returnPct": 5.85}, {"year": 2026, "returnPct": -8.65}], "25_4_10": [{"year": 2020, "returnPct": 80.91}, {"year": 2021, "returnPct": 54.22}, {"year": 2022, "returnPct": 38.72}, {"year": 2023, "returnPct": 37.44}, {"year": 2024, "returnPct": 36.0}, {"year": 2025, "returnPct": 14.02}, {"year": 2026, "returnPct": -12.19}], "25_4_15": [{"year": 2020, "returnPct": 78.07}, {"year": 2021, "returnPct": 66.76}, {"year": 2022, "returnPct": 41.66}, {"year": 2023, "returnPct": 43.13}, {"year": 2024, "returnPct": 20.35}, {"year": 2025, "returnPct": 7.68}, {"year": 2026, "returnPct": -9.53}], "25_8_5": [{"year": 2020, "returnPct": 108.76}, {"year": 2021, "returnPct": 58.98}, {"year": 2022, "returnPct": 17.34}, {"year": 2023, "returnPct": 42.74}, {"year": 2024, "returnPct": 17.11}, {"year": 2025, "returnPct": 47.88}, {"year": 2026, "returnPct": 3.02}], "25_8_10": [{"year": 2020, "returnPct": 76.41}, {"year": 2021, "returnPct": 56.06}, {"year": 2022, "returnPct": 23.71}, {"year": 2023, "returnPct": 64.19}, {"year": 2024, "returnPct": 40.79}, {"year": 2025, "returnPct": 16.13}, {"year": 2026, "returnPct": -10.09}], "25_8_15": [{"year": 2020, "returnPct": 71.66}, {"year": 2021, "returnPct": 55.91}, {"year": 2022, "returnPct": 24.72}, {"year": 2023, "returnPct": 70.11}, {"year": 2024, "returnPct": 41.58}, {"year": 2025, "returnPct": 6.96}, {"year": 2026, "returnPct": -11.23}], "25_12_5": [{"year": 2020, "returnPct": 105.47}, {"year": 2021, "returnPct": 74.18}, {"year": 2022, "returnPct": 6.88}, {"year": 2023, "returnPct": 43.1}, {"year": 2024, "returnPct": 40.17}, {"year": 2025, "returnPct": 31.57}, {"year": 2026, "returnPct": -14.06}], "25_12_10": [{"year": 2020, "returnPct": 74.12}, {"year": 2021, "returnPct": 57.63}, {"year": 2022, "returnPct": 23.46}, {"year": 2023, "returnPct": 61.27}, {"year": 2024, "returnPct": 43.78}, {"year": 2025, "returnPct": 15.2}, {"year": 2026, "returnPct": -13.13}], "25_12_15": [{"year": 2020, "returnPct": 69.76}, {"year": 2021, "returnPct": 53.79}, {"year": 2022, "returnPct": 22.58}, {"year": 2023, "returnPct": 69.35}, {"year": 2024, "returnPct": 46.67}, {"year": 2025, "returnPct": 2.1}, {"year": 2026, "returnPct": -14.3}], "50_4_5": [{"year": 2020, "returnPct": 82.22}, {"year": 2021, "returnPct": 116.88}, {"year": 2022, "returnPct": 9.4}, {"year": 2023, "returnPct": 30.68}, {"year": 2024, "returnPct": 2.0}, {"year": 2025, "returnPct": 57.54}, {"year": 2026, "returnPct": -36.05}], "50_4_10": [{"year": 2020, "returnPct": 67.82}, {"year": 2021, "returnPct": 80.37}, {"year": 2022, "returnPct": 22.29}, {"year": 2023, "returnPct": 28.58}, {"year": 2024, "returnPct": 20.78}, {"year": 2025, "returnPct": 47.52}, {"year": 2026, "returnPct": -37.35}], "50_4_15": [{"year": 2020, "returnPct": 56.61}, {"year": 2021, "returnPct": 88.4}, {"year": 2022, "returnPct": 21.49}, {"year": 2023, "returnPct": 48.26}, {"year": 2024, "returnPct": 25.35}, {"year": 2025, "returnPct": 18.08}, {"year": 2026, "returnPct": -12.59}], "50_8_5": [{"year": 2020, "returnPct": 99.21}, {"year": 2021, "returnPct": 58.09}, {"year": 2022, "returnPct": -8.64}, {"year": 2023, "returnPct": 36.04}, {"year": 2024, "returnPct": 8.06}, {"year": 2025, "returnPct": 26.19}, {"year": 2026, "returnPct": -32.11}], "50_8_10": [{"year": 2020, "returnPct": 89.35}, {"year": 2021, "returnPct": 60.98}, {"year": 2022, "returnPct": -6.06}, {"year": 2023, "returnPct": 47.14}, {"year": 2024, "returnPct": 9.7}, {"year": 2025, "returnPct": -7.98}, {"year": 2026, "returnPct": -9.0}], "50_8_15": [{"year": 2020, "returnPct": 71.54}, {"year": 2021, "returnPct": 85.33}, {"year": 2022, "returnPct": -0.65}, {"year": 2023, "returnPct": 53.57}, {"year": 2024, "returnPct": 18.08}, {"year": 2025, "returnPct": -18.54}, {"year": 2026, "returnPct": -10.21}], "50_12_5": [{"year": 2020, "returnPct": 67.36}, {"year": 2021, "returnPct": 87.8}, {"year": 2022, "returnPct": -1.29}, {"year": 2023, "returnPct": 23.84}, {"year": 2024, "returnPct": 12.79}, {"year": 2025, "returnPct": 26.73}, {"year": 2026, "returnPct": 17.93}], "50_12_10": [{"year": 2020, "returnPct": 67.86}, {"year": 2021, "returnPct": 57.65}, {"year": 2022, "returnPct": -8.93}, {"year": 2023, "returnPct": 45.05}, {"year": 2024, "returnPct": 21.95}, {"year": 2025, "returnPct": -12.3}, {"year": 2026, "returnPct": 6.71}], "50_12_15": [{"year": 2020, "returnPct": 52.86}, {"year": 2021, "returnPct": 79.34}, {"year": 2022, "returnPct": 0.75}, {"year": 2023, "returnPct": 46.19}, {"year": 2024, "returnPct": 17.81}, {"year": 2025, "returnPct": -17.55}, {"year": 2026, "returnPct": -0.19}], "100_4_5": [{"year": 2020, "returnPct": 60.02}, {"year": 2021, "returnPct": 60.27}, {"year": 2022, "returnPct": 4.16}, {"year": 2023, "returnPct": 7.64}, {"year": 2024, "returnPct": 26.36}, {"year": 2025, "returnPct": 35.36}, {"year": 2026, "returnPct": 133.72}], "100_4_10": [{"year": 2020, "returnPct": 52.38}, {"year": 2021, "returnPct": 101.78}, {"year": 2022, "returnPct": 13.93}, {"year": 2023, "returnPct": 12.27}, {"year": 2024, "returnPct": 20.0}, {"year": 2025, "returnPct": -6.31}, {"year": 2026, "returnPct": 80.53}], "100_4_15": [{"year": 2020, "returnPct": 40.58}, {"year": 2021, "returnPct": 125.32}, {"year": 2022, "returnPct": 3.16}, {"year": 2023, "returnPct": 30.68}, {"year": 2024, "returnPct": 22.13}, {"year": 2025, "returnPct": -6.78}, {"year": 2026, "returnPct": 69.7}], "100_8_5": [{"year": 2020, "returnPct": 69.27}, {"year": 2021, "returnPct": 84.4}, {"year": 2022, "returnPct": 35.36}, {"year": 2023, "returnPct": 82.42}, {"year": 2024, "returnPct": 20.32}, {"year": 2025, "returnPct": -32.66}, {"year": 2026, "returnPct": 7.67}], "100_8_10": [{"year": 2020, "returnPct": 57.48}, {"year": 2021, "returnPct": 142.28}, {"year": 2022, "returnPct": 6.85}, {"year": 2023, "returnPct": 72.92}, {"year": 2024, "returnPct": 25.87}, {"year": 2025, "returnPct": -36.71}, {"year": 2026, "returnPct": 5.2}], "100_8_15": [{"year": 2020, "returnPct": 50.22}, {"year": 2021, "returnPct": 121.47}, {"year": 2022, "returnPct": 1.58}, {"year": 2023, "returnPct": 52.76}, {"year": 2024, "returnPct": 20.89}, {"year": 2025, "returnPct": -34.97}, {"year": 2026, "returnPct": 1.4}], "100_12_5": [{"year": 2020, "returnPct": 52.3}, {"year": 2021, "returnPct": 44.49}, {"year": 2022, "returnPct": 3.54}, {"year": 2023, "returnPct": 59.28}, {"year": 2024, "returnPct": 38.71}, {"year": 2025, "returnPct": -27.03}, {"year": 2026, "returnPct": 0.73}], "100_12_10": [{"year": 2020, "returnPct": 48.93}, {"year": 2021, "returnPct": 102.94}, {"year": 2022, "returnPct": 5.3}, {"year": 2023, "returnPct": 77.06}, {"year": 2024, "returnPct": 38.54}, {"year": 2025, "returnPct": -24.24}, {"year": 2026, "returnPct": 10.31}], "100_12_15": [{"year": 2020, "returnPct": 46.46}, {"year": 2021, "returnPct": 100.67}, {"year": 2022, "returnPct": -2.83}, {"year": 2023, "returnPct": 59.68}, {"year": 2024, "returnPct": 42.21}, {"year": 2025, "returnPct": -29.35}, {"year": 2026, "returnPct": 21.09}]}};
+
+// ---- tabs: both sections stay visible, tabs just scroll + highlight ----
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab===name));
+  document.getElementById('panel-'+name).scrollIntoView({behavior:'smooth', block:'start'});
+}
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => switchTab(t.dataset.tab));
+});
+
+// ---- backtest panel ----
+function fmtPct(v){ return (v>=0?'+':'') + v.toFixed(2) + '%'; }
+function fmtPctYr(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
+function colorFor(v){ return v >= 0 ? 'var(--green)' : 'var(--red)'; }
+
+function findCombo(trail, stop, maxpos){
+  return BACKTEST_DATA.combos.find(c => c.trail===trail && c.stop===stop && c.maxpos===maxpos);
+}
+
+function renderEquityCurve(yearly, startCap){
+  const w = 560, h = 130, padL = 4, padR = 4, padT = 14, padB = 18;
+  let equity = startCap;
+  const series = [{label:'Start', equity: startCap}];
+  yearly.forEach(y => {
+    equity = startCap + (series[series.length-1].equity - startCap) + (startCap * y.returnPct/100);
+    series.push({label: String(y.year), equity});
+  });
+  const values = series.map(s => s.equity);
+  const minV = Math.min(...values), maxV = Math.max(...values);
+  const range = (maxV - minV) || 1;
+  const xStep = (w - padL - padR) / (series.length - 1);
+  const yOf = v => padT + (maxV - v) / range * (h - padT - padB);
+
+  const pts = series.map((s,i) => `${(padL + i*xStep).toFixed(1)},${yOf(s.equity).toFixed(1)}`).join(' ');
+  const fillPts = `${padL},${(h-padB).toFixed(1)} ${pts} ${(padL+(series.length-1)*xStep).toFixed(1)},${(h-padB).toFixed(1)}`;
+
+  const labels = series.map((s,i) =>
+    `<text x="${(padL+i*xStep).toFixed(1)}" y="${h-2}" font-size="9" fill="var(--muted)" text-anchor="middle" font-family="IBM Plex Mono">${s.label}</text>`
+  ).join('');
+
+  return {
+    svg: `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}">
+      <polygon points="${fillPts}" fill="var(--green)" opacity="0.12"/>
+      <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2"/>
+      ${labels}
+    </svg>`,
+    finalEquity: values[values.length-1]
+  };
+}
+
+function renderBacktest(){
+  const trail = parseInt(document.getElementById('sel-trail').value);
+  const stop = parseInt(document.getElementById('sel-stop').value);
+  const maxpos = parseInt(document.getElementById('sel-maxpos').value);
+  const c = findCombo(trail, stop, maxpos);
+  if(!c) return;
+
+  document.getElementById('bt-stats').innerHTML = `
+    <div class="stat"><div class="v" style="color:${colorFor(c.roi)}">${fmtPct(c.roi)}</div><div class="l">Total return</div></div>
+    <div class="stat"><div class="v">₹${(c.totalPnl/1e5).toFixed(2)}L</div><div class="l">Total P&amp;L</div></div>
+    <div class="stat"><div class="v" style="color:var(--red)">${c.maxDD.toFixed(2)}%</div><div class="l">Max drawdown</div></div>`;
+  document.getElementById('bt-stats-2').innerHTML = `
+    <div class="stat"><div class="v">${c.closedTrades}</div><div class="l">Total trades</div></div>
+    <div class="stat"><div class="v">${c.winRate.toFixed(2)}%</div><div class="l">Win rate</div></div>
+    <div class="stat"><div class="v">${c.profitFactor.toFixed(2)}</div><div class="l">Profit factor</div></div>`;
+
+  const key = `${trail}_${stop}_${maxpos}`;
+  const yearly = BACKTEST_DATA.yearly[key] || [];
+  document.getElementById('bt-year-rows').innerHTML = yearly.map(y => {
+    const pnl = 1000000 * y.returnPct/100;
+    return `<tr>
+      <td class="num">${y.year}</td>
+      <td class="r num" style="color:${colorFor(pnl)}">${pnl>=0?'+':''}${Math.round(pnl).toLocaleString('en-IN')}</td>
+      <td class="r num" style="color:${colorFor(y.returnPct)}">${fmtPctYr(y.returnPct)}</td>
+    </tr>`;
+  }).join('');
+
+  const eq = renderEquityCurve(yearly, c.capPerPos * maxpos);
+  document.getElementById('bt-equity-chart').innerHTML = eq.svg;
+  document.getElementById('bt-ending-equity').textContent = '₹' + Math.round(eq.finalEquity).toLocaleString('en-IN');
+
+  document.getElementById('bt-keystats').innerHTML = `
+    <div class="row"><span class="lbl">Starting capital</span><span class="val num">₹10,00,000</span></div>
+    <div class="row"><span class="lbl">Win rate</span><span class="val num">${c.winRate.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Ending equity</span><span class="val num">₹${Math.round(c.endingEquity).toLocaleString('en-IN')}</span></div>
+    <div class="row"><span class="lbl">Avg winner</span><span class="val num" style="color:var(--green)">+${c.avgWinner.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Total return</span><span class="val num" style="color:${colorFor(c.roi)}">${fmtPct(c.roi)}</span></div>
+    <div class="row"><span class="lbl">Avg loser</span><span class="val num" style="color:var(--red)">${c.avgLoser.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Max drawdown</span><span class="val num" style="color:var(--red)">${c.maxDD.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Profit factor</span><span class="val num">${c.profitFactor.toFixed(2)}</span></div>
+    <div class="row"><span class="lbl">Total trades</span><span class="val num">${c.closedTrades}</span></div>
+    <div class="row"><span class="lbl">Open at end</span><span class="val num">${c.openAtEnd}</span></div>`;
+
+  const sorted = [...BACKTEST_DATA.combos].sort((a,b) => b.roi - a.roi);
+  document.getElementById('bt-all-rows').innerHTML = sorted.map(row => {
+    const isCurrent = row.trail===trail && row.stop===stop && row.maxpos===maxpos;
+    return `<tr style="${isCurrent ? 'background:#ECFDF5;font-weight:600;' : ''}">
+      <td class="num">${row.trail}</td>
+      <td class="num">${row.stop}%</td>
+      <td class="num">${row.maxpos}</td>
+      <td class="r num" style="color:${colorFor(row.roi)}">${fmtPct(row.roi)}</td>
+      <td class="r num" style="color:var(--red)">${row.maxDD.toFixed(2)}%</td>
+      <td class="r num">${row.profitFactor.toFixed(2)}</td>
+      <td class="r num">${row.winRate.toFixed(1)}%</td>
+      <td class="r num">${row.closedTrades}</td>
+    </tr>`;
+  }).join('');
+}
+['sel-trail','sel-stop','sel-maxpos'].forEach(id =>
+  document.getElementById(id).addEventListener('change', renderBacktest)
+);
+renderBacktest();
+
+
+let LIFECYCLE_DATA = null;
+let ACTIVE_STAGE = 'fresh';
+
+const STAGE_META = {
+  forming:    { title: 'Forming',        desc: 'resting before a breakout' },
+  fresh:      { title: 'Fresh breakouts', desc: `cleared it in the last ${5} sessions` },
+  climbing:   { title: 'Climbing',       desc: 'broke out earlier, still rising' },
+  played_out: { title: 'Played out',     desc: 'stopped or trailed out' },
+};
+
+function renderStageCards(){
+  const c = LIFECYCLE_DATA.counts;
+  const order = ['forming','fresh','climbing','played_out'];
+  document.getElementById('lifecycle-cards').innerHTML = order.map(key => {
+    const meta = STAGE_META[key];
+    const isActive = key === ACTIVE_STAGE;
+    return `<div class="stage-card ${isActive?'active':''}" data-stage="${key}">
+      <div class="tap">tap to view ›</div>
+      <div class="count num">${c[key]}</div>
+      <div class="title">${meta.title}</div>
+      <div class="desc">${meta.desc}</div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.stage-card').forEach(card => {
+    card.addEventListener('click', () => { ACTIVE_STAGE = card.dataset.stage; renderStageCards(); renderStageTable(); });
+  });
+}
+
+function renderStageTable(){
+  const el = document.getElementById('breakouts-content');
+  const rows = LIFECYCLE_DATA.stages[ACTIVE_STAGE] || [];
+  if(rows.length === 0){
+    el.innerHTML = `<div class="card"><div class="empty">Nothing in "${STAGE_META[ACTIVE_STAGE].title}" right now.</div></div>`;
+    return;
+  }
+
+  let head, body;
+  if(ACTIVE_STAGE === 'forming'){
+    head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
+    body = rows.map(r => `<tr>
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="r num">${r.close.toFixed(2)}</td>
+      <td class="r num" style="color:var(--muted);">${r.pivot.toFixed(2)}</td>
+      <td class="r num">${r.dist_to_pivot_pct.toFixed(2)}%</td>
+      <td class="r num">${(r.age_sessions/5).toFixed(1)} wks</td>
+    </tr>`).join('');
+  } else if(ACTIVE_STAGE === 'played_out'){
+    head = `<th>Stock</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
+    body = rows.map(r => `<tr>
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="r num">${r.entry_price.toFixed(2)}</td>
+      <td class="r num">${r.exit_price.toFixed(2)}</td>
+      <td class="r num" style="color:${r.return_pct>=0?'var(--green)':'var(--red)'}">${r.return_pct>=0?'+':''}${r.return_pct.toFixed(2)}%</td>
+      <td style="font-size:12px;color:var(--muted);">${r.exit_reason}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`).join('');
+  } else {
+    // fresh / climbing
+    head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">Sessions</th><th class="r">RS</th>`;
+    body = rows.map(r => `<tr>
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
+      <td class="r num">${r.current_price.toFixed(2)}</td>
+      <td class="r num" style="color:${r.gain_pct>=0?'var(--green)':'var(--red)'}">${r.gain_pct>=0?'+':''}${r.gain_pct.toFixed(2)}%</td>
+      <td class="r num">${r.sessions_since_entry}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`).join('');
+  }
+
+  el.innerHTML = `<div class="card">
+    <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+  </div>`;
+}
+
+async function loadBreakouts(){
+  const headerEl = document.getElementById('lifecycle-header');
+  const el = document.getElementById('breakouts-content');
+  try{
+    const res = await fetch('./breakout_lifecycle.json', {cache:'no-store'});
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    LIFECYCLE_DATA = data;
+    STAGE_META.fresh.desc = `cleared it in the last 5 sessions`;
+
+    headerEl.innerHTML = `
+      <h2 class="disp">${data.counts.fresh} fresh breakouts today.</h2>
+      <div class="sub">Every setup this screen finds, at the stage it has reached — tap a stage to see the names.</div>`;
+
+    renderStageCards();
+    renderStageTable();
+  }catch(e){
+    headerEl.innerHTML = '';
+    el.innerHTML = `<div class="card"><div class="empty">breakout_lifecycle.json not found yet.<br><br>Run <code>update_universe_daily.py</code> then <code>breakout_lifecycle.py</code> to generate it, then reload this page.</div></div>`;
+  }
+}
+loadBreakouts();
+</script>
+</body>
+</html>

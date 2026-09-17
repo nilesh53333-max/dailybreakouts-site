@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DailyBreakouts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#132A4C; --paper:#EEF2F8; --card:#FFFFFF; --border:#E2E8F0;
+    --accent:#2563EB; --green:#16A34A; --red:#DC2626; --muted:#64748B; --text:#0F172A;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;}
+  .num{font-family:'IBM Plex Mono',monospace;}
+  .disp{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+
+  header{height:64px;background:var(--ink);display:flex;align-items:center;padding:0 24px;gap:20px;}
+  header .logo{color:#FFFFFF;font-weight:700;font-size:20px;line-height:1.1;}
+  header .logo span{color:var(--green);}
+  .logo-tagline{color:#94A3B8;font-size:10.5px;line-height:1.2;max-width:150px;margin-right:8px;}
+  .topnav{display:flex;gap:4px;flex:1 1 auto;}
+  .topnav-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:7px;font-size:13.5px;color:#CBD5E1;white-space:nowrap;}
+  .topnav-item.active{background:var(--accent);color:#FFFFFF;font-weight:600;}
+  .topsearch{display:flex;align-items:center;gap:8px;background:#1E3A5F;border:1px solid #2C4A70;border-radius:8px;padding:8px 12px;width:280px;}
+  .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
+
+  main{max-width:1000px;margin:0 auto;padding:64px 20px 80px;text-align:center;}
+  .hero-tag{display:inline-block;background:#ECFDF5;color:var(--green);font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:20px;}
+  h1{font-size:40px;margin:0 0 16px;line-height:1.15;}
+  .hero-sub{font-size:16px;color:var(--muted);max-width:640px;margin:0 auto 32px;line-height:1.6;}
+  .cta-row{display:flex;gap:14px;justify-content:center;margin-bottom:56px;}
+  .btn-primary{background:var(--green);border:none;border-radius:8px;padding:14px 28px;font-size:15px;font-weight:600;color:#FFFFFF;cursor:pointer;}
+  .btn-secondary{background:#FFFFFF;border:1px solid var(--border);border-radius:8px;padding:14px 28px;font-size:15px;font-weight:600;color:var(--text);cursor:pointer;}
+
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left;margin-bottom:56px;}
+  .feature{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;}
+  .feature .icon{width:36px;height:36px;border-radius:9px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--green);}
+  .feature h3{font-size:15px;margin:0 0 6px;}
+  .feature p{font-size:13px;color:var(--muted);margin:0;line-height:1.5;}
+
+  .stats-strip{display:flex;gap:16px;justify-content:center;margin-bottom:24px;}
+  .stat-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 28px;min-width:140px;}
+  .stat-block .v{font-size:22px;font-weight:700;color:var(--green);}
+  .stat-block .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stats-note{font-size:11.5px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo disp">daily<span>breakouts</span></div>
+  <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
+  <nav class="topnav">
+    <a href="index.html" class="topnav-item active">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      Home
+    </a>
+    <a href="strategies.html" class="topnav-item">Strategies</a>
+    <a href="#" class="topnav-item">Backtest</a>
+    <a href="#" class="topnav-item">Watchlist</a>
+    <a href="#" class="topnav-item">Resources</a>
+    <a href="#" class="topnav-item">Community</a>
+  </nav>
+  <div class="topsearch">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input aria-label="Search stock" placeholder="Search stock (e.g. RELIANCE, TCS, INFY)">
+  </div>
+  <button aria-label="Account menu" class="avatar">N</button>
+</header>
+
+<main>
+  <div class="hero-tag">Real backtest data, not marketing numbers</div>
+  <h1 class="disp">Find breakouts backed by real, checkable numbers.</h1>
+  <div class="hero-sub">Base-1 RS Breakouts scans NSE stocks daily for volatility-contraction setups with strong relative strength — every signal traceable back to real Kite price data and a fully transparent backtest.</div>
+  <div class="cta-row">
+    <a href="strategies.html"><button class="btn-primary">View today's breakouts</button></a>
+    <a href="strategies.html#panel-backtest"><button class="btn-secondary">See the backtest</button></a>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+      </div>
+      <h3>Real backtest, not a pitch</h3>
+      <p>27 parameter combinations tested on real NSE history, 2020–2026, with every rule (mcap, RS, dedup, exits) stated plainly — no hidden assumptions.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>Live, not a snapshot</h3>
+      <p>Today's breakouts are computed straight from your own Kite-sourced daily data — the same signal logic the backtest uses, not a separate marketing feed.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <h3>Every setup, every stage</h3>
+      <p>Forming, Fresh, Climbing, Played out — see exactly where each qualifying setup stands right now, not just the ones that broke out today.</p>
+    </div>
+  </div>
+
+  <div class="stats-strip" id="home-stats">
+    <div class="stat-block"><div class="v num">—</div><div class="l">Total return</div></div>
+    <div class="stat-block"><div class="v num">—</div><div class="l">Profit factor</div></div>
+    <div class="stat-block"><div class="v num">—</div><div class="l">Trades backtested</div></div>
+  </div>
+  <div class="stats-note">From the leading backtest config — see full comparison on the Strategies page.</div>
+</main>
+
+<script>
+// Same real backtest data embedded in strategies.html -- pulling the
+// leading config's numbers from here instead of hardcoding, so this
+// page can never drift out of sync with the actual backtest output.
+const BACKTEST_DATA = {"combos": [{"trail": 25, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3309983.24, "totalPnl": 2309983.24, "roi": 231.0, "maxDD": -14.92, "closedTrades": 507, "openAtEnd": 5, "winRate": 31.36, "profitFactor": 1.6, "avgWinner": 19.24, "avgLoser": -5.2}, {"trail": 25, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3491102.93, "totalPnl": 2491102.93, "roi": 249.11, "maxDD": -12.62, "closedTrades": 922, "openAtEnd": 10, "winRate": 33.84, "profitFactor": 1.77, "avgWinner": 18.33, "avgLoser": -5.03}, {"trail": 25, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3481166.77, "totalPnl": 2481166.77, "roi": 248.12, "maxDD": -9.83, "closedTrades": 1337, "openAtEnd": 15, "winRate": 33.28, "profitFactor": 1.78, "avgWinner": 18.77, "avgLoser": -4.99}, {"trail": 25, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3958340.3, "totalPnl": 2958340.3, "roi": 295.83, "maxDD": -17.15, "closedTrades": 408, "openAtEnd": 5, "winRate": 37.01, "profitFactor": 1.87, "avgWinner": 20.6, "avgLoser": -6.2}, {"trail": 25, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3671953.17, "totalPnl": 2671953.17, "roi": 267.2, "maxDD": -12.43, "closedTrades": 790, "openAtEnd": 10, "winRate": 38.61, "profitFactor": 1.87, "avgWinner": 18.76, "avgLoser": -6.03}, {"trail": 25, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3597176.35, "totalPnl": 2597176.35, "roi": 259.72, "maxDD": -10.34, "closedTrades": 1139, "openAtEnd": 15, "winRate": 39.42, "profitFactor": 1.89, "avgWinner": 18.41, "avgLoser": -6.07}, {"trail": 25, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3873192.4, "totalPnl": 2873192.4, "roi": 287.32, "maxDD": -14.62, "closedTrades": 400, "openAtEnd": 5, "winRate": 37.25, "profitFactor": 1.84, "avgWinner": 20.88, "avgLoser": -6.47}, {"trail": 25, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3623240.74, "totalPnl": 2623240.74, "roi": 262.32, "maxDD": -12.48, "closedTrades": 773, "openAtEnd": 10, "winRate": 38.81, "profitFactor": 1.84, "avgWinner": 18.98, "avgLoser": -6.26}, {"trail": 25, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3499632.25, "totalPnl": 2499632.25, "roi": 249.96, "maxDD": -11.3, "closedTrades": 1115, "openAtEnd": 15, "winRate": 38.83, "profitFactor": 1.85, "avgWinner": 18.81, "avgLoser": -6.19}, {"trail": 50, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3626828.86, "totalPnl": 2626828.86, "roi": 262.68, "maxDD": -17.5, "closedTrades": 323, "openAtEnd": 5, "winRate": 28.79, "profitFactor": 1.9, "avgWinner": 26.77, "avgLoser": -5.39}, {"trail": 50, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3300076.54, "totalPnl": 2300076.54, "roi": 230.01, "maxDD": -17.41, "closedTrades": 648, "openAtEnd": 10, "winRate": 28.4, "profitFactor": 1.82, "avgWinner": 26.32, "avgLoser": -5.42}, {"trail": 50, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3455977.14, "totalPnl": 2455977.14, "roi": 245.6, "maxDD": -14.42, "closedTrades": 932, "openAtEnd": 15, "winRate": 28.54, "profitFactor": 1.9, "avgWinner": 26.39, "avgLoser": -5.28}, {"trail": 50, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2868433.4, "totalPnl": 1868433.4, "roi": 186.84, "maxDD": -23.87, "closedTrades": 256, "openAtEnd": 5, "winRate": 38.67, "profitFactor": 1.76, "avgWinner": 23.0, "avgLoser": -7.7}, {"trail": 50, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2841298.96, "totalPnl": 1841298.96, "roi": 184.13, "maxDD": -16.76, "closedTrades": 514, "openAtEnd": 10, "winRate": 36.19, "profitFactor": 1.71, "avgWinner": 23.39, "avgLoser": -7.36}, {"trail": 50, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 2991229.53, "totalPnl": 1991229.53, "roi": 199.12, "maxDD": -16.29, "closedTrades": 745, "openAtEnd": 15, "winRate": 36.78, "profitFactor": 1.82, "avgWinner": 23.42, "avgLoser": -7.22}, {"trail": 50, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3351548.68, "totalPnl": 2351548.68, "roi": 235.15, "maxDD": -16.83, "closedTrades": 226, "openAtEnd": 5, "winRate": 42.48, "profitFactor": 1.99, "avgWinner": 22.02, "avgLoser": -7.79}, {"trail": 50, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2779806.63, "totalPnl": 1779806.63, "roi": 177.98, "maxDD": -17.49, "closedTrades": 469, "openAtEnd": 10, "winRate": 37.1, "profitFactor": 1.67, "avgWinner": 23.46, "avgLoser": -7.96}, {"trail": 50, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 2792032.91, "totalPnl": 1792032.91, "roi": 179.2, "maxDD": -15.52, "closedTrades": 687, "openAtEnd": 14, "winRate": 37.7, "profitFactor": 1.72, "avgWinner": 22.99, "avgLoser": -7.77}, {"trail": 100, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4275293.94, "totalPnl": 3275293.94, "roi": 327.53, "maxDD": -21.28, "closedTrades": 235, "openAtEnd": 5, "winRate": 20.85, "profitFactor": 1.4, "avgWinner": 31.0, "avgLoser": -5.43}, {"trail": 100, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3745730.7, "totalPnl": 2745730.7, "roi": 274.57, "maxDD": -19.3, "closedTrades": 460, "openAtEnd": 10, "winRate": 20.87, "profitFactor": 1.56, "avgWinner": 35.0, "avgLoser": -5.54}, {"trail": 100, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3847809.3, "totalPnl": 2847809.3, "roi": 284.78, "maxDD": -15.37, "closedTrades": 639, "openAtEnd": 15, "winRate": 21.91, "profitFactor": 1.85, "avgWinner": 38.12, "avgLoser": -5.5}, {"trail": 100, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3667802.51, "totalPnl": 2667802.51, "roi": 266.78, "maxDD": -19.84, "closedTrades": 158, "openAtEnd": 5, "winRate": 26.58, "profitFactor": 2.17, "avgWinner": 55.59, "avgLoser": -7.93}, {"trail": 100, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3738924.58, "totalPnl": 2738924.58, "roi": 273.89, "maxDD": -18.58, "closedTrades": 314, "openAtEnd": 10, "winRate": 27.39, "profitFactor": 2.26, "avgWinner": 51.08, "avgLoser": -8.06}, {"trail": 100, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3133531.03, "totalPnl": 2133531.03, "roi": 213.35, "maxDD": -19.13, "closedTrades": 453, "openAtEnd": 15, "winRate": 30.46, "profitFactor": 2.07, "avgWinner": 40.53, "avgLoser": -8.17}, {"trail": 100, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2720305.37, "totalPnl": 1720305.37, "roi": 172.03, "maxDD": -30.0, "closedTrades": 145, "openAtEnd": 5, "winRate": 28.28, "profitFactor": 1.73, "avgWinner": 49.53, "avgLoser": -9.3}, {"trail": 100, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3588210.28, "totalPnl": 2588210.28, "roi": 258.82, "maxDD": -16.68, "closedTrades": 272, "openAtEnd": 10, "winRate": 30.51, "profitFactor": 2.27, "avgWinner": 50.48, "avgLoser": -9.23}, {"trail": 100, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3379332.13, "totalPnl": 2379332.13, "roi": 237.93, "maxDD": -15.61, "closedTrades": 388, "openAtEnd": 15, "winRate": 34.28, "profitFactor": 2.26, "avgWinner": 41.63, "avgLoser": -9.3}], "yearly": {"25_4_5": [{"year": 2020, "returnPct": 117.66}, {"year": 2021, "returnPct": 66.57}, {"year": 2022, "returnPct": 0.14}, {"year": 2023, "returnPct": 29.99}, {"year": 2024, "returnPct": 19.43}, {"year": 2025, "returnPct": 5.85}, {"year": 2026, "returnPct": -8.65}], "25_4_10": [{"year": 2020, "returnPct": 80.91}, {"year": 2021, "returnPct": 54.22}, {"year": 2022, "returnPct": 38.72}, {"year": 2023, "returnPct": 37.44}, {"year": 2024, "returnPct": 36.0}, {"year": 2025, "returnPct": 14.02}, {"year": 2026, "returnPct": -12.19}], "25_4_15": [{"year": 2020, "returnPct": 78.07}, {"year": 2021, "returnPct": 66.76}, {"year": 2022, "returnPct": 41.66}, {"year": 2023, "returnPct": 43.13}, {"year": 2024, "returnPct": 20.35}, {"year": 2025, "returnPct": 7.68}, {"year": 2026, "returnPct": -9.53}], "25_8_5": [{"year": 2020, "returnPct": 108.76}, {"year": 2021, "returnPct": 58.98}, {"year": 2022, "returnPct": 17.34}, {"year": 2023, "returnPct": 42.74}, {"year": 2024, "returnPct": 17.11}, {"year": 2025, "returnPct": 47.88}, {"year": 2026, "returnPct": 3.02}], "25_8_10": [{"year": 2020, "returnPct": 76.41}, {"year": 2021, "returnPct": 56.06}, {"year": 2022, "returnPct": 23.71}, {"year": 2023, "returnPct": 64.19}, {"year": 2024, "returnPct": 40.79}, {"year": 2025, "returnPct": 16.13}, {"year": 2026, "returnPct": -10.09}], "25_8_15": [{"year": 2020, "returnPct": 71.66}, {"year": 2021, "returnPct": 55.91}, {"year": 2022, "returnPct": 24.72}, {"year": 2023, "returnPct": 70.11}, {"year": 2024, "returnPct": 41.58}, {"year": 2025, "returnPct": 6.96}, {"year": 2026, "returnPct": -11.23}], "25_12_5": [{"year": 2020, "returnPct": 105.47}, {"year": 2021, "returnPct": 74.18}, {"year": 2022, "returnPct": 6.88}, {"year": 2023, "returnPct": 43.1}, {"year": 2024, "returnPct": 40.17}, {"year": 2025, "returnPct": 31.57}, {"year": 2026, "returnPct": -14.06}], "25_12_10": [{"year": 2020, "returnPct": 74.12}, {"year": 2021, "returnPct": 57.63}, {"year": 2022, "returnPct": 23.46}, {"year": 2023, "returnPct": 61.27}, {"year": 2024, "returnPct": 43.78}, {"year": 2025, "returnPct": 15.2}, {"year": 2026, "returnPct": -13.13}], "25_12_15": [{"year": 2020, "returnPct": 69.76}, {"year": 2021, "returnPct": 53.79}, {"year": 2022, "returnPct": 22.58}, {"year": 2023, "returnPct": 69.35}, {"year": 2024, "returnPct": 46.67}, {"year": 2025, "returnPct": 2.1}, {"year": 2026, "returnPct": -14.3}], "50_4_5": [{"year": 2020, "returnPct": 82.22}, {"year": 2021, "returnPct": 116.88}, {"year": 2022, "returnPct": 9.4}, {"year": 2023, "returnPct": 30.68}, {"year": 2024, "returnPct": 2.0}, {"year": 2025, "returnPct": 57.54}, {"year": 2026, "returnPct": -36.05}], "50_4_10": [{"year": 2020, "returnPct": 67.82}, {"year": 2021, "returnPct": 80.37}, {"year": 2022, "returnPct": 22.29}, {"year": 2023, "returnPct": 28.58}, {"year": 2024, "returnPct": 20.78}, {"year": 2025, "returnPct": 47.52}, {"year": 2026, "returnPct": -37.35}], "50_4_15": [{"year": 2020, "returnPct": 56.61}, {"year": 2021, "returnPct": 88.4}, {"year": 2022, "returnPct": 21.49}, {"year": 2023, "returnPct": 48.26}, {"year": 2024, "returnPct": 25.35}, {"year": 2025, "returnPct": 18.08}, {"year": 2026, "returnPct": -12.59}], "50_8_5": [{"year": 2020, "returnPct": 99.21}, {"year": 2021, "returnPct": 58.09}, {"year": 2022, "returnPct": -8.64}, {"year": 2023, "returnPct": 36.04}, {"year": 2024, "returnPct": 8.06}, {"year": 2025, "returnPct": 26.19}, {"year": 2026, "returnPct": -32.11}], "50_8_10": [{"year": 2020, "returnPct": 89.35}, {"year": 2021, "returnPct": 60.98}, {"year": 2022, "returnPct": -6.06}, {"year": 2023, "returnPct": 47.14}, {"year": 2024, "returnPct": 9.7}, {"year": 2025, "returnPct": -7.98}, {"year": 2026, "returnPct": -9.0}], "50_8_15": [{"year": 2020, "returnPct": 71.54}, {"year": 2021, "returnPct": 85.33}, {"year": 2022, "returnPct": -0.65}, {"year": 2023, "returnPct": 53.57}, {"year": 2024, "returnPct": 18.08}, {"year": 2025, "returnPct": -18.54}, {"year": 2026, "returnPct": -10.21}], "50_12_5": [{"year": 2020, "returnPct": 67.36}, {"year": 2021, "returnPct": 87.8}, {"year": 2022, "returnPct": -1.29}, {"year": 2023, "returnPct": 23.84}, {"year": 2024, "returnPct": 12.79}, {"year": 2025, "returnPct": 26.73}, {"year": 2026, "returnPct": 17.93}], "50_12_10": [{"year": 2020, "returnPct": 67.86}, {"year": 2021, "returnPct": 57.65}, {"year": 2022, "returnPct": -8.93}, {"year": 2023, "returnPct": 45.05}, {"year": 2024, "returnPct": 21.95}, {"year": 2025, "returnPct": -12.3}, {"year": 2026, "returnPct": 6.71}], "50_12_15": [{"year": 2020, "returnPct": 52.86}, {"year": 2021, "returnPct": 79.34}, {"year": 2022, "returnPct": 0.75}, {"year": 2023, "returnPct": 46.19}, {"year": 2024, "returnPct": 17.81}, {"year": 2025, "returnPct": -17.55}, {"year": 2026, "returnPct": -0.19}], "100_4_5": [{"year": 2020, "returnPct": 60.02}, {"year": 2021, "returnPct": 60.27}, {"year": 2022, "returnPct": 4.16}, {"year": 2023, "returnPct": 7.64}, {"year": 2024, "returnPct": 26.36}, {"year": 2025, "returnPct": 35.36}, {"year": 2026, "returnPct": 133.72}], "100_4_10": [{"year": 2020, "returnPct": 52.38}, {"year": 2021, "returnPct": 101.78}, {"year": 2022, "returnPct": 13.93}, {"year": 2023, "returnPct": 12.27}, {"year": 2024, "returnPct": 20.0}, {"year": 2025, "returnPct": -6.31}, {"year": 2026, "returnPct": 80.53}], "100_4_15": [{"year": 2020, "returnPct": 40.58}, {"year": 2021, "returnPct": 125.32}, {"year": 2022, "returnPct": 3.16}, {"year": 2023, "returnPct": 30.68}, {"year": 2024, "returnPct": 22.13}, {"year": 2025, "returnPct": -6.78}, {"year": 2026, "returnPct": 69.7}], "100_8_5": [{"year": 2020, "returnPct": 69.27}, {"year": 2021, "returnPct": 84.4}, {"year": 2022, "returnPct": 35.36}, {"year": 2023, "returnPct": 82.42}, {"year": 2024, "returnPct": 20.32}, {"year": 2025, "returnPct": -32.66}, {"year": 2026, "returnPct": 7.67}], "100_8_10": [{"year": 2020, "returnPct": 57.48}, {"year": 2021, "returnPct": 142.28}, {"year": 2022, "returnPct": 6.85}, {"year": 2023, "returnPct": 72.92}, {"year": 2024, "returnPct": 25.87}, {"year": 2025, "returnPct": -36.71}, {"year": 2026, "returnPct": 5.2}], "100_8_15": [{"year": 2020, "returnPct": 50.22}, {"year": 2021, "returnPct": 121.47}, {"year": 2022, "returnPct": 1.58}, {"year": 2023, "returnPct": 52.76}, {"year": 2024, "returnPct": 20.89}, {"year": 2025, "returnPct": -34.97}, {"year": 2026, "returnPct": 1.4}], "100_12_5": [{"year": 2020, "returnPct": 52.3}, {"year": 2021, "returnPct": 44.49}, {"year": 2022, "returnPct": 3.54}, {"year": 2023, "returnPct": 59.28}, {"year": 2024, "returnPct": 38.71}, {"year": 2025, "returnPct": -27.03}, {"year": 2026, "returnPct": 0.73}], "100_12_10": [{"year": 2020, "returnPct": 48.93}, {"year": 2021, "returnPct": 102.94}, {"year": 2022, "returnPct": 5.3}, {"year": 2023, "returnPct": 77.06}, {"year": 2024, "returnPct": 38.54}, {"year": 2025, "returnPct": -24.24}, {"year": 2026, "returnPct": 10.31}], "100_12_15": [{"year": 2020, "returnPct": 46.46}, {"year": 2021, "returnPct": 100.67}, {"year": 2022, "returnPct": -2.83}, {"year": 2023, "returnPct": 59.68}, {"year": 2024, "returnPct": 42.21}, {"year": 2025, "returnPct": -29.35}, {"year": 2026, "returnPct": 21.09}]}};
+const LEAD = BACKTEST_DATA.combos.find(c => c.trail===25 && c.stop===8 && c.maxpos===5);
+if(LEAD){
+  const els = document.querySelectorAll('#home-stats .v');
+  els[0].textContent = (LEAD.roi>=0?'+':'') + LEAD.roi.toFixed(2) + '%';
+  els[1].textContent = LEAD.profitFactor.toFixed(2);
+  els[2].textContent = LEAD.closedTrades;
+}
+</script>
+</body>
+</html>
