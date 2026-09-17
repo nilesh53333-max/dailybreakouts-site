@@ -71,7 +71,9 @@
   .stock-name{font-size:19px;font-weight:700;}
   .stock-price{font-size:19px;font-weight:700;text-align:right;}
   .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
-  .chart-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;margin-top:14px;}
+  .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
+  .range-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;}
+  .range-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
   .chart-stats .v{font-weight:600;}
   .chart-stats .l{color:var(--muted);margin-top:1px;}
 
@@ -86,6 +88,7 @@
   .summary-strip{display:flex;gap:12px;margin-bottom:18px;}
   .summary-strip .stat{flex:1;}
   .btn-primary{background:var(--green);border:none;border-radius:8px;padding:0 18px;font-size:13px;font-weight:600;color:#FFFFFF;cursor:pointer;white-space:nowrap;}
+  .btn-secondary{background:#ECFDF5;border:1px solid var(--green);border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;}
 
   .equity-tabs{display:flex;gap:16px;margin-bottom:10px;}
   .equity-tab{font-size:12px;color:var(--muted);cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;}
@@ -96,15 +99,15 @@
   .keystats .row .val{font-weight:600;}
 
   .lifecycle-header{margin-bottom:4px;}
-  .lifecycle-header h2{font-size:22px;margin:0 0 4px;}
-  .lifecycle-header .sub{color:var(--muted);font-size:13.5px;margin-bottom:16px;}
-  .lifecycle-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
-  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:border-color .15s;}
+  .lifecycle-header h2{font-size:20px;margin:0 0 3px;}
+  .lifecycle-header .sub{color:var(--muted);font-size:13px;margin-bottom:12px;}
+  .lifecycle-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;cursor:pointer;transition:border-color .15s;}
   .stage-card:hover{border-color:var(--accent);}
   .stage-card.active{background:#EFF6F1;border-color:var(--green);}
   .stage-card .tap{font-size:11px;color:var(--muted);text-align:right;margin-bottom:8px;}
   .stage-card.active .tap{color:var(--green);font-weight:600;}
-  .stage-card .count{font-size:26px;font-weight:700;}
+  .stage-card .count{font-size:22px;font-weight:700;}
   .stage-card .title{font-size:14px;font-weight:600;margin-top:2px;}
   .stage-card .desc{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;}
 </style>
@@ -375,50 +378,173 @@ function renderStageCards(){
   });
 }
 
-function renderCandles(history, pivot, baseStartDate){
-  const w = 460, h = 220, padTop = 24, padBottom = 20;
-  if(!history || history.length === 0){
+function computeChartStats(row, sliced){
+  if(!sliced || sliced.length < 2) return null;
+  const today = sliced[sliced.length-1];
+  const yest = sliced[sliced.length-2];
+  const oneDayGain = ((today.c/yest.c)-1)*100;
+  const closeInRange = (today.h>today.l) ? (today.c-today.l)/(today.h-today.l) : null;
+  const nowVsPivot = row.pivot ? ((today.c/row.pivot)-1)*100 : null;
+
+  const vols = sliced.slice(-21,-1).map(d=>d.v);
+  const avgVol20 = vols.length ? vols.reduce((a,b)=>a+b,0)/vols.length : null;
+  const volX = avgVol20 ? today.v/avgVol20 : null;
+
+  const closes50 = sliced.slice(-50).map(d=>d.c);
+  const ma50 = closes50.length>=50 ? closes50.reduce((a,b)=>a+b,0)/closes50.length : null;
+  const priceVsMa50 = ma50 ? ((today.c/ma50)-1)*100 : null;
+
+  // Breakout-day gain: the % move ON the day it actually broke out, found
+  // by matching entry_date/base_start in the history (not "gain since entry").
+  const breakoutDate = row.entry_date;
+  let breakoutDayGain = null;
+  if(breakoutDate){
+    const idx = sliced.findIndex(d => d.date === breakoutDate);
+    if(idx > 0){
+      breakoutDayGain = ((sliced[idx].c/sliced[idx-1].c)-1)*100;
+    }
+  }
+  return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
+}
+
+function renderCandles(sliced, pivot, baseStartDate, showBaseLabel){
+  const w = 640, h = 260, padTop = 26, padBottom = 16, priceH = 190, volH = 50, volGap = 6;
+  if(!sliced || sliced.length === 0){
     return '<div class="empty" style="padding:20px;">No chart history for this stock.</div>';
   }
-  const highs = history.map(d => d.h), lows = history.map(d => d.l);
-  const maxP = Math.max(...highs, pivot), minP = Math.min(...lows, pivot);
+  const highs = sliced.map(d => d.h), lows = sliced.map(d => d.l);
+  const maxP = Math.max(...highs, pivot||0), minP = Math.min(...lows, pivot||Infinity);
   const range = (maxP - minP) || 1;
-  const y = p => padTop + (maxP - p) / range * (h - padTop - padBottom);
-  const n = history.length;
-  const slot = w / n;
-  const bw = Math.max(2, Math.min(7, slot * 0.6));
+  const y = p => padTop + (maxP - p) / range * (priceH - padTop);
+  const maxV = Math.max(...sliced.map(d=>d.v), 1);
+  const yv = v => (priceH + volGap) + (1 - v/maxV) * volH;
 
-  let baseStartIdx = baseStartDate ? history.findIndex(d => d.date >= baseStartDate) : -1;
+  const n = sliced.length;
+  const slot = w / n;
+  const bw = Math.max(1, Math.min(6, slot * 0.65));
+
+  let baseStartIdx = baseStartDate ? sliced.findIndex(d => d.date >= baseStartDate) : -1;
   if(baseStartIdx < 0) baseStartIdx = 0;
 
-  let svg = `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" style="background:#FAFAF7;border-radius:8px;">`;
-  const zoneX = baseStartIdx * slot, zoneW = w - zoneX;
-  svg += `<rect x="${zoneX.toFixed(1)}" y="${y(maxP).toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(y(minP)-y(maxP)).toFixed(1)}" fill="#ECFDF5" opacity="0.6"/>`;
-  svg += `<line x1="0" y1="${y(pivot).toFixed(1)}" x2="${w}" y2="${y(pivot).toFixed(1)}" stroke="var(--green)" stroke-width="1" stroke-dasharray="3 3"/>`;
-  svg += `<text x="4" y="${(y(pivot)-4).toFixed(1)}" font-size="9" fill="var(--green)" font-family="IBM Plex Mono">pivot ${pivot}</text>`;
-  history.forEach((d,i) => {
+  let svg = `<svg width="100%" height="${priceH+volGap+volH+10}" viewBox="0 0 ${w} ${priceH+volGap+volH+10}">`;
+
+  if(pivot){
+    const zoneX = baseStartIdx * slot, zoneW = w - zoneX;
+    const zoneTop = y(maxP), zoneBot = y(minP);
+    svg += `<rect x="${zoneX.toFixed(1)}" y="${zoneTop.toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(zoneBot-zoneTop).toFixed(1)}" fill="var(--green)" opacity="0.10" stroke="var(--green)" stroke-width="1" stroke-dasharray="2 3"/>`;
+    svg += `<line x1="0" y1="${y(pivot).toFixed(1)}" x2="${w}" y2="${y(pivot).toFixed(1)}" stroke="var(--green)" stroke-width="1.2" stroke-dasharray="4 3"/>`;
+    svg += `<rect x="2" y="${(y(pivot)-16).toFixed(1)}" width="${(60+String(pivot).length*5)}" height="14" fill="var(--green)" rx="3"/>`;
+    svg += `<text x="6" y="${(y(pivot)-5).toFixed(1)}" font-size="9" fill="#fff" font-family="IBM Plex Mono">pivot ₹${pivot}</text>`;
+    if(showBaseLabel){
+      svg += `<text x="${(zoneX+6).toFixed(1)}" y="${(zoneTop-4).toFixed(1)}" font-size="9" fill="var(--green)" font-weight="600" font-family="IBM Plex Mono">${showBaseLabel}</text>`;
+    }
+  }
+
+  sliced.forEach((d,i) => {
     const x = i*slot + slot/2;
     const up = d.c >= d.o;
     const color = up ? 'var(--green)' : 'var(--red)';
     svg += `<line x1="${x.toFixed(1)}" y1="${y(d.h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${y(d.l).toFixed(1)}" stroke="${color}" stroke-width="1"/>`;
     const top=y(Math.max(d.o,d.c)), bot=y(Math.min(d.o,d.c));
     svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,(bot-top)).toFixed(1)}" fill="${color}"/>`;
+    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${yv(d.v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(priceH+volGap+volH-yv(d.v)).toFixed(1)}" fill="${color}" opacity="0.45"/>`;
   });
+
+  // Month tick labels along the bottom
+  let lastMonth = null;
+  sliced.forEach((d,i) => {
+    const m = d.date.slice(0,7);
+    if(m !== lastMonth && i % 3 === 0){
+      lastMonth = m;
+      const x = i*slot;
+      const label = new Date(d.date).toLocaleString('en-US',{month:'short'});
+      svg += `<text x="${x.toFixed(1)}" y="${priceH+volGap+volH+10}" font-size="8" fill="var(--muted)" font-family="IBM Plex Mono">${label}</text>`;
+    }
+  });
+
   svg += `</svg>`;
   return svg;
+}
+
+let CURRENT_CHART_ROW = null;
+let CURRENT_CHART_RANGE = '6M';
+
+function sliceHistory(history, range){
+  const sessionsMap = {'6M': 126, '1Y': 252};
+  const n = sessionsMap[range] || history.length;
+  return history.slice(-n);
 }
 
 function renderChartFor(row){
   const panel = document.getElementById('stage-chart-panel');
   if(!panel) return;
   document.querySelectorAll('#stage-table tbody tr').forEach(tr => tr.classList.toggle('selected', tr.dataset.symbol===row.symbol));
-  const priceNow = row.close ?? row.current_price ?? row.exit_price;
+  CURRENT_CHART_ROW = row;
+  CURRENT_CHART_RANGE = '6M';
+  drawChartPanel();
+}
+
+function drawChartPanel(){
+  const row = CURRENT_CHART_ROW;
+  const panel = document.getElementById('stage-chart-panel');
+  if(!row || !panel) return;
+
+  const fullHistory = row.history || [];
+  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE);
+  const stats = computeChartStats(row, sliced);
+  const today = sliced.length ? sliced[sliced.length-1] : null;
+  const priceNow = today ? today.c : (row.close ?? row.current_price ?? row.exit_price);
+
+  const isBreakoutStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
+  const badgeHtml = isBreakoutStage
+    ? `<span style="background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">Breakout</span>
+       <span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Close &gt; Pivot (₹${row.pivot})</span>`
+    : (ACTIVE_STAGE==='forming'
+        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Approaching pivot</span>` : '');
+
+  const baseLabel = row.base_weeks ? `${row.base_weeks} wks base` : '';
+
+  const ohlcLine = today
+    ? `${today.date} &nbsp; O ${today.o} &nbsp; H ${today.h} &nbsp; L ${today.l} &nbsp; C ${today.c}`
+    : '';
+  const volRsMcapLine = `Vol ${today ? (today.v/1e6).toFixed(2)+'M' : '—'} &nbsp;&nbsp; RS ${row.rs_pct ?? '—'} &nbsp;&nbsp; Mkt Cap ${row.market_cap_cr ? '₹'+row.market_cap_cr.toLocaleString('en-IN')+' Cr' : '—'}`;
+
+  const rangeBtns = ['6M','1Y'].map(r =>
+    `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${r}</button>`
+  ).join('');
+
+  const statRow = (label, val, color) =>
+    `<div><div class="v num" style="${color?`color:${color};`:''}">${val}</div><div class="l">${label}</div></div>`;
+
+  const statsHtml = stats ? `
+    <div class="chart-stats">
+      ${statRow('Breakout-day gain', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('1-day gain', (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('Now vs pivot', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Close-in-range', stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
+      ${statRow('Vol vs 20d avg', stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
+      ${statRow('Price vs 50-MA', stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—')}
+      ${statRow('RS rating', row.rs_pct ?? '—')}
+      ${statRow('Base weeks', row.base_weeks ?? '—')}
+    </div>` : '';
+
   panel.innerHTML = `<div class="card">
     <div class="stock-header">
-      <div><div class="disp stock-name">${row.symbol}</div></div>
-      <div class="num stock-price">₹${(priceNow||0).toFixed(2)}</div>
+      <div>
+        <div class="disp stock-name">${row.symbol} <span style="color:var(--muted);font-weight:400;font-size:14px;">☆</span></div>
+      </div>
+      <div style="display:flex;gap:8px;">${badgeHtml}</div>
     </div>
-    ${renderCandles(row.history, row.pivot, row.base_start)}
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;">
+      <div class="num stock-price">₹${(priceNow||0).toFixed(2)}</div>
+      ${stats && stats.oneDayGain!=null ? `<div class="num" style="font-weight:600;color:${stats.oneDayGain>=0?'var(--green)':'var(--red)'}">${stats.oneDayGain>=0?'+':''}${stats.oneDayGain.toFixed(2)}%</div>` : ''}
+    </div>
+    <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:2px;">${ohlcLine}</div>
+    <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:10px;">${volRsMcapLine}</div>
+    <div style="display:flex;gap:6px;margin-bottom:10px;">${rangeBtns}</div>
+    ${renderCandles(sliced, row.pivot, row.base_start, baseLabel)}
+    ${statsHtml}
+    <button class="btn-secondary" style="margin-top:12px;width:100%;">☆ Add to Watchlist</button>
   </div>`;
 }
 
