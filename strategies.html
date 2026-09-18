@@ -362,22 +362,43 @@ renderBacktest();
 
 let LIFECYCLE_DATA = null;
 let ACTIVE_STAGE = 'fresh';
+let SELECTED_MAX_POSITIONS = 10;
 
 const STAGE_META = {
-  forming:    { title: 'Forming',        desc: 'resting before a breakout' },
-  fresh:      { title: 'Fresh breakouts', desc: 'closed above pivot today' },
-  climbing:   { title: 'Climbing',       desc: 'broke out earlier, still rising' },
-  played_out: { title: 'Played out',     desc: 'stopped or trailed out' },
+  forming: { title: 'Forming',      desc: 'resting before a breakout' },
+  fresh:   { title: 'Fresh breakouts', desc: 'closed above pivot today' },
+  open:    { title: 'Open Trades',  desc: 'currently held, given your slot limit' },
+  closed:  { title: 'Closed Trades 2026', desc: 'exited this year -- stop or trail' },
 };
 
+// Buckets LIFECYCLE_DATA.signals_2026 into Fresh/Open/Closed using each
+// signal's own outcomes[selectedMaxPos] (a real constrained-portfolio
+// result, not just "hasn't stopped out yet") -- recomputed instantly
+// client-side when the Max Positions selector changes, no re-fetch needed.
+function bucketSignalsByMaxPositions(){
+  const mp = String(SELECTED_MAX_POSITIONS);
+  const fresh = [], open = [], closed = [];
+  for(const s of (LIFECYCLE_DATA.signals_2026 || [])){
+    const o = s.outcomes ? s.outcomes[mp] : null;
+    if(s.is_fresh_today) fresh.push({...s, _outcome: o});
+    if(o && o.status === 'open') open.push({...s, _outcome: o});
+    if(o && o.status === 'closed') closed.push({...s, _outcome: o});
+  }
+  return {fresh, open, closed};
+}
+
 function renderStageCards(){
-  const c = LIFECYCLE_DATA.counts;
-  const order = ['forming','fresh','climbing','played_out'];
+  const buckets = bucketSignalsByMaxPositions();
+  const counts = {
+    forming: LIFECYCLE_DATA.counts.forming,
+    fresh: buckets.fresh.length, open: buckets.open.length, closed: buckets.closed.length,
+  };
+  const order = ['forming','fresh','open','closed'];
   document.getElementById('lifecycle-cards').innerHTML = order.map(key => {
     const meta = STAGE_META[key];
     const isActive = key === ACTIVE_STAGE;
     return `<div class="stage-card ${isActive?'active':''}" data-stage="${key}">
-      <div><span class="count num">${c[key]}</span> <span class="title">${meta.title}</span></div>
+      <div><span class="count num">${counts[key]}</span> <span class="title">${meta.title}</span></div>
       <div class="desc">${meta.desc}</div>
     </div>`;
   }).join('');
@@ -669,8 +690,9 @@ const STAGE_PAGE_SIZE = 10;
 
 function renderStageTable(){
   const el = document.getElementById('breakouts-content');
-  const rows = LIFECYCLE_DATA.stages[ACTIVE_STAGE] || [];
-  if(rows.length === 0){
+  const buckets = bucketSignalsByMaxPositions();
+  const rows = ACTIVE_STAGE === 'forming' ? (LIFECYCLE_DATA.stages.forming || []) : buckets[ACTIVE_STAGE];
+  if(!rows || rows.length === 0){
     el.innerHTML = `<div class="card"><div class="empty">Nothing in "${STAGE_META[ACTIVE_STAGE].title}" right now.</div></div>`;
     return;
   }
@@ -678,7 +700,7 @@ function renderStageTable(){
   const isExpanded = !!EXPANDED_STAGES[ACTIVE_STAGE];
   const displayRows = isExpanded ? rows : rows.slice(0, STAGE_PAGE_SIZE);
 
-  const hasChart = ACTIVE_STAGE !== 'played_out';
+  const hasChart = ACTIVE_STAGE !== 'closed';
   let head, body;
   if(ACTIVE_STAGE === 'forming'){
     head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
@@ -689,26 +711,40 @@ function renderStageTable(){
       <td class="r num">${r.dist_to_pivot_pct.toFixed(2)}%</td>
       <td class="r num">${(r.age_sessions/5).toFixed(1)} wks</td>
     </tr>`).join('');
-  } else if(ACTIVE_STAGE === 'played_out'){
+  } else if(ACTIVE_STAGE === 'closed'){
     head = `<th>Stock</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
-    body = displayRows.map(r => `<tr>
+    body = displayRows.map(r => { const o=r._outcome; return `<tr>
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
-      <td class="r num">${r.exit_price.toFixed(2)}</td>
-      <td class="r num" style="color:${r.return_pct>=0?'var(--green)':'var(--red)'}">${r.return_pct>=0?'+':''}${r.return_pct.toFixed(2)}%</td>
-      <td style="font-size:12px;color:var(--muted);">${r.exit_reason}</td>
+      <td class="r num">${o.exit_price.toFixed(2)}</td>
+      <td class="r num" style="color:${o.return_pct>=0?'var(--green)':'var(--red)'}">${o.return_pct>=0?'+':''}${o.return_pct.toFixed(2)}%</td>
+      <td style="font-size:12px;color:var(--muted);">${o.exit_reason}</td>
       <td class="r num">${r.rs_pct ?? '—'}</td>
-    </tr>`).join('');
+    </tr>`;}).join('');
+  } else if(ACTIVE_STAGE === 'fresh'){
+    head = `<th>Stock</th><th class="r">Entry ₹</th><th>Trade status</th><th class="r">RS</th>`;
+    body = displayRows.map(r => {
+      const o = r._outcome;
+      const traded = o && o.status === 'open';
+      const statusHtml = traded
+        ? `<span class="badge tight">Traded</span>`
+        : `<span class="badge" style="background:#FEF2F2;color:var(--red);">No trade — book full</span>`;
+      return `<tr class="selectable" data-symbol="${r.symbol}">
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="r num">${r.entry_price.toFixed(2)}</td>
+      <td>${statusHtml}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`;}).join('');
   } else {
-    head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">Sessions</th><th class="r">RS</th>`;
-    body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
+    // open
+    head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">RS</th>`;
+    body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
-      <td class="r num">${r.current_price.toFixed(2)}</td>
-      <td class="r num" style="color:${r.gain_pct>=0?'var(--green)':'var(--red)'}">${r.gain_pct>=0?'+':''}${r.gain_pct.toFixed(2)}%</td>
-      <td class="r num">${r.sessions_since_entry}</td>
+      <td class="r num">${o.current_price.toFixed(2)}</td>
+      <td class="r num" style="color:${o.gain_pct>=0?'var(--green)':'var(--red)'}">${o.gain_pct>=0?'+':''}${o.gain_pct.toFixed(2)}%</td>
       <td class="r num">${r.rs_pct ?? '—'}</td>
-    </tr>`).join('');
+    </tr>`;}).join('');
   }
 
   const truncNote = (ACTIVE_STAGE==='forming' && LIFECYCLE_DATA.forming_list_truncated)
@@ -736,6 +772,8 @@ function renderStageTable(){
         if(row) renderChartFor(row);
       });
     });
+    // Only chart rows that actually have chart data (Fresh entries that
+    // never got a trade slot still have history attached, so this is safe).
     if(displayRows.length) renderChartFor(displayRows[0]);
   } else {
     el.innerHTML = `<div class="card">
@@ -754,11 +792,34 @@ async function loadBreakouts(){
     if(!res.ok) throw new Error('not found');
     const data = await res.json();
     LIFECYCLE_DATA = data;
+    SELECTED_MAX_POSITIONS = data.default_max_positions || 10;
     STAGE_META.fresh.desc = 'closed above pivot today';
 
+    const freshToday = bucketSignalsByMaxPositions().fresh.length;
+    const mpOptions = (data.max_positions_options || [5,10,15]).map(mp =>
+      `<option value="${mp}" ${mp===SELECTED_MAX_POSITIONS?'selected':''}>${mp}</option>`
+    ).join('');
+
     headerEl.innerHTML = `
-      <h2 class="disp">${data.counts.fresh} fresh breakouts today.</h2>
-      <div class="sub">Every setup this screen finds, at the stage it has reached — tap a stage to see the names.</div>`;
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h2 class="disp">${freshToday} fresh breakouts today.</h2>
+          <div class="sub">Every setup this screen finds, at the stage it has reached — tap a stage to see the names.</div>
+        </div>
+        <div class="field">
+          <label>Max positions</label>
+          <select id="sel-max-positions-today">${mpOptions}</select>
+        </div>
+      </div>`;
+
+    document.getElementById('sel-max-positions-today').addEventListener('change', (e) => {
+      SELECTED_MAX_POSITIONS = parseInt(e.target.value);
+      renderStageCards();
+      renderStageTable();
+      // Refresh the headline count too, since Fresh's trade status depends on the selection.
+      document.querySelector('#lifecycle-header h2').textContent =
+        `${bucketSignalsByMaxPositions().fresh.length} fresh breakouts today.`;
+    });
 
     renderStageCards();
     renderStageTable();
