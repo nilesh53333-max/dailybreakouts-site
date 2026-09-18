@@ -308,36 +308,8 @@
 
     <!-- BOTTOM LEFT: backtest controls + metrics + yearly table -->
     <div class="quadrant" id="quad-backtest">
-      <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:6px 10px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-          <div class="disp" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
-          <div class="controls" style="margin-bottom:0;">
-            <div class="field">
-              <label>Max pos</label>
-              <select id="sel-maxpos">
-                <option value="5">5</option>
-                <option value="10" selected>10</option>
-                <option value="15">15</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Trail</label>
-              <select id="sel-trail">
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100" selected>100</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Stop %</label>
-              <select id="sel-stop">
-                <option value="4" selected>4%</option>
-                <option value="8">8%</option>
-                <option value="12">12%</option>
-              </select>
-            </div>
-          </div>
-        </div>
+      <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
+        <div class="disp" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -428,9 +400,7 @@ function renderEquityCurve(yearly, startCap){
 }
 
 function renderBacktest(){
-  const trail = parseInt(document.getElementById('sel-trail').value);
-  const stop = parseInt(document.getElementById('sel-stop').value);
-  const maxpos = parseInt(document.getElementById('sel-maxpos').value);
+  const trail = 100, stop = 4, maxpos = 10;  // fixed -- no parameter selection exposed to users
   const c = findCombo(trail, stop, maxpos);
   if(!c) return;
 
@@ -469,9 +439,6 @@ function renderBacktest(){
     <div class="row"><span class="lbl">Total trades</span><span class="val num">${c.closedTrades}</span></div>
     <div class="row"><span class="lbl">Open at end</span><span class="val num">${c.openAtEnd}</span></div>`;
 }
-['sel-trail','sel-stop','sel-maxpos'].forEach(id =>
-  document.getElementById(id).addEventListener('change', renderBacktest)
-);
 renderBacktest();
 
 
