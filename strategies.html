@@ -189,9 +189,9 @@
   .stock-price{font-size:19px;font-weight:700;text-align:right;}
   .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
   .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
-  .chart-stats-2col{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 8px;margin-top:6px;flex:0 0 auto;min-width:0;}
-  .stat-row{display:flex;flex-direction:column;padding:2px 0;font-size:clamp(9px, 1vw, 10.5px);}
-  .stat-row .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .chart-stats-2col{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;margin-top:6px;flex:0 0 auto;min-width:0;}
+  .stat-row{display:flex;flex-direction:column;padding:2px 0;font-size:clamp(8.5px, 0.9vw, 9.5px);}
+  .stat-row .lbl{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;}
   .stat-row .val{font-size:clamp(11px, 1.1vw, 13px);margin-top:1px;}
   .stat-row .lbl{color:var(--muted);}
   .stat-row .val{font-weight:600;}
@@ -769,11 +769,11 @@ function drawChartPanel(){
 
   const statsHtml = stats ? `
     <div class="chart-stats-2col">
-      ${statRow('Breakout-day gain (%)', 'The % move on the day it actually broke out, not since entry.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
-      ${statRow('1-day gain (%)', "Today's close vs yesterday's close.", (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
-      ${statRow('Now vs pivot (%)', 'Current close vs the pivot it broke out above.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
-      ${statRow('Breakout volume (vs 20d avg)', "Volume vs the 20-session average, at today's bar.", stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
-      ${statRow('Breakout close-in-range', "Where today's close sits in today's range (1.0 = at the high).", stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
+      ${statRow('Breakout-day gain', 'The % move on the day it actually broke out, not since entry.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('1-day gain', "Today's close vs yesterday's close.", (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('Now vs pivot', 'Current close vs the pivot it broke out above.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume', "Volume vs the 20-session average, at today's bar.", stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
+      ${statRow('Close-in-range', "Where today's close sits in today's range (1.0 = at the high).", stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
       ${statRow('RS rating', 'Relative strength percentile vs the whole scanned universe.', row.rs_pct ?? '—')}
       ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
       ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
