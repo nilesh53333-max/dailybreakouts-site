@@ -497,9 +497,15 @@ function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLa
   // Deferring to the next animation frame ensures the chart has actually
   // finished applying the fitted range before we read coordinates from it.
   requestAnimationFrame(() => {
-    if(pivot && baseStartDate){
-      const baseStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
-      if(baseStartIdx >= 0){
+    if(pivot && baseStartDate && sliced.length){
+      const foundIdx = sliced.findIndex(d => d.date >= baseStartDate);
+      // If the base started before the visible window (foundIdx === -1,
+      // e.g. a 45-week-old base on a 6M/~26-week chart), clamp to the
+      // start of what's actually shown rather than skip the zone entirely
+      // -- a base clipped at the left edge is far more useful than no
+      // base shown at all.
+      const baseStartIdx = foundIdx >= 0 ? foundIdx : 0;
+      {
         const zoneCandles = sliced.slice(baseStartIdx);
         const zoneHigh = Math.max(...zoneCandles.map(d=>d.h), pivot);
         const zoneLow = Math.min(...zoneCandles.map(d=>d.l), pivot);
