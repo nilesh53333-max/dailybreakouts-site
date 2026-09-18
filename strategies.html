@@ -120,6 +120,7 @@
   .stage-card .title{font-size:12px;font-weight:600;}
   .stage-card .desc{font-size:10.5px;color:var(--muted);font-style:italic;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
 <body>
 
@@ -414,121 +415,16 @@ function computeChartStats(row, sliced){
   return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
 }
 
-function renderCandles(sliced, pivot, baseStartDate, showBaseLabel, isStillOpen, chartId){
-  const w = 640, padTop = 30, padRight = 52, padBottom = 20, priceH = 190, volH = 42, volGap = 8;
-  if(!sliced || sliced.length === 0){
-    return '<div class="empty" style="padding:20px;">No chart history for this stock.</div>';
-  }
-  const highs = sliced.map(d => d.h), lows = sliced.map(d => d.l);
-  const maxP = Math.max(...highs, pivot||0), minP = Math.min(...lows, pivot||Infinity);
-  const range = (maxP - minP) || 1;
-  const plotW = w - padRight;
-  const y = p => padTop + (maxP - p) / range * (priceH - padTop);
-  const maxV = Math.max(...sliced.map(d=>d.v), 1);
-  const volTop = priceH + volGap;
-  const yv = v => volTop + (1 - v/maxV) * volH;
-
-  const n = sliced.length;
-  const slot = plotW / n;
-  const bw = Math.max(1, Math.min(6, slot * 0.65));
-
-  let baseStartIdx = baseStartDate ? sliced.findIndex(d => d.date >= baseStartDate) : -1;
-  if(baseStartIdx < 0) baseStartIdx = 0;
-
-  const totalH = volTop + volH + padBottom;
-  let svg = `<svg id="${chartId}" width="100%" height="${totalH}" viewBox="0 0 ${w} ${totalH}" style="cursor:crosshair;">`;
-
-  // Horizontal gridlines behind everything, matched to the right-axis labels
-  for(let k=0;k<=3;k++){
-    const p = minP + (range*k/3);
-    svg += `<line x1="0" y1="${y(p).toFixed(1)}" x2="${plotW}" y2="${y(p).toFixed(1)}" stroke="#EEF1F5" stroke-width="1"/>`;
-  }
-
-  if(pivot){
-    const zoneX = baseStartIdx * slot, zoneW = plotW - zoneX;
-    const zoneTop = y(maxP), zoneBot = y(minP);
-    svg += `<rect x="${zoneX.toFixed(1)}" y="${zoneTop.toFixed(1)}" width="${zoneW.toFixed(1)}" height="${(zoneBot-zoneTop).toFixed(1)}" fill="var(--green)" opacity="0.07" stroke="var(--green)" stroke-width="1" stroke-opacity="0.35"/>`;
-    if(showBaseLabel){
-      svg += `<text x="${(zoneX+zoneW/2).toFixed(1)}" y="${(zoneTop-6).toFixed(1)}" font-size="9.5" fill="var(--green)" font-weight="600" text-anchor="middle">${showBaseLabel}</text>`;
-    }
-    svg += `<line x1="0" y1="${y(pivot).toFixed(1)}" x2="${plotW}" y2="${y(pivot).toFixed(1)}" stroke="var(--green)" stroke-width="1.2" stroke-dasharray="4 3"/>`;
-    svg += `<rect x="2" y="${(y(pivot)-16).toFixed(1)}" width="${(58+String(pivot).length*5)}" height="14" fill="var(--green)" rx="3"/>`;
-    svg += `<text x="6" y="${(y(pivot)-5).toFixed(1)}" font-size="9" fill="#fff">pivot ₹${pivot}</text>`;
-  }
-
-  sliced.forEach((d,i) => {
-    const x = i*slot + slot/2;
-    const up = d.c >= d.o;
-    const color = up ? 'var(--green)' : 'var(--red)';
-    svg += `<line x1="${x.toFixed(1)}" y1="${y(d.h).toFixed(1)}" x2="${x.toFixed(1)}" y2="${y(d.l).toFixed(1)}" stroke="${color}" stroke-width="1" pointer-events="none"/>`;
-    const top=y(Math.max(d.o,d.c)), bot=y(Math.min(d.o,d.c));
-    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(1,(bot-top)).toFixed(1)}" fill="${color}" pointer-events="none"/>`;
-    svg += `<rect x="${(x-bw/2).toFixed(1)}" y="${yv(d.v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(volTop+volH-yv(d.v)).toFixed(1)}" fill="${color}" opacity="0.4" pointer-events="none"/>`;
-    // Invisible wide hit-target per candle for hover/click (data attrs picked up by the panel's mousemove handler)
-    svg += `<rect class="candle-hit" data-i="${i}" x="${(x-slot/2).toFixed(1)}" y="0" width="${slot.toFixed(1)}" height="${totalH}" fill="transparent"/>`;
-  });
-
-  if(isStillOpen){
-    const last = sliced[sliced.length-1];
-    const x = (n-1)*slot + slot/2;
-    const arrowY = y(last.h) - 10;
-    svg += `<path d="M ${x.toFixed(1)} ${(arrowY-6).toFixed(1)} l -5 8 l 10 0 z" fill="var(--green)" pointer-events="none"/>`;
-  }
-
-  for(let k=0;k<=3;k++){
-    const p = minP + (range*k/3);
-    svg += `<text x="${plotW+6}" y="${(y(p)+3).toFixed(1)}" font-size="8.5" fill="var(--muted)">${p.toFixed(2)}</text>`;
-  }
-
-  const tickCount = 3;
-  for(let k=0;k<tickCount;k++){
-    const idx = Math.round((n-1) * k/(tickCount-1));
-    const x = idx*slot + slot/2;
-    const anchor = k===0 ? 'start' : (k===tickCount-1 ? 'end' : 'middle');
-    svg += `<text x="${x.toFixed(1)}" y="${totalH-4}" font-size="8.5" fill="var(--muted)" text-anchor="${anchor}">${sliced[idx].date}</text>`;
-  }
-
-  svg += `</svg>`;
-  return svg;
-}
-
-function wireChartTooltip(chartId, sliced){
-  const svg = document.getElementById(chartId);
-  const tooltip = document.getElementById(chartId+'-tooltip');
-  if(!svg || !tooltip) return;
-
-  function showTooltip(e){
-    const target = e.target.closest('.candle-hit');
-    if(!target){ tooltip.style.display = 'none'; return; }
-    const i = parseInt(target.dataset.i);
-    const d = sliced[i];
-    if(!d) return;
-    const up = d.c >= d.o;
-    // Position relative to the SVG's own bounding box in CSS pixels --
-    // offsetX/offsetY are unreliable for SVG child elements across
-    // browsers, so compute from clientX/Y and getBoundingClientRect instead.
-    const rect = svg.getBoundingClientRect();
-    const relX = e.clientX - rect.left;
-    const relY = e.clientY - rect.top;
-    tooltip.style.display = 'block';
-    tooltip.style.left = Math.min(relX+12, rect.width-150) + 'px';
-    tooltip.style.top = Math.max(relY-10, 0) + 'px';
-    tooltip.innerHTML = `<b>${d.date}</b><br>O ${d.o} &nbsp; H ${d.h}<br>L ${d.l} &nbsp; C <span style="color:${up?'var(--green)':'var(--red)'}">${d.c}</span><br>Vol ${(d.v/1000).toFixed(0)}K`;
-  }
-
-  svg.addEventListener('mousemove', showTooltip);
-  svg.addEventListener('click', showTooltip);
-  svg.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
-}
-
-let CURRENT_CHART_ROW = null;
-let CURRENT_CHART_RANGE = '6M';
-
 function sliceHistory(history, range){
   const sessionsMap = {'6M': 126, '1Y': 252};
   const n = sessionsMap[range] || history.length;
   return history.slice(-n);
 }
+
+let CURRENT_CHART_ROW = null;
+let CURRENT_CHART_RANGE = '6M';
+let SHOW_BASE_ZONE = true;
+let ACTIVE_LWCHART = null;   // the current LightweightCharts instance, so we can dispose it on redraw
 
 function renderChartFor(row){
   const panel = document.getElementById('stage-chart-panel');
@@ -537,6 +433,114 @@ function renderChartFor(row){
   CURRENT_CHART_ROW = row;
   CURRENT_CHART_RANGE = '6M';
   drawChartPanel();
+}
+
+function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLabel, isStillOpen){
+  const container = document.getElementById(containerId);
+  if(!container || !window.LightweightCharts) return;
+  container.innerHTML = '';
+
+  const chart = LightweightCharts.createChart(container, {
+    width: container.clientWidth,
+    height: 320,
+    layout: { background: { color: '#FAFAF7' }, textColor: '#64748B', fontFamily: 'IBM Plex Mono, monospace', fontSize: 10 },
+    grid: { vertLines: { color: '#EEF1F5' }, horzLines: { color: '#EEF1F5' } },
+    rightPriceScale: { borderColor: '#E2E8F0' },
+    timeScale: { borderColor: '#E2E8F0', timeVisible: false },
+    handleScroll: false,
+    handleScale: false,
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+  });
+  ACTIVE_LWCHART = chart;
+
+  const candleSeries = chart.addCandlestickSeries({
+    upColor: '#16A34A', downColor: '#DC2626',
+    borderUpColor: '#16A34A', borderDownColor: '#DC2626',
+    wickUpColor: '#16A34A', wickDownColor: '#DC2626',
+  });
+  const candleData = sliced.map(d => ({ time: d.date, open: d.o, high: d.h, low: d.l, close: d.c }));
+  candleSeries.setData(candleData);
+
+  const volSeries = chart.addHistogramSeries({
+    priceFormat: { type: 'volume' }, priceScaleId: '', color: '#16A34A',
+  });
+  volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+  volSeries.setData(sliced.map(d => ({ time: d.date, value: d.v, color: d.c>=d.o ? 'rgba(22,163,74,0.4)' : 'rgba(220,38,38,0.4)' })));
+
+  if(pivot){
+    candleSeries.createPriceLine({
+      price: pivot, color: '#16A34A', lineWidth: 1,
+      lineStyle: LightweightCharts.LineStyle.Dashed,
+      axisLabelVisible: true, title: `pivot ₹${pivot}`,
+    });
+  }
+
+  if(isStillOpen && sliced.length){
+    const last = sliced[sliced.length-1];
+    candleSeries.setMarkers([{
+      time: last.date, position: 'aboveBar', color: '#16A34A', shape: 'arrowUp',
+      text: baseLabel || '',
+    }]);
+  }
+
+  chart.timeScale().fitContent();
+
+  // Base-zone shading: an absolutely-positioned overlay div, computed from
+  // the chart's own coordinate-mapping functions (timeToCoordinate /
+  // priceToCoordinate). Toggle-able without re-rendering the whole chart.
+  // Note: pan/zoom is disabled above (handleScroll/handleScale: false) so
+  // these pixel coordinates stay valid without needing to recompute on scroll.
+  if(pivot && baseStartDate){
+    const baseStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
+    if(baseStartIdx >= 0){
+      const zoneCandles = sliced.slice(baseStartIdx);
+      const zoneHigh = Math.max(...zoneCandles.map(d=>d.h), pivot);
+      const zoneLow = Math.min(...zoneCandles.map(d=>d.l), pivot);
+      const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
+      const x2 = container.clientWidth - 4;
+      const yTop = candleSeries.priceToCoordinate(zoneHigh);
+      const yBot = candleSeries.priceToCoordinate(zoneLow);
+      if(x1!=null && yTop!=null && yBot!=null){
+        const zoneDiv = document.createElement('div');
+        zoneDiv.id = containerId+'-zone';
+        zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        container.style.position = 'relative';
+        container.appendChild(zoneDiv);
+        if(baseLabel){
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          labelDiv.textContent = baseLabel;
+          labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
+        }
+      }
+    }
+  }
+
+  // Native crosshair-driven tooltip -- reliable across browsers since it
+  // uses the library's own coordinate system, not manual hit-testing.
+  const tooltip = document.getElementById(containerId+'-tooltip');
+  if(tooltip){
+    chart.subscribeCrosshairMove(param => {
+      if(!param.time || !param.point){ tooltip.style.display = 'none'; return; }
+      const d = candleData.find(c => c.time === param.time);
+      if(!d){ tooltip.style.display = 'none'; return; }
+      const up = d.close >= d.open;
+      tooltip.style.display = 'block';
+      tooltip.style.left = Math.min(param.point.x+12, container.clientWidth-140) + 'px';
+      tooltip.style.top = Math.max(param.point.y-10, 0) + 'px';
+      tooltip.innerHTML = `<b>${d.time}</b><br>O ${d.open} &nbsp; H ${d.high}<br>L ${d.low} &nbsp; C <span style="color:${up?'#16A34A':'#DC2626'}">${d.close}</span>`;
+    });
+  }
+}
+
+function toggleBaseZone(){
+  SHOW_BASE_ZONE = !SHOW_BASE_ZONE;
+  const btn = document.getElementById('base-zone-toggle');
+  if(btn) btn.classList.toggle('active', SHOW_BASE_ZONE);
+  document.querySelectorAll('[id$="-zone"], [id$="-zonelabel"]').forEach(el => {
+    el.style.display = SHOW_BASE_ZONE ? 'block' : 'none';
+  });
 }
 
 function drawChartPanel(){
@@ -564,8 +568,6 @@ function drawChartPanel(){
     : '';
   const volRsMcapLine = `Vol ${today ? (today.v/1e6).toFixed(2)+'M' : '—'} &nbsp;&nbsp; RS ${row.rs_pct ?? '—'} &nbsp;&nbsp; Mkt Cap ${row.market_cap_cr ? '₹'+row.market_cap_cr.toLocaleString('en-IN')+' Cr' : '—'}`;
 
-  // Prefer the backend's real fields (computed against FULL multi-year
-  // history) over any client-side estimate limited to the embedded window.
   const medianTurnoverCr = row.median_turnover_cr ?? (sliced.length >= 20
     ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
     : null);
@@ -573,6 +575,7 @@ function drawChartPanel(){
   const rangeBtns = ['6M','1Y'].map(r =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${r}</button>`
   ).join('');
+  const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">Base zone</button>`;
 
   const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
   const statRow = (label, tip, val, color) =>
@@ -591,9 +594,6 @@ function drawChartPanel(){
     </div>` : '';
 
   const isOpenStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
-  // "Blue sky": real backend field, checked against the stock's FULL
-  // history (not just this chart's embedded window) -- current close
-  // within 1% of its all-time high, meaning no overhead resistance above.
   const blueSkyBadge = (isOpenStage && row.blue_sky)
     ? `<span style="display:inline-block;background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 12px;border-radius:14px;margin-top:10px;">Blue sky</span>` : '';
 
@@ -612,16 +612,15 @@ function drawChartPanel(){
     </div>
     <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:2px;">${ohlcLine}</div>
     <div class="num" style="font-size:11px;color:var(--muted);margin-bottom:10px;">${volRsMcapLine}</div>
-    <div style="display:flex;gap:6px;margin-bottom:10px;">${rangeBtns}</div>
-    <div style="position:relative;">
-      ${renderCandles(sliced, row.pivot, row.base_start, baseLabel, isOpenStage, chartId)}
-      <div id="${chartId}-tooltip" class="chart-tooltip"></div>
-    </div>
+    <div style="display:flex;gap:6px;margin-bottom:10px;">${rangeBtns}${baseZoneToggle}</div>
+    <div id="${chartId}" style="position:relative;"></div>
+    <div id="${chartId}-tooltip" class="chart-tooltip"></div>
     ${statsHtml}
     ${blueSkyBadge}
     <button class="btn-secondary" style="margin-top:12px;width:100%;">☆ Add to Watchlist</button>
   </div>`;
-  wireChartTooltip(chartId, sliced);
+
+  buildLightweightChart(chartId, sliced, row.pivot, row.base_start, baseLabel, isOpenStage);
 }
 
 let EXPANDED_STAGES = {};
