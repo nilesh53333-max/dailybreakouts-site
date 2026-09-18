@@ -362,24 +362,31 @@ renderBacktest();
 
 let LIFECYCLE_DATA = null;
 let ACTIVE_STAGE = 'fresh';
+let SELECTED_TRAIL_DMA = 25;
+let SELECTED_STOP_PCT = 8;
 let SELECTED_MAX_POSITIONS = 10;
 
 const STAGE_META = {
   forming: { title: 'Forming',      desc: 'resting before a breakout' },
   fresh:   { title: 'Fresh breakouts', desc: 'closed above pivot today' },
-  open:    { title: 'Open Trades',  desc: 'currently held, given your slot limit' },
+  open:    { title: 'Open Trades',  desc: 'currently held, given your settings' },
   closed:  { title: 'Closed Trades 2026', desc: 'exited this year -- stop or trail' },
 };
 
 // Buckets LIFECYCLE_DATA.signals_2026 into Fresh/Open/Closed using each
-// signal's own outcomes[selectedMaxPos] (a real constrained-portfolio
-// result, not just "hasn't stopped out yet") -- recomputed instantly
-// client-side when the Max Positions selector changes, no re-fetch needed.
+// signal's own outcomes["trail_stop_maxpos"] (a real constrained-portfolio
+// result for that exact combo, matching vcm_engine.py's backtest grid) --
+// recomputed instantly client-side whenever any of the three selectors
+// change, no re-fetch needed.
+function currentComboKey(){
+  return `${SELECTED_TRAIL_DMA}_${SELECTED_STOP_PCT}_${SELECTED_MAX_POSITIONS}`;
+}
+
 function bucketSignalsByMaxPositions(){
-  const mp = String(SELECTED_MAX_POSITIONS);
+  const key = currentComboKey();
   const fresh = [], open = [], closed = [];
   for(const s of (LIFECYCLE_DATA.signals_2026 || [])){
-    const o = s.outcomes ? s.outcomes[mp] : null;
+    const o = s.outcomes ? s.outcomes[key] : null;
     if(s.is_fresh_today) fresh.push({...s, _outcome: o});
     if(o && o.status === 'open') open.push({...s, _outcome: o});
     if(o && o.status === 'closed') closed.push({...s, _outcome: o});
@@ -792,12 +799,13 @@ async function loadBreakouts(){
     if(!res.ok) throw new Error('not found');
     const data = await res.json();
     LIFECYCLE_DATA = data;
-    SELECTED_MAX_POSITIONS = data.default_max_positions || 10;
+    const dc = data.default_combo || {trail_dma:25, stop_pct:8, max_positions:10};
+    SELECTED_TRAIL_DMA = dc.trail_dma; SELECTED_STOP_PCT = dc.stop_pct; SELECTED_MAX_POSITIONS = dc.max_positions;
     STAGE_META.fresh.desc = 'closed above pivot today';
 
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
-    const mpOptions = (data.max_positions_options || [5,10,15]).map(mp =>
-      `<option value="${mp}" ${mp===SELECTED_MAX_POSITIONS?'selected':''}>${mp}</option>`
+    const optHtml = (opts, selected) => opts.map(v =>
+      `<option value="${v}" ${v===selected?'selected':''}>${v}</option>`
     ).join('');
 
     headerEl.innerHTML = `
@@ -806,20 +814,34 @@ async function loadBreakouts(){
           <h2 class="disp">${freshToday} fresh breakouts today.</h2>
           <div class="sub">Every setup this screen finds, at the stage it has reached — tap a stage to see the names.</div>
         </div>
-        <div class="field">
-          <label>Max positions</label>
-          <select id="sel-max-positions-today">${mpOptions}</select>
+        <div class="controls" style="margin-bottom:0;">
+          <div class="field">
+            <label>Max positions</label>
+            <select id="sel-max-positions-today">${optHtml(data.max_positions_options || [5,10,15], SELECTED_MAX_POSITIONS)}</select>
+          </div>
+          <div class="field">
+            <label>Trail (DMA)</label>
+            <select id="sel-trail-today">${optHtml(data.trail_options || [25,50,100], SELECTED_TRAIL_DMA)}</select>
+          </div>
+          <div class="field">
+            <label>Stop loss %</label>
+            <select id="sel-stop-today">${optHtml(data.stop_options || [4,8,12], SELECTED_STOP_PCT)}</select>
+          </div>
         </div>
       </div>`;
 
-    document.getElementById('sel-max-positions-today').addEventListener('change', (e) => {
-      SELECTED_MAX_POSITIONS = parseInt(e.target.value);
+    const onSelectorChange = () => {
+      SELECTED_MAX_POSITIONS = parseInt(document.getElementById('sel-max-positions-today').value);
+      SELECTED_TRAIL_DMA = parseInt(document.getElementById('sel-trail-today').value);
+      SELECTED_STOP_PCT = parseInt(document.getElementById('sel-stop-today').value);
       renderStageCards();
       renderStageTable();
-      // Refresh the headline count too, since Fresh's trade status depends on the selection.
       document.querySelector('#lifecycle-header h2').textContent =
         `${bucketSignalsByMaxPositions().fresh.length} fresh breakouts today.`;
-    });
+    };
+    document.getElementById('sel-max-positions-today').addEventListener('change', onSelectorChange);
+    document.getElementById('sel-trail-today').addEventListener('change', onSelectorChange);
+    document.getElementById('sel-stop-today').addEventListener('change', onSelectorChange);
 
     renderStageCards();
     renderStageTable();
