@@ -28,20 +28,20 @@
   .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
 
   main{padding:16px 24px 32px;width:100%;}
-  h1{font-size:24px;margin:0 0 4px;}
-  .sub{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+  h1{font-size:19px;margin:0 0 2px;}
+  .sub{color:var(--muted);font-size:12px;margin-bottom:12px;}
 
-  .tabs{display:flex;gap:20px;border-bottom:1px solid var(--border);margin-bottom:20px;}
-  .tab{padding:10px 2px;font-size:14px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+  .tabs{display:flex;gap:18px;border-bottom:1px solid var(--border);margin-bottom:12px;}
+  .tab{padding:6px 2px;font-size:12.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
   .tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
   .panel{margin-bottom:32px;}
   .panel.active{display:block;}
 
   .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;}
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
-  .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
-  .stat .v{font-size:20px;font-weight:700;}
-  .stat .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;}
+  .stat .v{font-size:16px;font-weight:700;}
+  .stat .l{font-size:10px;color:var(--muted);margin-top:1px;}
 
   table{width:100%;border-collapse:collapse;font-size:13px;}
   th{text-align:left;padding:6px 8px;font-size:10.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);background:#FAFAF7;}
@@ -72,8 +72,8 @@
   .stock-price{font-size:19px;font-weight:700;text-align:right;}
   .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
   .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
-  .chart-stats-2col{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px;margin-top:14px;}
-  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #F1EFE8;font-size:12.5px;}
+  .chart-stats-2col{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;margin-top:8px;}
+  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid #F1EFE8;font-size:11.5px;}
   .stat-row .lbl{color:var(--muted);}
   .stat-row .val{font-weight:600;}
   .info-icon{display:inline-block;color:#B8C0CC;font-size:11px;cursor:help;}
@@ -102,16 +102,16 @@
   .equity-tab{font-size:12px;color:var(--muted);cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;}
   .equity-tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
   .keystats{display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:12.5px;margin-top:14px;}
-  .keystats .row{display:flex;justify-content:space-between;padding:7px 10px;border-bottom:1px solid #F1EFE8;}
+  .keystats .row{display:flex;justify-content:space-between;padding:4px 8px;border-bottom:1px solid #F1EFE8;font-size:12px;}
   .keystats .row .lbl{color:var(--muted);}
   .keystats .row .val{font-weight:600;}
 
   .lifecycle-header{margin-bottom:4px;}
   .lifecycle-header h2{font-size:20px;margin:0 0 3px;}
   .lifecycle-header .sub{color:var(--muted);font-size:13px;margin-bottom:12px;}
-  .lifecycle-cards{display:flex;gap:10px;margin-bottom:14px;}
+  .lifecycle-cards{display:flex;gap:8px;margin-bottom:10px;}
   .stage-card{flex:1;}
-  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s;}
+  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 12px;cursor:pointer;transition:border-color .15s;}
   .stage-card:hover{border-color:var(--accent);}
   .stage-card.active{background:#EFF6F1;border-color:var(--green);}
   .stage-card .tap{font-size:9.5px;color:var(--muted);text-align:right;margin-bottom:2px;}
@@ -476,7 +476,7 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
 
   const chart = LightweightCharts.createChart(container, {
     width: container.clientWidth,
-    height: 320,
+    height: 210,
     layout: { background: { color: '#FAFAF7' }, textColor: '#64748B', fontFamily: 'IBM Plex Mono, monospace', fontSize: 10 },
     grid: { vertLines: { color: '#EEF1F5' }, horzLines: { color: '#EEF1F5' } },
     rightPriceScale: { borderColor: '#E2E8F0' },
