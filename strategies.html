@@ -793,7 +793,7 @@ function renderStageTable(){
   const isExpanded = !!EXPANDED_STAGES[ACTIVE_STAGE];
   const displayRows = isExpanded ? rows : rows.slice(0, STAGE_PAGE_SIZE);
 
-  const hasChart = ACTIVE_STAGE !== 'closed';
+  const hasChart = true;
   let head, body;
   if(ACTIVE_STAGE === 'forming'){
     head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
@@ -806,7 +806,7 @@ function renderStageTable(){
     </tr>`).join('');
   } else if(ACTIVE_STAGE === 'closed'){
     head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
-    body = displayRows.map(r => { const o=r._outcome; return `<tr>
+    body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
@@ -868,8 +868,6 @@ function renderStageTable(){
     // Only chart rows that actually have chart data (Fresh entries that
     // never got a trade slot still have history attached, so this is safe).
     if(displayRows.length) renderChartFor(displayRows[0]);
-  } else if(chartPanel){
-    chartPanel.innerHTML = `<div class="quadrant-card"><div class="empty">Played-out trades aren't charted (reference only) — select Forming, Fresh, or Open Trades to see a chart.</div></div>`;
   }
 }
 
