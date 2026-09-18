@@ -90,7 +90,8 @@
     .dashboard-grid{
       display:grid;
       grid-template-columns:56fr 44fr;
-      grid-template-rows:auto 1fr;
+      grid-template-rows:auto auto;
+      align-items:start;
       gap:clamp(6px, 1vh, 10px);
       flex:1;
       min-height:0;
@@ -225,9 +226,8 @@
   .keystats .row .lbl{color:var(--muted);}
   .keystats .row .val{font-weight:600;}
 
-  .toolbar-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
-  .toolbar-title h1{margin:0;line-height:1.15;}
-  .toolbar-title .sub{margin:1px 0 0;line-height:1.2;}
+  .compact-strip h1{margin:0;line-height:1.15;}
+  .compact-strip .sub{margin:1px 0 0;line-height:1.2;}
   .lifecycle-cards{display:flex;gap:8px;margin-bottom:10px;}
   .stage-card{flex:1;}
   .stage-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;cursor:pointer;transition:border-color .15s;}
@@ -285,12 +285,9 @@
   </div>
 
 <main class="content-col">
-  <div class="compact-strip toolbar-row">
-    <div class="toolbar-title">
-      <h1 class="disp">Volatility Contraction</h1>
-      <div class="sub" id="dynamic-sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
-    </div>
-    <div class="controls" id="today-controls" style="margin-bottom:0;"></div>
+  <div class="compact-strip">
+    <h1 class="disp">Volatility Contraction</h1>
+    <div class="sub" id="dynamic-sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
   </div>
 
   <div class="dashboard-grid">
@@ -915,44 +912,16 @@ async function loadBreakouts(){
     if(!res.ok) throw new Error('not found');
     const data = await res.json();
     LIFECYCLE_DATA = data;
-    const dc = data.default_combo || {trail_dma:25, stop_pct:8, max_positions:10};
-    SELECTED_TRAIL_DMA = dc.trail_dma; SELECTED_STOP_PCT = dc.stop_pct; SELECTED_MAX_POSITIONS = dc.max_positions;
+    // Hard-coded default -- the top-right selector was removed, so this
+    // is now fixed rather than user-adjustable from this page. The
+    // Backtest section's own controls remain fully independent and
+    // functional for exploring other combos.
+    SELECTED_TRAIL_DMA = 100; SELECTED_STOP_PCT = 4; SELECTED_MAX_POSITIONS = 10;
     STAGE_META.fresh.desc = 'closed above pivot today';
 
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
-    const optHtml = (opts, selected) => opts.map(v =>
-      `<option value="${v}" ${v===selected?'selected':''}>${v}</option>`
-    ).join('');
-
-    const subEl = document.getElementById('dynamic-sub');
-    const controlsEl = document.getElementById('today-controls');
-    subEl.textContent = `${freshToday} fresh breakouts today — tap a stage below to see the names.`;
-    controlsEl.innerHTML = `
-      <div class="field">
-        <label>Max positions</label>
-        <select id="sel-max-positions-today">${optHtml(data.max_positions_options || [5,10,15], SELECTED_MAX_POSITIONS)}</select>
-      </div>
-      <div class="field">
-        <label>Trail (DMA)</label>
-        <select id="sel-trail-today">${optHtml(data.trail_options || [25,50,100], SELECTED_TRAIL_DMA)}</select>
-      </div>
-      <div class="field">
-        <label>Stop loss %</label>
-        <select id="sel-stop-today">${optHtml(data.stop_options || [4,8,12], SELECTED_STOP_PCT)}</select>
-      </div>`;
-
-    const onSelectorChange = () => {
-      SELECTED_MAX_POSITIONS = parseInt(document.getElementById('sel-max-positions-today').value);
-      SELECTED_TRAIL_DMA = parseInt(document.getElementById('sel-trail-today').value);
-      SELECTED_STOP_PCT = parseInt(document.getElementById('sel-stop-today').value);
-      renderStageCards();
-      renderStageTable();
-      document.getElementById('dynamic-sub').textContent =
-        `${bucketSignalsByMaxPositions().fresh.length} fresh breakouts today — tap a stage below to see the names.`;
-    };
-    document.getElementById('sel-max-positions-today').addEventListener('change', onSelectorChange);
-    document.getElementById('sel-trail-today').addEventListener('change', onSelectorChange);
-    document.getElementById('sel-stop-today').addEventListener('change', onSelectorChange);
+    document.getElementById('dynamic-sub').textContent =
+      `${freshToday} fresh breakouts today — tap a stage below to see the names.`;
 
     renderStageCards();
     renderStageTable();
