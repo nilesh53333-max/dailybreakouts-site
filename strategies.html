@@ -16,7 +16,7 @@
   a{color:inherit;text-decoration:none;}
   select,button,input{font-family:inherit;}
 
-  header{height:64px;background:var(--ink);display:flex;align-items:center;padding:0 24px;gap:20px;}
+  header{height:56px;background:var(--ink);display:flex;align-items:center;padding:0 20px;gap:18px;}
   header .logo{color:#FFFFFF;font-weight:700;font-size:20px;line-height:1.1;}
   header .logo span{color:var(--green);}
   .logo-tagline{color:#94A3B8;font-size:10.5px;line-height:1.2;max-width:150px;margin-right:8px;}
@@ -27,7 +27,7 @@
   .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
   .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
 
-  main{padding:24px 32px 60px;width:100%;}
+  main{padding:16px 24px 32px;width:100%;}
   h1{font-size:24px;margin:0 0 4px;}
   .sub{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
 
@@ -37,15 +37,15 @@
   .panel{margin-bottom:32px;}
   .panel.active{display:block;}
 
-  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;}
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
   .stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
   .stat .v{font-size:20px;font-weight:700;}
   .stat .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
 
   table{width:100%;border-collapse:collapse;font-size:13px;}
-  th{text-align:left;padding:9px 10px;font-size:11px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);background:#FAFAF7;}
-  td{padding:9px 10px;border-bottom:1px solid #F1EFE8;}
+  th{text-align:left;padding:6px 8px;font-size:10.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);background:#FAFAF7;}
+  td{padding:6px 8px;border-bottom:1px solid #F1EFE8;}
   td.r{text-align:right;}
   tr:last-child td{border-bottom:none;}
 
@@ -86,7 +86,7 @@
   .chart-stats .l{color:var(--muted);margin-top:1px;}
 
   .app-body{display:flex;width:100%;align-items:flex-start;}
-  .sidebar{width:220px;flex:0 0 auto;background:var(--card);border-right:1px solid var(--border);padding:20px 14px;position:sticky;top:0;align-self:flex-start;}
+  .sidebar{width:200px;flex:0 0 auto;background:var(--card);border-right:1px solid var(--border);padding:16px 12px;position:sticky;top:0;align-self:flex-start;}
   .sidebar h3{font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;padding:0 8px 8px;margin:0;}
   .sidebar .item{display:block;padding:8px 10px;border-radius:7px;font-size:13.5px;color:#4B5563;margin-bottom:2px;}
   .sidebar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border:1px solid var(--green);}
@@ -179,11 +179,11 @@
 
   <!-- BACKTESTING -->
   <div class="panel" id="panel-backtest">
-    <div class="card" style="margin-bottom:18px;">
-      <div style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:280px;">
-          <div class="disp" style="font-size:16px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
-          <div style="font-size:12px;color:var(--muted);margin:4px 0 14px;">Test historical performance with different parameters. Results are real output from vcm_engine.py.</div>
+    <div class="breakouts-layout">
+      <div class="breakouts-table-col">
+        <div class="card" style="margin-bottom:14px;">
+          <div class="disp" style="font-size:15px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
+          <div style="font-size:11.5px;color:var(--muted);margin:3px 0 10px;">Real output from vcm_engine.py.</div>
           <div class="controls" style="margin-bottom:0;">
             <div class="field">
               <label>Max positions</label>
@@ -210,50 +210,43 @@
               </select>
             </div>
           </div>
-        </div>
-        <div style="font-size:12px;color:var(--muted);min-width:180px;">
-          <div style="font-weight:600;color:var(--text);margin-bottom:4px;">Backtest period</div>
-          <div>Jan 2020 – Sep 2026</div>
-          <div style="font-weight:600;color:var(--text);margin:8px 0 4px;">Starting capital</div>
-          <div>₹10,00,000 (fixed)</div>
-          <div style="font-weight:600;color:var(--text);margin:8px 0 4px;">Compounding</div>
-          <div>No</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid-4" id="bt-stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px;"></div>
-    <div class="grid-4" id="bt-stats-2" style="grid-template-columns:repeat(3,1fr);"></div>
-
-    <div class="card" style="margin:18px 0;">
-      <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:10px;">Year-by-year (fixed ₹10L, no compounding)</div>
-      <table>
-        <thead><tr><th>Year</th><th class="r">P&amp;L (₹)</th><th class="r">Return on ₹10L</th></tr></thead>
-        <tbody id="bt-year-rows"></tbody>
-      </table>
-      <div class="note" style="margin-top:8px;">Per-year Trade count and Win Rate aren't exported by the engine yet — real Year/P&amp;L/Return only, no placeholder columns.</div>
-    </div>
-
-    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;">
-      <div class="card" style="flex:1.4;min-width:340px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <div style="font-size:14px;font-weight:700;color:var(--accent);">Equity Curve <span style="font-size:11px;font-weight:400;color:var(--muted);">(fixed capital ₹10L)</span></div>
-          <div style="text-align:right;">
-            <div style="font-size:10px;color:var(--muted);">Ending equity</div>
-            <div class="num" style="font-weight:700;color:var(--accent);" id="bt-ending-equity"></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:10px;">
+            Jan 2020–Sep 2026 · ₹10,00,000 fixed · No compounding
           </div>
         </div>
-        <div id="bt-equity-chart"></div>
-        <div class="note">Year-end checkpoints from real backtest output — 7 points, not a smooth daily curve. A daily-resolution version needs one addition to <code>vcm_engine.py</code> (currently computed internally but not exported).</div>
+
+        <div class="grid-4" id="bt-stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px;"></div>
+        <div class="grid-4" id="bt-stats-2" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px;"></div>
+
+        <div class="card">
+          <div style="font-size:11px;font-weight:600;color:var(--muted);margin-bottom:8px;">Year-by-year (fixed ₹10L, no compounding)</div>
+          <table>
+            <thead><tr><th>Year</th><th class="r">P&amp;L (₹)</th><th class="r">Return on ₹10L</th></tr></thead>
+            <tbody id="bt-year-rows"></tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="card" style="flex:1;min-width:280px;">
-        <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Key Stats</div>
-        <div class="keystats" id="bt-keystats"></div>
+      <div class="breakouts-chart-col">
+        <div class="card" style="margin-bottom:14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="font-size:13px;font-weight:700;color:var(--accent);">Equity Curve <span style="font-size:10.5px;font-weight:400;color:var(--muted);">(₹10L fixed)</span></div>
+            <div style="text-align:right;">
+              <div style="font-size:9.5px;color:var(--muted);">Ending equity</div>
+              <div class="num" style="font-weight:700;color:var(--accent);font-size:13px;" id="bt-ending-equity"></div>
+            </div>
+          </div>
+          <div id="bt-equity-chart"></div>
+        </div>
+
+        <div class="card">
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px;">Key Stats</div>
+          <div class="keystats" id="bt-keystats"></div>
+        </div>
       </div>
     </div>
 
-    <div class="note">Backtest: Jan 2020 – Sep 2026 · fixed ₹10,00,000 capital, no compounding · entries and exits both at that day's close · point-in-time market cap (≥₹500cr) applied per signal's own year, not today's snapshot.</div>
+    <div class="note">Backtest: Jan 2020 – Sep 2026 · fixed ₹10,00,000 capital, no compounding · entries and exits both at that day's close · point-in-time market cap (≥₹500cr) applied per signal's own year, not today's snapshot. Equity curve is 7 year-end checkpoints, not a smooth daily curve — needs one addition to vcm_engine.py to export daily. Per-year Trade count/Win Rate aren't exported by the engine yet.</div>
   </div>
 </main>
 </div>
