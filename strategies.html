@@ -452,6 +452,8 @@ function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLa
     crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
   });
   ACTIVE_LWCHART = chart;
+  container.style.position = 'relative';
+  container.style.overflow = 'hidden';  // safety clip: never let a coordinate bug bleed outside the chart's own box
 
   const candleSeries = chart.addCandlestickSeries({
     upColor: '#16A34A', downColor: '#DC2626',
@@ -488,34 +490,44 @@ function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLa
   // Base-zone shading: an absolutely-positioned overlay div, computed from
   // the chart's own coordinate-mapping functions (timeToCoordinate /
   // priceToCoordinate). Toggle-able without re-rendering the whole chart.
-  // Note: pan/zoom is disabled above (handleScroll/handleScale: false) so
-  // these pixel coordinates stay valid without needing to recompute on scroll.
-  if(pivot && baseStartDate){
-    const baseStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
-    if(baseStartIdx >= 0){
-      const zoneCandles = sliced.slice(baseStartIdx);
-      const zoneHigh = Math.max(...zoneCandles.map(d=>d.h), pivot);
-      const zoneLow = Math.min(...zoneCandles.map(d=>d.l), pivot);
-      const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
-      const x2 = container.clientWidth - 4;
-      const yTop = candleSeries.priceToCoordinate(zoneHigh);
-      const yBot = candleSeries.priceToCoordinate(zoneLow);
-      if(x1!=null && yTop!=null && yBot!=null){
-        const zoneDiv = document.createElement('div');
-        zoneDiv.id = containerId+'-zone';
-        zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-        container.style.position = 'relative';
-        container.appendChild(zoneDiv);
-        if(baseLabel){
-          const labelDiv = document.createElement('div');
-          labelDiv.id = containerId+'-zonelabel';
-          labelDiv.textContent = baseLabel;
-          labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-          container.appendChild(labelDiv);
+  // IMPORTANT: fitContent() doesn't apply its new visible range
+  // synchronously -- querying timeToCoordinate/priceToCoordinate right
+  // after it, in the same tick, can return stale/undefined values (this
+  // was the cause of the zone box rendering in the wrong place entirely).
+  // Deferring to the next animation frame ensures the chart has actually
+  // finished applying the fitted range before we read coordinates from it.
+  requestAnimationFrame(() => {
+    if(pivot && baseStartDate){
+      const baseStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
+      if(baseStartIdx >= 0){
+        const zoneCandles = sliced.slice(baseStartIdx);
+        const zoneHigh = Math.max(...zoneCandles.map(d=>d.h), pivot);
+        const zoneLow = Math.min(...zoneCandles.map(d=>d.l), pivot);
+        const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
+        const x2 = container.clientWidth - 4;
+        const yTop = candleSeries.priceToCoordinate(zoneHigh);
+        const yBot = candleSeries.priceToCoordinate(zoneLow);
+        // Sanity-check every value before drawing anything -- if the chart
+        // still hasn't settled, skip the overlay rather than risk another
+        // mispositioned box.
+        const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
+          && x1 >= 0 && x1 < x2 && yTop < yBot;
+        if(valid){
+          const zoneDiv = document.createElement('div');
+          zoneDiv.id = containerId+'-zone';
+          zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(zoneDiv);
+          if(baseLabel){
+            const labelDiv = document.createElement('div');
+            labelDiv.id = containerId+'-zonelabel';
+            labelDiv.textContent = baseLabel;
+            labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+            container.appendChild(labelDiv);
+          }
         }
       }
     }
-  }
+  });
 
   // Native crosshair-driven tooltip -- reliable across browsers since it
   // uses the library's own coordinate system, not manual hit-testing.
