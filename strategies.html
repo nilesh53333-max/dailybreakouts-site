@@ -529,20 +529,24 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
       const yTop = candleSeries.priceToCoordinate(row.base_high);
       const yBot = candleSeries.priceToCoordinate(row.base_low);
 
+      console.log(`[base-zone ${row.symbol}] x1=${x1} x2=${x2} yTop=${yTop} yBot=${yBot} width=${x2-x1} height=${yBot-yTop}`);
+
       const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
         && x1 < x2 && yTop < yBot;
       if(valid){
         const zoneDiv = document.createElement('div');
         zoneDiv.id = containerId+'-zone';
-        zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.14);border:1.5px solid rgba(22,163,74,0.55);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
         container.appendChild(zoneDiv);
         if(baseLabel){
           const labelDiv = document.createElement('div');
           labelDiv.id = containerId+'-zonelabel';
           labelDiv.textContent = baseLabel;
-          labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          labelDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
           container.appendChild(labelDiv);
         }
+      } else {
+        console.warn(`[base-zone ${row.symbol}] SKIPPED drawing -- invalid coordinates (see values logged above)`);
       }
     }
   });
