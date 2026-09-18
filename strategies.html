@@ -98,11 +98,15 @@
     }
     .quadrant{min-height:0;overflow-y:auto;gap:clamp(6px, 1vh, 10px);}
     .quadrant-card{flex:1;min-height:0;overflow-y:auto;padding:clamp(8px, 1vh, 14px);}
+    /* Fixed cap, NOT flex:1 -- deliberately independent of however much
+       space the quadrant would otherwise offer, so a 10-row table can
+       never force the whole grid taller. ~5 rows + sticky header. */
+    .capped-table-card{flex:0 0 auto;max-height:230px;overflow-y:auto;}
     /* The chart itself is the one element that should actually GROW to
        fill remaining space in its quadrant, once header/buttons/stats
        (all flex:0 0 auto) have taken their natural height. */
-    #stage-chart-panel{height:100%;min-height:0;display:flex;flex-direction:column;}
-    #stage-chart-panel .card{flex:1;min-height:0;display:flex;flex-direction:column;}
+    #stage-chart-panel{height:100%;min-height:0;min-width:0;display:flex;flex-direction:column;}
+    #stage-chart-panel .card{flex:1;min-height:0;min-width:0;display:flex;flex-direction:column;overflow-x:hidden;}
     #chart-fill-area{flex:1;min-height:0;}
   }
 
@@ -114,6 +118,7 @@
     main.content-col{padding:4px 14px 4px;}
     h1{font-size:16px;}
     .sub{font-size:11px;margin-bottom:6px;}
+    .capped-table-card{max-height:190px;}
     .lifecycle-cards{gap:6px;margin-bottom:6px;}
     .stage-card{padding:5px 10px;}
     .stage-card .count{font-size:15px;}
@@ -184,7 +189,7 @@
   .stock-price{font-size:19px;font-weight:700;text-align:right;}
   .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
   .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
-  .chart-stats-2col{display:grid;grid-template-columns:repeat(4,1fr);gap:4px 10px;margin-top:6px;flex:0 0 auto;}
+  .chart-stats-2col{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 8px;margin-top:6px;flex:0 0 auto;min-width:0;}
   .stat-row{display:flex;flex-direction:column;padding:2px 0;font-size:clamp(9px, 1vw, 10.5px);}
   .stat-row .lbl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .stat-row .val{font-size:clamp(11px, 1.1vw, 13px);margin-top:1px;}
@@ -291,7 +296,7 @@
     <div class="quadrant" id="quad-stocklist">
       <div id="lifecycle-header" class="lifecycle-header compact-strip"></div>
       <div id="lifecycle-cards" class="lifecycle-cards compact-strip"></div>
-      <div id="stage-table-container" class="quadrant-card">
+      <div id="stage-table-container" class="quadrant-card capped-table-card">
         <div class="empty">Loading breakout stages…</div>
       </div>
     </div>
@@ -598,7 +603,7 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
   // not a guessed constant. Falls back to a sane minimum if the browser
   // hasn't laid anything out yet (e.g. container briefly zero-height).
   const measuredHeight = container.clientHeight;
-  const chartHeight = measuredHeight > 40 ? measuredHeight : 180;
+  const chartHeight = measuredHeight > 40 ? measuredHeight : 175;
 
   const chart = LightweightCharts.createChart(container, {
     width: container.clientWidth,
@@ -781,7 +786,7 @@ function drawChartPanel(){
   const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
 
   panel.innerHTML = `<div class="card" style="position:relative;">
-    <div class="stock-header" style="margin-bottom:4px;">
+    <div class="stock-header" style="margin-bottom:2px;">
       <div>
         <div class="disp stock-name" style="font-size:15px;">${row.symbol} <span style="color:var(--muted);font-weight:400;font-size:12px;">☆</span></div>
       </div>
@@ -792,9 +797,9 @@ function drawChartPanel(){
       </div>
     </div>
     <div class="num" style="font-size:10px;color:var(--muted);">${ohlcLine}</div>
-    <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:4px;">${volRsMcapLine}</div>
-    <div style="display:flex;gap:4px;margin-bottom:6px;">${rangeBtns}${baseZoneToggle}</div>
-    <div id="${chartId}" style="position:relative;flex:1;min-height:190px;"></div>
+    <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:2px;">${volRsMcapLine}</div>
+    <div style="display:flex;gap:4px;margin-bottom:4px;">${rangeBtns}${baseZoneToggle}</div>
+    <div id="${chartId}" style="position:relative;flex:1;min-height:175px;"></div>
     <div id="${chartId}-tooltip" class="chart-tooltip"></div>
     ${(row.base_high==null || row.base_low==null || row.base_start==null) ? '<div class="note" style="color:var(--red);margin-top:4px;font-size:10px;">Base data unavailable.</div>' : ''}
     ${statsHtml}
