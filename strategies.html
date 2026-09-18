@@ -77,6 +77,8 @@
   .stat-row .lbl{color:var(--muted);}
   .stat-row .val{font-weight:600;}
   .info-icon{display:inline-block;color:#B8C0CC;font-size:11px;cursor:help;}
+  .view-all-link{color:var(--accent);font-size:12.5px;font-weight:600;text-decoration:none;}
+  .view-all-link:hover{text-decoration:underline;}
   .chart-tooltip{display:none;position:absolute;background:var(--ink);color:#fff;font-size:10.5px;line-height:1.5;padding:6px 9px;border-radius:6px;pointer-events:none;white-space:nowrap;z-index:10;font-family:'IBM Plex Mono',monospace;}
   .range-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;}
   .range-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
@@ -494,18 +496,28 @@ function wireChartTooltip(chartId, sliced){
   const svg = document.getElementById(chartId);
   const tooltip = document.getElementById(chartId+'-tooltip');
   if(!svg || !tooltip) return;
-  svg.addEventListener('mousemove', (e) => {
+
+  function showTooltip(e){
     const target = e.target.closest('.candle-hit');
-    if(!target) return;
+    if(!target){ tooltip.style.display = 'none'; return; }
     const i = parseInt(target.dataset.i);
     const d = sliced[i];
     if(!d) return;
     const up = d.c >= d.o;
+    // Position relative to the SVG's own bounding box in CSS pixels --
+    // offsetX/offsetY are unreliable for SVG child elements across
+    // browsers, so compute from clientX/Y and getBoundingClientRect instead.
+    const rect = svg.getBoundingClientRect();
+    const relX = e.clientX - rect.left;
+    const relY = e.clientY - rect.top;
     tooltip.style.display = 'block';
-    tooltip.style.left = Math.min(e.offsetX+12, svg.clientWidth-150) + 'px';
-    tooltip.style.top = Math.max(e.offsetY-10, 0) + 'px';
+    tooltip.style.left = Math.min(relX+12, rect.width-150) + 'px';
+    tooltip.style.top = Math.max(relY-10, 0) + 'px';
     tooltip.innerHTML = `<b>${d.date}</b><br>O ${d.o} &nbsp; H ${d.h}<br>L ${d.l} &nbsp; C <span style="color:${up?'var(--green)':'var(--red)'}">${d.c}</span><br>Vol ${(d.v/1000).toFixed(0)}K`;
-  });
+  }
+
+  svg.addEventListener('mousemove', showTooltip);
+  svg.addEventListener('click', showTooltip);
   svg.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 }
 
@@ -612,6 +624,9 @@ function drawChartPanel(){
   wireChartTooltip(chartId, sliced);
 }
 
+let EXPANDED_STAGES = {};
+const STAGE_PAGE_SIZE = 10;
+
 function renderStageTable(){
   const el = document.getElementById('breakouts-content');
   const rows = LIFECYCLE_DATA.stages[ACTIVE_STAGE] || [];
@@ -620,11 +635,14 @@ function renderStageTable(){
     return;
   }
 
+  const isExpanded = !!EXPANDED_STAGES[ACTIVE_STAGE];
+  const displayRows = isExpanded ? rows : rows.slice(0, STAGE_PAGE_SIZE);
+
   const hasChart = ACTIVE_STAGE !== 'played_out';
   let head, body;
   if(ACTIVE_STAGE === 'forming'){
     head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
-    body = rows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
+    body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num">${r.close.toFixed(2)}</td>
       <td class="r num" style="color:var(--muted);">${r.pivot.toFixed(2)}</td>
@@ -633,7 +651,7 @@ function renderStageTable(){
     </tr>`).join('');
   } else if(ACTIVE_STAGE === 'played_out'){
     head = `<th>Stock</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
-    body = rows.map(r => `<tr>
+    body = displayRows.map(r => `<tr>
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
       <td class="r num">${r.exit_price.toFixed(2)}</td>
@@ -643,7 +661,7 @@ function renderStageTable(){
     </tr>`).join('');
   } else {
     head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">Sessions</th><th class="r">RS</th>`;
-    body = rows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
+    body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
       <td class="r num">${r.current_price.toFixed(2)}</td>
@@ -656,11 +674,19 @@ function renderStageTable(){
   const truncNote = (ACTIVE_STAGE==='forming' && LIFECYCLE_DATA.forming_list_truncated)
     ? `<div class="note" style="margin-bottom:8px;">Showing the 60 closest to their pivot, out of ${LIFECYCLE_DATA.counts.forming} total forming bases.</div>` : '';
 
+  const pagingLink = rows.length > STAGE_PAGE_SIZE
+    ? `<div style="text-align:center;padding-top:10px;">
+         <a href="#" class="view-all-link" onclick="EXPANDED_STAGES['${ACTIVE_STAGE}']=${!isExpanded};renderStageTable();return false;">
+           ${isExpanded ? 'Show less ↑' : `View all ${rows.length} ${STAGE_META[ACTIVE_STAGE].title.toLowerCase()} →`}
+         </a>
+       </div>` : '';
+
   if(hasChart){
     el.innerHTML = `<div class="breakouts-layout">
       <div class="breakouts-table-col card">
         ${truncNote}
         <table id="stage-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+        ${pagingLink}
       </div>
       <div class="breakouts-chart-col" id="stage-chart-panel"></div>
     </div>`;
@@ -670,11 +696,12 @@ function renderStageTable(){
         if(row) renderChartFor(row);
       });
     });
-    if(rows.length) renderChartFor(rows[0]);
+    if(displayRows.length) renderChartFor(displayRows[0]);
   } else {
     el.innerHTML = `<div class="card">
       ${truncNote}
       <table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+      ${pagingLink}
     </div>`;
   }
 }
