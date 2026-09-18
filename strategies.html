@@ -92,7 +92,7 @@
       display:grid;
       grid-template-columns:56fr 44fr;
       grid-template-rows:auto auto;
-      align-items:start;
+      align-items:stretch;
       gap:clamp(6px, 1vh, 10px);
       flex:1;
       min-height:0;
@@ -103,7 +103,7 @@
     /* Fixed cap, NOT flex:1 -- deliberately independent of however much
        space the quadrant would otherwise offer, so a 10-row table can
        never force the whole grid taller. ~5 rows + sticky header. */
-    .capped-table-card{flex:0 0 auto;max-height:230px;overflow-y:auto;}
+    .capped-table-card{flex:1;min-height:0;max-height:340px;overflow-y:auto;}
     /* The chart itself is the one element that should actually GROW to
        fill remaining space in its quadrant, once header/buttons/stats
        (all flex:0 0 auto) have taken their natural height. */
@@ -120,7 +120,7 @@
     main.content-col{padding:4px 14px 4px;}
     h1{font-size:16px;}
     .sub{font-size:11px;margin-bottom:6px;}
-    .capped-table-card{max-height:190px;}
+    .capped-table-card{max-height:260px;}
     .lifecycle-cards{gap:6px;margin-bottom:6px;}
     .stage-card{padding:5px 10px;}
     .stage-card .count{font-size:15px;}
