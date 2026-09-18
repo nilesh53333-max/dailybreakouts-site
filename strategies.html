@@ -719,17 +719,19 @@ function renderStageTable(){
       <td class="r num">${(r.age_sessions/5).toFixed(1)} wks</td>
     </tr>`).join('');
   } else if(ACTIVE_STAGE === 'closed'){
-    head = `<th>Stock</th><th class="r">Entry</th><th class="r">Exit</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr>
       <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:12px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
+      <td class="num" style="font-size:12px;color:var(--muted);">${o.exit_date}</td>
       <td class="r num">${o.exit_price.toFixed(2)}</td>
       <td class="r num" style="color:${o.return_pct>=0?'var(--green)':'var(--red)'}">${o.return_pct>=0?'+':''}${o.return_pct.toFixed(2)}%</td>
       <td style="font-size:12px;color:var(--muted);">${o.exit_reason}</td>
       <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`;}).join('');
   } else if(ACTIVE_STAGE === 'fresh'){
-    head = `<th>Stock</th><th class="r">Entry ₹</th><th>Trade status</th><th class="r">RS</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Trade status</th><th class="r">RS</th>`;
     body = displayRows.map(r => {
       const o = r._outcome;
       const traded = o && o.status === 'open';
@@ -738,15 +740,17 @@ function renderStageTable(){
         : `<span class="badge" style="background:#FEF2F2;color:var(--red);">No trade — book full</span>`;
       return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:12px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
       <td>${statusHtml}</td>
       <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`;}).join('');
   } else {
     // open
-    head = `<th>Stock</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">RS</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">RS</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:12px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
       <td class="r num">${o.current_price.toFixed(2)}</td>
       <td class="r num" style="color:${o.gain_pct>=0?'var(--green)':'var(--red)'}">${o.gain_pct>=0?'+':''}${o.gain_pct.toFixed(2)}%</td>
