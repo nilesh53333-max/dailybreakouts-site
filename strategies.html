@@ -415,14 +415,24 @@ function computeChartStats(row, sliced){
   return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
 }
 
-function sliceHistory(history, range){
+function sliceHistory(history, range, baseStartDate){
+  if(range === 'FIT' && baseStartDate){
+    const idx = history.findIndex(d => d.date >= baseStartDate);
+    if(idx >= 0){
+      const from = Math.max(0, idx - 50); // ~50 sessions of pre-base context, matches backend's PRE_BASE_CONTEXT
+      return history.slice(from);
+    }
+    // base_start not found even in the full embedded history -- fall
+    // through to showing everything rather than guessing.
+    return history;
+  }
   const sessionsMap = {'6M': 126, '1Y': 252};
   const n = sessionsMap[range] || history.length;
   return history.slice(-n);
 }
 
 let CURRENT_CHART_ROW = null;
-let CURRENT_CHART_RANGE = '6M';
+let CURRENT_CHART_RANGE = 'FIT';
 let SHOW_BASE_ZONE = true;
 let ACTIVE_LWCHART = null;   // the current LightweightCharts instance, so we can dispose it on redraw
 
@@ -431,11 +441,14 @@ function renderChartFor(row){
   if(!panel) return;
   document.querySelectorAll('#stage-table tbody tr').forEach(tr => tr.classList.toggle('selected', tr.dataset.symbol===row.symbol));
   CURRENT_CHART_ROW = row;
-  CURRENT_CHART_RANGE = '6M';
+  CURRENT_CHART_RANGE = 'FIT';
   drawChartPanel();
 }
 
-function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLabel, isStillOpen){
+function buildLightweightChart(containerId, sliced, row, isStillOpen){
+  const pivot = row.pivot;
+  const baseStartDate = row.base_start;
+  const baseLabel = row.base_weeks ? `${row.base_weeks} wks` : '';
   const container = document.getElementById(containerId);
   if(!container || !window.LightweightCharts) return;
   container.innerHTML = '';
@@ -487,49 +500,48 @@ function buildLightweightChart(containerId, sliced, pivot, baseStartDate, baseLa
 
   chart.timeScale().fitContent();
 
-  // Base-zone shading: an absolutely-positioned overlay div, computed from
-  // the chart's own coordinate-mapping functions (timeToCoordinate /
-  // priceToCoordinate). Toggle-able without re-rendering the whole chart.
-  // IMPORTANT: fitContent() doesn't apply its new visible range
-  // synchronously -- querying timeToCoordinate/priceToCoordinate right
-  // after it, in the same tick, can return stale/undefined values (this
-  // was the cause of the zone box rendering in the wrong place entirely).
-  // Deferring to the next animation frame ensures the chart has actually
-  // finished applying the fitted range before we read coordinates from it.
+  // Base-zone: ALWAYS uses the detector's own base_high/base_low/base_start/
+  // base_end_date -- never derived by scanning the visible candles. If any
+  // of these are missing from the API response, no rectangle is drawn at
+  // all (see the "Base data unavailable" note below the chart instead).
+  const hasRealBaseData = row.base_high != null && row.base_low != null && baseStartDate != null;
+
   requestAnimationFrame(() => {
-    if(pivot && baseStartDate && sliced.length){
-      const foundIdx = sliced.findIndex(d => d.date >= baseStartDate);
-      // If the base started before the visible window (foundIdx === -1,
-      // e.g. a 45-week-old base on a 6M/~26-week chart), clamp to the
-      // start of what's actually shown rather than skip the zone entirely
-      // -- a base clipped at the left edge is far more useful than no
-      // base shown at all.
-      const baseStartIdx = foundIdx >= 0 ? foundIdx : 0;
-      {
-        const zoneCandles = sliced.slice(baseStartIdx);
-        const zoneHigh = Math.max(...zoneCandles.map(d=>d.h), pivot);
-        const zoneLow = Math.min(...zoneCandles.map(d=>d.l), pivot);
-        const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
-        const x2 = container.clientWidth - 4;
-        const yTop = candleSeries.priceToCoordinate(zoneHigh);
-        const yBot = candleSeries.priceToCoordinate(zoneLow);
-        // Sanity-check every value before drawing anything -- if the chart
-        // still hasn't settled, skip the overlay rather than risk another
-        // mispositioned box.
-        const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
-          && x1 >= 0 && x1 < x2 && yTop < yBot;
-        if(valid){
-          const zoneDiv = document.createElement('div');
-          zoneDiv.id = containerId+'-zone';
-          zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-          container.appendChild(zoneDiv);
-          if(baseLabel){
-            const labelDiv = document.createElement('div');
-            labelDiv.id = containerId+'-zonelabel';
-            labelDiv.textContent = baseLabel;
-            labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-            container.appendChild(labelDiv);
-          }
+    if(hasRealBaseData && sliced.length){
+      const foundStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
+      // If base_start predates even the currently sliced window (can
+      // happen if the user manually switched to a shorter fixed range
+      // like 6M after the default Fit-Base view), clip to what's visible
+      // rather than silently drop the zone -- but the horizontal EXTENT
+      // still always comes from the real base_start/base_end_date, never
+      // guessed from candle data.
+      const baseStartIdx = foundStartIdx >= 0 ? foundStartIdx : 0;
+
+      const endDateForZone = row.base_end_date; // null while still Forming (no breakout yet)
+      let baseEndIdx = sliced.length - 1; // ongoing base: extend to the last available candle
+      if(endDateForZone){
+        const foundEndIdx = sliced.findIndex(d => d.date >= endDateForZone);
+        if(foundEndIdx >= 0) baseEndIdx = foundEndIdx;
+      }
+
+      const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
+      const x2 = chart.timeScale().timeToCoordinate(sliced[baseEndIdx].date);
+      const yTop = candleSeries.priceToCoordinate(row.base_high);
+      const yBot = candleSeries.priceToCoordinate(row.base_low);
+
+      const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
+        && x1 < x2 && yTop < yBot;
+      if(valid){
+        const zoneDiv = document.createElement('div');
+        zoneDiv.id = containerId+'-zone';
+        zoneDiv.style.cssText = `position:absolute;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.08);border:1px solid rgba(22,163,74,0.35);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        container.appendChild(zoneDiv);
+        if(baseLabel){
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          labelDiv.textContent = baseLabel;
+          labelDiv.style.cssText = `position:absolute;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
         }
       }
     }
@@ -567,7 +579,7 @@ function drawChartPanel(){
   if(!row || !panel) return;
 
   const fullHistory = row.history || [];
-  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE);
+  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start);
   const stats = computeChartStats(row, sliced);
   const today = sliced.length ? sliced[sliced.length-1] : null;
   const priceNow = today ? today.c : (row.close ?? row.current_price ?? row.exit_price);
@@ -590,8 +602,8 @@ function drawChartPanel(){
     ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
     : null);
 
-  const rangeBtns = ['6M','1Y'].map(r =>
-    `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${r}</button>`
+  const rangeBtns = [['FIT','Fit Base'],['6M','6M'],['1Y','1Y']].map(([r,label]) =>
+    `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
   const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">Base zone</button>`;
 
@@ -633,12 +645,16 @@ function drawChartPanel(){
     <div style="display:flex;gap:6px;margin-bottom:10px;">${rangeBtns}${baseZoneToggle}</div>
     <div id="${chartId}" style="position:relative;"></div>
     <div id="${chartId}-tooltip" class="chart-tooltip"></div>
+    ${(row.base_high==null || row.base_low==null || row.base_start==null) ? '<div class="note" style="color:var(--red);margin-top:6px;">Base data unavailable for this setup.</div>' : ''}
     ${statsHtml}
     ${blueSkyBadge}
     <button class="btn-secondary" style="margin-top:12px;width:100%;">☆ Add to Watchlist</button>
   </div>`;
 
-  buildLightweightChart(chartId, sliced, row.pivot, row.base_start, baseLabel, isOpenStage);
+  if(row.base_high==null || row.base_low==null || row.base_start==null){
+    console.warn(`Base data unavailable for ${row.symbol}: base_high=${row.base_high}, base_low=${row.base_low}, base_start=${row.base_start}`);
+  }
+  buildLightweightChart(chartId, sliced, row, isOpenStage);
 }
 
 let EXPANDED_STAGES = {};
