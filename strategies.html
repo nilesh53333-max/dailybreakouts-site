@@ -646,6 +646,9 @@ function drawChartPanel(){
     <div id="${chartId}" style="position:relative;"></div>
     <div id="${chartId}-tooltip" class="chart-tooltip"></div>
     ${(row.base_high==null || row.base_low==null || row.base_start==null) ? '<div class="note" style="color:var(--red);margin-top:6px;">Base data unavailable for this setup.</div>' : ''}
+    <div class="num" style="font-size:9.5px;color:#94A3B8;background:#F8FAFC;border:1px solid var(--border);border-radius:6px;padding:6px 8px;margin-top:8px;line-height:1.6;">
+      DEBUG — raw fields from API: symbol=${row.symbol} | base_number=${row.base_number ?? 'null'} | base_start=${row.base_start ?? 'null'} | base_end_date=${row.base_end_date ?? 'null'} | pivot=${row.pivot ?? 'null'} | base_high=${row.base_high ?? 'null'} | base_low=${row.base_low ?? 'null'} | base_weeks=${row.base_weeks ?? 'null'}
+    </div>
     ${statsHtml}
     ${blueSkyBadge}
     <button class="btn-secondary" style="margin-top:12px;width:100%;">☆ Add to Watchlist</button>
