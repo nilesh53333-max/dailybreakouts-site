@@ -310,8 +310,13 @@
     <!-- BOTTOM LEFT: backtest controls + metrics + yearly table -->
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
+<<<<<<< HEAD
         <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
         <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">6-month rolling method — currently 100 DMA / 12% stop / 5 positions, active for Jul-Dec 2026, re-determined every half-year</div>
+=======
+        <div class="disp" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">6-month rolling method — currently 100 DMA / 12% stop / 5 positions, active for Jul-Dec 2026, re-determined every half-year</div>
+>>>>>>> 9df4a6ef151785f67e38be3091e33e1eabe67816
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -445,12 +450,22 @@ function renderEquityCurve(yearly, startCap){
 }
 
 function renderBacktest(){
+<<<<<<< HEAD
   // VCM uses the 6-month rolling worst-ranked combo (currently 100/12/5
   // for 2026-H2 -- UPDATE THIS every 6 months). Bull Flag uses a fixed
   // combo chosen for lowest correlation with VCM (25/4/5). Each
   // strategy's default lives in STRATEGY_CONFIG, not hardcoded here.
   const combo = STRATEGY_CONFIG[ACTIVE_STRATEGY].default_combo;
   const trail = combo.trail, stop = combo.stop, maxpos = combo.maxpos;
+=======
+  // 6-MONTH ROLLING METHOD: whichever combo ranks WORST on cumulative
+  // P&L using only data through the end of the prior half-year --
+  // re-determined every 6 months, not a fixed manual pick. Today's date
+  // is within 2026-H2 (Jul-Dec 2026), so the ACTIVE combo uses only
+  // data through 2026-H1 (June 2026) -- that's 100 DMA / 12% stop / 5
+  // positions. UPDATE THIS every 6 months.
+  const trail = 100, stop = 12, maxpos = 5;
+>>>>>>> 9df4a6ef151785f67e38be3091e33e1eabe67816
   const c = findCombo(trail, stop, maxpos);
   if(!c) return;
 
@@ -1014,7 +1029,11 @@ async function loadBreakouts(){
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
     const comboLabel = `${cfg.default_combo.trail} DMA/${cfg.default_combo.stop}%/${cfg.default_combo.maxpos} positions`;
     document.getElementById('dynamic-sub').textContent =
+<<<<<<< HEAD
       `${freshToday} fresh breakouts today (using ${cfg.title}'s combo: ${comboLabel}) — tap a stage below to see the names.`;
+=======
+      `${freshToday} fresh breakouts today (using 2026-H2's worst-ranked combo: 100 DMA/12%/5 positions, per the 6-month rolling method) — tap a stage below to see the names.`;
+>>>>>>> 9df4a6ef151785f67e38be3091e33e1eabe67816
 
     renderStageCards();
     renderStageTable();
