@@ -18,16 +18,16 @@
   ],
   "default_combo": {
     "trail_dma": 100,
-    "stop_pct": 12,
-    "max_positions": 5
+    "stop_pct": 4,
+    "max_positions": 10
   },
-  "default_combo_method": "6-month rolling worst-ranked (re-determined every half-year using only data through the prior half)",
-  "default_combo_active_period": "2026-H2 (Jul-Dec 2026)",
+  "default_combo_method": "Fixed -- consistently outperformed every rolling/switching alternative tested",
+  "default_combo_active_period": "N/A (permanent)",
   "counts": {
     "forming": 145,
     "fresh": 2,
-    "open": 5,
-    "closed": 12
+    "open": 10,
+    "closed": 74
   },
   "forming_list_truncated": true,
   "stages": {
