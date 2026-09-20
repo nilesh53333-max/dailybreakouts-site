@@ -311,7 +311,7 @@
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
         <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
-        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">6-month rolling method — currently 100 DMA / 12% stop / 5 positions, active for Jul-Dec 2026, re-determined every half-year</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -352,10 +352,10 @@ const BACKTEST_DATA_BULLFLAG = {"combos": [{"trail": 25, "stop": 4, "maxpos": 5,
 const STRATEGY_CONFIG = {
   vcm: {
     title: "Volatility Contraction",
-    sub_static: "6-month rolling method — currently 100 DMA / 12% stop / 5 positions, active for Jul-Dec 2026, re-determined every half-year",
+    sub_static: "Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.",
     lifecycle_json: "./breakout_lifecycle.json",
     backtest_data: BACKTEST_DATA_VCM,
-    default_combo: {trail:100, stop:12, maxpos:5},
+    default_combo: {trail:100, stop:4, maxpos:10},
   },
   bullflag: {
     title: "Classic Bull Flag",
@@ -447,10 +447,12 @@ function renderEquityCurve(yearly, startCap){
 }
 
 function renderBacktest(){
-  // VCM uses the 6-month rolling worst-ranked combo (currently 100/12/5
-  // for 2026-H2 -- UPDATE THIS every 6 months). Bull Flag uses a fixed
-  // combo chosen for lowest correlation with VCM (25/4/5). Each
-  // strategy's default lives in STRATEGY_CONFIG, not hardcoded here.
+  // VCM: permanent fixed 100/4/10 -- the 6-month rolling worst-ranked
+  // method was tried and abandoned; the simple static combo
+  // consistently outperformed it. Bull Flag uses a combined mix
+  // (25/4/5 + 50/4/5, 10 positions) chosen for lowest correlation with
+  // VCM. Each strategy's default lives in STRATEGY_CONFIG, not
+  // hardcoded here.
   const combo = STRATEGY_CONFIG[ACTIVE_STRATEGY].default_combo;
   const trail = combo.trail, stop = combo.stop, maxpos = combo.maxpos;
   const c = findCombo(trail, stop, maxpos, combo.isMix);
