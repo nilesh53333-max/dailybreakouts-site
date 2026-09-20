@@ -18,17 +18,17 @@
   ],
   "default_combo": {
     "trail_dma": null,
-    "stop_pct": null,
+    "stop_pct": 4,
     "max_positions": 10,
-    "note": "Combined 25 DMA/4%/5 + 50 DMA/4%/5 mix -- two independent sleeves, 10 positions total"
+    "note": "Single book, alternating 25/50 DMA trail per entry, 4% stop"
   },
-  "default_combo_method": "Fixed -- chosen for lowest correlation with VCM (0.214), not a rolling pick",
+  "default_combo_method": "Fixed -- simpler alternative to the two-sleeve mix, chosen for simplicity",
   "default_combo_active_period": "N/A (fixed combo)",
   "counts": {
     "forming": 151,
     "fresh": 7,
-    "open": 8,
-    "closed": 68
+    "open": 10,
+    "closed": 91
   },
   "forming_list_truncated": true,
   "stages": {
@@ -1136,7 +1136,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -13.25
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-02-01",
           "exit_price": 599.25,
@@ -1256,7 +1256,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-07-29",
           "exit_price": 6452.0,
@@ -1364,7 +1364,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -1471,7 +1471,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -1587,7 +1587,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -1693,7 +1693,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -1801,8 +1801,10 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "open",
+          "current_price": 685.0,
+          "gain_pct": 7.96
         }
       },
       "history_url": "history/KABRAEXTRU.json",
@@ -1909,7 +1911,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -2013,7 +2015,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -2182,8 +2184,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -3.81
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-02-06",
+          "exit_price": 3731.1,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": -2.34
         }
       },
       "history_url": "history/SMLMAH.json",
@@ -2310,7 +2316,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-19",
           "exit_price": 776.85,
@@ -2470,7 +2476,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-19",
           "exit_price": 628.2,
@@ -2590,8 +2596,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-07-07",
+          "exit_price": 413.5,
+          "exit_reason": "4% close stop",
+          "return_pct": -7.72
         }
       },
       "history_url": "history/AEROFLEX.json",
@@ -2694,7 +2704,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -2795,7 +2805,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -2960,7 +2970,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-02-19",
           "exit_price": 1173.3,
@@ -3156,12 +3166,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -5.65
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-04-28",
-          "exit_price": 1663.2,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 0.06
+          "exit_date": "2026-04-29",
+          "exit_price": 1610.4,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": -3.12
         }
       },
       "history_url": "history/LUMAXTECH.json",
@@ -3264,7 +3274,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -3365,7 +3375,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -3466,7 +3476,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -3571,7 +3581,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -3747,7 +3757,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-07-14",
           "exit_price": 590.5,
@@ -3863,12 +3873,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-23",
-          "exit_price": 1233.2,
-          "exit_reason": "4% close stop",
-          "return_pct": -4.88
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/ATHERENERG.json",
@@ -3971,7 +3977,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -4088,7 +4094,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -4284,7 +4290,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": 9.61
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 2744.4,
@@ -4428,7 +4434,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-04",
           "exit_price": 969.45,
@@ -4608,8 +4614,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -3.72
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-30",
+          "exit_price": 3320.6,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.77
         }
       },
       "history_url": "history/THANGAMAYL.json",
@@ -4808,7 +4818,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -12.28
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-19",
           "exit_price": 1421.3,
@@ -4924,8 +4934,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-07-06",
+          "exit_price": 1476.0,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 0.59
         }
       },
       "history_url": "history/WHEELS.json",
@@ -5064,12 +5078,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-06-24",
-          "exit_price": 395.0,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 15.94
+          "exit_date": "2026-07-20",
+          "exit_price": 392.8,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 15.29
         }
       },
       "history_url": "history/APOLLO.json",
@@ -5200,7 +5214,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -5304,7 +5318,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -5441,12 +5455,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-09-15",
-          "exit_price": 2720.0,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 8.11
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/KMEW.json",
@@ -5555,7 +5565,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -5659,7 +5669,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -5796,7 +5806,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-09-15",
           "exit_price": 138.22,
@@ -6012,7 +6022,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -11.57
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-04",
           "exit_price": 200.46,
@@ -6160,8 +6170,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-02",
+          "exit_price": 379.1,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.01
         }
       },
       "history_url": "history/BAJAJCON.json",
@@ -6280,7 +6294,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -6394,7 +6408,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -6606,7 +6620,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -12.11
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-18",
           "exit_price": 192.05,
@@ -6782,7 +6796,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-21",
           "exit_price": 58.6,
@@ -6894,7 +6908,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -7002,7 +7016,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -7138,7 +7152,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -7284,12 +7298,10 @@
           "current_price": 1613.2,
           "gain_pct": 34.43
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1547.0,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 28.92
+        "alt_25_50": {
+          "status": "open",
+          "current_price": 1613.2,
+          "gain_pct": 34.43
         }
       },
       "history_url": "history/ATHERENERG.json",
@@ -7400,7 +7412,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -7504,7 +7516,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -7605,7 +7617,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -7706,7 +7718,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -7827,7 +7839,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -7939,7 +7951,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -8123,7 +8135,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-06-05",
           "exit_price": 237.35,
@@ -8231,7 +8243,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -8332,7 +8344,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -8453,8 +8465,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-09-16",
+          "exit_price": 1547.0,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 17.75
         }
       },
       "history_url": "history/RPEL.json",
@@ -8557,7 +8573,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -8658,7 +8674,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -8817,7 +8833,7 @@
           "current_price": 3425.2,
           "gain_pct": 48.75
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-04-02",
           "exit_price": 2110.2,
@@ -8925,7 +8941,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -9070,8 +9086,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-07-17",
+          "exit_price": 148.33,
+          "exit_reason": "4% close stop",
+          "return_pct": -10.12
         }
       },
       "history_url": "history/IOLCP.json",
@@ -9210,7 +9230,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 120.8,
           "gain_pct": 43.48
@@ -9400,12 +9420,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": 21.57
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-03-09",
-          "exit_price": 422.7,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": -0.8
+          "exit_date": "2026-03-10",
+          "exit_price": 407.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.32
         }
       },
       "history_url": "history/TDPOWERSYS.json",
@@ -9520,7 +9540,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -9656,7 +9676,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-07-14",
           "exit_price": 247.83,
@@ -9776,7 +9796,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -9912,7 +9932,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-05",
           "exit_price": 367.75,
@@ -10020,7 +10040,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -10125,7 +10145,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -10249,7 +10269,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -10363,7 +10383,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -10467,7 +10487,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -10568,7 +10588,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -10681,7 +10701,7 @@
           "current_price": 939.0,
           "gain_pct": 22.05
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -10795,7 +10815,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -10963,8 +10983,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -2.66
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-02-23",
+          "exit_price": 1278.8,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.82
         }
       },
       "history_url": "history/SEAMECLTD.json",
@@ -11087,7 +11111,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -11239,8 +11263,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-29",
+          "exit_price": 426.3,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 4.97
         }
       },
       "history_url": "history/APEX.json",
@@ -11379,12 +11407,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-04-30",
-          "exit_price": 1502.6,
-          "exit_reason": "4% close stop",
-          "return_pct": -7.92
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/IMFA.json",
@@ -11507,7 +11531,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -11611,7 +11635,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -11748,7 +11772,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -11852,7 +11876,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -11961,7 +11985,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -12137,7 +12161,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-13",
           "exit_price": 368.75,
@@ -12245,7 +12269,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -12356,7 +12380,7 @@
           "current_price": 2170.0,
           "gain_pct": 7.63
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -12510,7 +12534,7 @@
           "current_price": 1399.9,
           "gain_pct": 20.61
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-09-15",
           "exit_price": 1422.1,
@@ -12640,7 +12664,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -12744,7 +12768,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -12853,7 +12877,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -12957,7 +12981,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -13102,7 +13126,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-07-22",
           "exit_price": 837.25,
@@ -13210,7 +13234,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -13319,7 +13343,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -13507,7 +13531,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-13",
           "exit_price": 2083.8,
@@ -13671,7 +13695,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -13785,7 +13809,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -13889,7 +13913,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -13994,7 +14018,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -14104,10 +14128,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "open",
-          "current_price": 785.85,
-          "gain_pct": 19.37
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-09-02",
+          "exit_price": 753.1,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 14.39
         }
       },
       "history_url": "history/SKYGOLD.json",
@@ -14282,7 +14308,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 302.35,
@@ -14498,7 +14524,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -8.3
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-27",
           "exit_price": 1208.6,
@@ -14622,7 +14648,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -14780,12 +14806,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-09-02",
-          "exit_price": 2630.4,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 8.14
+          "exit_date": "2026-09-04",
+          "exit_price": 2454.1,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 0.89
         }
       },
       "history_url": "history/RRKABEL.json",
@@ -14888,7 +14914,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -14989,7 +15015,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -15098,7 +15124,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -15210,7 +15236,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -15314,7 +15340,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -15439,7 +15465,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -15543,7 +15569,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -15650,7 +15676,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -15754,7 +15780,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -15857,7 +15883,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -15961,7 +15987,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -16086,7 +16112,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -16190,7 +16216,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -16291,7 +16317,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -16392,7 +16418,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -16511,7 +16537,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 4262.0,
           "gain_pct": 49.31
@@ -16617,7 +16643,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -16758,8 +16784,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": 6.59
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-07-08",
+          "exit_price": 2038.6,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 20.63
         }
       },
       "history_url": "history/KERNEX.json",
@@ -16874,8 +16904,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-06-17",
+          "exit_price": 2563.0,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.24
         }
       },
       "history_url": "history/INDOTECH.json",
@@ -16978,7 +17012,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -17079,7 +17113,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -17192,8 +17226,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-09-07",
+          "exit_price": 1175.9,
+          "exit_reason": "4% close stop",
+          "return_pct": -7.32
         }
       },
       "history_url": "history/DIVGIITTS.json",
@@ -17318,7 +17356,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-09-15",
           "exit_price": 84.1,
@@ -17534,7 +17572,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -14.72
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-01-16",
           "exit_price": 631.2,
@@ -17642,7 +17680,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -17751,7 +17789,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -17855,7 +17893,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -17956,7 +17994,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -18065,7 +18103,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -18169,7 +18207,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -18270,7 +18308,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -18383,7 +18421,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -18491,7 +18529,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -18595,7 +18633,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -18696,7 +18734,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -18905,7 +18943,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -15.01
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-01-08",
           "exit_price": 810.8,
@@ -19017,7 +19055,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -19141,8 +19179,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-06-03",
+          "exit_price": 1427.8,
+          "exit_reason": "4% close stop",
+          "return_pct": -7.75
         }
       },
       "history_url": "history/DSSL.json",
@@ -19289,7 +19331,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-06-09",
           "exit_price": 14.14,
@@ -19433,7 +19475,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -19541,7 +19583,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -19645,7 +19687,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -19746,7 +19788,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -19847,7 +19889,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -19948,7 +19990,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -20073,7 +20115,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -20177,7 +20219,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -20278,7 +20320,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -20407,8 +20449,12 @@
           "current_price": 2987.0,
           "gain_pct": 14.23
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-07-23",
+          "exit_price": 2692.2,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 2.96
         }
       },
       "history_url": "history/CARTRADE.json",
@@ -20511,7 +20557,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -20612,7 +20658,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -20767,7 +20813,7 @@
           "current_price": 1721.0,
           "gain_pct": 68.97
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-18",
           "exit_price": 969.95,
@@ -20895,7 +20941,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-06-11",
           "exit_price": 220.39,
@@ -21011,7 +21057,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -21135,7 +21181,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -21239,7 +21285,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -21342,7 +21388,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -21466,7 +21512,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -21574,7 +21620,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -21678,7 +21724,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -21823,12 +21869,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-30",
-          "exit_price": 257.42,
-          "exit_reason": "4% close stop",
-          "return_pct": -4.26
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/SATIN.json",
@@ -21959,8 +22001,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-12",
+          "exit_price": 2386.9,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 6.17
         }
       },
       "history_url": "history/SANSERA.json",
@@ -22063,7 +22109,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -22176,7 +22222,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -22294,7 +22340,7 @@
           "current_price": 831.0,
           "gain_pct": 14.61
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 831.0,
           "gain_pct": 14.61
@@ -22400,7 +22446,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -22605,12 +22651,12 @@
           "exit_reason": "12% close stop",
           "return_pct": -12.86
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-01-30",
-          "exit_price": 628.5,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": -3.93
+          "exit_date": "2026-02-01",
+          "exit_price": 570.1,
+          "exit_reason": "4% close stop",
+          "return_pct": -12.86
         }
       },
       "history_url": "history/HINDZINC.json",
@@ -22713,7 +22759,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -22814,7 +22860,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -22935,7 +22981,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -23039,7 +23085,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23146,7 +23192,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -23250,7 +23296,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23355,7 +23401,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -23459,7 +23505,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23560,7 +23606,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23661,7 +23707,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23782,12 +23828,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-24",
-          "exit_price": 710.95,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 5.51
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/RAMCOSYS.json",
@@ -23890,7 +23932,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -23991,7 +24033,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -24092,7 +24134,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -24197,7 +24239,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -24301,7 +24343,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -24426,12 +24468,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-28",
-          "exit_price": 436.45,
-          "exit_reason": "4% close stop",
-          "return_pct": -4.22
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/SANGHVIMOV.json",
@@ -24534,7 +24572,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -24635,7 +24673,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -24740,7 +24778,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -24856,7 +24894,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -24960,7 +24998,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -25169,7 +25207,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -12.19
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-01-08",
           "exit_price": 865.1,
@@ -25277,7 +25315,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -25378,7 +25416,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -25479,7 +25517,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -25584,7 +25622,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -25724,7 +25762,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -25832,7 +25870,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -25976,7 +26014,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -26144,12 +26182,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-06-01",
-          "exit_price": 1243.4,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 34.24
+          "exit_date": "2026-06-03",
+          "exit_price": 1122.3,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 21.17
         }
       },
       "history_url": "history/SCHNEIDER.json",
@@ -26264,7 +26302,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-12",
           "exit_price": 172.68,
@@ -26384,7 +26422,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -26488,7 +26526,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -26589,7 +26627,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -26690,7 +26728,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -26795,7 +26833,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -26919,7 +26957,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -27023,7 +27061,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27124,7 +27162,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27277,7 +27315,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -27381,7 +27419,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27482,7 +27520,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27641,8 +27679,12 @@
           "current_price": 889.1,
           "gain_pct": 42.55
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-04",
+          "exit_price": 651.75,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 4.5
         }
       },
       "history_url": "history/TMB.json",
@@ -27745,7 +27787,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27846,7 +27888,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -27947,7 +27989,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28048,7 +28090,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28149,7 +28191,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28250,7 +28292,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28351,7 +28393,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28452,7 +28494,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28553,7 +28595,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28654,7 +28696,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -28779,7 +28821,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -28899,7 +28941,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -29003,7 +29045,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29104,7 +29146,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29213,7 +29255,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -29317,7 +29359,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29418,7 +29460,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29519,7 +29561,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29656,7 +29698,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -29760,7 +29802,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -29861,7 +29903,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -30024,7 +30066,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 223.29,
@@ -30132,7 +30174,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -30341,7 +30383,7 @@
           "exit_reason": "12% close stop",
           "return_pct": -12.29
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-01-12",
           "exit_price": 126.01,
@@ -30449,7 +30491,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -30582,7 +30624,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -30686,7 +30728,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -30787,7 +30829,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -30896,7 +30938,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-07-17",
           "exit_price": 1513.9,
@@ -31004,7 +31046,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -31153,8 +31195,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-13",
+          "exit_price": 1008.5,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": 9.16
         }
       },
       "history_url": "history/ABSLAMC.json",
@@ -31257,7 +31303,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -31358,7 +31404,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -31459,7 +31505,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -31632,7 +31678,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-19",
           "exit_price": 529.25,
@@ -31772,7 +31818,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-12",
           "exit_price": 8163.5,
@@ -31880,7 +31926,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -31981,7 +32027,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32154,8 +32200,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -9.37
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-30",
+          "exit_price": 617.3,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.72
         }
       },
       "history_url": "history/GRAPHITE.json",
@@ -32258,7 +32308,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32359,7 +32409,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32464,7 +32514,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -32568,7 +32618,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32669,7 +32719,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32770,7 +32820,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -32871,7 +32921,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33012,7 +33062,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-15",
           "exit_price": 192.4,
@@ -33120,7 +33170,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33221,7 +33271,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33386,7 +33436,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-13",
           "exit_price": 885.7,
@@ -33526,8 +33576,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-08-10",
+          "exit_price": 2093.1,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 17.5
         }
       },
       "history_url": "history/BHARATFORG.json",
@@ -33630,7 +33684,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33731,7 +33785,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33832,7 +33886,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -33933,7 +33987,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34138,12 +34192,12 @@
           "exit_reason": "12% close stop",
           "return_pct": -15.72
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-03-04",
-          "exit_price": 435.85,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": -1.13
+          "exit_date": "2026-03-13",
+          "exit_price": 429.35,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": -2.61
         }
       },
       "history_url": "history/MMFL.json",
@@ -34246,7 +34300,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34347,7 +34401,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34460,7 +34514,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-09-09",
           "exit_price": 2359.3,
@@ -34568,7 +34622,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34669,7 +34723,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34770,7 +34824,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -34903,12 +34957,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-09-02",
-          "exit_price": 782.65,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 2.47
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/SONACOMS.json",
@@ -35019,7 +35069,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -35123,7 +35173,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35224,7 +35274,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35325,7 +35375,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35426,7 +35476,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35527,7 +35577,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35628,7 +35678,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35757,7 +35807,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -35861,7 +35911,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -35962,7 +36012,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36063,7 +36113,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36268,7 +36318,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": 28.58
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-04-28",
           "exit_price": 433.2,
@@ -36376,7 +36426,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36477,7 +36527,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36578,7 +36628,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36679,7 +36729,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36780,7 +36830,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36881,7 +36931,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -36982,7 +37032,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37083,7 +37133,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37184,7 +37234,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37285,7 +37335,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37458,8 +37508,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -2.1
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-02-01",
+          "exit_price": 419.55,
+          "exit_reason": "4% close stop",
+          "return_pct": -7.94
         }
       },
       "history_url": "history/COALINDIA.json",
@@ -37562,7 +37616,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37663,7 +37717,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37764,7 +37818,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37865,7 +37919,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -37966,7 +38020,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38067,7 +38121,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38168,7 +38222,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38311,7 +38365,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 552.85,
           "gain_pct": -1.09
@@ -38417,7 +38471,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38518,7 +38572,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38619,7 +38673,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38720,7 +38774,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -38833,7 +38887,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -38937,7 +38991,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39110,8 +39164,12 @@
           "exit_reason": "12% close stop",
           "return_pct": -14.51
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-06",
+          "exit_price": 653.0,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.4
         }
       },
       "history_url": "history/PRICOLLTD.json",
@@ -39234,7 +39292,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -39338,7 +39396,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39439,7 +39497,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39562,7 +39620,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -39666,7 +39724,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39767,7 +39825,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39868,7 +39926,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -39969,7 +40027,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40070,7 +40128,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40171,7 +40229,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40272,7 +40330,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40377,7 +40435,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -40481,7 +40539,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40582,7 +40640,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40683,7 +40741,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40784,7 +40842,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40885,7 +40943,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -40986,7 +41044,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41087,7 +41145,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41188,7 +41246,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41289,7 +41347,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41402,7 +41460,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -41506,7 +41564,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41607,7 +41665,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41720,7 +41778,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -41824,7 +41882,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -41925,7 +41983,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -42026,7 +42084,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -42127,7 +42185,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -42288,7 +42346,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-08-14",
           "exit_price": 351.3,
@@ -42496,7 +42554,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": 3.7
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-05-06",
           "exit_price": 10002.0,
@@ -42608,7 +42666,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -42712,7 +42770,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -42813,7 +42871,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -43010,7 +43068,7 @@
           "current_price": 4262.0,
           "gain_pct": 141.4
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-01-20",
           "exit_price": 1759.0,
@@ -43198,7 +43256,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -9.95
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-02-11",
           "exit_price": 71.44,
@@ -43306,7 +43364,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -43423,7 +43481,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -43527,7 +43585,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -43628,7 +43686,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -43729,7 +43787,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -43862,7 +43920,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -43974,8 +44032,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-06-11",
+          "exit_price": 273.6,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.75
         }
       },
       "history_url": "history/ADFFOODS.json",
@@ -44124,12 +44186,10 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-08",
-          "exit_price": 1208.3,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 1.85
+        "alt_25_50": {
+          "status": "open",
+          "current_price": 1608.5,
+          "gain_pct": 35.58
         }
       },
       "history_url": "history/SAILIFE.json",
@@ -44232,7 +44292,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -44333,7 +44393,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -44434,7 +44494,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -44551,7 +44611,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -44655,7 +44715,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -44756,7 +44816,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -44947,7 +45007,7 @@
           "current_price": 18791.0,
           "gain_pct": 84.55
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-10",
           "exit_price": 9996.0,
@@ -45055,7 +45115,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45172,7 +45232,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -45276,7 +45336,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45377,7 +45437,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45478,7 +45538,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45579,7 +45639,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45680,7 +45740,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45781,7 +45841,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45882,7 +45942,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -45983,7 +46043,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -46092,7 +46152,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -46196,7 +46256,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -46297,7 +46357,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -46470,8 +46530,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -11.99
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-08",
+          "exit_price": 746.3,
+          "exit_reason": "4% close stop",
+          "return_pct": -9.74
         }
       },
       "history_url": "history/PGIL.json",
@@ -46634,8 +46698,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-09",
+          "exit_price": 65.69,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.78
         }
       },
       "history_url": "history/MAHABANK.json",
@@ -46754,7 +46822,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -46866,7 +46934,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -46970,7 +47038,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47071,7 +47139,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47172,7 +47240,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47329,8 +47397,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-13",
+          "exit_price": 1611.8,
+          "exit_reason": "4% close stop",
+          "return_pct": -7.7
         }
       },
       "history_url": "history/ASTRAL.json",
@@ -47453,8 +47525,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-11",
+          "exit_price": 6387.5,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": -2.7
         }
       },
       "history_url": "history/ABB.json",
@@ -47557,7 +47633,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47662,7 +47738,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -47766,7 +47842,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47867,7 +47943,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -47972,7 +48048,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -48076,7 +48152,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48177,7 +48253,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48350,8 +48426,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -8.54
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-23",
+          "exit_price": 431.5,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.68
         }
       },
       "history_url": "history/INDIACEM.json",
@@ -48454,7 +48534,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48559,7 +48639,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -48663,7 +48743,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48764,7 +48844,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48865,7 +48945,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -48966,7 +49046,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49067,7 +49147,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49168,7 +49248,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49313,12 +49393,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-06-25",
-          "exit_price": 732.6,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 0.6
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/TMB.json",
@@ -49421,7 +49497,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49522,7 +49598,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49623,7 +49699,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49724,7 +49800,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49825,7 +49901,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -49926,7 +50002,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50027,7 +50103,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50128,7 +50204,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -50232,7 +50308,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50333,7 +50409,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50434,7 +50510,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50535,7 +50611,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50696,12 +50772,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-07-06",
-          "exit_price": 145.33,
-          "exit_reason": "4% close stop",
-          "return_pct": -4.21
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/MOTHERSON.json",
@@ -50804,7 +50876,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -50905,7 +50977,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51020,10 +51092,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 10.72
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/AEGISVOPAK.json",
@@ -51126,7 +51196,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51227,7 +51297,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51328,7 +51398,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51429,7 +51499,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51530,7 +51600,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51631,7 +51701,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51732,7 +51802,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -51859,7 +51929,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 1134.5,
           "gain_pct": 5.34
@@ -51965,7 +52035,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52066,7 +52136,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52167,7 +52237,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52268,7 +52338,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52369,7 +52439,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52470,7 +52540,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52571,7 +52641,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52672,7 +52742,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52773,7 +52843,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52874,7 +52944,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -52975,7 +53045,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53076,7 +53146,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53177,7 +53247,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53278,7 +53348,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53379,7 +53449,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53480,7 +53550,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53593,7 +53663,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -53697,7 +53767,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -53814,8 +53884,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-30",
+          "exit_price": 5941.5,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.39
         }
       },
       "history_url": "history/ABB.json",
@@ -53918,7 +53992,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54019,7 +54093,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54120,7 +54194,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54221,7 +54295,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54322,7 +54396,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54423,7 +54497,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54524,7 +54598,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54641,7 +54715,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -54745,7 +54819,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54846,7 +54920,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -54947,7 +55021,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55120,8 +55194,12 @@
           "exit_reason": "12% close stop",
           "return_pct": -18.01
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-01-08",
+          "exit_price": 1243.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.62
         }
       },
       "history_url": "history/KERNEX.json",
@@ -55224,7 +55302,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55325,7 +55403,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55426,7 +55504,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55563,8 +55641,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-03-19",
+          "exit_price": 374.05,
+          "exit_reason": "4% close stop",
+          "return_pct": -4.22
         }
       },
       "history_url": "history/NTPC.json",
@@ -55667,7 +55749,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55768,7 +55850,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55869,7 +55951,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -55970,7 +56052,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56071,7 +56153,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56238,7 +56320,7 @@
           "current_price": 735.95,
           "gain_pct": 61.36
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 434.95,
@@ -56350,7 +56432,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -56454,7 +56536,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56555,7 +56637,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56656,7 +56738,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56757,7 +56839,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56858,7 +56940,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -56959,7 +57041,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57060,7 +57142,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57161,7 +57243,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57262,7 +57344,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57363,7 +57445,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57464,7 +57546,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57565,7 +57647,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57666,7 +57748,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57767,7 +57849,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57868,7 +57950,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -57969,7 +58051,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58070,7 +58152,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58171,7 +58253,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58272,7 +58354,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58373,7 +58455,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58474,7 +58556,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58575,7 +58657,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58684,7 +58766,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -58788,7 +58870,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -58897,7 +58979,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -59021,12 +59103,8 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "closed",
-          "exit_date": "2026-05-14",
-          "exit_price": 143.38,
-          "exit_reason": "4% close stop",
-          "return_pct": -7.71
+        "alt_25_50": {
+          "status": "skipped"
         }
       },
       "history_url": "history/DHAMPURSUG.json",
@@ -59129,7 +59207,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59234,7 +59312,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -59338,7 +59416,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59439,7 +59517,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59540,7 +59618,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59641,7 +59719,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59742,7 +59820,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -59915,7 +59993,7 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -3.37
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
           "exit_date": "2026-03-10",
           "exit_price": 269.2,
@@ -60023,7 +60101,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60124,7 +60202,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60225,7 +60303,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60326,7 +60404,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60427,7 +60505,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60528,7 +60606,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60629,7 +60707,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60730,7 +60808,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60831,7 +60909,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -60976,7 +61054,7 @@
           "current_price": 3486.2,
           "gain_pct": 0.37
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -61080,7 +61158,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61181,7 +61259,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61282,7 +61360,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61383,7 +61461,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61484,7 +61562,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61585,7 +61663,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61686,7 +61764,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61787,7 +61865,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -61888,7 +61966,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62029,8 +62107,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-09-01",
+          "exit_price": 436.25,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 0.24
         }
       },
       "history_url": "history/EXIDEIND.json",
@@ -62133,7 +62215,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62234,7 +62316,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62335,7 +62417,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62436,7 +62518,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62537,7 +62619,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62638,7 +62720,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62739,7 +62821,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62840,7 +62922,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -62941,7 +63023,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63042,7 +63124,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63143,7 +63225,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63244,7 +63326,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63345,7 +63427,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63446,7 +63528,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63547,7 +63629,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63668,8 +63750,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-06-15",
+          "exit_price": 88.47,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": -2.9
         }
       },
       "history_url": "history/NMDC.json",
@@ -63772,7 +63858,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63873,7 +63959,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -63974,7 +64060,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64103,7 +64189,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -64207,7 +64293,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64308,7 +64394,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64409,7 +64495,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64562,7 +64648,7 @@
           "current_price": 6725.0,
           "gain_pct": -1.77
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "open",
           "current_price": 6725.0,
           "gain_pct": -1.77
@@ -64668,7 +64754,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64769,7 +64855,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64870,7 +64956,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -64971,7 +65057,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65072,7 +65158,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65173,7 +65259,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65274,7 +65360,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65375,7 +65461,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65524,8 +65610,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-12",
+          "exit_price": 157.01,
+          "exit_reason": "4% close stop",
+          "return_pct": -5.6
         }
       },
       "history_url": "history/AVANTEL.json",
@@ -65640,8 +65730,12 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "closed",
+          "exit_date": "2026-05-15",
+          "exit_price": 107.99,
+          "exit_reason": "closed below 25DMA",
+          "return_pct": -2.93
         }
       },
       "history_url": "history/NTPCGREEN.json",
@@ -65744,7 +65838,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65845,7 +65939,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -65946,7 +66040,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66047,7 +66141,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66148,7 +66242,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66249,7 +66343,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66350,7 +66444,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66451,7 +66545,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66642,12 +66736,12 @@
           "current_price": 1625.2,
           "gain_pct": 80.79
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-02-09",
-          "exit_price": 988.4,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 9.95
+          "exit_date": "2026-03-02",
+          "exit_price": 932.15,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 3.69
         }
       },
       "history_url": "history/AETHER.json",
@@ -66750,7 +66844,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66851,7 +66945,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -66952,7 +67046,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67053,7 +67147,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -67181,7 +67275,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -67285,7 +67379,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67386,7 +67480,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67487,7 +67581,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67588,7 +67682,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67689,7 +67783,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67790,7 +67884,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67891,7 +67985,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -67992,7 +68086,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68093,7 +68187,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68194,7 +68288,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68295,7 +68389,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68396,7 +68490,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68509,7 +68603,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -68613,7 +68707,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68714,7 +68808,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68815,7 +68909,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -68916,7 +69010,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69017,7 +69111,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69118,7 +69212,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69219,7 +69313,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69320,7 +69414,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69421,7 +69515,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69522,7 +69616,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69623,7 +69717,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69724,7 +69818,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69825,7 +69919,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -69926,7 +70020,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70027,7 +70121,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70128,7 +70222,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70229,7 +70323,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70330,7 +70424,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70431,7 +70525,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70532,7 +70626,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70633,7 +70727,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70734,7 +70828,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -70835,7 +70929,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71044,12 +71138,12 @@
           "exit_reason": "closed below 100DMA",
           "return_pct": -7.46
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "closed",
-          "exit_date": "2026-02-16",
-          "exit_price": 150.11,
-          "exit_reason": "closed below 25DMA",
-          "return_pct": 4.5
+          "exit_date": "2026-03-02",
+          "exit_price": 143.65,
+          "exit_reason": "closed below 50DMA",
+          "return_pct": 0.0
         }
       },
       "history_url": "history/RAIN.json",
@@ -71152,7 +71246,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71253,7 +71347,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71354,7 +71448,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71455,7 +71549,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71556,7 +71650,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71657,7 +71751,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71758,7 +71852,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71859,7 +71953,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -71960,7 +72054,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72061,7 +72155,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72162,7 +72256,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72263,7 +72357,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72364,7 +72458,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72465,7 +72559,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72566,7 +72660,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72667,7 +72761,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72768,7 +72862,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72869,7 +72963,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -72970,7 +73064,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73071,7 +73165,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73172,7 +73266,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73273,7 +73367,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73374,7 +73468,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73475,7 +73569,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73576,7 +73670,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73677,7 +73771,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73778,7 +73872,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -73879,7 +73973,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74002,7 +74096,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -74106,7 +74200,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74207,7 +74301,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74308,7 +74402,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74409,7 +74503,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74510,7 +74604,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74611,7 +74705,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74712,7 +74806,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74813,7 +74907,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -74914,7 +75008,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75015,7 +75109,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75116,7 +75210,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75217,7 +75311,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75340,8 +75434,10 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
-          "status": "skipped"
+        "alt_25_50": {
+          "status": "open",
+          "current_price": 587.1,
+          "gain_pct": 0.48
         }
       },
       "history_url": "history/GNFC.json",
@@ -75444,7 +75540,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75545,7 +75641,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75646,7 +75742,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75747,7 +75843,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75848,7 +75944,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -75949,7 +76045,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76050,7 +76146,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76151,7 +76247,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76252,7 +76348,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76353,7 +76449,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76466,7 +76562,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -76570,7 +76666,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76671,7 +76767,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76780,7 +76876,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -76884,7 +76980,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -76985,7 +77081,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77086,7 +77182,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77187,7 +77283,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77288,7 +77384,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77393,7 +77489,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -77497,7 +77593,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77598,7 +77694,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77699,7 +77795,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77800,7 +77896,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -77901,7 +77997,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -78002,7 +78098,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -78103,7 +78199,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -78204,7 +78300,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
@@ -78309,7 +78405,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       },
@@ -78413,7 +78509,7 @@
         "100_12_15": {
           "status": "skipped"
         },
-        "mix_25_50": {
+        "alt_25_50": {
           "status": "skipped"
         }
       }
