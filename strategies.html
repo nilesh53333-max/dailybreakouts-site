@@ -586,8 +586,8 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
     grid: { vertLines: { color: '#EEF1F5' }, horzLines: { color: '#EEF1F5' } },
     rightPriceScale: { borderColor: '#E2E8F0' },
     timeScale: { borderColor: '#E2E8F0', timeVisible: false },
-    handleScroll: false,
-    handleScale: false,
+    handleScroll: true,
+    handleScale: true,
     crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
   });
   ACTIVE_LWCHART = chart;
@@ -632,50 +632,63 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
   // all (see the "Base data unavailable" note below the chart instead).
   const hasRealBaseData = row.base_high != null && row.base_low != null && baseStartDate != null;
 
-  requestAnimationFrame(() => {
-    if(hasRealBaseData && sliced.length){
-      const foundStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
-      // If base_start predates even the currently sliced window (can
-      // happen if the user manually switched to a shorter fixed range
-      // like 6M after the default Fit-Base view), clip to what's visible
-      // rather than silently drop the zone -- but the horizontal EXTENT
-      // still always comes from the real base_start/base_end_date, never
-      // guessed from candle data.
-      const baseStartIdx = foundStartIdx >= 0 ? foundStartIdx : 0;
+  function drawBaseZone(){
+    // Remove any previously-drawn zone/label from an earlier scroll/zoom
+    // position before drawing the current one -- otherwise stale copies
+    // pile up as the person pans around.
+    const oldZone = document.getElementById(containerId+'-zone');
+    const oldLabel = document.getElementById(containerId+'-zonelabel');
+    if(oldZone) oldZone.remove();
+    if(oldLabel) oldLabel.remove();
 
-      const endDateForZone = row.base_end_date; // null while still Forming (no breakout yet)
-      let baseEndIdx = sliced.length - 1; // ongoing base: extend to the last available candle
-      if(endDateForZone){
-        const foundEndIdx = sliced.findIndex(d => d.date >= endDateForZone);
-        if(foundEndIdx >= 0) baseEndIdx = foundEndIdx;
-      }
+    if(!(hasRealBaseData && sliced.length)) return;
 
-      const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
-      const x2 = chart.timeScale().timeToCoordinate(sliced[baseEndIdx].date);
-      const yTop = candleSeries.priceToCoordinate(row.base_high);
-      const yBot = candleSeries.priceToCoordinate(row.base_low);
+    const foundStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
+    // If base_start predates even the currently sliced window (can
+    // happen if the user manually switched to a shorter fixed range
+    // like 6M after the default Fit-Base view), clip to what's visible
+    // rather than silently drop the zone -- but the horizontal EXTENT
+    // still always comes from the real base_start/base_end_date, never
+    // guessed from candle data.
+    const baseStartIdx = foundStartIdx >= 0 ? foundStartIdx : 0;
 
-      console.log(`[base-zone ${row.symbol}] x1=${x1} x2=${x2} yTop=${yTop} yBot=${yBot} width=${x2-x1} height=${yBot-yTop}`);
+    const endDateForZone = row.base_end_date; // null while still Forming (no breakout yet)
+    let baseEndIdx = sliced.length - 1; // ongoing base: extend to the last available candle
+    if(endDateForZone){
+      const foundEndIdx = sliced.findIndex(d => d.date >= endDateForZone);
+      if(foundEndIdx >= 0) baseEndIdx = foundEndIdx;
+    }
 
-      const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
-        && x1 < x2 && yTop < yBot;
-      if(valid){
-        const zoneDiv = document.createElement('div');
-        zoneDiv.id = containerId+'-zone';
-        zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.14);border:1.5px solid rgba(22,163,74,0.55);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-        container.appendChild(zoneDiv);
-        if(baseLabel){
-          const labelDiv = document.createElement('div');
-          labelDiv.id = containerId+'-zonelabel';
-          labelDiv.textContent = baseLabel;
-          labelDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-          container.appendChild(labelDiv);
-        }
-      } else {
-        console.warn(`[base-zone ${row.symbol}] SKIPPED drawing -- invalid coordinates (see values logged above)`);
+    const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
+    const x2 = chart.timeScale().timeToCoordinate(sliced[baseEndIdx].date);
+    const yTop = candleSeries.priceToCoordinate(row.base_high);
+    const yBot = candleSeries.priceToCoordinate(row.base_low);
+
+    // Off-screen after scrolling/zooming away from the base entirely --
+    // timeToCoordinate returns null rather than a stale pixel value, so
+    // this correctly skips drawing instead of drawing at a wrong spot.
+    const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
+      && x1 < x2 && yTop < yBot;
+    if(valid){
+      const zoneDiv = document.createElement('div');
+      zoneDiv.id = containerId+'-zone';
+      zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.14);border:1.5px solid rgba(22,163,74,0.55);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+      container.appendChild(zoneDiv);
+      if(baseLabel){
+        const labelDiv = document.createElement('div');
+        labelDiv.id = containerId+'-zonelabel';
+        labelDiv.textContent = baseLabel;
+        labelDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        container.appendChild(labelDiv);
       }
     }
-  });
+  }
+
+  requestAnimationFrame(drawBaseZone);
+  // Keep the zone correctly aligned with the candles as the person
+  // scrolls or zooms -- without this, enabling handleScroll/handleScale
+  // would leave the zone drawn at its original, now-stale position.
+  chart.timeScale().subscribeVisibleTimeRangeChange(drawBaseZone);
 
   // Native crosshair-driven tooltip -- reliable across browsers since it
   // uses the library's own coordinate system, not manual hit-testing.
