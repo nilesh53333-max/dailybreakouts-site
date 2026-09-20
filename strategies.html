@@ -580,15 +580,25 @@ function computeChartStats(row, sliced){
   return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
 }
 
-function sliceHistory(history, range, baseStartDate){
+function sliceHistory(history, range, baseStartDate, baseEndDate){
   if(range === 'FIT' && baseStartDate){
     const idx = history.findIndex(d => d.date >= baseStartDate);
     if(idx >= 0){
       const from = Math.max(0, idx - 50); // ~50 sessions of pre-base context, matches backend's PRE_BASE_CONTEXT
-      return history.slice(from);
+      // Cap the END too, at a reasonable window past the breakout --
+      // without this, a pattern that broke out weeks/months ago (with
+      // the stock continuing to run since) would show its ENTIRE
+      // subsequent history here, making the actual pattern shrink to a
+      // tiny, unrecognizable sliver on a much wider chart. "Fit Base"
+      // should show the pattern clearly; 6M/1Y/5Y already handle "how
+      // has it done since".
+      let to = history.length;
+      if(baseEndDate){
+        const endIdx = history.findIndex(d => d.date >= baseEndDate);
+        if(endIdx >= 0) to = Math.min(history.length, endIdx + 40);
+      }
+      return history.slice(from, to);
     }
-    // base_start not found even in the full embedded history -- fall
-    // through to showing everything rather than guessing.
     return history;
   }
   const sessionsMap = {'6M': 126, '1Y': 252, '5Y': 1260};
@@ -840,12 +850,16 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
       container.appendChild(svg);
 
       if(baseLabel){
-        const labelX = upperEndX!=null ? upperEndX - 60 : x1;
+        const flagX1 = chart.timeScale().timeToCoordinate(sliced[flagStartIdx].date);
+        const flagX2 = chart.timeScale().timeToCoordinate(sliced[flagEndIdx].date);
+        const labelValid = typeof flagX1==='number' && typeof flagX2==='number' && isFinite(flagX1) && isFinite(flagX2);
+        const labelX = labelValid ? flagX1 : x1;
+        const labelWidth = labelValid ? (flagX2-flagX1) : 120;
         const labelY = upperEndY!=null ? upperEndY - 16 : yTop - 16;
         const labelDiv = document.createElement('div');
         labelDiv.id = containerId+'-zonelabel';
         labelDiv.textContent = baseLabel;
-        labelDiv.style.cssText = `position:absolute;z-index:5;left:${labelX}px;top:${labelY}px;width:120px;text-align:center;color:#2563EB;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        labelDiv.style.cssText = `position:absolute;z-index:5;left:${labelX}px;top:${labelY}px;width:${labelWidth}px;text-align:center;color:#2563EB;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
         container.appendChild(labelDiv);
       }
     } else if(valid){
@@ -939,7 +953,7 @@ function renderChartPanelWithHistory(row, fullHistory){
   const panel = document.getElementById('stage-chart-panel');
   if(!row || !panel) return;
 
-  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start);
+  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start, row.base_end_date);
   const stats = computeChartStats(row, sliced);
   const today = sliced.length ? sliced[sliced.length-1] : null;
   const priceNow = today ? today.c : (row.close ?? row.current_price ?? row.exit_price);
