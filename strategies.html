@@ -310,6 +310,7 @@
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
         <div class="disp" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">6-month rolling method — currently 100 DMA / 12% stop / 5 positions, active for Jul-Dec 2026, re-determined every half-year</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -400,7 +401,13 @@ function renderEquityCurve(yearly, startCap){
 }
 
 function renderBacktest(){
-  const trail = 100, stop = 4, maxpos = 10;  // fixed -- no parameter selection exposed to users
+  // 6-MONTH ROLLING METHOD: whichever combo ranks WORST on cumulative
+  // P&L using only data through the end of the prior half-year --
+  // re-determined every 6 months, not a fixed manual pick. Today's date
+  // is within 2026-H2 (Jul-Dec 2026), so the ACTIVE combo uses only
+  // data through 2026-H1 (June 2026) -- that's 100 DMA / 12% stop / 5
+  // positions. UPDATE THIS every 6 months.
+  const trail = 100, stop = 12, maxpos = 5;
   const c = findCombo(trail, stop, maxpos);
   if(!c) return;
 
@@ -536,7 +543,7 @@ function sliceHistory(history, range, baseStartDate){
     // through to showing everything rather than guessing.
     return history;
   }
-  const sessionsMap = {'6M': 126, '1Y': 252};
+  const sessionsMap = {'6M': 126, '1Y': 252, '5Y': 1260};
   const n = sessionsMap[range] || history.length;
   return history.slice(-n);
 }
@@ -696,12 +703,50 @@ function toggleBaseZone(){
   });
 }
 
-function drawChartPanel(){
+const HISTORY_CACHE = {};  // symbol -> history array, fetched once per page load
+
+async function drawChartPanel(){
   const row = CURRENT_CHART_ROW;
   const panel = document.getElementById('stage-chart-panel');
   if(!row || !panel) return;
 
-  const fullHistory = row.history || [];
+  // Backward compatible: if this row still has history embedded directly
+  // (an older JSON format), use it without fetching anything.
+  if(row.history){
+    renderChartPanelWithHistory(row, row.history);
+    return;
+  }
+
+  if(HISTORY_CACHE[row.symbol]){
+    renderChartPanelWithHistory(row, HISTORY_CACHE[row.symbol]);
+    return;
+  }
+
+  if(!row.history_url){
+    renderChartPanelWithHistory(row, []);
+    return;
+  }
+
+  panel.innerHTML = `<div class="quadrant-card"><div class="empty">Loading chart…</div></div>`;
+  try{
+    const res = await fetch(row.history_url, {cache:'force-cache'});
+    if(!res.ok) throw new Error('history fetch failed');
+    const hist = await res.json();
+    HISTORY_CACHE[row.symbol] = hist;
+    // The person may have clicked a different row while this was loading --
+    // only render if this fetch's row is still the one currently selected.
+    if(CURRENT_CHART_ROW && CURRENT_CHART_ROW.symbol === row.symbol){
+      renderChartPanelWithHistory(row, hist);
+    }
+  }catch(e){
+    panel.innerHTML = `<div class="quadrant-card"><div class="empty">Couldn't load chart data for ${row.symbol}.</div></div>`;
+  }
+}
+
+function renderChartPanelWithHistory(row, fullHistory){
+  const panel = document.getElementById('stage-chart-panel');
+  if(!row || !panel) return;
+
   const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start);
   const stats = computeChartStats(row, sliced);
   const today = sliced.length ? sliced[sliced.length-1] : null;
@@ -725,7 +770,7 @@ function drawChartPanel(){
     ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
     : null);
 
-  const rangeBtns = [['FIT','Fit Base'],['6M','6M'],['1Y','1Y']].map(([r,label]) =>
+  const rangeBtns = [['FIT','Fit Base'],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
   const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">Base zone</button>`;
@@ -887,7 +932,7 @@ async function loadBreakouts(){
 
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
     document.getElementById('dynamic-sub').textContent =
-      `${freshToday} fresh breakouts today — tap a stage below to see the names.`;
+      `${freshToday} fresh breakouts today (using 2026-H2's worst-ranked combo: 100 DMA/12%/5 positions, per the 6-month rolling method) — tap a stage below to see the names.`;
 
     renderStageCards();
     renderStageTable();
