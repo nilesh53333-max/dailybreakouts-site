@@ -756,34 +756,57 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
     const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
       && x1 < x2 && yTop < yBot;
     if(valid && ACTIVE_STRATEGY === 'bullflag'){
-      // Flagpole: draw a visible line from the impulse's start up to
-      // where price first reached the flag's high -- makes the pattern
-      // visually read as "pole then flag", matching how a real bull
-      // flag is recognized, instead of showing the flag box in
-      // isolation with no visible impulse leading into it.
+      // The TRUE flag window is from where price first reached the
+      // pole's high (poleTopIdx) to the breakout day (baseEndIdx) --
+      // baseStartIdx itself is the POLE's start, not the flag's.
       const poleStartIdx = baseStartIdx;
       let poleTopIdx = poleStartIdx;
       for(let k=poleStartIdx; k<=baseEndIdx; k++){
         if(sliced[k] && sliced[k].h >= row.base_high){ poleTopIdx = k; break; }
       }
+      const flagStartIdx = poleTopIdx;
+      const flagEndIdx = baseEndIdx;
+
+      // Flagpole: a visible line from the impulse's start up to where
+      // price first reached the flag's high -- shows "pole then flag"
+      // clearly, instead of the flag shape appearing with no visible
+      // impulse leading into it.
       const poleX1 = chart.timeScale().timeToCoordinate(sliced[poleStartIdx].date);
       const poleY1 = candleSeries.priceToCoordinate(sliced[poleStartIdx].l);
-      const poleX2 = chart.timeScale().timeToCoordinate(sliced[poleTopIdx].date);
+      const poleX2 = chart.timeScale().timeToCoordinate(sliced[flagStartIdx].date);
       const poleY2 = candleSeries.priceToCoordinate(row.base_high);
       const poleValid = [poleX1,poleY1,poleX2,poleY2].every(v => typeof v==='number' && isFinite(v));
 
-      // Bull Flag's channel genuinely slopes downward -- a flat rectangle
-      // would misrepresent the pattern. Approximate the slope using the
-      // available base_high (near the flag's start, right after the
-      // pole) and base_low (near the flag's end, just before the
-      // breakout): a parallelogram tilting from upper-left down to
-      // lower-right, with a modest fixed channel width, rather than a
-      // flat box.
-      const channelWidthPx = Math.max(14, (yBot - yTop) * 0.35);
+      // The flag channel is fit DIRECTLY from the real candles in the
+      // flag window -- a simple least-squares line through the HIGHS
+      // (upper boundary) and another through the LOWS (lower boundary)
+      // -- so the drawn channel actually hugs the real price action,
+      // instead of an arbitrary fixed offset that could land anywhere
+      // relative to what the candles actually did.
+      function fitLine(indices, getValue){
+        const n = indices.length;
+        if(n < 2) return null;
+        const xs = indices.map((_, i) => i);
+        const ys = indices.map(idx => getValue(sliced[idx]));
+        const xMean = xs.reduce((a,b)=>a+b,0)/n;
+        const yMean = ys.reduce((a,b)=>a+b,0)/n;
+        let num=0, den=0;
+        for(let i=0;i<n;i++){ num += (xs[i]-xMean)*(ys[i]-yMean); den += (xs[i]-xMean)**2; }
+        const slope = den!==0 ? num/den : 0;
+        const intercept = yMean - slope*xMean;
+        return { valueAt: (i) => intercept + slope*i };
+      }
+
+      const flagIndices = [];
+      for(let k=flagStartIdx; k<=flagEndIdx; k++) if(sliced[k]) flagIndices.push(k);
+      const upperFit = fitLine(flagIndices, d => d.h);
+      const lowerFit = fitLine(flagIndices, d => d.l);
+
       const svgNS = 'http://www.w3.org/2000/svg';
       const svg = document.createElementNS(svgNS, 'svg');
       svg.id = containerId+'-zone';
       svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
+
       if(poleValid){
         const poleLine = document.createElementNS(svgNS, 'line');
         poleLine.setAttribute('x1', poleX1); poleLine.setAttribute('y1', poleY1);
@@ -793,21 +816,36 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
         poleLine.setAttribute('stroke-dasharray', '4,3');
         svg.appendChild(poleLine);
       }
-      const poly = document.createElementNS(svgNS, 'polygon');
-      // Upper-left (flag starts near its high) -> upper-right (drifted
-      // down by the channel width) -> lower-right -> lower-left.
-      const points = `${x1},${yTop} ${x2},${yTop+channelWidthPx} ${x2},${yBot+channelWidthPx} ${x1},${yBot}`;
-      poly.setAttribute('points', points);
-      poly.setAttribute('fill', 'rgba(37,99,235,0.10)');
-      poly.setAttribute('stroke', 'rgba(37,99,235,0.65)');
-      poly.setAttribute('stroke-width', '1.5');
-      svg.appendChild(poly);
+
+      let upperEndX = null, upperEndY = null;
+      if(upperFit && lowerFit && flagIndices.length>=2){
+        const n = flagIndices.length;
+        const fx1 = chart.timeScale().timeToCoordinate(sliced[flagIndices[0]].date);
+        const fx2 = chart.timeScale().timeToCoordinate(sliced[flagIndices[n-1]].date);
+        const fUpperY1 = candleSeries.priceToCoordinate(upperFit.valueAt(0));
+        const fUpperY2 = candleSeries.priceToCoordinate(upperFit.valueAt(n-1));
+        const fLowerY1 = candleSeries.priceToCoordinate(lowerFit.valueAt(0));
+        const fLowerY2 = candleSeries.priceToCoordinate(lowerFit.valueAt(n-1));
+        const fitValid = [fx1,fx2,fUpperY1,fUpperY2,fLowerY1,fLowerY2].every(v => typeof v==='number' && isFinite(v));
+        if(fitValid){
+          const poly = document.createElementNS(svgNS, 'polygon');
+          poly.setAttribute('points', `${fx1},${fUpperY1} ${fx2},${fUpperY2} ${fx2},${fLowerY2} ${fx1},${fLowerY1}`);
+          poly.setAttribute('fill', 'rgba(37,99,235,0.10)');
+          poly.setAttribute('stroke', 'rgba(37,99,235,0.65)');
+          poly.setAttribute('stroke-width', '1.5');
+          svg.appendChild(poly);
+          upperEndX = fx2; upperEndY = fUpperY2;
+        }
+      }
       container.appendChild(svg);
+
       if(baseLabel){
+        const labelX = upperEndX!=null ? upperEndX - 60 : x1;
+        const labelY = upperEndY!=null ? upperEndY - 16 : yTop - 16;
         const labelDiv = document.createElement('div');
         labelDiv.id = containerId+'-zonelabel';
         labelDiv.textContent = baseLabel;
-        labelDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#2563EB;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        labelDiv.style.cssText = `position:absolute;z-index:5;left:${labelX}px;top:${labelY}px;width:120px;text-align:center;color:#2563EB;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
         container.appendChild(labelDiv);
       }
     } else if(valid){
@@ -946,8 +984,7 @@ function renderChartPanelWithHistory(row, fullHistory){
     </div>` : '';
 
   const isOpenStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
-  const blueSkyBadge = (isOpenStage && row.blue_sky)
-    ? `<span style="display:inline-block;background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 12px;border-radius:14px;margin-top:10px;">Blue sky</span>` : '';
+  const blueSkyBadge = '';
 
   const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
 
