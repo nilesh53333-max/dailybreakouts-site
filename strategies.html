@@ -568,6 +568,7 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
   const baseLabel = row.base_weeks ? `${row.base_weeks} wks` : '';
   const container = document.getElementById(containerId);
   if(!container || !window.LightweightCharts) return;
+  if(container._resizeObserver) container._resizeObserver.disconnect();
   container.innerHTML = '';
 
   // Height comes from whatever CSS flex has actually allocated this
@@ -593,6 +594,28 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
   ACTIVE_LWCHART = chart;
   container.style.position = 'relative';
   container.style.overflow = 'hidden';  // safety clip: never let a coordinate bug bleed outside the chart's own box
+
+  // The container's width/height read above can be wrong if the
+  // surrounding flex layout hasn't fully settled yet at this exact
+  // moment (fonts still loading, other cards still resizing). If the
+  // chart gets created at a stale/incorrect size, its internal
+  // time-scale can end up stuck showing only a narrow recent window
+  // even though far more data was passed to setData -- watching for
+  // the container's REAL size and re-applying it fixes that.
+  if(typeof ResizeObserver !== 'undefined'){
+    const chartResizeObserver = new ResizeObserver(entries => {
+      for(const entry of entries){
+        const w = entry.contentRect.width;
+        const h = entry.contentRect.height;
+        if(w > 0 && h > 0){
+          chart.applyOptions({ width: w, height: h });
+          chart.timeScale().fitContent();
+        }
+      }
+    });
+    chartResizeObserver.observe(container);
+    container._resizeObserver = chartResizeObserver;
+  }
 
   const candleSeries = chart.addCandlestickSeries({
     upColor: '#16A34A', downColor: '#DC2626',
