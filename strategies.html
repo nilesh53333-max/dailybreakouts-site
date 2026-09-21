@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DailyBreakouts — Strategies</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23142850'/%3E%3Crect x='7' y='16' width='4' height='10' fill='%2316A34A'/%3E%3Crect x='14' y='9' width='4' height='17' fill='%2316A34A'/%3E%3Crect x='21' y='4' width='4' height='22' fill='%2316A34A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#132A4C; --paper:#EEF2F8; --card:#FFFFFF; --border:#E2E8F0;
+    --accent:#2563EB; --green:#16A34A; --red:#DC2626; --muted:#64748B; --text:#0F172A;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;}
+  .num{font-family:'IBM Plex Mono',monospace;}
+  .disp{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  select,button,input{font-family:inherit;}
+
+  header{height:56px;background:var(--ink);display:flex;align-items:center;padding:0 20px;gap:18px;}
+  header .logo{color:#FFFFFF;font-weight:700;font-size:20px;line-height:1.1;}
+  header .logo span{color:var(--green);}
+  .logo-tagline{color:#94A3B8;font-size:10.5px;line-height:1.2;max-width:150px;margin-right:8px;}
+  .topnav{display:flex;gap:4px;flex:1 1 auto;}
+  .topnav-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:7px;font-size:13.5px;color:#CBD5E1;white-space:nowrap;}
+  .topnav-item.active{background:var(--accent);color:#FFFFFF;font-weight:600;}
+  .topsearch{display:flex;align-items:center;gap:8px;background:#1E3A5F;border:1px solid #2C4A70;border-radius:8px;padding:8px 12px;width:280px;}
+  .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
+  .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
+  .hamburger-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex:0 0 auto;}
+  .mobile-search-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex:0 0 auto;}
+  .mobile-sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:40;}
+
+  main{padding:16px 24px 32px;width:100%;}
+  h1{font-size:19px;margin:0 0 2px;}
+  .sub{color:var(--muted);font-size:12px;margin-bottom:12px;}
+
+  .tabs{display:flex;gap:18px;border-bottom:1px solid var(--border);margin-bottom:12px;}
+  .tab{padding:6px 2px;font-size:12.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+  .tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
+  .panel{margin-bottom:32px;}
+  .panel.active{display:block;}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:0;}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;}
+  .stat .v{font-size:16px;font-weight:700;}
+  .stat .l{font-size:10px;color:var(--muted);margin-top:1px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:6px 8px;font-size:10.5px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);background:#FAFAF7;position:sticky;top:0;z-index:2;}
+  td{padding:6px 8px;border-bottom:1px solid #F1EFE8;}
+  td.r{text-align:right;}
+  tr:last-child td{border-bottom:none;}
+
+  .badge{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;}
+  .badge.fresh{background:#FDF3E7;color:#B4700C;}
+  .badge.tight{background:#EEF3FB;color:#2C5FA8;}
+  .badge.extended{background:#F4EDF9;color:#7A3FA0;}
+
+  .controls{display:flex;gap:14px;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap;}
+  .field label{display:block;font-size:10.5px;color:var(--muted);margin-bottom:4px;}
+  .field select{border:1px solid #D9D5C9;border-radius:6px;padding:7px 10px;font-size:13px;background:#fff;}
+
+  .empty{padding:40px;text-align:center;color:var(--muted);font-size:13.5px;}
+  .note{font-size:11.5px;color:var(--muted);margin-top:10px;}
+
+  .breakouts-layout{display:flex;gap:18px;align-items:flex-start;}
+  .breakouts-table-col{flex:1.3;}
+  .breakouts-chart-col{flex:1;position:sticky;top:20px;}
+
+  /* Default (narrower than 1440px): normal stacked flow, no height constraint. */
+  .compact-strip{flex:0 0 auto;}
+  .dashboard-grid{display:flex;flex-direction:column;gap:14px;}
+  .quadrant{display:flex;flex-direction:column;gap:10px;}
+  .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
+
+  /* >=1440px: real viewport-constrained 2x2 dashboard. Every ancestor in
+     the chain down to each quadrant needs min-height:0 -- without it,
+     flex/grid children default to min-height:auto and will happily
+     overflow their track instead of shrinking, which silently breaks
+     this whole approach. */
+  /* >=1200px covers all target laptop/desktop sizes (1366, 1440, 1536,
+     1600, 1920) -- the previous 1440px threshold excluded 1366-wide
+     laptops from the grid entirely. */
+  @media (min-width: 1200px){
+    .app-body{min-height:calc(100vh - 56px);overflow:visible;align-items:stretch;}
+    .sidebar{height:100%;overflow-y:auto;position:static;width:clamp(150px, 12vw, 200px);}
+    .content-col{min-height:0;overflow:visible;}
+    main.content-col{padding:clamp(6px, 1vh, 10px) 16px clamp(4px, 0.8vh, 8px);}
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:56fr 44fr;
+      grid-template-rows:auto auto;
+      align-items:stretch;
+      gap:clamp(6px, 1vh, 10px);
+      flex:1;
+      min-height:0;
+      overflow:hidden;
+    }
+    .quadrant{min-height:0;overflow-y:auto;gap:clamp(4px, 0.6vh, 8px);}
+    .quadrant-card{flex:1;min-height:0;overflow-y:auto;padding:clamp(8px, 1vh, 14px);}
+    /* Fixed cap, NOT flex:1 -- deliberately independent of however much
+       space the quadrant would otherwise offer, so a 10-row table can
+       never force the whole grid taller. ~5 rows + sticky header. */
+    .capped-table-card{flex:1;min-height:0;max-height:340px;overflow-y:auto;}
+    /* The chart itself is the one element that should actually GROW to
+       fill remaining space in its quadrant, once header/buttons/stats
+       (all flex:0 0 auto) have taken their natural height. */
+    #stage-chart-panel{min-height:0;min-width:0;display:flex;flex-direction:column;height:100%;}
+    #stage-chart-panel .card{flex:1;min-height:0;min-width:0;display:flex;flex-direction:column;overflow-x:hidden;}
+    #chart-fill-area{flex:1;min-height:0;}
+  }
+
+  /* Shorter viewports (1366x768, 1440x900-class laptops) need denser
+     values than a tall 1080p+ desktop -- height, not just width, drives
+     this. Applied on top of the grid rules above. */
+  @media (min-width: 1200px) and (max-height: 850px){
+    header{height:48px;}
+    main.content-col{padding:4px 14px 4px;}
+    h1{font-size:16px;}
+    .sub{font-size:11px;margin-bottom:6px;}
+    .capped-table-card{max-height:260px;}
+    .lifecycle-cards{gap:6px;margin-bottom:6px;}
+    .stage-card{padding:5px 10px;}
+    .stage-card .count{font-size:15px;}
+    .stage-card .title{font-size:11px;}
+    .stage-card .desc{font-size:9px;}
+    .quadrant-card{padding:6px;}
+    th,td{padding:4px 6px;font-size:10px;}
+    .stat{padding:6px 8px;}
+    .stat .v{font-size:14px;}
+    .stat .l{font-size:9px;}
+    .keystats .row{padding:2px 6px;font-size:11px;}
+    .stock-name{font-size:13px;}
+    .stock-price{font-size:12px;}
+  }
+
+  .bt-stats-row{grid-template-columns:repeat(6,1fr);flex:0 0 auto;}
+
+  /* MOBILE (<900px): intentionally a different, single-column, touch
+     interface -- not a squeezed version of the desktop grid. */
+  @media (max-width: 899px){
+    header{height:52px;padding:0 12px;gap:10px;}
+    .hamburger-btn{display:block;}
+    .mobile-search-btn{display:block;}
+    .logo-tagline{display:none;}
+    .topnav{display:none;}
+    .topsearch{display:none;}
+
+    .sidebar{
+      position:fixed;top:0;left:0;bottom:0;width:240px;z-index:50;
+      transform:translateX(-100%);transition:transform .2s ease;
+      box-shadow:2px 0 12px rgba(0,0,0,0.15);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .mobile-sidebar-overlay.open{display:block;}
+
+    .app-body{display:block;height:auto;overflow:visible;}
+    main.content-col{padding:12px;height:auto;overflow:visible;}
+    .dashboard-grid{display:flex;flex-direction:column;gap:14px;height:auto;}
+    .quadrant{overflow:visible;}
+    .quadrant-card{overflow-x:auto;}
+
+    h1{font-size:18px;}
+    .lifecycle-cards{flex-wrap:wrap;}
+    .stage-card{flex:1 1 45%;min-width:130px;}
+
+    /* Backtest metrics: 2-column grid on mobile, per spec, instead of
+       a cramped 6-across row. */
+    .bt-stats-row{grid-template-columns:repeat(2,1fr) !important;}
+
+    .breakouts-table-col, .breakouts-chart-col{flex:none;width:100%;}
+    table{display:block;overflow-x:auto;white-space:nowrap;}
+
+    /* Chart card becomes full width, generous touch-friendly height
+       instead of inheriting a fixed flex-fill from the desktop grid. */
+    #stage-chart-panel{height:auto;}
+    #stage-chart-panel .card{height:auto;}
+    #chart-fill-area, [id^="chart-"]{min-height:280px;}
+
+    .controls{flex-wrap:wrap;}
+    .field select{min-height:36px;}
+    .btn-primary,.btn-secondary,.range-btn{min-height:34px;}
+  }
+  table tr.selectable{cursor:pointer;}
+  table tr.selectable:hover{background:#FAFAF7;}
+  table tr.selected{background:#EFF6F1;}
+  .stock-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+  .stock-name{font-size:19px;font-weight:700;}
+  .stock-price{font-size:19px;font-weight:700;text-align:right;}
+  .stock-change{font-size:12.5px;font-weight:600;text-align:right;}
+  .chart-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 10px;font-size:12px;margin-top:14px;}
+  .chart-stats-2col{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;margin-top:6px;flex:0 0 auto;min-width:0;}
+  .stat-row{display:flex;flex-direction:column;padding:2px 0;font-size:clamp(8.5px, 0.9vw, 9.5px);}
+  .stat-row .lbl{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.25;}
+  .stat-row .val{font-size:clamp(11px, 1.1vw, 13px);margin-top:1px;}
+  .stat-row .lbl{color:var(--muted);}
+  .stat-row .val{font-weight:600;}
+  .info-icon{display:inline-block;color:#B8C0CC;font-size:11px;cursor:help;}
+  .view-all-link{color:var(--accent);font-size:12.5px;font-weight:600;text-decoration:none;}
+  .view-all-link:hover{text-decoration:underline;}
+  .chart-tooltip{display:none;position:absolute;background:var(--ink);color:#fff;font-size:10.5px;line-height:1.5;padding:6px 9px;border-radius:6px;pointer-events:none;white-space:nowrap;z-index:10;font-family:'IBM Plex Mono',monospace;}
+  .range-btn{border:1px solid var(--border);background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;}
+  .range-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .chart-stats .v{font-weight:600;}
+  .chart-stats .l{color:var(--muted);margin-top:1px;}
+
+  .app-body{display:flex;width:100%;align-items:flex-start;}
+  .sidebar{width:200px;flex:0 0 auto;background:var(--card);border-right:1px solid var(--border);padding:16px 12px;position:sticky;top:0;align-self:flex-start;}
+  .sidebar h3{font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;padding:0 8px 8px;margin:0;}
+  .sidebar .item{display:block;padding:8px 10px;border-radius:7px;font-size:13.5px;color:#4B5563;margin-bottom:2px;}
+  .sidebar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border:1px solid var(--green);}
+  .sidebar .section{margin-bottom:22px;}
+  .content-col{flex:1;min-width:0;display:flex;flex-direction:column;}
+
+  .summary-strip{display:flex;gap:12px;margin-bottom:18px;}
+  .summary-strip .stat{flex:1;}
+  .btn-primary{background:var(--green);border:none;border-radius:8px;padding:0 18px;font-size:13px;font-weight:600;color:#FFFFFF;cursor:pointer;white-space:nowrap;}
+  .btn-secondary{background:#ECFDF5;border:1px solid var(--green);border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;}
+
+  .equity-tabs{display:flex;gap:16px;margin-bottom:10px;}
+  .equity-tab{font-size:12px;color:var(--muted);cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;}
+  .equity-tab.active{color:var(--text);font-weight:600;border-bottom-color:var(--green);}
+  .keystats{display:grid;grid-template-columns:1fr 1fr;gap:0;font-size:12.5px;margin-top:14px;}
+  .keystats .row{display:flex;justify-content:space-between;padding:4px 8px;border-bottom:1px solid #F1EFE8;font-size:12px;}
+  .keystats .row .lbl{color:var(--muted);}
+  .keystats .row .val{font-weight:600;}
+
+  .compact-strip h1{margin:0;line-height:1.15;}
+  .compact-strip .sub{margin:1px 0 0;line-height:1.2;}
+  .lifecycle-cards{display:flex;gap:8px;margin-bottom:10px;}
+  .stage-card{flex:1;}
+  .stage-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;cursor:pointer;transition:border-color .15s;}
+  .stage-card:hover{border-color:var(--accent);}
+  .stage-card.active{background:#EFF6F1;border-color:var(--green);}
+  .stage-card .tap{font-size:9.5px;color:var(--muted);text-align:right;margin-bottom:2px;}
+  .stage-card.active .tap{color:var(--green);font-weight:600;}
+  .stage-card .count{font-size:18px;font-weight:700;line-height:1.2;}
+  .stage-card .title{font-size:12px;font-weight:600;line-height:1.2;}
+  .stage-card .desc{font-size:10.5px;color:var(--muted);font-style:italic;line-height:1.25;margin-top:1px;}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+
+<header>
+  <button aria-label="Open menu" class="hamburger-btn" onclick="toggleMobileSidebar()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <div class="logo disp">daily<span>breakouts</span></div>
+  <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
+  <nav class="topnav">
+    <a href="index.html" class="topnav-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      Home
+    </a>
+    <a href="strategies.html" class="topnav-item active">Strategies</a>
+    <a href="#" class="topnav-item">Backtest</a>
+    <a href="#" class="topnav-item">Watchlist</a>
+    <a href="#" class="topnav-item">Resources</a>
+    <a href="#" class="topnav-item">Community</a>
+  </nav>
+  <button aria-label="Search" class="mobile-search-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
+  <div class="topsearch">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input aria-label="Search stock" placeholder="Search stock (e.g. RELIANCE, TCS, INFY)">
+  </div>
+  <button aria-label="Account menu" class="avatar">N</button>
+</header>
+<div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+
+<div class="app-body">
+  <div class="sidebar">
+    <div class="section">
+      <h3>Select strategy</h3>
+      <a href="#" class="item active" id="sidebar-item-vcm" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
+      <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;">Classic Bull Flag</a>
+    </div>
+    <div class="section">
+      <h3>Tools</h3>
+      <a href="#" class="item" onclick="switchTab('breakouts');return false;">Today's Breakouts</a>
+      <a href="#" class="item" onclick="switchTab('backtest');return false;">Backtesting</a>
+    </div>
+  </div>
+
+<main class="content-col">
+  <div class="compact-strip">
+    <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
+    <div class="sub" id="dynamic-sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
+  </div>
+
+  <div class="dashboard-grid">
+
+    <!-- TOP LEFT: today's breakouts stock list -->
+    <div class="quadrant" id="quad-stocklist">
+      <div id="lifecycle-cards" class="lifecycle-cards compact-strip"></div>
+      <div id="stage-table-container" class="quadrant-card capped-table-card">
+        <div class="empty">Loading breakout stages…</div>
+      </div>
+    </div>
+
+    <!-- TOP RIGHT: selected stock chart -->
+    <div class="quadrant" id="quad-chart">
+      <div id="stage-chart-panel"></div>
+    </div>
+
+    <!-- BOTTOM LEFT: backtest controls + metrics + yearly table -->
+    <div class="quadrant" id="quad-backtest">
+      <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
+        <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.</div>
+      </div>
+
+      <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
+
+      <div class="quadrant-card">
+        <div style="font-size:10.5px;font-weight:600;color:var(--muted);margin-bottom:6px;">Year-by-year (fixed ₹10L, no compounding)</div>
+        <table>
+          <thead><tr><th>Year</th><th class="r">P&amp;L (₹)</th><th class="r">Return on ₹10L</th></tr></thead>
+          <tbody id="bt-year-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BOTTOM RIGHT: equity curve + key stats -->
+    <div class="quadrant" id="quad-equity">
+      <div class="quadrant-card" style="flex:0 0 auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <div style="font-size:12px;font-weight:700;color:var(--accent);">Equity Curve</div>
+          <div class="num" style="font-weight:700;color:var(--accent);font-size:12px;" id="bt-ending-equity"></div>
+        </div>
+        <div id="bt-equity-chart" style="max-height:150px;"></div>
+      </div>
+      <div class="quadrant-card" style="flex:1;min-height:0;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:4px;">Key Stats</div>
+        <div class="keystats" id="bt-keystats"></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+</div>
+
+<script>
+// ---- REAL backtest grid, exported from dailybreakouts_v29_27combo_summary.csv / _yearly.csv ----
+const BACKTEST_DATA_VCM = {"combos": [{"trail": 25, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3216109.11, "totalPnl": 2216109.11, "roi": 221.61, "maxDD": -16.54, "closedTrades": 498, "openAtEnd": 5, "winRate": 32.13, "profitFactor": 1.6, "avgWinner": 18.32, "avgLoser": -5.11}, {"trail": 25, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3650908.03, "totalPnl": 2650908.03, "roi": 265.09, "maxDD": -9.51, "closedTrades": 915, "openAtEnd": 10, "winRate": 33.22, "profitFactor": 1.82, "avgWinner": 19.35, "avgLoser": -5.01}, {"trail": 25, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3302905.94, "totalPnl": 2302905.94, "roi": 230.29, "maxDD": -9.7, "closedTrades": 1299, "openAtEnd": 13, "winRate": 32.33, "profitFactor": 1.75, "avgWinner": 18.93, "avgLoser": -4.9}, {"trail": 25, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3597393.97, "totalPnl": 2597393.97, "roi": 259.74, "maxDD": -17.34, "closedTrades": 410, "openAtEnd": 4, "winRate": 36.83, "profitFactor": 1.76, "avgWinner": 19.64, "avgLoser": -6.25}, {"trail": 25, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3396377.32, "totalPnl": 2396377.32, "roi": 239.64, "maxDD": -11.51, "closedTrades": 796, "openAtEnd": 9, "winRate": 37.31, "profitFactor": 1.76, "avgWinner": 18.93, "avgLoser": -6.1}, {"trail": 25, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3201852.39, "totalPnl": 2201852.39, "roi": 220.19, "maxDD": -12.54, "closedTrades": 1129, "openAtEnd": 13, "winRate": 36.4, "profitFactor": 1.74, "avgWinner": 19.23, "avgLoser": -6.01}, {"trail": 25, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3548926.32, "totalPnl": 2548926.32, "roi": 254.89, "maxDD": -15.11, "closedTrades": 406, "openAtEnd": 4, "winRate": 36.45, "profitFactor": 1.72, "avgWinner": 20.19, "avgLoser": -6.45}, {"trail": 25, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3331630.94, "totalPnl": 2331630.94, "roi": 233.16, "maxDD": -11.86, "closedTrades": 782, "openAtEnd": 9, "winRate": 37.6, "profitFactor": 1.73, "avgWinner": 18.96, "avgLoser": -6.31}, {"trail": 25, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3161675.4, "totalPnl": 2161675.4, "roi": 216.17, "maxDD": -13.11, "closedTrades": 1110, "openAtEnd": 14, "winRate": 36.58, "profitFactor": 1.72, "avgWinner": 19.22, "avgLoser": -6.17}, {"trail": 50, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3591214.99, "totalPnl": 2591214.99, "roi": 259.12, "maxDD": -16.59, "closedTrades": 324, "openAtEnd": 5, "winRate": 29.63, "profitFactor": 1.92, "avgWinner": 25.31, "avgLoser": -5.26}, {"trail": 50, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3110590.03, "totalPnl": 2110590.03, "roi": 211.06, "maxDD": -13.39, "closedTrades": 638, "openAtEnd": 10, "winRate": 29.78, "profitFactor": 1.82, "avgWinner": 23.88, "avgLoser": -5.32}, {"trail": 50, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3548511.18, "totalPnl": 2548511.18, "roi": 254.85, "maxDD": -11.21, "closedTrades": 874, "openAtEnd": 15, "winRate": 30.78, "profitFactor": 2.1, "avgWinner": 25.66, "avgLoser": -5.19}, {"trail": 50, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2639926.18, "totalPnl": 1639926.18, "roi": 163.99, "maxDD": -22.84, "closedTrades": 266, "openAtEnd": 5, "winRate": 36.09, "profitFactor": 1.6, "avgWinner": 22.87, "avgLoser": -7.52}, {"trail": 50, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2770370.69, "totalPnl": 1770370.69, "roi": 177.04, "maxDD": -19.87, "closedTrades": 524, "openAtEnd": 10, "winRate": 34.92, "profitFactor": 1.63, "avgWinner": 23.56, "avgLoser": -7.42}, {"trail": 50, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3128669.82, "totalPnl": 2128669.82, "roi": 212.87, "maxDD": -15.77, "closedTrades": 743, "openAtEnd": 15, "winRate": 35.67, "profitFactor": 1.87, "avgWinner": 25.32, "avgLoser": -7.09}, {"trail": 50, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2590080.08, "totalPnl": 1590080.08, "roi": 159.01, "maxDD": -17.62, "closedTrades": 235, "openAtEnd": 5, "winRate": 40.0, "profitFactor": 1.69, "avgWinner": 21.12, "avgLoser": -7.93}, {"trail": 50, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 2710491.6, "totalPnl": 1710491.6, "roi": 171.05, "maxDD": -16.86, "closedTrades": 479, "openAtEnd": 9, "winRate": 36.95, "profitFactor": 1.67, "avgWinner": 23.54, "avgLoser": -7.94}, {"trail": 50, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3003652.88, "totalPnl": 2003652.88, "roi": 200.37, "maxDD": -16.24, "closedTrades": 690, "openAtEnd": 13, "winRate": 37.97, "profitFactor": 1.86, "avgWinner": 24.4, "avgLoser": -7.65}, {"trail": 100, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4400535.12, "totalPnl": 3400535.12, "roi": 340.05, "maxDD": -16.38, "closedTrades": 232, "openAtEnd": 5, "winRate": 20.69, "profitFactor": 1.46, "avgWinner": 33.53, "avgLoser": -5.61}, {"trail": 100, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 4547070.12, "totalPnl": 3547070.12, "roi": 354.71, "maxDD": -16.72, "closedTrades": 412, "openAtEnd": 10, "winRate": 22.09, "profitFactor": 2.15, "avgWinner": 45.01, "avgLoser": -5.36}, {"trail": 100, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 4214212.57, "totalPnl": 3214212.57, "roi": 321.42, "maxDD": -15.08, "closedTrades": 596, "openAtEnd": 15, "winRate": 22.65, "profitFactor": 2.22, "avgWinner": 44.56, "avgLoser": -5.33}, {"trail": 100, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2939016.22, "totalPnl": 1939016.22, "roi": 193.9, "maxDD": -23.59, "closedTrades": 170, "openAtEnd": 5, "winRate": 24.71, "profitFactor": 1.79, "avgWinner": 51.05, "avgLoser": -7.9}, {"trail": 100, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3073454.74, "totalPnl": 2073454.74, "roi": 207.35, "maxDD": -19.75, "closedTrades": 325, "openAtEnd": 10, "winRate": 27.08, "profitFactor": 1.94, "avgWinner": 46.89, "avgLoser": -7.99}, {"trail": 100, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3410283.24, "totalPnl": 2410283.24, "roi": 241.03, "maxDD": -17.56, "closedTrades": 456, "openAtEnd": 15, "winRate": 28.73, "profitFactor": 2.19, "avgWinner": 46.97, "avgLoser": -7.9}, {"trail": 100, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 2594446.31, "totalPnl": 1594446.31, "roi": 159.44, "maxDD": -26.96, "closedTrades": 147, "openAtEnd": 5, "winRate": 28.57, "profitFactor": 1.66, "avgWinner": 46.92, "avgLoser": -9.27}, {"trail": 100, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3115377.52, "totalPnl": 2115377.52, "roi": 211.54, "maxDD": -20.18, "closedTrades": 270, "openAtEnd": 10, "winRate": 31.48, "profitFactor": 1.95, "avgWinner": 46.83, "avgLoser": -9.35}, {"trail": 100, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3028795.39, "totalPnl": 2028795.39, "roi": 202.88, "maxDD": -17.56, "closedTrades": 395, "openAtEnd": 15, "winRate": 33.16, "profitFactor": 2.06, "avgWinner": 41.49, "avgLoser": -9.07}], "yearly": {"25_4_5": [{"year": 2020, "returnPct": 100.46}, {"year": 2021, "returnPct": 55.17}, {"year": 2022, "returnPct": 25.05}, {"year": 2023, "returnPct": 41.46}, {"year": 2024, "returnPct": 4.39}, {"year": 2025, "returnPct": -6.96}, {"year": 2026, "returnPct": 2.03}], "25_4_10": [{"year": 2020, "returnPct": 72.27}, {"year": 2021, "returnPct": 76.25}, {"year": 2022, "returnPct": 42.18}, {"year": 2023, "returnPct": 46.81}, {"year": 2024, "returnPct": 31.57}, {"year": 2025, "returnPct": 1.23}, {"year": 2026, "returnPct": -5.23}], "25_4_15": [{"year": 2020, "returnPct": 58.05}, {"year": 2021, "returnPct": 71.5}, {"year": 2022, "returnPct": 28.54}, {"year": 2023, "returnPct": 52.65}, {"year": 2024, "returnPct": 26.92}, {"year": 2025, "returnPct": -6.95}, {"year": 2026, "returnPct": -0.41}], "25_8_5": [{"year": 2020, "returnPct": 104.33}, {"year": 2021, "returnPct": 48.99}, {"year": 2022, "returnPct": 18.21}, {"year": 2023, "returnPct": 56.03}, {"year": 2024, "returnPct": 27.57}, {"year": 2025, "returnPct": 8.31}, {"year": 2026, "returnPct": -3.71}], "25_8_10": [{"year": 2020, "returnPct": 69.29}, {"year": 2021, "returnPct": 51.69}, {"year": 2022, "returnPct": 30.82}, {"year": 2023, "returnPct": 65.49}, {"year": 2024, "returnPct": 34.15}, {"year": 2025, "returnPct": 0.19}, {"year": 2026, "returnPct": -11.99}], "25_8_15": [{"year": 2020, "returnPct": 54.25}, {"year": 2021, "returnPct": 55.61}, {"year": 2022, "returnPct": 25.13}, {"year": 2023, "returnPct": 69.99}, {"year": 2024, "returnPct": 17.3}, {"year": 2025, "returnPct": 0.7}, {"year": 2026, "returnPct": -2.78}], "25_12_5": [{"year": 2020, "returnPct": 100.99}, {"year": 2021, "returnPct": 62.07}, {"year": 2022, "returnPct": 6.12}, {"year": 2023, "returnPct": 45.8}, {"year": 2024, "returnPct": 43.71}, {"year": 2025, "returnPct": 5.23}, {"year": 2026, "returnPct": -9.01}], "25_12_10": [{"year": 2020, "returnPct": 64.3}, {"year": 2021, "returnPct": 51.25}, {"year": 2022, "returnPct": 32.57}, {"year": 2023, "returnPct": 59.39}, {"year": 2024, "returnPct": 31.83}, {"year": 2025, "returnPct": -1.43}, {"year": 2026, "returnPct": -4.75}], "25_12_15": [{"year": 2020, "returnPct": 55.69}, {"year": 2021, "returnPct": 57.29}, {"year": 2022, "returnPct": 25.31}, {"year": 2023, "returnPct": 64.55}, {"year": 2024, "returnPct": 24.14}, {"year": 2025, "returnPct": -9.14}, {"year": 2026, "returnPct": -1.66}], "50_4_5": [{"year": 2020, "returnPct": 79.62}, {"year": 2021, "returnPct": 116.72}, {"year": 2022, "returnPct": 10.67}, {"year": 2023, "returnPct": 37.59}, {"year": 2024, "returnPct": 13.09}, {"year": 2025, "returnPct": 31.05}, {"year": 2026, "returnPct": -29.61}], "50_4_10": [{"year": 2020, "returnPct": 66.78}, {"year": 2021, "returnPct": 75.63}, {"year": 2022, "returnPct": 22.78}, {"year": 2023, "returnPct": 41.32}, {"year": 2024, "returnPct": 20.88}, {"year": 2025, "returnPct": 7.27}, {"year": 2026, "returnPct": -23.6}], "50_4_15": [{"year": 2020, "returnPct": 67.7}, {"year": 2021, "returnPct": 84.97}, {"year": 2022, "returnPct": 16.67}, {"year": 2023, "returnPct": 59.23}, {"year": 2024, "returnPct": 32.83}, {"year": 2025, "returnPct": 2.32}, {"year": 2026, "returnPct": -8.88}], "50_8_5": [{"year": 2020, "returnPct": 97.11}, {"year": 2021, "returnPct": 55.67}, {"year": 2022, "returnPct": -14.29}, {"year": 2023, "returnPct": 33.33}, {"year": 2024, "returnPct": 8.3}, {"year": 2025, "returnPct": -9.68}, {"year": 2026, "returnPct": -6.44}], "50_8_10": [{"year": 2020, "returnPct": 69.09}, {"year": 2021, "returnPct": 90.57}, {"year": 2022, "returnPct": -0.23}, {"year": 2023, "returnPct": 36.51}, {"year": 2024, "returnPct": 18.19}, {"year": 2025, "returnPct": -24.21}, {"year": 2026, "returnPct": -12.89}], "50_8_15": [{"year": 2020, "returnPct": 64.83}, {"year": 2021, "returnPct": 93.52}, {"year": 2022, "returnPct": 7.83}, {"year": 2023, "returnPct": 57.61}, {"year": 2024, "returnPct": 25.26}, {"year": 2025, "returnPct": -21.59}, {"year": 2026, "returnPct": -14.59}], "50_12_5": [{"year": 2020, "returnPct": 67.36}, {"year": 2021, "returnPct": 86.73}, {"year": 2022, "returnPct": -24.59}, {"year": 2023, "returnPct": 21.13}, {"year": 2024, "returnPct": 15.6}, {"year": 2025, "returnPct": -10.57}, {"year": 2026, "returnPct": 3.34}], "50_12_10": [{"year": 2020, "returnPct": 47.7}, {"year": 2021, "returnPct": 98.66}, {"year": 2022, "returnPct": -3.07}, {"year": 2023, "returnPct": 29.94}, {"year": 2024, "returnPct": 25.45}, {"year": 2025, "returnPct": -25.44}, {"year": 2026, "returnPct": -2.2}], "50_12_15": [{"year": 2020, "returnPct": 60.12}, {"year": 2021, "returnPct": 80.44}, {"year": 2022, "returnPct": 7.19}, {"year": 2023, "returnPct": 50.36}, {"year": 2024, "returnPct": 26.6}, {"year": 2025, "returnPct": -21.42}, {"year": 2026, "returnPct": -2.94}], "100_4_5": [{"year": 2020, "returnPct": 57.6}, {"year": 2021, "returnPct": 75.69}, {"year": 2022, "returnPct": 8.49}, {"year": 2023, "returnPct": -2.46}, {"year": 2024, "returnPct": 31.75}, {"year": 2025, "returnPct": 29.57}, {"year": 2026, "returnPct": 139.41}], "100_4_10": [{"year": 2020, "returnPct": 46.71}, {"year": 2021, "returnPct": 122.16}, {"year": 2022, "returnPct": 27.7}, {"year": 2023, "returnPct": 19.93}, {"year": 2024, "returnPct": 48.65}, {"year": 2025, "returnPct": 2.75}, {"year": 2026, "returnPct": 86.82}], "100_4_15": [{"year": 2020, "returnPct": 48.13}, {"year": 2021, "returnPct": 109.17}, {"year": 2022, "returnPct": 15.7}, {"year": 2023, "returnPct": 44.07}, {"year": 2024, "returnPct": 52.86}, {"year": 2025, "returnPct": -15.63}, {"year": 2026, "returnPct": 67.12}], "100_8_5": [{"year": 2020, "returnPct": 69.27}, {"year": 2021, "returnPct": 84.4}, {"year": 2022, "returnPct": 10.67}, {"year": 2023, "returnPct": 64.22}, {"year": 2024, "returnPct": 7.13}, {"year": 2025, "returnPct": -30.16}, {"year": 2026, "returnPct": -11.62}], "100_8_10": [{"year": 2020, "returnPct": 64.89}, {"year": 2021, "returnPct": 97.35}, {"year": 2022, "returnPct": 13.93}, {"year": 2023, "returnPct": 57.3}, {"year": 2024, "returnPct": 13.64}, {"year": 2025, "returnPct": -33.82}, {"year": 2026, "returnPct": -5.95}], "100_8_15": [{"year": 2020, "returnPct": 58.28}, {"year": 2021, "returnPct": 133.82}, {"year": 2022, "returnPct": 0.16}, {"year": 2023, "returnPct": 51.4}, {"year": 2024, "returnPct": 28.68}, {"year": 2025, "returnPct": -35.24}, {"year": 2026, "returnPct": 3.92}], "100_12_5": [{"year": 2020, "returnPct": 52.3}, {"year": 2021, "returnPct": 44.49}, {"year": 2022, "returnPct": 4.59}, {"year": 2023, "returnPct": 56.58}, {"year": 2024, "returnPct": 27.6}, {"year": 2025, "returnPct": -27.86}, {"year": 2026, "returnPct": 1.74}], "100_12_10": [{"year": 2020, "returnPct": 52.94}, {"year": 2021, "returnPct": 64.97}, {"year": 2022, "returnPct": 4.69}, {"year": 2023, "returnPct": 41.12}, {"year": 2024, "returnPct": 52.84}, {"year": 2025, "returnPct": -30.31}, {"year": 2026, "returnPct": 25.28}], "100_12_15": [{"year": 2020, "returnPct": 46.61}, {"year": 2021, "returnPct": 91.05}, {"year": 2022, "returnPct": -5.94}, {"year": 2023, "returnPct": 56.12}, {"year": 2024, "returnPct": 36.8}, {"year": 2025, "returnPct": -31.12}, {"year": 2026, "returnPct": 9.37}]}};
+const BACKTEST_DATA_BULLFLAG = {"combos": [{"trail": 25, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4567279.59, "totalPnl": 3567279.59, "roi": 356.73, "maxDD": -13.98, "closedTrades": 483, "openAtEnd": 3, "winRate": 33.95, "profitFactor": 2.04, "avgWinner": 20.74, "avgLoser": -5.24}, {"trail": 25, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3646502.67, "totalPnl": 2646502.67, "roi": 264.65, "maxDD": -12.39, "closedTrades": 938, "openAtEnd": 6, "winRate": 31.56, "profitFactor": 1.77, "avgWinner": 19.8, "avgLoser": -5.16}, {"trail": 25, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3259790.49, "totalPnl": 2259790.49, "roi": 225.98, "maxDD": -11.09, "closedTrades": 1319, "openAtEnd": 9, "winRate": 31.92, "profitFactor": 1.71, "avgWinner": 18.33, "avgLoser": -5.04}, {"trail": 25, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3485710.98, "totalPnl": 2485710.98, "roi": 248.57, "maxDD": -22.86, "closedTrades": 428, "openAtEnd": 4, "winRate": 35.75, "profitFactor": 1.68, "avgWinner": 19.85, "avgLoser": -6.37}, {"trail": 25, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3410972.6, "totalPnl": 2410972.6, "roi": 241.1, "maxDD": -14.91, "closedTrades": 804, "openAtEnd": 7, "winRate": 36.44, "profitFactor": 1.74, "avgWinner": 18.77, "avgLoser": -6.2}, {"trail": 25, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3053826.0, "totalPnl": 2053826.0, "roi": 205.38, "maxDD": -15.32, "closedTrades": 1169, "openAtEnd": 9, "winRate": 34.82, "profitFactor": 1.63, "avgWinner": 18.77, "avgLoser": -6.16}, {"trail": 25, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3351226.44, "totalPnl": 2351226.44, "roi": 235.12, "maxDD": -23.48, "closedTrades": 422, "openAtEnd": 4, "winRate": 36.73, "profitFactor": 1.64, "avgWinner": 19.32, "avgLoser": -6.63}, {"trail": 25, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3277942.42, "totalPnl": 2277942.42, "roi": 227.79, "maxDD": -16.58, "closedTrades": 787, "openAtEnd": 9, "winRate": 36.34, "profitFactor": 1.67, "avgWinner": 18.91, "avgLoser": -6.43}, {"trail": 25, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3137408.42, "totalPnl": 2137408.42, "roi": 213.74, "maxDD": -16.89, "closedTrades": 1136, "openAtEnd": 10, "winRate": 36.0, "profitFactor": 1.67, "avgWinner": 18.81, "avgLoser": -6.35}, {"trail": 50, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4327354.05, "totalPnl": 3327354.05, "roi": 332.74, "maxDD": -17.33, "closedTrades": 295, "openAtEnd": 3, "winRate": 31.53, "profitFactor": 2.35, "avgWinner": 30.15, "avgLoser": -5.9}, {"trail": 50, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3645254.11, "totalPnl": 2645254.11, "roi": 264.53, "maxDD": -14.42, "closedTrades": 587, "openAtEnd": 8, "winRate": 29.81, "profitFactor": 2.07, "avgWinner": 27.64, "avgLoser": -5.62}, {"trail": 50, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3744958.85, "totalPnl": 2744958.85, "roi": 274.5, "maxDD": -12.44, "closedTrades": 823, "openAtEnd": 11, "winRate": 31.23, "profitFactor": 2.24, "avgWinner": 27.14, "avgLoser": -5.52}, {"trail": 50, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 4456343.33, "totalPnl": 3456343.33, "roi": 345.63, "maxDD": -26.76, "closedTrades": 237, "openAtEnd": 4, "winRate": 34.18, "profitFactor": 2.48, "avgWinner": 35.21, "avgLoser": -7.45}, {"trail": 50, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3889014.92, "totalPnl": 2889014.92, "roi": 288.9, "maxDD": -14.37, "closedTrades": 450, "openAtEnd": 9, "winRate": 36.22, "profitFactor": 2.28, "avgWinner": 31.43, "avgLoser": -7.64}, {"trail": 50, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3583609.6, "totalPnl": 2583609.6, "roi": 258.36, "maxDD": -15.8, "closedTrades": 659, "openAtEnd": 14, "winRate": 37.94, "profitFactor": 2.18, "avgWinner": 28.44, "avgLoser": -7.87}, {"trail": 50, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3664005.89, "totalPnl": 2664005.89, "roi": 266.4, "maxDD": -27.64, "closedTrades": 218, "openAtEnd": 3, "winRate": 38.07, "profitFactor": 2.22, "avgWinner": 29.06, "avgLoser": -8.18}, {"trail": 50, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3669794.68, "totalPnl": 2669794.68, "roi": 266.98, "maxDD": -17.03, "closedTrades": 412, "openAtEnd": 7, "winRate": 40.53, "profitFactor": 2.26, "avgWinner": 29.23, "avgLoser": -8.58}, {"trail": 50, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3510896.05, "totalPnl": 2510896.05, "roi": 251.09, "maxDD": -16.7, "closedTrades": 607, "openAtEnd": 11, "winRate": 40.2, "profitFactor": 2.18, "avgWinner": 28.61, "avgLoser": -8.72}, {"trail": 100, "stop": 4, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3496110.13, "totalPnl": 2496110.13, "roi": 249.61, "maxDD": -19.0, "closedTrades": 181, "openAtEnd": 5, "winRate": 24.31, "profitFactor": 2.38, "avgWinner": 46.63, "avgLoser": -6.17}, {"trail": 100, "stop": 4, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 4012028.27, "totalPnl": 3012028.27, "roi": 301.2, "maxDD": -15.9, "closedTrades": 365, "openAtEnd": 9, "winRate": 23.29, "profitFactor": 2.71, "avgWinner": 53.34, "avgLoser": -5.98}, {"trail": 100, "stop": 4, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3453881.32, "totalPnl": 2453881.32, "roi": 245.39, "maxDD": -13.88, "closedTrades": 556, "openAtEnd": 13, "winRate": 23.2, "profitFactor": 2.4, "avgWinner": 47.22, "avgLoser": -5.89}, {"trail": 100, "stop": 8, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3324244.77, "totalPnl": 2324244.77, "roi": 232.42, "maxDD": -30.11, "closedTrades": 142, "openAtEnd": 5, "winRate": 32.39, "profitFactor": 2.13, "avgWinner": 41.94, "avgLoser": -9.27}, {"trail": 100, "stop": 8, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3562370.07, "totalPnl": 2562370.07, "roi": 256.24, "maxDD": -17.49, "closedTrades": 274, "openAtEnd": 10, "winRate": 32.12, "profitFactor": 2.31, "avgWinner": 49.12, "avgLoser": -9.2}, {"trail": 100, "stop": 8, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3639880.07, "totalPnl": 2639880.07, "roi": 263.99, "maxDD": -18.3, "closedTrades": 407, "openAtEnd": 14, "winRate": 32.43, "profitFactor": 2.4, "avgWinner": 46.67, "avgLoser": -9.15}, {"trail": 100, "stop": 12, "maxpos": 5, "capPerPos": 200000.0, "endingEquity": 3424293.34, "totalPnl": 2424293.34, "roi": 242.43, "maxDD": -31.13, "closedTrades": 117, "openAtEnd": 5, "winRate": 35.9, "profitFactor": 2.24, "avgWinner": 47.83, "avgLoser": -11.41}, {"trail": 100, "stop": 12, "maxpos": 10, "capPerPos": 100000.0, "endingEquity": 3448083.32, "totalPnl": 2448083.32, "roi": 244.81, "maxDD": -20.23, "closedTrades": 230, "openAtEnd": 10, "winRate": 36.09, "profitFactor": 2.25, "avgWinner": 51.29, "avgLoser": -11.69}, {"trail": 100, "stop": 12, "maxpos": 15, "capPerPos": 66666.67, "endingEquity": 3610088.06, "totalPnl": 2610088.06, "roi": 261.01, "maxDD": -21.61, "closedTrades": 340, "openAtEnd": 14, "winRate": 36.47, "profitFactor": 2.41, "avgWinner": 49.23, "avgLoser": -11.48}, {"trail": null, "stop": 4, "maxpos": 10, "isMix": true, "capPerPos": 100000.0, "endingEquity": 4181379.19, "totalPnl": 3181379.19, "roi": 318.14, "maxDD": -13.24, "closedTrades": 704, "openAtEnd": 7, "winRate": 31.68, "profitFactor": 2.18, "avgWinner": 0, "avgLoser": 0}], "yearly": {"25_4_5": [{"year": 2020, "returnPct": 62.2}, {"year": 2021, "returnPct": 105.93}, {"year": 2022, "returnPct": 72.37}, {"year": 2023, "returnPct": 84.59}, {"year": 2024, "returnPct": 46.75}, {"year": 2025, "returnPct": -19.52}, {"year": 2026, "returnPct": 4.41}], "25_4_10": [{"year": 2020, "returnPct": 59.29}, {"year": 2021, "returnPct": 76.05}, {"year": 2022, "returnPct": 52.95}, {"year": 2023, "returnPct": 65.73}, {"year": 2024, "returnPct": 33.83}, {"year": 2025, "returnPct": -19.3}, {"year": 2026, "returnPct": -3.9}], "25_4_15": [{"year": 2020, "returnPct": 51.82}, {"year": 2021, "returnPct": 65.67}, {"year": 2022, "returnPct": 36.55}, {"year": 2023, "returnPct": 56.05}, {"year": 2024, "returnPct": 31.62}, {"year": 2025, "returnPct": -17.69}, {"year": 2026, "returnPct": 1.96}], "25_8_5": [{"year": 2020, "returnPct": 47.64}, {"year": 2021, "returnPct": 87.16}, {"year": 2022, "returnPct": 29.57}, {"year": 2023, "returnPct": 77.57}, {"year": 2024, "returnPct": 38.68}, {"year": 2025, "returnPct": -24.92}, {"year": 2026, "returnPct": -7.13}], "25_8_10": [{"year": 2020, "returnPct": 55.18}, {"year": 2021, "returnPct": 93.39}, {"year": 2022, "returnPct": 30.48}, {"year": 2023, "returnPct": 62.07}, {"year": 2024, "returnPct": 27.24}, {"year": 2025, "returnPct": -27.63}, {"year": 2026, "returnPct": 0.37}], "25_8_15": [{"year": 2020, "returnPct": 41.04}, {"year": 2021, "returnPct": 89.61}, {"year": 2022, "returnPct": 21.54}, {"year": 2023, "returnPct": 56.9}, {"year": 2024, "returnPct": 26.82}, {"year": 2025, "returnPct": -21.85}, {"year": 2026, "returnPct": -8.68}], "25_12_5": [{"year": 2020, "returnPct": 44.65}, {"year": 2021, "returnPct": 101.13}, {"year": 2022, "returnPct": 13.85}, {"year": 2023, "returnPct": 76.79}, {"year": 2024, "returnPct": 31.84}, {"year": 2025, "returnPct": -21.31}, {"year": 2026, "returnPct": -11.83}], "25_12_10": [{"year": 2020, "returnPct": 43.67}, {"year": 2021, "returnPct": 85.51}, {"year": 2022, "returnPct": 37.01}, {"year": 2023, "returnPct": 62.97}, {"year": 2024, "returnPct": 27.33}, {"year": 2025, "returnPct": -34.41}, {"year": 2026, "returnPct": 5.71}], "25_12_15": [{"year": 2020, "returnPct": 52.97}, {"year": 2021, "returnPct": 77.07}, {"year": 2022, "returnPct": 27.83}, {"year": 2023, "returnPct": 61.01}, {"year": 2024, "returnPct": 30.71}, {"year": 2025, "returnPct": -36.73}, {"year": 2026, "returnPct": 0.89}], "50_4_5": [{"year": 2020, "returnPct": 65.96}, {"year": 2021, "returnPct": 112.12}, {"year": 2022, "returnPct": 11.8}, {"year": 2023, "returnPct": 84.95}, {"year": 2024, "returnPct": 13.04}, {"year": 2025, "returnPct": 63.31}, {"year": 2026, "returnPct": -18.45}], "50_4_10": [{"year": 2020, "returnPct": 55.99}, {"year": 2021, "returnPct": 88.65}, {"year": 2022, "returnPct": 10.07}, {"year": 2023, "returnPct": 72.27}, {"year": 2024, "returnPct": 28.55}, {"year": 2025, "returnPct": 22.17}, {"year": 2026, "returnPct": -13.18}], "50_4_15": [{"year": 2020, "returnPct": 54.12}, {"year": 2021, "returnPct": 107.03}, {"year": 2022, "returnPct": 9.63}, {"year": 2023, "returnPct": 64.73}, {"year": 2024, "returnPct": 33.23}, {"year": 2025, "returnPct": 13.07}, {"year": 2026, "returnPct": -7.31}], "50_8_5": [{"year": 2020, "returnPct": 48.97}, {"year": 2021, "returnPct": 120.94}, {"year": 2022, "returnPct": 13.68}, {"year": 2023, "returnPct": 63.58}, {"year": 2024, "returnPct": 81.13}, {"year": 2025, "returnPct": 30.0}, {"year": 2026, "returnPct": -12.66}], "50_8_10": [{"year": 2020, "returnPct": 53.52}, {"year": 2021, "returnPct": 110.07}, {"year": 2022, "returnPct": 0.75}, {"year": 2023, "returnPct": 71.99}, {"year": 2024, "returnPct": 50.77}, {"year": 2025, "returnPct": 2.91}, {"year": 2026, "returnPct": -1.11}], "50_8_15": [{"year": 2020, "returnPct": 52.28}, {"year": 2021, "returnPct": 94.88}, {"year": 2022, "returnPct": 5.81}, {"year": 2023, "returnPct": 70.19}, {"year": 2024, "returnPct": 39.79}, {"year": 2025, "returnPct": 5.8}, {"year": 2026, "returnPct": -10.4}], "50_12_5": [{"year": 2020, "returnPct": 21.54}, {"year": 2021, "returnPct": 92.31}, {"year": 2022, "returnPct": 16.8}, {"year": 2023, "returnPct": 57.5}, {"year": 2024, "returnPct": 69.25}, {"year": 2025, "returnPct": 29.19}, {"year": 2026, "returnPct": -20.19}], "50_12_10": [{"year": 2020, "returnPct": 41.64}, {"year": 2021, "returnPct": 107.47}, {"year": 2022, "returnPct": 7.59}, {"year": 2023, "returnPct": 64.74}, {"year": 2024, "returnPct": 40.02}, {"year": 2025, "returnPct": 12.78}, {"year": 2026, "returnPct": -7.26}], "50_12_15": [{"year": 2020, "returnPct": 51.71}, {"year": 2021, "returnPct": 84.69}, {"year": 2022, "returnPct": 8.22}, {"year": 2023, "returnPct": 62.87}, {"year": 2024, "returnPct": 34.97}, {"year": 2025, "returnPct": 13.22}, {"year": 2026, "returnPct": -4.58}], "100_4_5": [{"year": 2020, "returnPct": 37.34}, {"year": 2021, "returnPct": 98.2}, {"year": 2022, "returnPct": -2.75}, {"year": 2023, "returnPct": 55.45}, {"year": 2024, "returnPct": 60.06}, {"year": 2025, "returnPct": -4.81}, {"year": 2026, "returnPct": 6.12}], "100_4_10": [{"year": 2020, "returnPct": 47.5}, {"year": 2021, "returnPct": 105.83}, {"year": 2022, "returnPct": 3.9}, {"year": 2023, "returnPct": 79.33}, {"year": 2024, "returnPct": 70.84}, {"year": 2025, "returnPct": -7.44}, {"year": 2026, "returnPct": 1.25}], "100_4_15": [{"year": 2020, "returnPct": 42.8}, {"year": 2021, "returnPct": 85.43}, {"year": 2022, "returnPct": 15.85}, {"year": 2023, "returnPct": 71.5}, {"year": 2024, "returnPct": 49.31}, {"year": 2025, "returnPct": -11.94}, {"year": 2026, "returnPct": -7.57}], "100_8_5": [{"year": 2020, "returnPct": 26.15}, {"year": 2021, "returnPct": 64.65}, {"year": 2022, "returnPct": -1.85}, {"year": 2023, "returnPct": 64.61}, {"year": 2024, "returnPct": 88.12}, {"year": 2025, "returnPct": -30.13}, {"year": 2026, "returnPct": 20.87}], "100_8_10": [{"year": 2020, "returnPct": 52.59}, {"year": 2021, "returnPct": 75.9}, {"year": 2022, "returnPct": -2.53}, {"year": 2023, "returnPct": 67.76}, {"year": 2024, "returnPct": 72.75}, {"year": 2025, "returnPct": -35.38}, {"year": 2026, "returnPct": 25.14}], "100_8_15": [{"year": 2020, "returnPct": 43.83}, {"year": 2021, "returnPct": 96.19}, {"year": 2022, "returnPct": 0.89}, {"year": 2023, "returnPct": 61.76}, {"year": 2024, "returnPct": 67.21}, {"year": 2025, "returnPct": -26.7}, {"year": 2026, "returnPct": 20.81}], "100_12_5": [{"year": 2020, "returnPct": 33.51}, {"year": 2021, "returnPct": 68.08}, {"year": 2022, "returnPct": -6.84}, {"year": 2023, "returnPct": 60.88}, {"year": 2024, "returnPct": 81.14}, {"year": 2025, "returnPct": -14.83}, {"year": 2026, "returnPct": 20.49}], "100_12_10": [{"year": 2020, "returnPct": 50.59}, {"year": 2021, "returnPct": 71.33}, {"year": 2022, "returnPct": -11.34}, {"year": 2023, "returnPct": 77.47}, {"year": 2024, "returnPct": 56.93}, {"year": 2025, "returnPct": -23.2}, {"year": 2026, "returnPct": 23.02}], "100_12_15": [{"year": 2020, "returnPct": 42.84}, {"year": 2021, "returnPct": 90.63}, {"year": 2022, "returnPct": 0.34}, {"year": 2023, "returnPct": 73.57}, {"year": 2024, "returnPct": 49.48}, {"year": 2025, "returnPct": -18.46}, {"year": 2026, "returnPct": 22.62}], "alt_25_50": [{"year": 2020, "returnPct": 62.97}, {"year": 2021, "returnPct": 93.28}, {"year": 2022, "returnPct": 33.41}, {"year": 2023, "returnPct": 65.0}, {"year": 2024, "returnPct": 47.13}, {"year": 2025, "returnPct": 20.7}, {"year": 2026, "returnPct": -4.37}]}};
+
+const STRATEGY_CONFIG = {
+  vcm: {
+    title: "Volatility Contraction",
+    sub_static: "Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.",
+    lifecycle_json: "./breakout_lifecycle.json",
+    backtest_data: BACKTEST_DATA_VCM,
+    default_combo: {trail:100, stop:4, maxpos:10},
+  },
+  bullflag: {
+    title: "Classic Bull Flag",
+    sub_static: "Parallel downward-sloping flag channel, volume-confirmed breakout.",
+    lifecycle_json: "./breakout_lifecycle_bullflag.json",
+    backtest_data: BACKTEST_DATA_BULLFLAG,
+    default_combo: {trail:null, stop:4, maxpos:10, isMix:true, yearlyKey:"alt_25_50"},
+  },
+};
+let ACTIVE_STRATEGY = 'vcm';
+
+function switchStrategy(name){
+  if(!STRATEGY_CONFIG[name] || name===ACTIVE_STRATEGY) return;
+  ACTIVE_STRATEGY = name;
+  const cfg = STRATEGY_CONFIG[name];
+
+  document.getElementById('sidebar-item-vcm').classList.toggle('active', name==='vcm');
+  document.getElementById('sidebar-item-bullflag').classList.toggle('active', name==='bullflag');
+  document.getElementById('main-strategy-title').textContent = cfg.title;
+  document.getElementById('backtest-strategy-title').textContent = `📊 Backtest ${cfg.title}`;
+  document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
+
+  // Reset state that's specific to the previous strategy's data before
+  // loading the new one, so nothing stale (a selected chart row, a
+  // cached history fetch keyed by a symbol that doesn't exist in the
+  // new strategy) leaks across the switch.
+  CURRENT_CHART_ROW = null;
+  LIFECYCLE_DATA = null;
+  ACTIVE_STAGE = 'forming';
+  for(const k in HISTORY_CACHE) delete HISTORY_CACHE[k];
+
+  renderBacktest();
+  loadBreakouts();
+}
+
+// ---- everything now lives in one 2x2 dashboard grid; sidebar links
+// just scroll to the relevant quadrant if the layout has fallen back
+// to stacked mode on a narrower screen.
+function toggleMobileSidebar(){
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('mobile-sidebar-overlay').classList.toggle('open');
+}
+
+function switchTab(name){
+  const target = document.getElementById(name === 'breakouts' ? 'quad-stocklist' : 'quad-backtest');
+  if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ---- backtest panel ----
+function fmtPct(v){ return (v>=0?'+':'') + v.toFixed(2) + '%'; }
+function fmtPctYr(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
+function colorFor(v){ return v >= 0 ? 'var(--green)' : 'var(--red)'; }
+
+function findCombo(trail, stop, maxpos, isMix){
+  const combos = STRATEGY_CONFIG[ACTIVE_STRATEGY].backtest_data.combos;
+  if(isMix) return combos.find(c => c.isMix && c.maxpos===maxpos);
+  return combos.find(c => c.trail===trail && c.stop===stop && c.maxpos===maxpos && !c.isMix);
+}
+
+function renderEquityCurve(yearly, startCap){
+  const w = 560, h = 130, padL = 4, padR = 4, padT = 14, padB = 18;
+  let equity = startCap;
+  const series = [{label:'Start', equity: startCap}];
+  yearly.forEach(y => {
+    equity = startCap + (series[series.length-1].equity - startCap) + (startCap * y.returnPct/100);
+    series.push({label: String(y.year), equity});
+  });
+  const values = series.map(s => s.equity);
+  const minV = Math.min(...values), maxV = Math.max(...values);
+  const range = (maxV - minV) || 1;
+  const xStep = (w - padL - padR) / (series.length - 1);
+  const yOf = v => padT + (maxV - v) / range * (h - padT - padB);
+
+  const pts = series.map((s,i) => `${(padL + i*xStep).toFixed(1)},${yOf(s.equity).toFixed(1)}`).join(' ');
+  const fillPts = `${padL},${(h-padB).toFixed(1)} ${pts} ${(padL+(series.length-1)*xStep).toFixed(1)},${(h-padB).toFixed(1)}`;
+
+  const labels = series.map((s,i) =>
+    `<text x="${(padL+i*xStep).toFixed(1)}" y="${h-2}" font-size="9" fill="var(--muted)" text-anchor="middle" font-family="IBM Plex Mono">${s.label}</text>`
+  ).join('');
+
+  return {
+    svg: `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}">
+      <polygon points="${fillPts}" fill="var(--green)" opacity="0.12"/>
+      <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2"/>
+      ${labels}
+    </svg>`,
+    finalEquity: values[values.length-1]
+  };
+}
+
+function renderBacktest(){
+  // VCM: permanent fixed 100/4/10 -- the 6-month rolling worst-ranked
+  // method was tried and abandoned; the simple static combo
+  // consistently outperformed it. Bull Flag uses a combined mix
+  // (25/4/5 + 50/4/5, 10 positions) chosen for lowest correlation with
+  // VCM. Each strategy's default lives in STRATEGY_CONFIG, not
+  // hardcoded here.
+  const combo = STRATEGY_CONFIG[ACTIVE_STRATEGY].default_combo;
+  const trail = combo.trail, stop = combo.stop, maxpos = combo.maxpos;
+  const c = findCombo(trail, stop, maxpos, combo.isMix);
+  if(!c) return;
+
+  document.getElementById('bt-stats').innerHTML = `
+    <div class="stat"><div class="v" style="color:${colorFor(c.roi)}">${fmtPct(c.roi)}</div><div class="l">Total return</div></div>
+    <div class="stat"><div class="v">₹${(c.totalPnl/1e5).toFixed(2)}L</div><div class="l">Total P&amp;L</div></div>
+    <div class="stat"><div class="v" style="color:var(--red)">${c.maxDD.toFixed(2)}%</div><div class="l">Max DD</div></div>
+    <div class="stat"><div class="v">${c.closedTrades}</div><div class="l">Trades</div></div>
+    <div class="stat"><div class="v">${c.winRate.toFixed(2)}%</div><div class="l">Win rate</div></div>
+    <div class="stat"><div class="v">${c.profitFactor.toFixed(2)}</div><div class="l">Profit factor</div></div>`;
+
+  const key = combo.yearlyKey || `${trail}_${stop}_${maxpos}`;
+  const yearly = STRATEGY_CONFIG[ACTIVE_STRATEGY].backtest_data.yearly[key] || [];
+  document.getElementById('bt-year-rows').innerHTML = yearly.map(y => {
+    const pnl = 1000000 * y.returnPct/100;
+    return `<tr>
+      <td class="num">${y.year}</td>
+      <td class="r num" style="color:${colorFor(pnl)}">${pnl>=0?'+':''}${Math.round(pnl).toLocaleString('en-IN')}</td>
+      <td class="r num" style="color:${colorFor(y.returnPct)}">${fmtPctYr(y.returnPct)}</td>
+    </tr>`;
+  }).join('');
+
+  const eq = renderEquityCurve(yearly, c.capPerPos * maxpos);
+  document.getElementById('bt-equity-chart').innerHTML = eq.svg;
+  document.getElementById('bt-ending-equity').textContent = '₹' + Math.round(eq.finalEquity).toLocaleString('en-IN');
+
+  document.getElementById('bt-keystats').innerHTML = `
+    <div class="row"><span class="lbl">Starting capital</span><span class="val num">₹10,00,000</span></div>
+    <div class="row"><span class="lbl">Win rate</span><span class="val num">${c.winRate.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Ending equity</span><span class="val num">₹${Math.round(c.endingEquity).toLocaleString('en-IN')}</span></div>
+    <div class="row"><span class="lbl">Avg winner</span><span class="val num" style="color:var(--green)">+${c.avgWinner.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Total return</span><span class="val num" style="color:${colorFor(c.roi)}">${fmtPct(c.roi)}</span></div>
+    <div class="row"><span class="lbl">Avg loser</span><span class="val num" style="color:var(--red)">${c.avgLoser.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Max drawdown</span><span class="val num" style="color:var(--red)">${c.maxDD.toFixed(2)}%</span></div>
+    <div class="row"><span class="lbl">Profit factor</span><span class="val num">${c.profitFactor.toFixed(2)}</span></div>
+    <div class="row"><span class="lbl">Total trades</span><span class="val num">${c.closedTrades}</span></div>
+    <div class="row"><span class="lbl">Open at end</span><span class="val num">${c.openAtEnd}</span></div>`;
+}
+renderBacktest();
+
+
+let LIFECYCLE_DATA = null;
+let ACTIVE_STAGE = 'fresh';
+let SELECTED_TRAIL_DMA = 25;
+let SELECTED_STOP_PCT = 8;
+let SELECTED_MAX_POSITIONS = 10;
+
+const STAGE_META = {
+  forming: { title: 'Forming',      desc: 'resting before a breakout' },
+  fresh:   { title: 'Fresh breakouts', desc: 'closed above pivot today' },
+  open:    { title: 'Open Trades',  desc: 'currently held, given your settings' },
+  closed:  { title: 'Closed Trades 2026', desc: 'exited this year -- stop or trail' },
+};
+
+// Buckets LIFECYCLE_DATA.signals_2026 into Fresh/Open/Closed using each
+// signal's own outcomes["trail_stop_maxpos"] (a real constrained-portfolio
+// result for that exact combo, matching vcm_engine.py's backtest grid) --
+// recomputed instantly client-side whenever any of the three selectors
+// change, no re-fetch needed.
+function currentComboKey(){
+  if(SELECTED_TRAIL_DMA===null) return "alt_25_50";
+  return `${SELECTED_TRAIL_DMA}_${SELECTED_STOP_PCT}_${SELECTED_MAX_POSITIONS}`;
+}
+
+function bucketSignalsByMaxPositions(){
+  const key = currentComboKey();
+  const fresh = [], open = [], closed = [];
+  for(const s of (LIFECYCLE_DATA.signals_2026 || [])){
+    const o = s.outcomes ? s.outcomes[key] : null;
+    if(s.is_fresh_today) fresh.push({...s, _outcome: o});
+    if(o && o.status === 'open') open.push({...s, _outcome: o});
+    if(o && o.status === 'closed') closed.push({...s, _outcome: o});
+  }
+  return {fresh, open, closed};
+}
+
+function renderStageCards(){
+  const buckets = bucketSignalsByMaxPositions();
+  const counts = {
+    forming: LIFECYCLE_DATA.counts.forming,
+    fresh: buckets.fresh.length, open: buckets.open.length, closed: buckets.closed.length,
+  };
+  const order = ['forming','fresh','open','closed'];
+  document.getElementById('lifecycle-cards').innerHTML = order.map(key => {
+    const meta = STAGE_META[key];
+    const isActive = key === ACTIVE_STAGE;
+    return `<div class="stage-card ${isActive?'active':''}" data-stage="${key}">
+      <div><span class="count num">${counts[key]}</span> <span class="title">${meta.title}</span></div>
+      <div class="desc">${meta.desc}</div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.stage-card').forEach(card => {
+    card.addEventListener('click', () => { ACTIVE_STAGE = card.dataset.stage; renderStageCards(); renderStageTable(); });
+  });
+}
+
+function computeChartStats(row, sliced){
+  if(!sliced || sliced.length < 2) return null;
+  const today = sliced[sliced.length-1];
+  const yest = sliced[sliced.length-2];
+  const oneDayGain = ((today.c/yest.c)-1)*100;
+  const closeInRange = (today.h>today.l) ? (today.c-today.l)/(today.h-today.l) : null;
+  const nowVsPivot = row.pivot ? ((today.c/row.pivot)-1)*100 : null;
+
+  const vols = sliced.slice(-21,-1).map(d=>d.v);
+  const avgVol20 = vols.length ? vols.reduce((a,b)=>a+b,0)/vols.length : null;
+  const volX = avgVol20 ? today.v/avgVol20 : null;
+
+  const closes50 = sliced.slice(-50).map(d=>d.c);
+  const ma50 = closes50.length>=50 ? closes50.reduce((a,b)=>a+b,0)/closes50.length : null;
+  const priceVsMa50 = ma50 ? ((today.c/ma50)-1)*100 : null;
+
+  // Breakout-day gain: the % move ON the day it actually broke out, found
+  // by matching entry_date/base_start in the history (not "gain since entry").
+  const breakoutDate = row.entry_date;
+  let breakoutDayGain = null;
+  if(breakoutDate){
+    const idx = sliced.findIndex(d => d.date === breakoutDate);
+    if(idx > 0){
+      breakoutDayGain = ((sliced[idx].c/sliced[idx-1].c)-1)*100;
+    }
+  }
+  return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
+}
+
+function sliceHistory(history, range, baseStartDate, baseEndDate){
+  if(range === 'FIT' && baseStartDate){
+    const idx = history.findIndex(d => d.date >= baseStartDate);
+    if(idx >= 0){
+      const from = Math.max(0, idx - 50); // ~50 sessions of pre-base context, matches backend's PRE_BASE_CONTEXT
+      // Cap the END too, at a reasonable window past the breakout --
+      // without this, a pattern that broke out weeks/months ago (with
+      // the stock continuing to run since) would show its ENTIRE
+      // subsequent history here, making the actual pattern shrink to a
+      // tiny, unrecognizable sliver on a much wider chart. "Fit Base"
+      // should show the pattern clearly; 6M/1Y/5Y already handle "how
+      // has it done since".
+      let to = history.length;
+      if(baseEndDate){
+        const endIdx = history.findIndex(d => d.date >= baseEndDate);
+        if(endIdx >= 0) to = Math.min(history.length, endIdx + 40);
+      }
+      return history.slice(from, to);
+    }
+    return history;
+  }
+  const sessionsMap = {'6M': 126, '1Y': 252, '5Y': 1260};
+  const n = sessionsMap[range] || history.length;
+  return history.slice(-n);
+}
+
+let CURRENT_CHART_ROW = null;
+let CURRENT_CHART_RANGE = 'FIT';
+let SHOW_BASE_ZONE = true;
+let ACTIVE_LWCHART = null;   // the current LightweightCharts instance, so we can dispose it on redraw
+
+function renderChartFor(row){
+  const panel = document.getElementById('stage-chart-panel');
+  if(!panel) return;
+  document.querySelectorAll('#stage-table tbody tr').forEach(tr => tr.classList.toggle('selected', tr.dataset.symbol===row.symbol));
+  CURRENT_CHART_ROW = row;
+  CURRENT_CHART_RANGE = 'FIT';
+  drawChartPanel();
+}
+
+function buildLightweightChart(containerId, sliced, row, isStillOpen){
+  const pivot = row.pivot;
+  const baseStartDate = row.base_start;
+  const baseLabel = row.base_weeks ? `${row.base_weeks} wks` : '';
+  const container = document.getElementById(containerId);
+  if(!container || !window.LightweightCharts) return;
+  if(container._resizeObserver) container._resizeObserver.disconnect();
+  container.innerHTML = '';
+
+  // Height comes from whatever CSS flex has actually allocated this
+  // container (it's a flex:1;min-height:0 child inside a card that fills
+  // its quadrant) -- reading clientHeight here forces the browser to
+  // resolve layout first, so this reflects the real available space,
+  // not a guessed constant. Falls back to a sane minimum if the browser
+  // hasn't laid anything out yet (e.g. container briefly zero-height).
+  const measuredHeight = container.clientHeight;
+  const chartHeight = measuredHeight > 40 ? measuredHeight : 175;
+
+  const chart = LightweightCharts.createChart(container, {
+    width: container.clientWidth,
+    height: chartHeight,
+    layout: { background: { color: '#FAFAF7' }, textColor: '#64748B', fontFamily: 'IBM Plex Mono, monospace', fontSize: 10 },
+    grid: { vertLines: { color: '#EEF1F5' }, horzLines: { color: '#EEF1F5' } },
+    rightPriceScale: { borderColor: '#E2E8F0' },
+    timeScale: { borderColor: '#E2E8F0', timeVisible: false },
+    handleScroll: true,
+    handleScale: true,
+    crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+  });
+  ACTIVE_LWCHART = chart;
+  container.style.position = 'relative';
+  container.style.overflow = 'hidden';  // safety clip: never let a coordinate bug bleed outside the chart's own box
+
+  // The container's width/height read above can be wrong if the
+  // surrounding flex layout hasn't fully settled yet at this exact
+  // moment (fonts still loading, other cards still resizing). If the
+  // chart gets created at a stale/incorrect size, its internal
+  // time-scale can end up stuck showing only a narrow recent window
+  // even though far more data was passed to setData -- watching for
+  // the container's REAL size and re-applying it fixes that.
+  if(typeof ResizeObserver !== 'undefined'){
+    const chartResizeObserver = new ResizeObserver(entries => {
+      for(const entry of entries){
+        const w = entry.contentRect.width;
+        const h = entry.contentRect.height;
+        if(w > 0 && h > 0){
+          chart.applyOptions({ width: w, height: h });
+          chart.timeScale().fitContent();
+        }
+      }
+    });
+    chartResizeObserver.observe(container);
+    container._resizeObserver = chartResizeObserver;
+  }
+
+  const candleSeries = chart.addCandlestickSeries({
+    upColor: '#16A34A', downColor: '#DC2626',
+    borderUpColor: '#16A34A', borderDownColor: '#DC2626',
+    wickUpColor: '#16A34A', wickDownColor: '#DC2626',
+  });
+  const candleData = sliced.map(d => ({ time: d.date, open: d.o, high: d.h, low: d.l, close: d.c }));
+  candleSeries.setData(candleData);
+
+  const volSeries = chart.addHistogramSeries({
+    priceFormat: { type: 'volume' }, priceScaleId: '', color: '#16A34A',
+  });
+  volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+  volSeries.setData(sliced.map(d => ({ time: d.date, value: d.v, color: d.c>=d.o ? 'rgba(22,163,74,0.4)' : 'rgba(220,38,38,0.4)' })));
+
+  if(pivot){
+    candleSeries.createPriceLine({
+      price: pivot, color: '#16A34A', lineWidth: 1,
+      lineStyle: LightweightCharts.LineStyle.Dashed,
+      axisLabelVisible: false,
+    });
+  }
+
+  if(isStillOpen && sliced.length){
+    let markerBar = sliced[sliced.length-1];
+    let markerText = baseLabel || '';
+    if(ACTIVE_STRATEGY === 'bullflag' && row.entry_date){
+      const breakoutBar = sliced.find(d => d.date === row.entry_date);
+      if(breakoutBar) markerBar = breakoutBar;
+      markerText = 'Breakout';
+    }
+    candleSeries.setMarkers([{
+      time: markerBar.date, position: 'aboveBar', color: '#16A34A', shape: 'arrowUp',
+      text: markerText,
+    }]);
+  }
+
+  chart.timeScale().fitContent();
+
+  // Base-zone: ALWAYS uses the detector's own base_high/base_low/base_start/
+  // base_end_date -- never derived by scanning the visible candles. If any
+  // of these are missing from the API response, no rectangle is drawn at
+  // all (see the "Base data unavailable" note below the chart instead).
+  function drawPivotLabel(){
+    const old = document.getElementById(containerId+'-pivotlabel');
+    if(old) old.remove();
+    if(!pivot) return;
+    const y = candleSeries.priceToCoordinate(pivot);
+    if(typeof y !== 'number' || !isFinite(y)) return;
+    const tag = document.createElement('div');
+    tag.id = containerId+'-pivotlabel';
+    tag.textContent = `pivot ₹${pivot}`;
+    tag.style.cssText = `position:absolute;z-index:6;left:6px;top:${y-9}px;background:#DC2626;color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;pointer-events:none;`;
+    container.appendChild(tag);
+  }
+  requestAnimationFrame(drawPivotLabel);
+  chart.timeScale().subscribeVisibleTimeRangeChange(drawPivotLabel);
+
+  const hasRealBaseData = row.base_high != null && row.base_low != null && baseStartDate != null;
+
+  function drawBaseZone(){
+    // Remove any previously-drawn zone/label from an earlier scroll/zoom
+    // position before drawing the current one -- otherwise stale copies
+    // pile up as the person pans around.
+    const oldZone = document.getElementById(containerId+'-zone');
+    const oldLabel = document.getElementById(containerId+'-zonelabel');
+    if(oldZone) oldZone.remove();
+    if(oldLabel) oldLabel.remove();
+
+    if(!(hasRealBaseData && sliced.length)) return;
+
+    const foundStartIdx = sliced.findIndex(d => d.date >= baseStartDate);
+    // If base_start predates even the currently sliced window (can
+    // happen if the user manually switched to a shorter fixed range
+    // like 6M after the default Fit-Base view), clip to what's visible
+    // rather than silently drop the zone -- but the horizontal EXTENT
+    // still always comes from the real base_start/base_end_date, never
+    // guessed from candle data.
+    const baseStartIdx = foundStartIdx >= 0 ? foundStartIdx : 0;
+
+    const endDateForZone = row.base_end_date; // null while still Forming (no breakout yet)
+    let baseEndIdx = sliced.length - 1; // ongoing base: extend to the last available candle
+    if(endDateForZone){
+      const foundEndIdx = sliced.findIndex(d => d.date >= endDateForZone);
+      if(foundEndIdx >= 0) baseEndIdx = foundEndIdx;
+    }
+
+    const x1 = chart.timeScale().timeToCoordinate(sliced[baseStartIdx].date);
+    const x2 = chart.timeScale().timeToCoordinate(sliced[baseEndIdx].date);
+    const yTop = candleSeries.priceToCoordinate(row.base_high);
+    const yBot = candleSeries.priceToCoordinate(row.base_low);
+
+    // Off-screen after scrolling/zooming away from the base entirely --
+    // timeToCoordinate returns null rather than a stale pixel value, so
+    // this correctly skips drawing instead of drawing at a wrong spot.
+    const valid = [x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))
+      && x1 < x2 && yTop < yBot;
+    if(valid && ACTIVE_STRATEGY === 'bullflag'){
+      // Bull Flag presentation:
+      // Prefer the detector's exact flag_start when the lifecycle JSON
+      // provides it. Never invent a decorative pole line. If older JSON
+      // lacks flag_start, retain the previous causal fallback so the page
+      // remains backward compatible.
+      let flagStartIdx = -1;
+      if(row.flag_start){
+        flagStartIdx = sliced.findIndex(d => d.date >= row.flag_start);
+      }
+      if(flagStartIdx < 0){
+        for(let k=baseStartIdx; k<=baseEndIdx; k++){
+          if(sliced[k] && sliced[k].h >= row.base_high){ flagStartIdx = k; break; }
+        }
+      }
+      if(flagStartIdx < 0) flagStartIdx = baseStartIdx;
+      const flagEndIdx = Math.max(flagStartIdx, baseEndIdx);
+
+      // Fit the visible channel only to candles belonging to the flag.
+      // The detector defines the time window; this regression is merely
+      // a rendering aid so the translucent channel hugs those candles.
+      function fitLine(indices, getValue){
+        const n = indices.length;
+        if(n < 2) return null;
+        const xs = indices.map((_, i) => i);
+        const ys = indices.map(idx => getValue(sliced[idx]));
+        const xMean = xs.reduce((a,b)=>a+b,0)/n;
+        const yMean = ys.reduce((a,b)=>a+b,0)/n;
+        let num=0, den=0;
+        for(let i=0;i<n;i++){ num += (xs[i]-xMean)*(ys[i]-yMean); den += (xs[i]-xMean)**2; }
+        const slope = den!==0 ? num/den : 0;
+        const intercept = yMean - slope*xMean;
+        return { valueAt: (i) => intercept + slope*i };
+      }
+
+      const flagIndices = [];
+      for(let k=flagStartIdx; k<=flagEndIdx; k++) if(sliced[k]) flagIndices.push(k);
+      const upperFit = fitLine(flagIndices, d => d.h);
+      const lowerFit = fitLine(flagIndices, d => d.l);
+
+      const svgNS = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.id = containerId+'-zone';
+      svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
+
+      let upperEndY = null;
+      if(upperFit && lowerFit && flagIndices.length>=2){
+        const n = flagIndices.length;
+        const fx1 = chart.timeScale().timeToCoordinate(sliced[flagIndices[0]].date);
+        const fx2 = chart.timeScale().timeToCoordinate(sliced[flagIndices[n-1]].date);
+        const fUpperY1 = candleSeries.priceToCoordinate(upperFit.valueAt(0));
+        const fUpperY2 = candleSeries.priceToCoordinate(upperFit.valueAt(n-1));
+        const fLowerY1 = candleSeries.priceToCoordinate(lowerFit.valueAt(0));
+        const fLowerY2 = candleSeries.priceToCoordinate(lowerFit.valueAt(n-1));
+        const fitValid = [fx1,fx2,fUpperY1,fUpperY2,fLowerY1,fLowerY2].every(v => typeof v==='number' && isFinite(v));
+        if(fitValid){
+          const poly = document.createElementNS(svgNS, 'polygon');
+          poly.setAttribute('points', `${fx1},${fUpperY1} ${fx2},${fUpperY2} ${fx2},${fLowerY2} ${fx1},${fLowerY1}`);
+          poly.setAttribute('fill', 'rgba(37,99,235,0.08)');
+          poly.setAttribute('stroke', 'rgba(37,99,235,0.72)');
+          poly.setAttribute('stroke-width', '1.5');
+          svg.appendChild(poly);
+          upperEndY = fUpperY2;
+        }
+      }
+      container.appendChild(svg);
+
+      if(flagIndices.length){
+        const flagX1 = chart.timeScale().timeToCoordinate(sliced[flagIndices[0]].date);
+        const flagX2 = chart.timeScale().timeToCoordinate(sliced[flagIndices[flagIndices.length-1]].date);
+        const labelValid = typeof flagX1==='number' && typeof flagX2==='number' && isFinite(flagX1) && isFinite(flagX2);
+        if(labelValid){
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          const days = row.flag_sessions ?? flagIndices.length;
+          labelDiv.textContent = `${days}d flag`;
+          labelDiv.style.cssText = `position:absolute;z-index:5;left:${flagX1}px;top:${(upperEndY!=null?upperEndY-17:yTop-17)}px;width:${Math.max(40,flagX2-flagX1)}px;text-align:center;color:#2563EB;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
+        }
+      }
+    } else if(valid){
+      const zoneDiv = document.createElement('div');
+      zoneDiv.id = containerId+'-zone';
+      zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.14);border:1.5px solid rgba(22,163,74,0.55);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+      container.appendChild(zoneDiv);
+      if(baseLabel){
+        const labelDiv = document.createElement('div');
+        labelDiv.id = containerId+'-zonelabel';
+        labelDiv.textContent = baseLabel;
+        labelDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${(yTop-16)}px;width:${(x2-x1)}px;text-align:center;color:#16A34A;font-size:10px;font-weight:600;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+        container.appendChild(labelDiv);
+      }
+    }
+  }
+
+  requestAnimationFrame(drawBaseZone);
+  // Keep the zone correctly aligned with the candles as the person
+  // scrolls or zooms -- without this, enabling handleScroll/handleScale
+  // would leave the zone drawn at its original, now-stale position.
+  chart.timeScale().subscribeVisibleTimeRangeChange(drawBaseZone);
+
+  // Native crosshair-driven tooltip -- reliable across browsers since it
+  // uses the library's own coordinate system, not manual hit-testing.
+  const tooltip = document.getElementById(containerId+'-tooltip');
+  if(tooltip){
+    chart.subscribeCrosshairMove(param => {
+      if(!param.time || !param.point){ tooltip.style.display = 'none'; return; }
+      const d = candleData.find(c => c.time === param.time);
+      if(!d){ tooltip.style.display = 'none'; return; }
+      const up = d.close >= d.open;
+      tooltip.style.display = 'block';
+      tooltip.style.left = Math.min(param.point.x+12, container.clientWidth-140) + 'px';
+      tooltip.style.top = Math.max(param.point.y-10, 0) + 'px';
+      tooltip.innerHTML = `<b>${d.time}</b><br>O ${d.open} &nbsp; H ${d.high}<br>L ${d.low} &nbsp; C <span style="color:${up?'#16A34A':'#DC2626'}">${d.close}</span>`;
+    });
+  }
+}
+
+function toggleBaseZone(){
+  SHOW_BASE_ZONE = !SHOW_BASE_ZONE;
+  const btn = document.getElementById('base-zone-toggle');
+  if(btn) btn.classList.toggle('active', SHOW_BASE_ZONE);
+  document.querySelectorAll('[id$="-zone"], [id$="-zonelabel"]').forEach(el => {
+    el.style.display = SHOW_BASE_ZONE ? 'block' : 'none';
+  });
+}
+
+const HISTORY_CACHE = {};  // symbol -> history array, fetched once per page load
+
+async function drawChartPanel(){
+  const row = CURRENT_CHART_ROW;
+  const panel = document.getElementById('stage-chart-panel');
+  if(!row || !panel) return;
+
+  // Backward compatible: if this row still has history embedded directly
+  // (an older JSON format), use it without fetching anything.
+  if(row.history){
+    renderChartPanelWithHistory(row, row.history);
+    return;
+  }
+
+  if(HISTORY_CACHE[row.symbol]){
+    renderChartPanelWithHistory(row, HISTORY_CACHE[row.symbol]);
+    return;
+  }
+
+  if(!row.history_url){
+    renderChartPanelWithHistory(row, []);
+    return;
+  }
+
+  panel.innerHTML = `<div class="quadrant-card"><div class="empty">Loading chart…</div></div>`;
+  try{
+    const res = await fetch(row.history_url, {cache:'force-cache'});
+    if(!res.ok) throw new Error('history fetch failed');
+    const hist = await res.json();
+    HISTORY_CACHE[row.symbol] = hist;
+    // The person may have clicked a different row while this was loading --
+    // only render if this fetch's row is still the one currently selected.
+    if(CURRENT_CHART_ROW && CURRENT_CHART_ROW.symbol === row.symbol){
+      renderChartPanelWithHistory(row, hist);
+    }
+  }catch(e){
+    panel.innerHTML = `<div class="quadrant-card"><div class="empty">Couldn't load chart data for ${row.symbol}.</div></div>`;
+  }
+}
+
+function renderChartPanelWithHistory(row, fullHistory){
+  const panel = document.getElementById('stage-chart-panel');
+  if(!row || !panel) return;
+
+  const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start, row.base_end_date);
+  const stats = computeChartStats(row, sliced);
+  const today = sliced.length ? sliced[sliced.length-1] : null;
+  const priceNow = today ? today.c : (row.close ?? row.current_price ?? row.exit_price);
+
+  const isBreakoutStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
+  const badgeHtml = isBreakoutStage
+    ? `<span style="background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">Breakout</span>
+       <span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Broke out above ₹${row.pivot} pivot</span>`
+    : (ACTIVE_STAGE==='forming'
+        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Approaching pivot</span>` : '');
+
+  const baseLabel = row.base_weeks ? `${row.base_weeks} wks base` : '';
+
+  const ohlcLine = today
+    ? `${today.date} &nbsp; O ${today.o} &nbsp; H ${today.h} &nbsp; L ${today.l} &nbsp; C ${today.c}`
+    : '';
+  const volRsMcapLine = `Vol ${today ? (today.v/1e6).toFixed(2)+'M' : '—'} &nbsp;&nbsp; RS ${row.rs_pct ?? '—'} &nbsp;&nbsp; Mkt Cap ${row.market_cap_cr ? '₹'+row.market_cap_cr.toLocaleString('en-IN')+' Cr' : '—'}`;
+
+  const medianTurnoverCr = row.median_turnover_cr ?? (sliced.length >= 20
+    ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
+    : null);
+
+  const isBullFlag = ACTIVE_STRATEGY === 'bullflag';
+  const rangeBtns = [['FIT',isBullFlag?'Fit Flag':'Fit Base'],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
+    `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
+  ).join('');
+  const zoneLabel = isBullFlag ? 'Flag zone' : 'Base zone';
+  const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
+
+  const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
+  const statRow = (label, tip, val, color) =>
+    `<div class="stat-row"><span class="lbl">${label} ${infoIcon(tip)}</span><span class="val num" style="${color?`color:${color};`:''}">${val}</span></div>`;
+
+  const bullFlagStatsHtml = stats ? `
+    <div class="chart-stats-2col">
+      ${statRow('Flagpole gain', 'Impulse/pole gain measured by the Bull Flag detector.', row.impulse_gain_pct!=null?'+'+Number(row.impulse_gain_pct).toFixed(2)+'%':'—', 'var(--green)')}
+      ${statRow('Flag length', 'Number of trading sessions in the detector-defined flag.', row.flag_sessions!=null?Number(row.flag_sessions).toFixed(0)+' days':(row.base_weeks!=null?row.base_weeks+' wks':'—'))}
+      ${statRow('Retracement', 'How much of the flagpole advance was retraced during the flag.', row.retracement_pct!=null?Number(row.retracement_pct).toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume', 'Breakout volume versus average volume during the detected flag.', row.breakout_vol_ratio!=null?Number(row.breakout_vol_ratio).toFixed(2)+'×':(stats.volX!=null?stats.volX.toFixed(2)+'×':'—'))}
+      ${statRow('Now vs pivot', 'Current close versus the detector-defined pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('RS rating', 'Relative strength percentile versus the scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
+    </div>` : '';
+
+  const standardStatsHtml = stats ? `
+    <div class="chart-stats-2col">
+      ${statRow('Breakout-day gain', 'The % move on the day it actually broke out, not since entry.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('1-day gain', "Today's close vs yesterday's close.", (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('Now vs pivot', 'Current close vs the pivot it broke out above.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume', "Volume vs the 20-session average, at today's bar.", stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
+      ${statRow('Close-in-range', "Where today's close sits in today's range (1.0 = at the high).", stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
+      ${statRow('RS rating', 'Relative strength percentile vs the whole scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
+    </div>` : '';
+
+  const statsHtml = isBullFlag ? bullFlagStatsHtml : standardStatsHtml;
+
+  const isOpenStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
+  const blueSkyBadge = '';
+
+  const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
+
+  panel.innerHTML = `<div class="card" style="position:relative;">
+    <div class="stock-header" style="margin-bottom:2px;">
+      <div>
+        <div class="disp stock-name" style="font-size:15px;">${row.symbol} <span style="color:var(--muted);font-weight:400;font-size:12px;">☆</span></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        ${badgeHtml}
+        <span class="num stock-price" style="font-size:14px;">₹${(priceNow||0).toFixed(2)}</span>
+        ${stats && stats.oneDayGain!=null ? `<span class="num" style="font-weight:600;font-size:12px;color:${stats.oneDayGain>=0?'var(--green)':'var(--red)'}">(${stats.oneDayGain>=0?'+':''}${stats.oneDayGain.toFixed(2)}%)</span>` : ''}
+      </div>
+    </div>
+    <div class="num" style="font-size:10px;color:var(--muted);">${ohlcLine}</div>
+    <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:2px;">${volRsMcapLine}</div>
+    <div style="display:flex;gap:4px;margin-bottom:4px;">${rangeBtns}${baseZoneToggle}</div>
+    <div id="${chartId}" style="position:relative;flex:1;min-height:175px;"></div>
+    <div id="${chartId}-tooltip" class="chart-tooltip"></div>
+    ${(row.base_high==null || row.base_low==null || row.base_start==null) ? `<div class="note" style="color:var(--red);margin-top:4px;font-size:10px;">${isBullFlag?'Flag':'Base'} data unavailable.</div>` : ''}
+    ${statsHtml}
+    ${blueSkyBadge}
+  </div>`;
+
+  buildLightweightChart(chartId, sliced, row, isOpenStage);
+}
+
+let EXPANDED_STAGES = {};
+const STAGE_PAGE_SIZE = 10;
+
+function renderStageTable(){
+  const el = document.getElementById('stage-table-container');
+  const chartPanel = document.getElementById('stage-chart-panel');
+  const buckets = bucketSignalsByMaxPositions();
+  const rows = ACTIVE_STAGE === 'forming' ? (LIFECYCLE_DATA.stages.forming || []) : buckets[ACTIVE_STAGE];
+  if(!rows || rows.length === 0){
+    el.innerHTML = `<div class="empty">Nothing in "${STAGE_META[ACTIVE_STAGE].title}" right now.</div>`;
+    if(chartPanel) chartPanel.innerHTML = `<div class="quadrant-card"><div class="empty">Nothing to chart.</div></div>`;
+    return;
+  }
+
+  const isExpanded = !!EXPANDED_STAGES[ACTIVE_STAGE];
+  const displayRows = isExpanded ? rows : rows.slice(0, STAGE_PAGE_SIZE);
+
+  const hasChart = true;
+  let head, body;
+  if(ACTIVE_STAGE === 'forming'){
+    head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
+    body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="r num">${r.close.toFixed(2)}</td>
+      <td class="r num" style="color:var(--muted);">${r.pivot.toFixed(2)}</td>
+      <td class="r num">${r.dist_to_pivot_pct.toFixed(2)}%</td>
+      <td class="r num">${(r.age_sessions/5).toFixed(1)} wks</td>
+    </tr>`).join('');
+  } else if(ACTIVE_STAGE === 'closed'){
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
+    body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
+      <td class="r num">${r.entry_price.toFixed(2)}</td>
+      <td class="num" style="font-size:11px;color:var(--muted);">${o.exit_date}</td>
+      <td class="r num">${o.exit_price.toFixed(2)}</td>
+      <td class="r num" style="color:${o.return_pct>=0?'var(--green)':'var(--red)'}">${o.return_pct>=0?'+':''}${o.return_pct.toFixed(2)}%</td>
+      <td style="font-size:11px;color:var(--muted);">${o.exit_reason}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`;}).join('');
+  } else if(ACTIVE_STAGE === 'fresh'){
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Trade status</th><th class="r">RS</th>`;
+    body = displayRows.map(r => {
+      const o = r._outcome;
+      const traded = o && o.status === 'open';
+      const statusHtml = traded
+        ? `<span class="badge tight">Traded</span>`
+        : `<span class="badge" style="background:#FEF2F2;color:var(--red);">No trade — book full</span>`;
+      return `<tr class="selectable" data-symbol="${r.symbol}">
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
+      <td class="r num">${r.entry_price.toFixed(2)}</td>
+      <td>${statusHtml}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`;}).join('');
+  } else {
+    // open
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">RS</th>`;
+    body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
+      <td style="font-weight:600;">${r.symbol}</td>
+      <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
+      <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
+      <td class="r num">${o.current_price.toFixed(2)}</td>
+      <td class="r num" style="color:${o.gain_pct>=0?'var(--green)':'var(--red)'}">${o.gain_pct>=0?'+':''}${o.gain_pct.toFixed(2)}%</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
+    </tr>`;}).join('');
+  }
+
+  const truncNote = (ACTIVE_STAGE==='forming' && LIFECYCLE_DATA.forming_list_truncated)
+    ? `<div class="note" style="margin-bottom:6px;font-size:10px;">Top 60 closest to pivot, of ${LIFECYCLE_DATA.counts.forming} total.</div>` : '';
+
+  const pagingLink = rows.length > STAGE_PAGE_SIZE
+    ? `<div style="text-align:center;padding-top:6px;">
+         <a href="#" class="view-all-link" onclick="EXPANDED_STAGES['${ACTIVE_STAGE}']=${!isExpanded};renderStageTable();return false;">
+           ${isExpanded ? 'Show less ↑' : `View all ${rows.length} →`}
+         </a>
+       </div>` : '';
+
+  el.innerHTML = `${truncNote}
+    <table id="stage-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
+    ${pagingLink}`;
+  document.querySelectorAll('#stage-table tbody tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const row = rows.find(r => r.symbol === tr.dataset.symbol);
+      if(row) renderChartFor(row);
+    });
+  });
+
+  if(hasChart){
+    // Only chart rows that actually have chart data (Fresh entries that
+    // never got a trade slot still have history attached, so this is safe).
+    if(displayRows.length) renderChartFor(displayRows[0]);
+  }
+}
+
+async function loadBreakouts(){
+  const el = document.getElementById('stage-table-container');
+  const cfg = STRATEGY_CONFIG[ACTIVE_STRATEGY];
+  try{
+    const res = await fetch(cfg.lifecycle_json, {cache:'no-store'});
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
+    LIFECYCLE_DATA = data;
+    // Each strategy uses its OWN fixed default combo (VCM: 6-month
+    // rolling worst-ranked pick; Bull Flag: lowest-correlation combo)
+    // -- not a single hardcoded value shared across strategies.
+    SELECTED_TRAIL_DMA = cfg.default_combo.trail;
+    SELECTED_STOP_PCT = cfg.default_combo.stop;
+    SELECTED_MAX_POSITIONS = cfg.default_combo.maxpos;
+    STAGE_META.fresh.desc = 'closed above pivot today';
+
+    const freshToday = bucketSignalsByMaxPositions().fresh.length;
+    const dc = cfg.default_combo;
+    const comboLabel = dc.isMix
+      ? "alternating 25/50 DMA trail, 4% stop, 10 positions"
+      : `${dc.trail} DMA/${dc.stop}%/${dc.maxpos} positions`;
+    document.getElementById('dynamic-sub').textContent =
+      `${freshToday} fresh breakouts today (using ${cfg.title}'s combo: ${comboLabel}) — tap a stage below to see the names.`;
+
+    renderStageCards();
+    renderStageTable();
+  }catch(e){
+    el.innerHTML = `<div class="card"><div class="empty">${cfg.lifecycle_json} not found yet.<br><br>Run the matching lifecycle script for ${cfg.title} to generate it, then reload this page.</div></div>`;
+  }
+}
+loadBreakouts();
+</script>
+</body>
+</html>
