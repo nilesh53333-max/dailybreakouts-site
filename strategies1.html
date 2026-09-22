@@ -27,7 +27,9 @@
   .topsearch{display:flex;align-items:center;gap:8px;background:#1E3A5F;border:1px solid #2C4A70;border-radius:8px;padding:8px 12px;width:280px;}
   .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
   .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
+  .hamburger-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex:0 0 auto;}
   .mobile-search-btn{display:none;background:none;border:none;padding:6px;cursor:pointer;flex:0 0 auto;}
+  .mobile-sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:40;}
 
   main{padding:16px 24px 32px;width:100%;}
   h1{font-size:19px;margin:0 0 2px;}
@@ -70,14 +72,8 @@
   /* Default (narrower than 1440px): normal stacked flow, no height constraint. */
   .compact-strip{flex:0 0 auto;}
   .dashboard-grid{display:flex;flex-direction:column;gap:14px;}
-  .dashboard-section-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:8px;}
-  .dashboard-section-title::after{content:"";height:1px;background:var(--border);flex:1;}
   .quadrant{display:flex;flex-direction:column;gap:10px;}
   .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
-  .strategy-tabs-bar{display:flex;gap:6px;overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:6px;margin:2px 0 14px;scrollbar-width:thin;}
-  .strategy-tabs-bar .item{padding:8px 13px;border-radius:7px;font-size:13px;color:#475569;white-space:nowrap;border:1px solid transparent;}
-  .strategy-tabs-bar .item:hover{background:#F8FAFC;}
-  .strategy-tabs-bar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border-color:var(--green);}
 
   /* >=1440px: real viewport-constrained 2x2 dashboard. Every ancestor in
      the chain down to each quadrant needs min-height:0 -- without it,
@@ -88,29 +84,26 @@
      1600, 1920) -- the previous 1440px threshold excluded 1366-wide
      laptops from the grid entirely. */
   @media (min-width: 1200px){
-    .app-body{min-height:calc(100vh - 56px);overflow:visible;}
+    .app-body{min-height:calc(100vh - 56px);overflow:visible;align-items:stretch;}
+    .sidebar{height:100%;overflow-y:auto;position:static;width:clamp(150px, 12vw, 200px);}
     .content-col{min-height:0;overflow:visible;}
-    main.content-col{padding:14px 24px 28px;}
+    main.content-col{padding:clamp(6px, 1vh, 10px) 16px clamp(4px, 0.8vh, 8px);}
     .dashboard-grid{
       display:grid;
-      grid-template-columns:repeat(12,minmax(0,1fr));
-      grid-template-rows:auto minmax(430px,auto) auto minmax(340px,auto);
+      grid-template-columns:56fr 44fr;
+      grid-template-rows:auto auto;
       align-items:stretch;
-      gap:10px 14px;
-      overflow:visible;
+      gap:clamp(6px, 1vh, 10px);
+      flex:1;
+      min-height:0;
+      overflow:hidden;
     }
-    .live-title{grid-column:1/-1;grid-row:1;}
-    #quad-stocklist{grid-column:1/span 5;grid-row:2;min-width:0;}
-    #quad-chart{grid-column:6/span 7;grid-row:2;min-width:0;}
-    .backtest-title{grid-column:1/-1;grid-row:3;margin-top:8px;}
-    #quad-backtest{grid-column:1/span 5;grid-row:4;min-width:0;}
-    #quad-equity{grid-column:6/span 7;grid-row:4;min-width:0;}
-    .quadrant{min-height:0;overflow:hidden;gap:8px;}
+    .quadrant{min-height:0;overflow-y:auto;gap:clamp(4px, 0.6vh, 8px);}
     .quadrant-card{flex:1;min-height:0;overflow-y:auto;padding:clamp(8px, 1vh, 14px);}
     /* Fixed cap, NOT flex:1 -- deliberately independent of however much
        space the quadrant would otherwise offer, so a 10-row table can
        never force the whole grid taller. ~5 rows + sticky header. */
-    .capped-table-card{flex:1;min-height:0;max-height:none;overflow-y:auto;}
+    .capped-table-card{flex:1;min-height:0;max-height:340px;overflow-y:auto;}
     /* The chart itself is the one element that should actually GROW to
        fill remaining space in its quadrant, once header/buttons/stats
        (all flex:0 0 auto) have taken their natural height. */
@@ -127,7 +120,7 @@
     main.content-col{padding:4px 14px 4px;}
     h1{font-size:16px;}
     .sub{font-size:11px;margin-bottom:6px;}
-    .capped-table-card{max-height:none;}
+    .capped-table-card{max-height:260px;}
     .lifecycle-cards{gap:6px;margin-bottom:6px;}
     .stage-card{padding:5px 10px;}
     .stage-card .count{font-size:15px;}
@@ -149,10 +142,19 @@
      interface -- not a squeezed version of the desktop grid. */
   @media (max-width: 899px){
     header{height:52px;padding:0 12px;gap:10px;}
+    .hamburger-btn{display:block;}
     .mobile-search-btn{display:block;}
     .logo-tagline{display:none;}
     .topnav{display:none;}
     .topsearch{display:none;}
+
+    .sidebar{
+      position:fixed;top:0;left:0;bottom:0;width:240px;z-index:50;
+      transform:translateX(-100%);transition:transform .2s ease;
+      box-shadow:2px 0 12px rgba(0,0,0,0.15);
+    }
+    .sidebar.open{transform:translateX(0);}
+    .mobile-sidebar-overlay.open{display:block;}
 
     .app-body{display:block;height:auto;overflow:visible;}
     main.content-col{padding:12px;height:auto;overflow:visible;}
@@ -204,8 +206,13 @@
   .chart-stats .v{font-weight:600;}
   .chart-stats .l{color:var(--muted);margin-top:1px;}
 
-  .app-body{display:block;width:100%;}
-  .content-col{width:100%;max-width:1680px;margin:0 auto;min-width:0;display:flex;flex-direction:column;}
+  .app-body{display:flex;width:100%;align-items:flex-start;}
+  .sidebar{width:200px;flex:0 0 auto;background:var(--card);border-right:1px solid var(--border);padding:16px 12px;position:sticky;top:0;align-self:flex-start;}
+  .sidebar h3{font-size:11px;font-weight:600;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;padding:0 8px 8px;margin:0;}
+  .sidebar .item{display:block;padding:8px 10px;border-radius:7px;font-size:13.5px;color:#4B5563;margin-bottom:2px;}
+  .sidebar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border:1px solid var(--green);}
+  .sidebar .section{margin-bottom:22px;}
+  .content-col{flex:1;min-width:0;display:flex;flex-direction:column;}
 
   .summary-strip{display:flex;gap:12px;margin-bottom:18px;}
   .summary-strip .stat{flex:1;}
@@ -238,6 +245,9 @@
 <body>
 
 <header>
+  <button aria-label="Open menu" class="hamburger-btn" onclick="toggleMobileSidebar()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
   <div class="logo disp">daily<span>breakouts</span></div>
   <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
   <nav class="topnav">
@@ -247,23 +257,30 @@
     </a>
   </nav>
 </header>
+<div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay" onclick="toggleMobileSidebar()"></div>
 
 <div class="app-body">
+  <div class="sidebar">
+    <div class="section">
+      <h3>Select strategy</h3>
+      <a href="#" class="item active" id="sidebar-item-vcm" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
+      <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;">Classic Bull Flag</a>
+      <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;">Cup and Handle</a>
+    </div>
+    <div class="section">
+      <h3>Tools</h3>
+      <a href="#" class="item" onclick="switchTab('breakouts');return false;">Today's Breakouts</a>
+      <a href="#" class="item" onclick="switchTab('backtest');return false;">Backtesting</a>
+    </div>
+  </div>
+
 <main class="content-col">
   <div class="compact-strip">
     <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
     <div class="sub" id="dynamic-sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
   </div>
 
-  <nav class="strategy-tabs-bar" aria-label="Trading strategies">
-    <a href="#" class="item active" id="sidebar-item-vcm" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
-    <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;">Classic Bull Flag</a>
-    <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;">Cup and Handle</a>
-  </nav>
-
   <div class="dashboard-grid">
-
-    <div class="dashboard-section-title live-title">Today's Patterns</div>
 
     <!-- TOP LEFT: today's breakouts stock list -->
     <div class="quadrant" id="quad-stocklist">
@@ -277,8 +294,6 @@
     <div class="quadrant" id="quad-chart">
       <div id="stage-chart-panel"></div>
     </div>
-
-    <div class="dashboard-section-title backtest-title">Historical Performance</div>
 
     <!-- BOTTOM LEFT: backtest controls + metrics + yearly table -->
     <div class="quadrant" id="quad-backtest">
