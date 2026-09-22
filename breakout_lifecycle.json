@@ -1,5 +1,5 @@
 {
-  "date": "2026-09-18",
+  "date": "2026-09-21",
   "year": 2026,
   "trail_options": [
     25,
@@ -25,7 +25,7 @@
   "default_combo_active_period": "N/A (permanent)",
   "counts": {
     "forming": 145,
-    "fresh": 2,
+    "fresh": 1,
     "open": 10,
     "closed": 74
   },
@@ -33,94 +33,94 @@
   "stages": {
     "forming": [
       {
-        "symbol": "ATGL",
-        "pivot": 657.65,
-        "close": 657.6,
-        "base_high": 674.8,
-        "base_low": 576.4,
+        "symbol": "GOODLUCK",
+        "pivot": 524.3,
+        "close": 524.0,
+        "base_high": 539.0,
+        "base_low": 417.3,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.01,
-        "base_start": "2026-08-21",
-        "age_sessions": 19,
-        "history_url": "history/ATGL.json",
+        "dist_to_pivot_pct": 0.06,
+        "base_start": "2026-07-16",
+        "age_sessions": 46,
+        "history_url": "history/GOODLUCK.json",
         "blue_sky": false,
-        "median_turnover_cr": 30.43
+        "median_turnover_cr": 30.49
       },
       {
-        "symbol": "POONAWALLA",
-        "pivot": 485.1,
-        "close": 485.0,
-        "base_high": 492.0,
-        "base_low": 428.1,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.02,
-        "base_start": "2026-08-25",
-        "age_sessions": 17,
-        "history_url": "history/POONAWALLA.json",
-        "blue_sky": false,
-        "median_turnover_cr": 35.04
-      },
-      {
-        "symbol": "SCHAEFFLER",
-        "pivot": 4247.9,
-        "close": 4247.0,
-        "base_high": 4260.0,
-        "base_low": 3818.1,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.02,
-        "base_start": "2026-06-25",
-        "age_sessions": 59,
-        "history_url": "history/SCHAEFFLER.json",
-        "blue_sky": false,
-        "median_turnover_cr": 19.68
-      },
-      {
-        "symbol": "HOMEFIRST",
-        "pivot": 1247.1,
-        "close": 1246.6,
-        "base_high": 1265.0,
-        "base_low": 1100.6,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.04,
-        "base_start": "2026-07-23",
-        "age_sessions": 40,
-        "history_url": "history/HOMEFIRST.json",
-        "blue_sky": false,
-        "median_turnover_cr": 16.52
-      },
-      {
-        "symbol": "INDGN",
-        "pivot": 612.15,
-        "close": 611.7,
-        "base_high": 632.9,
-        "base_low": 414.0,
+        "symbol": "BBOX",
+        "pivot": 832.5,
+        "close": 831.9,
+        "base_high": 842.5,
+        "base_low": 709.15,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.07,
-        "base_start": "2025-06-03",
-        "age_sessions": 322,
-        "history_url": "history/INDGN.json",
+        "base_start": "2026-08-14",
+        "age_sessions": 25,
+        "history_url": "history/BBOX.json",
         "blue_sky": false,
-        "median_turnover_cr": 21.03
+        "median_turnover_cr": 19.37
       },
       {
-        "symbol": "JUBLFOOD",
-        "pivot": 499.5,
-        "close": 499.05,
-        "base_high": 509.0,
-        "base_low": 461.6,
+        "symbol": "CONCORDBIO",
+        "pivot": 1571.3,
+        "close": 1570.0,
+        "base_high": 1592.0,
+        "base_low": 1411.6,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.08,
+        "base_start": "2026-08-24",
+        "age_sessions": 19,
+        "history_url": "history/CONCORDBIO.json",
+        "blue_sky": false,
+        "median_turnover_cr": 15.39
+      },
+      {
+        "symbol": "MANKIND",
+        "pivot": 2433.1,
+        "close": 2431.0,
+        "base_high": 2452.0,
+        "base_low": 2222.0,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.09,
-        "base_start": "2026-08-27",
+        "base_start": "2026-08-28",
         "age_sessions": 15,
-        "history_url": "history/JUBLFOOD.json",
+        "history_url": "history/MANKIND.json",
         "blue_sky": false,
-        "median_turnover_cr": 46.56
+        "median_turnover_cr": 78.88
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "pivot": 1069.0,
+        "close": 1068.0,
+        "base_high": 1072.6,
+        "base_low": 974.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.09,
+        "base_start": "2026-08-11",
+        "age_sessions": 28,
+        "history_url": "history/MAXHEALTH.json",
+        "blue_sky": false,
+        "median_turnover_cr": 183.82
+      },
+      {
+        "symbol": "SUPRIYA",
+        "pivot": 960.85,
+        "close": 960.0,
+        "base_high": 965.25,
+        "base_low": 740.45,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.09,
+        "base_start": "2026-08-06",
+        "age_sessions": 31,
+        "history_url": "history/SUPRIYA.json",
+        "blue_sky": false,
+        "median_turnover_cr": 16.66
       },
       {
         "symbol": "IIFLCAPS",
@@ -132,190 +132,130 @@
         "base_number": null,
         "dist_to_pivot_pct": 0.1,
         "base_start": "2026-06-29",
-        "age_sessions": 58,
+        "age_sessions": 59,
         "history_url": "history/IIFLCAPS.json",
         "blue_sky": false,
         "median_turnover_cr": 11.33
       },
       {
-        "symbol": "AIIL",
-        "pivot": 561.6,
-        "close": 561.0,
-        "base_high": 579.0,
-        "base_low": 503.0,
+        "symbol": "INDHOTEL",
+        "pivot": 745.95,
+        "close": 745.1,
+        "base_high": 755.0,
+        "base_low": 701.55,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.11,
-        "base_start": "2026-08-27",
-        "age_sessions": 15,
-        "history_url": "history/AIIL.json",
+        "base_start": "2026-08-04",
+        "age_sessions": 33,
+        "history_url": "history/INDHOTEL.json",
         "blue_sky": false,
-        "median_turnover_cr": 9.38
+        "median_turnover_cr": 95.56
       },
       {
-        "symbol": "TEGA",
-        "pivot": 1950.2,
-        "close": 1948.0,
-        "base_high": 1970.0,
-        "base_low": 1473.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.11,
-        "base_start": "2026-01-08",
-        "age_sessions": 171,
-        "history_url": "history/TEGA.json",
-        "blue_sky": false,
-        "median_turnover_cr": 32.52
-      },
-      {
-        "symbol": "GNFC",
-        "pivot": 588.0,
-        "close": 587.1,
-        "base_high": 599.0,
-        "base_low": 528.8,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.15,
-        "base_start": "2026-08-19",
-        "age_sessions": 21,
-        "history_url": "history/GNFC.json",
-        "blue_sky": false,
-        "median_turnover_cr": 30.27
-      },
-      {
-        "symbol": "HDBFS",
-        "pivot": 698.15,
-        "close": 697.0,
-        "base_high": 712.1,
-        "base_low": 662.4,
+        "symbol": "TI",
+        "pivot": 582.45,
+        "close": 581.5,
+        "base_high": 594.55,
+        "base_low": 500.65,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.16,
-        "base_start": "2026-08-19",
-        "age_sessions": 21,
-        "history_url": "history/HDBFS.json",
+        "base_start": "2026-08-25",
+        "age_sessions": 18,
+        "history_url": "history/TI.json",
         "blue_sky": false,
-        "median_turnover_cr": 25.72
+        "median_turnover_cr": 33.42
       },
       {
-        "symbol": "NORTHARC",
-        "pivot": 314.3,
-        "close": 313.75,
-        "base_high": 319.6,
-        "base_low": 273.15,
+        "symbol": "BLACKBUCK",
+        "pivot": 631.05,
+        "close": 630.0,
+        "base_high": 645.0,
+        "base_low": 570.1,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.18,
-        "base_start": "2026-07-17",
-        "age_sessions": 44,
-        "history_url": "history/NORTHARC.json",
+        "dist_to_pivot_pct": 0.17,
+        "base_start": "2026-08-21",
+        "age_sessions": 20,
+        "history_url": "history/BLACKBUCK.json",
         "blue_sky": false,
-        "median_turnover_cr": 42.14
-      },
-      {
-        "symbol": "JUBLPHARMA",
-        "pivot": 1077.0,
-        "close": 1075.0,
-        "base_high": 1107.8,
-        "base_low": 786.05,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.19,
-        "base_start": "2026-01-07",
-        "age_sessions": 172,
-        "history_url": "history/JUBLPHARMA.json",
-        "blue_sky": false,
-        "median_turnover_cr": 19.55
-      },
-      {
-        "symbol": "CASTROLIND",
-        "pivot": 196.46,
-        "close": 196.07,
-        "base_high": 198.22,
-        "base_low": 164.6,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.2,
-        "base_start": "2025-09-10",
-        "age_sessions": 253,
-        "history_url": "history/CASTROLIND.json",
-        "blue_sky": false,
-        "median_turnover_cr": 25.99
-      },
-      {
-        "symbol": "JASH",
-        "pivot": 525.25,
-        "close": 524.0,
-        "base_high": 532.3,
-        "base_low": 454.1,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.24,
-        "base_start": "2026-07-21",
-        "age_sessions": 42,
-        "history_url": "history/JASH.json",
-        "blue_sky": false,
-        "median_turnover_cr": 5.37
+        "median_turnover_cr": 20.21
       },
       {
         "symbol": "ORIENTHOT",
         "pivot": 143.68,
-        "close": 143.31,
+        "close": 143.41,
         "base_high": 147.97,
         "base_low": 119.12,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.26,
+        "dist_to_pivot_pct": 0.19,
         "base_start": "2026-07-21",
-        "age_sessions": 42,
+        "age_sessions": 43,
         "history_url": "history/ORIENTHOT.json",
         "blue_sky": false,
         "median_turnover_cr": 11.5
       },
       {
-        "symbol": "AVL",
-        "pivot": 641.65,
-        "close": 639.95,
-        "base_high": 654.0,
-        "base_low": 570.6,
+        "symbol": "GNA",
+        "pivot": 562.85,
+        "close": 561.5,
+        "base_high": 588.8,
+        "base_low": 504.2,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.24,
+        "base_start": "2026-08-24",
+        "age_sessions": 19,
+        "history_url": "history/GNA.json",
+        "blue_sky": false,
+        "median_turnover_cr": 13.9
+      },
+      {
+        "symbol": "ADANIPORTS",
+        "pivot": 1793.3,
+        "close": 1788.5,
+        "base_high": 1796.8,
+        "base_low": 1593.1,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.27,
-        "base_start": "2026-07-28",
-        "age_sessions": 37,
-        "history_url": "history/AVL.json",
+        "base_start": "2026-07-24",
+        "age_sessions": 40,
+        "history_url": "history/ADANIPORTS.json",
         "blue_sky": false,
-        "median_turnover_cr": 10.46
+        "median_turnover_cr": 339.05
       },
       {
-        "symbol": "PNB",
-        "pivot": 117.48,
-        "close": 117.12,
-        "base_high": 119.4,
-        "base_low": 113.16,
+        "symbol": "MEDANTA",
+        "pivot": 1508.9,
+        "close": 1504.9,
+        "base_high": 1531.4,
+        "base_low": 1380.1,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.31,
-        "base_start": "2026-08-20",
-        "age_sessions": 20,
-        "history_url": "history/PNB.json",
+        "dist_to_pivot_pct": 0.27,
+        "base_start": "2026-08-28",
+        "age_sessions": 15,
+        "history_url": "history/MEDANTA.json",
         "blue_sky": false,
-        "median_turnover_cr": 136.74
+        "median_turnover_cr": 36.92
       },
       {
-        "symbol": "BLACKBUCK",
-        "pivot": 631.05,
-        "close": 629.0,
-        "base_high": 645.0,
-        "base_low": 570.1,
+        "symbol": "GESHIP",
+        "pivot": 1492.0,
+        "close": 1487.0,
+        "base_high": 1598.9,
+        "base_low": 1261.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.33,
-        "base_start": "2026-08-21",
-        "age_sessions": 19,
-        "history_url": "history/BLACKBUCK.json",
+        "dist_to_pivot_pct": 0.34,
+        "base_start": "2026-06-29",
+        "age_sessions": 59,
+        "history_url": "history/GESHIP.json",
         "blue_sky": false,
-        "median_turnover_cr": 20.21
+        "median_turnover_cr": 120.23
       },
       {
         "symbol": "JSWINFRA",
@@ -327,610 +267,670 @@
         "base_number": null,
         "dist_to_pivot_pct": 0.34,
         "base_start": "2026-07-14",
-        "age_sessions": 47,
+        "age_sessions": 48,
         "history_url": "history/JSWINFRA.json",
         "blue_sky": false,
-        "median_turnover_cr": 81.53
+        "median_turnover_cr": 83.57
       },
       {
-        "symbol": "TVSSCS",
-        "pivot": 134.6,
-        "close": 134.0,
-        "base_high": 138.99,
-        "base_low": 122.51,
+        "symbol": "SAPPHIRE",
+        "pivot": 239.74,
+        "close": 238.9,
+        "base_high": 242.4,
+        "base_low": 219.31,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.45,
-        "base_start": "2026-08-25",
-        "age_sessions": 17,
-        "history_url": "history/TVSSCS.json",
-        "blue_sky": false,
-        "median_turnover_cr": 9.23
-      },
-      {
-        "symbol": "SHRIPISTON",
-        "pivot": 4610.0,
-        "close": 4587.6,
-        "base_high": 4640.9,
-        "base_low": 4150.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.49,
-        "base_start": "2026-08-27",
+        "dist_to_pivot_pct": 0.35,
+        "base_start": "2026-08-28",
         "age_sessions": 15,
-        "history_url": "history/SHRIPISTON.json",
+        "history_url": "history/SAPPHIRE.json",
         "blue_sky": false,
-        "median_turnover_cr": 33.06
+        "median_turnover_cr": 18.13
       },
       {
-        "symbol": "GNA",
-        "pivot": 562.85,
-        "close": 560.0,
-        "base_high": 588.8,
-        "base_low": 504.2,
+        "symbol": "3MINDIA",
+        "pivot": 34910.0,
+        "close": 34770.0,
+        "base_high": 35290.0,
+        "base_low": 31500.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.51,
-        "base_start": "2026-08-24",
-        "age_sessions": 18,
-        "history_url": "history/GNA.json",
+        "dist_to_pivot_pct": 0.4,
+        "base_start": "2026-08-18",
+        "age_sessions": 23,
+        "history_url": "history/3MINDIA.json",
         "blue_sky": false,
-        "median_turnover_cr": 13.9
+        "median_turnover_cr": 6.5
       },
       {
-        "symbol": "INDHOTEL",
-        "pivot": 741.05,
-        "close": 737.05,
-        "base_high": 743.8,
-        "base_low": 701.55,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.54,
-        "base_start": "2026-08-06",
-        "age_sessions": 30,
-        "history_url": "history/INDHOTEL.json",
-        "blue_sky": false,
-        "median_turnover_cr": 77.55
-      },
-      {
-        "symbol": "ADANIPORTS",
-        "pivot": 1778.5,
+        "symbol": "TATVA",
+        "pivot": 1775.6,
         "close": 1768.0,
-        "base_high": 1792.0,
-        "base_low": 1593.1,
+        "base_high": 1829.0,
+        "base_low": 1520.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.59,
-        "base_start": "2026-07-24",
-        "age_sessions": 39,
-        "history_url": "history/ADANIPORTS.json",
+        "dist_to_pivot_pct": 0.43,
+        "base_start": "2026-08-11",
+        "age_sessions": 28,
+        "history_url": "history/TATVA.json",
         "blue_sky": false,
-        "median_turnover_cr": 311.61
+        "median_turnover_cr": 6.83
+      },
+      {
+        "symbol": "HOMEFIRST",
+        "pivot": 1261.0,
+        "close": 1255.5,
+        "base_high": 1289.6,
+        "base_low": 1100.6,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.44,
+        "base_start": "2026-07-21",
+        "age_sessions": 43,
+        "history_url": "history/HOMEFIRST.json",
+        "blue_sky": false,
+        "median_turnover_cr": 16.52
       },
       {
         "symbol": "APLLTD",
         "pivot": 850.05,
-        "close": 845.0,
-        "base_high": 860.0,
+        "close": 846.0,
+        "base_high": 867.85,
         "base_low": 787.4,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.6,
+        "dist_to_pivot_pct": 0.48,
         "base_start": "2026-07-16",
-        "age_sessions": 45,
+        "age_sessions": 46,
         "history_url": "history/APLLTD.json",
         "blue_sky": false,
-        "median_turnover_cr": 11.46
+        "median_turnover_cr": 12.41
       },
       {
-        "symbol": "KIMS",
-        "pivot": 814.9,
-        "close": 809.65,
-        "base_high": 827.95,
-        "base_low": 748.3,
+        "symbol": "APOLLOHOSP",
+        "pivot": 8974.5,
+        "close": 8920.0,
+        "base_high": 9024.0,
+        "base_low": 8507.5,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.65,
+        "dist_to_pivot_pct": 0.61,
         "base_start": "2026-08-10",
-        "age_sessions": 28,
-        "history_url": "history/KIMS.json",
+        "age_sessions": 29,
+        "history_url": "history/APOLLOHOSP.json",
         "blue_sky": false,
-        "median_turnover_cr": 43.84
+        "median_turnover_cr": 227.53
       },
       {
         "symbol": "CARBORUNIV",
-        "pivot": 1137.6,
-        "close": 1130.0,
-        "base_high": 1207.0,
+        "pivot": 1184.6,
+        "close": 1177.0,
+        "base_high": 1229.0,
         "base_low": 1018.1,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.67,
-        "base_start": "2026-08-21",
-        "age_sessions": 19,
+        "dist_to_pivot_pct": 0.65,
+        "base_start": "2026-08-14",
+        "age_sessions": 25,
         "history_url": "history/CARBORUNIV.json",
         "blue_sky": false,
         "median_turnover_cr": 19.07
       },
       {
-        "symbol": "GOODLUCK",
-        "pivot": 521.3,
-        "close": 517.0,
-        "base_high": 539.0,
-        "base_low": 417.3,
+        "symbol": "AARTIDRUGS",
+        "pivot": 439.35,
+        "close": 436.0,
+        "base_high": 445.05,
+        "base_low": 404.5,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.83,
-        "base_start": "2026-07-17",
-        "age_sessions": 44,
-        "history_url": "history/GOODLUCK.json",
-        "blue_sky": false,
-        "median_turnover_cr": 30.49
-      },
-      {
-        "symbol": "TATVA",
-        "pivot": 1775.6,
-        "close": 1761.0,
-        "base_high": 1829.0,
-        "base_low": 1520.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.83,
-        "base_start": "2026-08-11",
+        "dist_to_pivot_pct": 0.77,
+        "base_start": "2026-08-12",
         "age_sessions": 27,
-        "history_url": "history/TATVA.json",
+        "history_url": "history/AARTIDRUGS.json",
         "blue_sky": false,
-        "median_turnover_cr": 6.74
+        "median_turnover_cr": 5.11
       },
       {
-        "symbol": "ETERNAL",
-        "pivot": 331.0,
-        "close": 328.0,
-        "base_high": 332.95,
-        "base_low": 310.8,
+        "symbol": "PNB",
+        "pivot": 118.98,
+        "close": 118.02,
+        "base_high": 119.4,
+        "base_low": 113.16,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.91,
+        "dist_to_pivot_pct": 0.81,
+        "base_start": "2026-08-13",
+        "age_sessions": 26,
+        "history_url": "history/PNB.json",
+        "blue_sky": false,
+        "median_turnover_cr": 135.51
+      },
+      {
+        "symbol": "AIIL",
+        "pivot": 566.65,
+        "close": 561.8,
+        "base_high": 579.0,
+        "base_low": 503.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 0.86,
         "base_start": "2026-08-26",
-        "age_sessions": 16,
-        "history_url": "history/ETERNAL.json",
+        "age_sessions": 17,
+        "history_url": "history/AIIL.json",
         "blue_sky": false,
-        "median_turnover_cr": 710.47
+        "median_turnover_cr": 8.75
       },
       {
-        "symbol": "GESHIP",
-        "pivot": 1440.4,
-        "close": 1427.3,
-        "base_high": 1598.9,
-        "base_low": 1261.0,
+        "symbol": "KDDL",
+        "pivot": 4084.6,
+        "close": 4045.0,
+        "base_high": 4128.5,
+        "base_low": 3510.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.92,
-        "base_start": "2026-07-23",
-        "age_sessions": 40,
-        "history_url": "history/GESHIP.json",
-        "blue_sky": false,
-        "median_turnover_cr": 111.72
-      },
-      {
-        "symbol": "NELCO",
-        "pivot": 1015.65,
-        "close": 1005.85,
-        "base_high": 1120.0,
-        "base_low": 875.5,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 0.97,
-        "base_start": "2026-08-17",
+        "dist_to_pivot_pct": 0.98,
+        "base_start": "2026-08-18",
         "age_sessions": 23,
-        "history_url": "history/NELCO.json",
+        "history_url": "history/KDDL.json",
         "blue_sky": false,
-        "median_turnover_cr": 18.52
+        "median_turnover_cr": 8.9
       },
       {
         "symbol": "ACUTAAS",
         "pivot": 3458.8,
-        "close": 3425.2,
-        "base_high": 3488.0,
+        "close": 3425.0,
+        "base_high": 3509.9,
         "base_low": 3025.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 0.98,
+        "dist_to_pivot_pct": 0.99,
         "base_start": "2026-07-24",
-        "age_sessions": 39,
+        "age_sessions": 40,
         "history_url": "history/ACUTAAS.json",
         "blue_sky": false,
-        "median_turnover_cr": 80.15
+        "median_turnover_cr": 83.68
       },
       {
-        "symbol": "TI",
-        "pivot": 575.65,
-        "close": 570.0,
-        "base_high": 594.55,
-        "base_low": 500.65,
+        "symbol": "ONESOURCE",
+        "pivot": 1614.8,
+        "close": 1599.0,
+        "base_high": 1657.5,
+        "base_low": 1478.0,
         "base_end_date": null,
         "base_number": null,
         "dist_to_pivot_pct": 0.99,
-        "base_start": "2026-08-24",
-        "age_sessions": 18,
-        "history_url": "history/TI.json",
+        "base_start": "2026-08-03",
+        "age_sessions": 34,
+        "history_url": "history/ONESOURCE.json",
         "blue_sky": false,
-        "median_turnover_cr": 31.04
+        "median_turnover_cr": 21.4
+      },
+      {
+        "symbol": "ABDL",
+        "pivot": 666.6,
+        "close": 658.8,
+        "base_high": 676.45,
+        "base_low": 580.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.18,
+        "base_start": "2026-07-10",
+        "age_sessions": 50,
+        "history_url": "history/ABDL.json",
+        "blue_sky": false,
+        "median_turnover_cr": 18.88
+      },
+      {
+        "symbol": "GPPL",
+        "pivot": 167.1,
+        "close": 165.15,
+        "base_high": 168.66,
+        "base_low": 137.36,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.18,
+        "base_start": "2026-03-04",
+        "age_sessions": 135,
+        "history_url": "history/GPPL.json",
+        "blue_sky": false,
+        "median_turnover_cr": 26.87
+      },
+      {
+        "symbol": "LALPATHLAB",
+        "pivot": 1937.3,
+        "close": 1910.0,
+        "base_high": 2038.6,
+        "base_low": 1855.7,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.43,
+        "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/LALPATHLAB.json",
+        "blue_sky": false,
+        "median_turnover_cr": 35.29
+      },
+      {
+        "symbol": "ABCAPITAL",
+        "pivot": 409.75,
+        "close": 403.5,
+        "base_high": 413.1,
+        "base_low": 378.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.55,
+        "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/ABCAPITAL.json",
+        "blue_sky": false,
+        "median_turnover_cr": 89.63
+      },
+      {
+        "symbol": "DYNAMATECH",
+        "pivot": 12405.0,
+        "close": 12205.0,
+        "base_high": 12875.0,
+        "base_low": 9769.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.64,
+        "base_start": "2026-05-08",
+        "age_sessions": 93,
+        "history_url": "history/DYNAMATECH.json",
+        "blue_sky": false,
+        "median_turnover_cr": 13.38
+      },
+      {
+        "symbol": "CASTROLIND",
+        "pivot": 196.46,
+        "close": 193.25,
+        "base_high": 198.22,
+        "base_low": 164.6,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.66,
+        "base_start": "2025-09-10",
+        "age_sessions": 254,
+        "history_url": "history/CASTROLIND.json",
+        "blue_sky": false,
+        "median_turnover_cr": 28.64
+      },
+      {
+        "symbol": "TVSSCS",
+        "pivot": 134.6,
+        "close": 132.17,
+        "base_high": 138.99,
+        "base_low": 122.51,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.84,
+        "base_start": "2026-08-25",
+        "age_sessions": 18,
+        "history_url": "history/TVSSCS.json",
+        "blue_sky": false,
+        "median_turnover_cr": 9.23
+      },
+      {
+        "symbol": "AVL",
+        "pivot": 641.65,
+        "close": 630.0,
+        "base_high": 654.0,
+        "base_low": 570.6,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.85,
+        "base_start": "2026-07-28",
+        "age_sessions": 38,
+        "history_url": "history/AVL.json",
+        "blue_sky": false,
+        "median_turnover_cr": 10.46
+      },
+      {
+        "symbol": "ORCHPHARMA",
+        "pivot": 1101.4,
+        "close": 1081.0,
+        "base_high": 1133.0,
+        "base_low": 923.7,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.89,
+        "base_start": "2026-07-16",
+        "age_sessions": 46,
+        "history_url": "history/ORCHPHARMA.json",
+        "blue_sky": false,
+        "median_turnover_cr": 5.91
+      },
+      {
+        "symbol": "YESBANK",
+        "pivot": 23.61,
+        "close": 23.17,
+        "base_high": 24.1,
+        "base_low": 21.82,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.9,
+        "base_start": "2026-07-20",
+        "age_sessions": 44,
+        "history_url": "history/YESBANK.json",
+        "blue_sky": false,
+        "median_turnover_cr": 118.07
+      },
+      {
+        "symbol": "NORTHARC",
+        "pivot": 325.3,
+        "close": 319.0,
+        "base_high": 334.0,
+        "base_low": 273.15,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.97,
+        "base_start": "2026-07-13",
+        "age_sessions": 49,
+        "history_url": "history/NORTHARC.json",
+        "blue_sky": false,
+        "median_turnover_cr": 43.84
+      },
+      {
+        "symbol": "ZYDUSLIFE",
+        "pivot": 1189.2,
+        "close": 1166.0,
+        "base_high": 1198.9,
+        "base_low": 1086.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 1.99,
+        "base_start": "2026-08-28",
+        "age_sessions": 15,
+        "history_url": "history/ZYDUSLIFE.json",
+        "blue_sky": false,
+        "median_turnover_cr": 127.3
+      },
+      {
+        "symbol": "SHRIPISTON",
+        "pivot": 4610.0,
+        "close": 4514.6,
+        "base_high": 4640.9,
+        "base_low": 4150.0,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.11,
+        "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/SHRIPISTON.json",
+        "blue_sky": false,
+        "median_turnover_cr": 31.96
+      },
+      {
+        "symbol": "RADICO",
+        "pivot": 4614.0,
+        "close": 4513.5,
+        "base_high": 4650.6,
+        "base_low": 4298.8,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.23,
+        "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/RADICO.json",
+        "blue_sky": false,
+        "median_turnover_cr": 95.96
+      },
+      {
+        "symbol": "DEVYANI",
+        "pivot": 146.11,
+        "close": 142.9,
+        "base_high": 146.79,
+        "base_low": 133.75,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.25,
+        "base_start": "2026-08-28",
+        "age_sessions": 15,
+        "history_url": "history/DEVYANI.json",
+        "blue_sky": false,
+        "median_turnover_cr": 29.19
+      },
+      {
+        "symbol": "CGPOWER",
+        "pivot": 929.15,
+        "close": 908.5,
+        "base_high": 954.9,
+        "base_low": 814.85,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.27,
+        "base_start": "2026-07-16",
+        "age_sessions": 46,
+        "history_url": "history/CGPOWER.json",
+        "blue_sky": false,
+        "median_turnover_cr": 204.24
+      },
+      {
+        "symbol": "HONASA",
+        "pivot": 483.8,
+        "close": 472.8,
+        "base_high": 492.6,
+        "base_low": 449.35,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.33,
+        "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/HONASA.json",
+        "blue_sky": false,
+        "median_turnover_cr": 32.75
+      },
+      {
+        "symbol": "WENDT",
+        "pivot": 8861.5,
+        "close": 8655.0,
+        "base_high": 9100.0,
+        "base_low": 5841.5,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.39,
+        "base_start": "2025-10-27",
+        "age_sessions": 223,
+        "history_url": "history/WENDT.json",
+        "blue_sky": false,
+        "median_turnover_cr": 7.57
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "pivot": 425.6,
+        "close": 415.25,
+        "base_high": 430.15,
+        "base_low": 345.5,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.49,
+        "base_start": "2026-02-25",
+        "age_sessions": 139,
+        "history_url": "history/KOTAKBANK.json",
+        "blue_sky": false,
+        "median_turnover_cr": 451.49
       },
       {
         "symbol": "SONACOMS",
-        "pivot": 818.05,
-        "close": 809.95,
+        "pivot": 814.6,
+        "close": 794.7,
         "base_high": 824.6,
         "base_low": 759.05,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 1.0,
-        "base_start": "2026-08-27",
+        "dist_to_pivot_pct": 2.5,
+        "base_start": "2026-08-28",
         "age_sessions": 15,
         "history_url": "history/SONACOMS.json",
         "blue_sky": false,
         "median_turnover_cr": 124.09
       },
       {
-        "symbol": "ONESOURCE",
-        "pivot": 1614.8,
-        "close": 1592.4,
-        "base_high": 1657.5,
-        "base_low": 1478.0,
+        "symbol": "PREMEXPLN",
+        "pivot": 692.65,
+        "close": 675.0,
+        "base_high": 702.5,
+        "base_low": 647.1,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 1.41,
-        "base_start": "2026-08-03",
-        "age_sessions": 33,
-        "history_url": "history/ONESOURCE.json",
-        "blue_sky": false,
-        "median_turnover_cr": 20.17
-      },
-      {
-        "symbol": "SUPRIYA",
-        "pivot": 923.45,
-        "close": 910.0,
-        "base_high": 940.0,
-        "base_low": 740.45,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.48,
-        "base_start": "2026-08-10",
-        "age_sessions": 28,
-        "history_url": "history/SUPRIYA.json",
-        "blue_sky": false,
-        "median_turnover_cr": 16.34
-      },
-      {
-        "symbol": "APOLLOHOSP",
-        "pivot": 8974.5,
-        "close": 8840.0,
-        "base_high": 9024.0,
-        "base_low": 8507.5,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.52,
-        "base_start": "2026-08-10",
-        "age_sessions": 28,
-        "history_url": "history/APOLLOHOSP.json",
-        "blue_sky": false,
-        "median_turnover_cr": 227.53
-      },
-      {
-        "symbol": "RATNAMANI",
-        "pivot": 2888.6,
-        "close": 2845.0,
-        "base_high": 2897.4,
-        "base_low": 2154.6,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.53,
-        "base_start": "2026-06-22",
-        "age_sessions": 62,
-        "history_url": "history/RATNAMANI.json",
-        "blue_sky": false,
-        "median_turnover_cr": 19.02
-      },
-      {
-        "symbol": "AARTIDRUGS",
-        "pivot": 439.35,
-        "close": 432.7,
-        "base_high": 445.05,
-        "base_low": 404.5,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.54,
-        "base_start": "2026-08-12",
-        "age_sessions": 26,
-        "history_url": "history/AARTIDRUGS.json",
-        "blue_sky": false,
-        "median_turnover_cr": 5.51
-      },
-      {
-        "symbol": "MAXHEALTH",
-        "pivot": 1069.0,
-        "close": 1052.0,
-        "base_high": 1067.4,
-        "base_low": 974.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.62,
+        "dist_to_pivot_pct": 2.61,
         "base_start": "2026-08-11",
-        "age_sessions": 27,
-        "history_url": "history/MAXHEALTH.json",
+        "age_sessions": 28,
+        "history_url": "history/PREMEXPLN.json",
         "blue_sky": false,
-        "median_turnover_cr": 183.82
+        "median_turnover_cr": 10.36
       },
       {
-        "symbol": "HONASA",
-        "pivot": 483.8,
-        "close": 476.0,
-        "base_high": 492.6,
-        "base_low": 449.35,
+        "symbol": "JUBLFOOD",
+        "pivot": 499.5,
+        "close": 486.6,
+        "base_high": 509.0,
+        "base_low": 461.6,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 1.64,
+        "dist_to_pivot_pct": 2.65,
         "base_start": "2026-08-27",
+        "age_sessions": 16,
+        "history_url": "history/JUBLFOOD.json",
+        "blue_sky": false,
+        "median_turnover_cr": 46.56
+      },
+      {
+        "symbol": "JUBLPHARMA",
+        "pivot": 1077.0,
+        "close": 1048.0,
+        "base_high": 1107.8,
+        "base_low": 786.05,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.77,
+        "base_start": "2026-01-07",
+        "age_sessions": 173,
+        "history_url": "history/JUBLPHARMA.json",
+        "blue_sky": false,
+        "median_turnover_cr": 19.68
+      },
+      {
+        "symbol": "LICHSGFIN",
+        "pivot": 585.6,
+        "close": 569.55,
+        "base_high": 580.95,
+        "base_low": 485.45,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.82,
+        "base_start": "2026-05-14",
+        "age_sessions": 89,
+        "history_url": "history/LICHSGFIN.json",
+        "blue_sky": false,
+        "median_turnover_cr": 191.79
+      },
+      {
+        "symbol": "HINDZINC",
+        "pivot": 610.1,
+        "close": 593.0,
+        "base_high": 624.35,
+        "base_low": 561.2,
+        "base_end_date": null,
+        "base_number": null,
+        "dist_to_pivot_pct": 2.88,
+        "base_start": "2026-08-28",
         "age_sessions": 15,
-        "history_url": "history/HONASA.json",
+        "history_url": "history/HINDZINC.json",
         "blue_sky": false,
-        "median_turnover_cr": 33.02
+        "median_turnover_cr": 317.01
       },
       {
-        "symbol": "WENDT",
-        "pivot": 8861.5,
-        "close": 8711.0,
-        "base_high": 9100.0,
-        "base_low": 5841.5,
+        "symbol": "INDGN",
+        "pivot": 612.15,
+        "close": 595.0,
+        "base_high": 632.9,
+        "base_low": 414.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 1.73,
-        "base_start": "2025-10-27",
-        "age_sessions": 222,
-        "history_url": "history/WENDT.json",
+        "dist_to_pivot_pct": 2.88,
+        "base_start": "2025-06-03",
+        "age_sessions": 323,
+        "history_url": "history/INDGN.json",
         "blue_sky": false,
-        "median_turnover_cr": 7.57
+        "median_turnover_cr": 20.75
       },
       {
-        "symbol": "USHAMART",
-        "pivot": 516.8,
-        "close": 507.4,
-        "base_high": 529.3,
-        "base_low": 464.15,
+        "symbol": "BAJAJHLDNG",
+        "pivot": 11734.0,
+        "close": 11404.0,
+        "base_high": 11660.0,
+        "base_low": 8588.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 1.85,
-        "base_start": "2026-08-11",
-        "age_sessions": 27,
-        "history_url": "history/USHAMART.json",
+        "dist_to_pivot_pct": 2.89,
+        "base_start": "2025-12-17",
+        "age_sessions": 187,
+        "history_url": "history/BAJAJHLDNG.json",
         "blue_sky": false,
-        "median_turnover_cr": 28.12
-      },
-      {
-        "symbol": "YESBANK",
-        "pivot": 23.61,
-        "close": 23.18,
-        "base_high": 24.1,
-        "base_low": 21.82,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.86,
-        "base_start": "2026-07-20",
-        "age_sessions": 43,
-        "history_url": "history/YESBANK.json",
-        "blue_sky": false,
-        "median_turnover_cr": 113.5
-      },
-      {
-        "symbol": "MAHSEAMLES",
-        "pivot": 730.8,
-        "close": 717.0,
-        "base_high": 738.6,
-        "base_low": 500.7,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 1.92,
-        "base_start": "2025-07-24",
-        "age_sessions": 285,
-        "history_url": "history/MAHSEAMLES.json",
-        "blue_sky": false,
-        "median_turnover_cr": 24.53
-      },
-      {
-        "symbol": "AJANTPHARM",
-        "pivot": 3639.8,
-        "close": 3568.0,
-        "base_high": 3666.9,
-        "base_low": 3425.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.01,
-        "base_start": "2026-08-24",
-        "age_sessions": 18,
-        "history_url": "history/AJANTPHARM.json",
-        "blue_sky": false,
-        "median_turnover_cr": 23.08
-      },
-      {
-        "symbol": "TATACOMM",
-        "pivot": 1800.7,
-        "close": 1765.1,
-        "base_high": 1831.5,
-        "base_low": 1640.2,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.02,
-        "base_start": "2026-08-04",
-        "age_sessions": 32,
-        "history_url": "history/TATACOMM.json",
-        "blue_sky": false,
-        "median_turnover_cr": 46.92
+        "median_turnover_cr": 43.85
       },
       {
         "symbol": "KSL",
         "pivot": 972.3,
-        "close": 952.55,
+        "close": 945.0,
         "base_high": 1002.8,
         "base_low": 816.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 2.07,
+        "dist_to_pivot_pct": 2.89,
         "base_start": "2026-07-14",
-        "age_sessions": 47,
+        "age_sessions": 48,
         "history_url": "history/KSL.json",
         "blue_sky": false,
-        "median_turnover_cr": 10.69
-      },
-      {
-        "symbol": "CGPOWER",
-        "pivot": 929.15,
-        "close": 909.8,
-        "base_high": 954.9,
-        "base_low": 814.85,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.13,
-        "base_start": "2026-07-16",
-        "age_sessions": 45,
-        "history_url": "history/CGPOWER.json",
-        "blue_sky": false,
-        "median_turnover_cr": 201.12
+        "median_turnover_cr": 10.52
       },
       {
         "symbol": "FINEORG",
         "pivot": 5285.8,
-        "close": 5175.0,
+        "close": 5134.0,
         "base_high": 5407.0,
         "base_low": 4692.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 2.14,
+        "dist_to_pivot_pct": 2.96,
         "base_start": "2026-06-30",
-        "age_sessions": 57,
+        "age_sessions": 58,
         "history_url": "history/FINEORG.json",
         "blue_sky": false,
-        "median_turnover_cr": 9.53
+        "median_turnover_cr": 9.06
       },
       {
-        "symbol": "LALPATHLAB",
-        "pivot": 1937.3,
-        "close": 1894.6,
-        "base_high": 2038.6,
-        "base_low": 1855.7,
+        "symbol": "AARTIPHARM",
+        "pivot": 874.55,
+        "close": 849.0,
+        "base_high": 894.7,
+        "base_low": 765.0,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 2.25,
-        "base_start": "2026-08-27",
-        "age_sessions": 15,
-        "history_url": "history/LALPATHLAB.json",
+        "dist_to_pivot_pct": 3.01,
+        "base_start": "2026-08-19",
+        "age_sessions": 22,
+        "history_url": "history/AARTIPHARM.json",
         "blue_sky": false,
-        "median_turnover_cr": 33.33
+        "median_turnover_cr": 34.55
       },
       {
-        "symbol": "IONEXCHANG",
-        "pivot": 451.7,
-        "close": 441.15,
-        "base_high": 461.0,
-        "base_low": 360.75,
+        "symbol": "TORNTPHARM",
+        "pivot": 5122.8,
+        "close": 4972.0,
+        "base_high": 5250.0,
+        "base_low": 4755.5,
         "base_end_date": null,
         "base_number": null,
-        "dist_to_pivot_pct": 2.39,
-        "base_start": "2026-07-14",
-        "age_sessions": 47,
-        "history_url": "history/IONEXCHANG.json",
+        "dist_to_pivot_pct": 3.03,
+        "base_start": "2026-08-03",
+        "age_sessions": 34,
+        "history_url": "history/TORNTPHARM.json",
         "blue_sky": false,
-        "median_turnover_cr": 13.27
-      },
-      {
-        "symbol": "CDSL",
-        "pivot": 1418.2,
-        "close": 1385.0,
-        "base_high": 1445.0,
-        "base_low": 1284.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.4,
-        "base_start": "2026-08-26",
-        "age_sessions": 16,
-        "history_url": "history/CDSL.json",
-        "blue_sky": false,
-        "median_turnover_cr": 159.27
-      },
-      {
-        "symbol": "KOTAKBANK",
-        "pivot": 425.6,
-        "close": 415.3,
-        "base_high": 430.15,
-        "base_low": 345.5,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.48,
-        "base_start": "2026-02-25",
-        "age_sessions": 138,
-        "history_url": "history/KOTAKBANK.json",
-        "blue_sky": false,
-        "median_turnover_cr": 458.16
-      },
-      {
-        "symbol": "GANDHAR",
-        "pivot": 281.95,
-        "close": 275.0,
-        "base_high": 303.17,
-        "base_low": 215.7,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.53,
-        "base_start": "2026-07-24",
-        "age_sessions": 39,
-        "history_url": "history/GANDHAR.json",
-        "blue_sky": false,
-        "median_turnover_cr": 19.73
-      },
-      {
-        "symbol": "LICHSGFIN",
-        "pivot": 564.0,
-        "close": 549.8,
-        "base_high": 579.4,
-        "base_low": 485.45,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.58,
-        "base_start": "2026-07-03",
-        "age_sessions": 54,
-        "history_url": "history/LICHSGFIN.json",
-        "blue_sky": false,
-        "median_turnover_cr": 182.17
-      },
-      {
-        "symbol": "UNOMINDA",
-        "pivot": 1285.0,
-        "close": 1250.0,
-        "base_high": 1307.5,
-        "base_low": 1160.0,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.8,
-        "base_start": "2026-08-10",
-        "age_sessions": 28,
-        "history_url": "history/UNOMINDA.json",
-        "blue_sky": false,
-        "median_turnover_cr": 69.98
-      },
-      {
-        "symbol": "CONCORDBIO",
-        "pivot": 1542.2,
-        "close": 1500.0,
-        "base_high": 1546.4,
-        "base_low": 1411.6,
-        "base_end_date": null,
-        "base_number": null,
-        "dist_to_pivot_pct": 2.81,
-        "base_start": "2026-08-27",
-        "age_sessions": 15,
-        "history_url": "history/CONCORDBIO.json",
-        "blue_sky": false,
-        "median_turnover_cr": 15.09
+        "median_turnover_cr": 141.93
       }
     ]
   },
@@ -1090,7 +1090,7 @@
       },
       "history_url": "history/IZMO.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.02
+      "median_turnover_cr": 8.52
     },
     {
       "symbol": "FORCEMOT",
@@ -1651,7 +1651,7 @@
       },
       "history_url": "history/QPOWER.json",
       "blue_sky": false,
-      "median_turnover_cr": 44.89
+      "median_turnover_cr": 45.35
     },
     {
       "symbol": "QPOWER",
@@ -1772,7 +1772,7 @@
       },
       "history_url": "history/QPOWER.json",
       "blue_sky": false,
-      "median_turnover_cr": 44.89
+      "median_turnover_cr": 45.35
     },
     {
       "symbol": "AEROFLEX",
@@ -2088,7 +2088,7 @@
       },
       "history_url": "history/KERNEX.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.44
+      "median_turnover_cr": 32.31
     },
     {
       "symbol": "NETWEB",
@@ -2325,13 +2325,13 @@
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 603.55,
-          "gain_pct": 97.37
+          "current_price": 633.7,
+          "gain_pct": 107.23
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 603.55,
-          "gain_pct": 97.37
+          "current_price": 633.7,
+          "gain_pct": 107.23
         },
         "25_8_5": {
           "status": "skipped"
@@ -2408,7 +2408,7 @@
       },
       "history_url": "history/TBZ.json",
       "blue_sky": true,
-      "median_turnover_cr": 85.65
+      "median_turnover_cr": 82.77
     },
     {
       "symbol": "ATHERENERG",
@@ -2466,13 +2466,13 @@
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 1613.2,
-          "gain_pct": 57.84
+          "current_price": 1594.0,
+          "gain_pct": 55.96
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1613.2,
-          "gain_pct": 57.84
+          "current_price": 1594.0,
+          "gain_pct": 55.96
         },
         "50_12_5": {
           "status": "skipped"
@@ -2985,23 +2985,23 @@
         },
         "100_12_5": {
           "status": "open",
-          "current_price": 91.8,
-          "gain_pct": 46.79
+          "current_price": 88.14,
+          "gain_pct": 40.93
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 91.8,
-          "gain_pct": 46.79
+          "current_price": 88.14,
+          "gain_pct": 40.93
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 91.8,
-          "gain_pct": 46.79
+          "current_price": 88.14,
+          "gain_pct": 40.93
         }
       },
       "history_url": "history/CONFIPET.json",
       "blue_sky": false,
-      "median_turnover_cr": 28.41
+      "median_turnover_cr": 29.2
     },
     {
       "symbol": "INDOTECH",
@@ -3110,7 +3110,7 @@
       },
       "history_url": "history/INDOTECH.json",
       "blue_sky": false,
-      "median_turnover_cr": 4.53
+      "median_turnover_cr": 4.48
     },
     {
       "symbol": "RPEL",
@@ -3192,46 +3192,46 @@
         },
         "50_4_5": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_4_10": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_8_5": {
           "status": "skipped"
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_12_5": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1644.8,
-          "gain_pct": 25.19
+          "current_price": 1690.0,
+          "gain_pct": 28.63
         },
         "100_4_5": {
           "status": "skipped"
@@ -3263,7 +3263,7 @@
       },
       "history_url": "history/RPEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 21.25
+      "median_turnover_cr": 19.4
     },
     {
       "symbol": "SBC",
@@ -3453,13 +3453,13 @@
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 49.0,
-          "gain_pct": 47.5
+          "current_price": 49.2,
+          "gain_pct": 48.1
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 49.0,
-          "gain_pct": 47.5
+          "current_price": 49.2,
+          "gain_pct": 48.1
         },
         "100_8_5": {
           "status": "skipped"
@@ -3482,7 +3482,7 @@
       },
       "history_url": "history/SBC.json",
       "blue_sky": false,
-      "median_turnover_cr": 37.16
+      "median_turnover_cr": 38.82
     },
     {
       "symbol": "APEX",
@@ -3821,21 +3821,21 @@
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 203.1,
-          "gain_pct": 42.7
+          "current_price": 202.5,
+          "gain_pct": 42.27
         },
         "50_12_5": {
           "status": "skipped"
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 203.1,
-          "gain_pct": 42.7
+          "current_price": 202.5,
+          "gain_pct": 42.27
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 203.1,
-          "gain_pct": 42.7
+          "current_price": 202.5,
+          "gain_pct": 42.27
         },
         "100_4_5": {
           "status": "skipped"
@@ -3867,7 +3867,7 @@
       },
       "history_url": "history/IOLCP.json",
       "blue_sky": false,
-      "median_turnover_cr": 94.91
+      "median_turnover_cr": 90.8
     },
     {
       "symbol": "NETWEB",
@@ -3984,7 +3984,7 @@
       },
       "history_url": "history/NETWEB.json",
       "blue_sky": false,
-      "median_turnover_cr": 818.85
+      "median_turnover_cr": 787.42
     },
     {
       "symbol": "GODAVARIB",
@@ -4181,7 +4181,7 @@
       },
       "history_url": "history/GODAVARIB.json",
       "blue_sky": false,
-      "median_turnover_cr": 1.86
+      "median_turnover_cr": 1.81
     },
     {
       "symbol": "NETWEB",
@@ -4346,7 +4346,7 @@
       },
       "history_url": "history/NETWEB.json",
       "blue_sky": false,
-      "median_turnover_cr": 818.85
+      "median_turnover_cr": 787.42
     },
     {
       "symbol": "SKMEGGPROD",
@@ -4455,7 +4455,7 @@
       },
       "history_url": "history/SKMEGGPROD.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.61
+      "median_turnover_cr": 5.34
     },
     {
       "symbol": "UNIVCABLES",
@@ -4564,7 +4564,7 @@
       },
       "history_url": "history/UNIVCABLES.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.88
+      "median_turnover_cr": 17.9
     },
     {
       "symbol": "SHREEJISPG",
@@ -4595,26 +4595,26 @@
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 4.07
+          "current_price": 717.0,
+          "gain_pct": 5.42
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 4.07
+          "current_price": 717.0,
+          "gain_pct": 5.42
         },
         "25_12_5": {
           "status": "skipped"
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 4.07
+          "current_price": 717.0,
+          "gain_pct": 5.42
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 4.07
+          "current_price": 717.0,
+          "gain_pct": 5.42
         },
         "50_4_5": {
           "status": "skipped"
@@ -4672,8 +4672,8 @@
         }
       },
       "history_url": "history/SHREEJISPG.json",
-      "blue_sky": false,
-      "median_turnover_cr": 56.61
+      "blue_sky": true,
+      "median_turnover_cr": 60.25
     },
     {
       "symbol": "ORCHPHARMA",
@@ -4813,18 +4813,18 @@
       "outcomes": {
         "25_4_5": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 6.56
+          "current_price": 717.0,
+          "gain_pct": 7.94
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 6.56
+          "current_price": 717.0,
+          "gain_pct": 7.94
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 707.8,
-          "gain_pct": 6.56
+          "current_price": 717.0,
+          "gain_pct": 7.94
         },
         "25_8_5": {
           "status": "skipped"
@@ -4900,8 +4900,8 @@
         }
       },
       "history_url": "history/SHREEJISPG.json",
-      "blue_sky": false,
-      "median_turnover_cr": 56.61
+      "blue_sky": true,
+      "median_turnover_cr": 60.25
     },
     {
       "symbol": "SUVEN",
@@ -5014,7 +5014,7 @@
       },
       "history_url": "history/SUVEN.json",
       "blue_sky": false,
-      "median_turnover_cr": 19.82
+      "median_turnover_cr": 19.58
     },
     {
       "symbol": "LGBBROSLTD",
@@ -5348,7 +5348,7 @@
       },
       "history_url": "history/CHENNPETRO.json",
       "blue_sky": false,
-      "median_turnover_cr": 182.23
+      "median_turnover_cr": 187.16
     },
     {
       "symbol": "GODAVARIB",
@@ -5795,7 +5795,7 @@
       },
       "history_url": "history/SOTL.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.69
+      "median_turnover_cr": 17.31
     },
     {
       "symbol": "APOLLO",
@@ -6022,7 +6022,7 @@
       },
       "history_url": "history/KMEW.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.6
+      "median_turnover_cr": 22.49
     },
     {
       "symbol": "RISHABH",
@@ -6047,8 +6047,8 @@
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 763.95,
-          "gain_pct": 13.7
+          "current_price": 750.0,
+          "gain_pct": 11.62
         },
         "25_8_5": {
           "status": "skipped"
@@ -6125,7 +6125,7 @@
       },
       "history_url": "history/RISHABH.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.32
+      "median_turnover_cr": 17.0
     },
     {
       "symbol": "SHARDACROP",
@@ -6258,7 +6258,7 @@
       },
       "history_url": "history/SHARDACROP.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.09
+      "median_turnover_cr": 8.79
     },
     {
       "symbol": "INDOBORAX",
@@ -6370,18 +6370,18 @@
         },
         "50_12_5": {
           "status": "open",
-          "current_price": 472.25,
-          "gain_pct": 5.17
+          "current_price": 463.6,
+          "gain_pct": 3.24
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 472.25,
-          "gain_pct": 5.17
+          "current_price": 463.6,
+          "gain_pct": 3.24
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 472.25,
-          "gain_pct": 5.17
+          "current_price": 463.6,
+          "gain_pct": 3.24
         },
         "100_4_5": {
           "status": "skipped"
@@ -6413,7 +6413,7 @@
       },
       "history_url": "history/INDOBORAX.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.85
+      "median_turnover_cr": 6.53
     },
     {
       "symbol": "EBGNG",
@@ -6432,18 +6432,18 @@
       "outcomes": {
         "25_4_5": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "25_8_5": {
           "status": "skipped"
@@ -6459,28 +6459,28 @@
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "50_4_5": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "50_4_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "50_8_5": {
           "status": "skipped"
@@ -6502,48 +6502,48 @@
         },
         "100_4_5": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_8_5": {
           "status": "skipped"
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_12_5": {
           "status": "skipped"
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 6.02
+          "current_price": 688.55,
+          "gain_pct": 3.52
         }
       },
       "history_url": "history/EBGNG.json",
-      "blue_sky": true,
+      "blue_sky": false,
       "median_turnover_cr": 62.01
     },
     {
@@ -7508,7 +7508,7 @@
       },
       "history_url": "history/BHARATSE.json",
       "blue_sky": false,
-      "median_turnover_cr": 2.74
+      "median_turnover_cr": 2.68
     },
     {
       "symbol": "SSWL",
@@ -7551,26 +7551,26 @@
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "25_12_5": {
           "status": "skipped"
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "50_4_5": {
           "status": "closed",
@@ -7595,31 +7595,31 @@
         },
         "50_8_5": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "50_12_5": {
           "status": "skipped"
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 371.1,
-          "gain_pct": 3.88
+          "current_price": 363.0,
+          "gain_pct": 1.61
         },
         "100_4_5": {
           "status": "skipped"
@@ -7651,7 +7651,7 @@
       },
       "history_url": "history/SSWL.json",
       "blue_sky": false,
-      "median_turnover_cr": 29.52
+      "median_turnover_cr": 28.36
     },
     {
       "symbol": "BHARATSE",
@@ -7914,7 +7914,7 @@
       },
       "history_url": "history/GODAVARIB.json",
       "blue_sky": false,
-      "median_turnover_cr": 1.86
+      "median_turnover_cr": 1.81
     },
     {
       "symbol": "ARFIN",
@@ -8208,26 +8208,26 @@
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 1112.0,
-          "gain_pct": 74.73
+          "current_price": 1099.0,
+          "gain_pct": 72.69
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 1112.0,
-          "gain_pct": 74.73
+          "current_price": 1099.0,
+          "gain_pct": 72.69
         },
         "100_12_5": {
           "status": "skipped"
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 1112.0,
-          "gain_pct": 74.73
+          "current_price": 1099.0,
+          "gain_pct": 72.69
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 1112.0,
-          "gain_pct": 74.73
+          "current_price": 1099.0,
+          "gain_pct": 72.69
         }
       },
       "history_url": "history/ANTELOPUS.json",
@@ -8361,7 +8361,7 @@
       },
       "history_url": "history/SANGHVIMOV.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.37
+      "median_turnover_cr": 12.05
     },
     {
       "symbol": "BELRISE",
@@ -8944,7 +8944,7 @@
       },
       "history_url": "history/UNIVCABLES.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.88
+      "median_turnover_cr": 17.9
     },
     {
       "symbol": "EBGNG",
@@ -8975,13 +8975,13 @@
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 4.35
+          "current_price": 688.55,
+          "gain_pct": 1.89
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 4.35
+          "current_price": 688.55,
+          "gain_pct": 1.89
         },
         "25_12_5": {
           "status": "skipped"
@@ -9048,7 +9048,7 @@
         }
       },
       "history_url": "history/EBGNG.json",
-      "blue_sky": true,
+      "blue_sky": false,
       "median_turnover_cr": 62.01
     },
     {
@@ -9252,7 +9252,7 @@
       },
       "history_url": "history/LUMAXIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.42
+      "median_turnover_cr": 7.16
     },
     {
       "symbol": "SOTL",
@@ -9882,36 +9882,36 @@
         },
         "100_8_5": {
           "status": "open",
-          "current_price": 1415.0,
-          "gain_pct": 53.5
+          "current_price": 1377.9,
+          "gain_pct": 49.48
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 1415.0,
-          "gain_pct": 53.5
+          "current_price": 1377.9,
+          "gain_pct": 49.48
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 1415.0,
-          "gain_pct": 53.5
+          "current_price": 1377.9,
+          "gain_pct": 49.48
         },
         "100_12_5": {
           "status": "skipped"
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 1415.0,
-          "gain_pct": 53.5
+          "current_price": 1377.9,
+          "gain_pct": 49.48
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 1415.0,
-          "gain_pct": 53.5
+          "current_price": 1377.9,
+          "gain_pct": 49.48
         }
       },
       "history_url": "history/CHENNPETRO.json",
       "blue_sky": false,
-      "median_turnover_cr": 182.23
+      "median_turnover_cr": 187.16
     },
     {
       "symbol": "DELHIVERY",
@@ -10024,7 +10024,7 @@
       },
       "history_url": "history/DELHIVERY.json",
       "blue_sky": false,
-      "median_turnover_cr": 65.6
+      "median_turnover_cr": 76.85
     },
     {
       "symbol": "VINDHYATEL",
@@ -10140,8 +10140,8 @@
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 2674.7,
-          "gain_pct": 12.24
+          "current_price": 2880.0,
+          "gain_pct": 20.86
         },
         "100_12_5": {
           "status": "skipped"
@@ -10155,7 +10155,7 @@
       },
       "history_url": "history/VINDHYATEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.46
+      "median_turnover_cr": 24.08
     },
     {
       "symbol": "TMB",
@@ -10304,7 +10304,7 @@
       },
       "history_url": "history/TMB.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.74
+      "median_turnover_cr": 10.98
     },
     {
       "symbol": "AETHER",
@@ -10493,13 +10493,13 @@
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 1625.2,
-          "gain_pct": 61.63
+          "current_price": 1638.1,
+          "gain_pct": 62.91
         }
       },
       "history_url": "history/AETHER.json",
       "blue_sky": false,
-      "median_turnover_cr": 34.29
+      "median_turnover_cr": 33.51
     },
     {
       "symbol": "NRBBEARING",
@@ -10702,7 +10702,7 @@
       },
       "history_url": "history/BLUESTONE.json",
       "blue_sky": false,
-      "median_turnover_cr": 53.68
+      "median_turnover_cr": 49.92
     },
     {
       "symbol": "PRECWIRE",
@@ -10920,22 +10920,22 @@
       "market_cap_cr": 2815.5,
       "base_high": 1787.8,
       "base_low": 1520.0,
-      "is_fresh_today": true,
+      "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "25_8_5": {
           "status": "skipped"
@@ -10945,41 +10945,41 @@
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "25_12_5": {
           "status": "skipped"
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "50_4_5": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "50_4_10": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "50_8_5": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "50_8_10": {
           "status": "skipped"
@@ -10995,8 +10995,8 @@
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "100_4_5": {
           "status": "skipped"
@@ -11006,8 +11006,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "100_8_5": {
           "status": "skipped"
@@ -11017,8 +11017,8 @@
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 0.0
+          "current_price": 1768.0,
+          "gain_pct": 0.4
         },
         "100_12_5": {
           "status": "skipped"
@@ -11032,7 +11032,7 @@
       },
       "history_url": "history/TATVA.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.74
+      "median_turnover_cr": 6.83
     },
     {
       "symbol": "KRISHNADEF",
@@ -11189,7 +11189,7 @@
       },
       "history_url": "history/KRISHNADEF.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.62
+      "median_turnover_cr": 7.26
     },
     {
       "symbol": "EBGNG",
@@ -11262,8 +11262,8 @@
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 705.2,
-          "gain_pct": 8.41
+          "current_price": 688.55,
+          "gain_pct": 5.85
         },
         "50_12_5": {
           "status": "skipped"
@@ -11303,7 +11303,7 @@
         }
       },
       "history_url": "history/EBGNG.json",
-      "blue_sky": true,
+      "blue_sky": false,
       "median_turnover_cr": 62.01
     },
     {
@@ -11531,7 +11531,7 @@
       },
       "history_url": "history/DELHIVERY.json",
       "blue_sky": false,
-      "median_turnover_cr": 65.6
+      "median_turnover_cr": 76.85
     },
     {
       "symbol": "WAAREEENER",
@@ -11738,7 +11738,7 @@
       },
       "history_url": "history/AEROENTER.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.02
+      "median_turnover_cr": 13.53
     },
     {
       "symbol": "GAEL",
@@ -11843,7 +11843,7 @@
       },
       "history_url": "history/GAEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.23
+      "median_turnover_cr": 12.71
     },
     {
       "symbol": "WAAREEENER",
@@ -12187,13 +12187,13 @@
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 889.1,
-          "gain_pct": 54.94
+          "current_price": 888.0,
+          "gain_pct": 54.74
         }
       },
       "history_url": "history/TMB.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.74
+      "median_turnover_cr": 10.98
     },
     {
       "symbol": "IDEAFORGE",
@@ -13350,7 +13350,7 @@
       },
       "history_url": "history/JTLIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 29.07
+      "median_turnover_cr": 26.9
     },
     {
       "symbol": "DELHIVERY",
@@ -13491,7 +13491,7 @@
       },
       "history_url": "history/DELHIVERY.json",
       "blue_sky": false,
-      "median_turnover_cr": 65.6
+      "median_turnover_cr": 76.85
     },
     {
       "symbol": "SPORTKING",
@@ -13894,7 +13894,7 @@
       },
       "history_url": "history/CARTRADE.json",
       "blue_sky": false,
-      "median_turnover_cr": 98.98
+      "median_turnover_cr": 96.37
     },
     {
       "symbol": "AETHER",
@@ -14007,7 +14007,7 @@
       },
       "history_url": "history/AETHER.json",
       "blue_sky": false,
-      "median_turnover_cr": 34.29
+      "median_turnover_cr": 33.51
     },
     {
       "symbol": "VTL",
@@ -15003,18 +15003,18 @@
         },
         "100_8_5": {
           "status": "open",
-          "current_price": 889.1,
-          "gain_pct": 56.35
+          "current_price": 888.0,
+          "gain_pct": 56.16
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 889.1,
-          "gain_pct": 56.35
+          "current_price": 888.0,
+          "gain_pct": 56.16
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 889.1,
-          "gain_pct": 56.35
+          "current_price": 888.0,
+          "gain_pct": 56.16
         },
         "100_12_5": {
           "status": "skipped"
@@ -15028,7 +15028,7 @@
       },
       "history_url": "history/TMB.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.74
+      "median_turnover_cr": 10.98
     },
     {
       "symbol": "TATVA",
@@ -16038,7 +16038,7 @@
       },
       "history_url": "history/ITDC.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.01
+      "median_turnover_cr": 4.65
     },
     {
       "symbol": "NILKAMAL",
@@ -16258,8 +16258,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 372.9,
-          "gain_pct": 145.15
+          "current_price": 382.0,
+          "gain_pct": 151.13
         },
         "100_8_5": {
           "status": "skipped"
@@ -16282,7 +16282,7 @@
       },
       "history_url": "history/INDSWFTLAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 21.23
+      "median_turnover_cr": 22.9
     },
     {
       "symbol": "CHENNPETRO",
@@ -16479,113 +16479,6 @@
           "status": "skipped"
         }
       }
-    },
-    {
-      "symbol": "TALBROAUTO",
-      "entry_date": "2026-09-18",
-      "entry_price": 478.0,
-      "pivot": 437.0,
-      "rs_pct": 92.0,
-      "base_weeks": 5.8,
-      "base_start": "2026-08-07",
-      "base_end_date": "2026-09-18",
-      "base_number": 1,
-      "market_cap_cr": 1760.9,
-      "base_high": 480.8,
-      "base_low": 394.5,
-      "is_fresh_today": true,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 0.0
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 0.0
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 0.0
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      },
-      "history_url": "history/TALBROAUTO.json",
-      "blue_sky": true,
-      "median_turnover_cr": 6.67
     },
     {
       "symbol": "VOLTAMP",
@@ -16823,6 +16716,113 @@
       "median_turnover_cr": 17.75
     },
     {
+      "symbol": "TALBROAUTO",
+      "entry_date": "2026-09-18",
+      "entry_price": 478.0,
+      "pivot": 437.0,
+      "rs_pct": 91.9,
+      "base_weeks": 5.8,
+      "base_start": "2026-08-07",
+      "base_end_date": "2026-09-18",
+      "base_number": 1,
+      "market_cap_cr": 1760.9,
+      "base_high": 480.8,
+      "base_low": 394.5,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "open",
+          "current_price": 466.75,
+          "gain_pct": -2.35
+        },
+        "25_4_15": {
+          "status": "skipped"
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "open",
+          "current_price": 466.75,
+          "gain_pct": -2.35
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "open",
+          "current_price": 466.75,
+          "gain_pct": -2.35
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/TALBROAUTO.json",
+      "blue_sky": false,
+      "median_turnover_cr": 6.98
+    },
+    {
       "symbol": "TMB",
       "entry_date": "2026-01-08",
       "entry_price": 564.75,
@@ -16957,7 +16957,7 @@
       },
       "history_url": "history/TMB.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.74
+      "median_turnover_cr": 10.98
     },
     {
       "symbol": "GOODLUCK",
@@ -17701,7 +17701,7 @@
       },
       "history_url": "history/GAEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.23
+      "median_turnover_cr": 12.71
     },
     {
       "symbol": "ENTERO",
@@ -17818,7 +17818,7 @@
       },
       "history_url": "history/ENTERO.json",
       "blue_sky": false,
-      "median_turnover_cr": 38.77
+      "median_turnover_cr": 41.51
     },
     {
       "symbol": "HAPPYFORGE",
@@ -18224,7 +18224,7 @@
         }
       },
       "history_url": "history/AVALON.json",
-      "blue_sky": true,
+      "blue_sky": false,
       "median_turnover_cr": 81.1
     },
     {
@@ -18354,7 +18354,7 @@
       },
       "history_url": "history/STAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.97
+      "median_turnover_cr": 34.4
     },
     {
       "symbol": "AXISBANK",
@@ -18900,7 +18900,7 @@
       },
       "history_url": "history/WAAREEENER.json",
       "blue_sky": false,
-      "median_turnover_cr": 124.71
+      "median_turnover_cr": 124.96
     },
     {
       "symbol": "ABB",
@@ -19409,7 +19409,7 @@
       },
       "history_url": "history/ABDL.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.13
+      "median_turnover_cr": 18.88
     },
     {
       "symbol": "GRWRHITECH",
@@ -20494,33 +20494,33 @@
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 735.95,
-          "gain_pct": 56.79
+          "current_price": 731.0,
+          "gain_pct": 55.73
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 735.95,
-          "gain_pct": 56.79
+          "current_price": 731.0,
+          "gain_pct": 55.73
         },
         "100_12_5": {
           "status": "open",
-          "current_price": 735.95,
-          "gain_pct": 56.79
+          "current_price": 731.0,
+          "gain_pct": 55.73
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 735.95,
-          "gain_pct": 56.79
+          "current_price": 731.0,
+          "gain_pct": 55.73
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 735.95,
-          "gain_pct": 56.79
+          "current_price": 731.0,
+          "gain_pct": 55.73
         }
       },
       "history_url": "history/AVADHSUGAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.87
+      "median_turnover_cr": 11.01
     },
     {
       "symbol": "HONASA",
@@ -20620,13 +20620,13 @@
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 476.0,
-          "gain_pct": 54.82
+          "current_price": 472.8,
+          "gain_pct": 53.78
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 476.0,
-          "gain_pct": 54.82
+          "current_price": 472.8,
+          "gain_pct": 53.78
         },
         "100_8_5": {
           "status": "skipped"
@@ -20649,7 +20649,7 @@
       },
       "history_url": "history/HONASA.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.02
+      "median_turnover_cr": 32.75
     },
     {
       "symbol": "VOLTAMP",
@@ -21076,7 +21076,7 @@
       },
       "history_url": "history/SBCL.json",
       "blue_sky": false,
-      "median_turnover_cr": 35.05
+      "median_turnover_cr": 37.47
     },
     {
       "symbol": "DWARKESH",
@@ -21181,7 +21181,7 @@
       },
       "history_url": "history/DWARKESH.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.39
+      "median_turnover_cr": 18.16
     },
     {
       "symbol": "RICOAUTO",
@@ -21682,7 +21682,7 @@
       },
       "history_url": "history/KROSS.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.06
+      "median_turnover_cr": 10.18
     },
     {
       "symbol": "LINDEINDIA",
@@ -22140,7 +22140,7 @@
       },
       "history_url": "history/PTC.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.94
+      "median_turnover_cr": 17.08
     },
     {
       "symbol": "SHILPAMED",
@@ -22460,8 +22460,8 @@
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 22700.0,
-          "gain_pct": 25.4
+          "current_price": 22690.0,
+          "gain_pct": 25.35
         },
         "100_12_5": {
           "status": "skipped"
@@ -22475,7 +22475,7 @@
       },
       "history_url": "history/NEULANDLAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 90.82
+      "median_turnover_cr": 93.28
     },
     {
       "symbol": "SONACOMS",
@@ -23576,7 +23576,7 @@
       },
       "history_url": "history/ENGINERSIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 64.54
+      "median_turnover_cr": 73.96
     },
     {
       "symbol": "DWARKESH",
@@ -23775,141 +23775,6 @@
       }
     },
     {
-      "symbol": "HATSUN",
-      "entry_date": "2026-09-15",
-      "entry_price": 1259.2,
-      "pivot": 1224.55,
-      "rs_pct": 89.2,
-      "base_weeks": 94.8,
-      "base_start": "2024-10-16",
-      "base_end_date": "2026-09-15",
-      "base_number": 1,
-      "market_cap_cr": 21364.2,
-      "base_high": 1349.7,
-      "base_low": 855.3,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "25_4_10": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "25_4_15": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "50_4_10": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "50_4_15": {
-          "status": "closed",
-          "exit_date": "2026-09-17",
-          "exit_price": 1179.7,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.31
-        },
-        "50_8_5": {
-          "status": "closed",
-          "exit_date": "2026-09-18",
-          "exit_price": 1143.4,
-          "exit_reason": "8% close stop",
-          "return_pct": -9.2
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -9.2
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "closed",
-          "exit_date": "2026-09-18",
-          "exit_price": 1143.4,
-          "exit_reason": "8% close stop",
-          "return_pct": -9.2
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      },
-      "history_url": "history/HATSUN.json",
-      "blue_sky": false,
-      "median_turnover_cr": 12.34
-    },
-    {
       "symbol": "KTKBANK",
       "entry_date": "2026-03-18",
       "entry_price": 231.88,
@@ -23999,8 +23864,8 @@
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 314.65,
-          "gain_pct": 35.7
+          "current_price": 314.8,
+          "gain_pct": 35.76
         },
         "100_12_5": {
           "status": "skipped"
@@ -24014,7 +23879,7 @@
       },
       "history_url": "history/KTKBANK.json",
       "blue_sky": false,
-      "median_turnover_cr": 66.87
+      "median_turnover_cr": 65.82
     },
     {
       "symbol": "PREMIERENE",
@@ -24246,33 +24111,33 @@
         },
         "25_8_5": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "25_12_5": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 525.5,
-          "gain_pct": 17.48
+          "current_price": 534.0,
+          "gain_pct": 19.38
         },
         "50_4_5": {
           "status": "skipped"
@@ -24335,7 +24200,142 @@
       },
       "history_url": "history/QUADFUTURE.json",
       "blue_sky": false,
-      "median_turnover_cr": 40.64
+      "median_turnover_cr": 32.11
+    },
+    {
+      "symbol": "HATSUN",
+      "entry_date": "2026-09-15",
+      "entry_price": 1259.2,
+      "pivot": 1224.55,
+      "rs_pct": 89.1,
+      "base_weeks": 94.8,
+      "base_start": "2024-10-16",
+      "base_end_date": "2026-09-15",
+      "base_number": 1,
+      "market_cap_cr": 21364.2,
+      "base_high": 1349.7,
+      "base_low": 855.3,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "25_4_10": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "25_4_15": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "50_4_10": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "50_4_15": {
+          "status": "closed",
+          "exit_date": "2026-09-17",
+          "exit_price": 1179.7,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.31
+        },
+        "50_8_5": {
+          "status": "closed",
+          "exit_date": "2026-09-18",
+          "exit_price": 1143.4,
+          "exit_reason": "8% close stop",
+          "return_pct": -9.2
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -10.24
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "closed",
+          "exit_date": "2026-09-18",
+          "exit_price": 1143.4,
+          "exit_reason": "8% close stop",
+          "return_pct": -9.2
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/HATSUN.json",
+      "blue_sky": false,
+      "median_turnover_cr": 12.34
     },
     {
       "symbol": "SANSERA",
@@ -24501,38 +24501,38 @@
         },
         "100_8_5": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         },
         "100_12_5": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 4262.0,
-          "gain_pct": 141.4
+          "current_price": 4300.0,
+          "gain_pct": 143.56
         }
       },
       "history_url": "history/SANSERA.json",
       "blue_sky": true,
-      "median_turnover_cr": 52.67
+      "median_turnover_cr": 53.62
     },
     {
       "symbol": "BANDHANBNK",
@@ -24904,7 +24904,7 @@
       },
       "history_url": "history/GODAVARIB.json",
       "blue_sky": false,
-      "median_turnover_cr": 1.86
+      "median_turnover_cr": 1.81
     },
     {
       "symbol": "TECHM",
@@ -25174,7 +25174,7 @@
       },
       "history_url": "history/BANDHANBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 110.07
+      "median_turnover_cr": 110.85
     },
     {
       "symbol": "ASTRAMICRO",
@@ -25511,7 +25511,7 @@
       },
       "history_url": "history/ABDL.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.13
+      "median_turnover_cr": 18.88
     },
     {
       "symbol": "SUNDARMFIN",
@@ -26044,7 +26044,7 @@
       },
       "history_url": "history/MANORAMA.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.47
+      "median_turnover_cr": 31.41
     },
     {
       "symbol": "J&KBANK",
@@ -26209,7 +26209,7 @@
       },
       "history_url": "history/J&KBANK.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.5
+      "median_turnover_cr": 27.53
     },
     {
       "symbol": "FINCABLES",
@@ -26444,7 +26444,7 @@
       },
       "history_url": "history/DHAMPURSUG.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.97
+      "median_turnover_cr": 11.58
     },
     {
       "symbol": "DYCL",
@@ -27393,38 +27393,38 @@
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_8_5": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_12_5": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "50_4_5": {
           "status": "skipped"
@@ -27434,8 +27434,8 @@
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 478.0,
-          "gain_pct": 10.7
+          "current_price": 466.75,
+          "gain_pct": 8.09
         },
         "50_8_5": {
           "status": "skipped"
@@ -27484,8 +27484,8 @@
         }
       },
       "history_url": "history/TALBROAUTO.json",
-      "blue_sky": true,
-      "median_turnover_cr": 6.67
+      "blue_sky": false,
+      "median_turnover_cr": 6.98
     },
     {
       "symbol": "ADVENZYMES",
@@ -28072,7 +28072,7 @@
       },
       "history_url": "history/PREMEXPLN.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.09
+      "median_turnover_cr": 10.36
     },
     {
       "symbol": "SIGNPOST",
@@ -29398,8 +29398,8 @@
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 1.03
+          "current_price": 1208.8,
+          "gain_pct": -0.1
         },
         "50_12_5": {
           "status": "skipped"
@@ -29409,23 +29409,23 @@
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 1.03
+          "current_price": 1208.8,
+          "gain_pct": -0.1
         },
         "100_4_5": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 1.03
+          "current_price": 1208.8,
+          "gain_pct": -0.1
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 1.03
+          "current_price": 1208.8,
+          "gain_pct": -0.1
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 1.03
+          "current_price": 1208.8,
+          "gain_pct": -0.1
         },
         "100_8_5": {
           "status": "skipped"
@@ -29448,7 +29448,7 @@
       },
       "history_url": "history/SUNDRMFAST.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.22
+      "median_turnover_cr": 14.11
     },
     {
       "symbol": "PTC",
@@ -30196,33 +30196,33 @@
         },
         "100_4_5": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_8_5": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 668.2,
-          "gain_pct": 12.21
+          "current_price": 675.0,
+          "gain_pct": 13.35
         },
         "100_12_5": {
           "status": "skipped"
@@ -30236,7 +30236,7 @@
       },
       "history_url": "history/PREMEXPLN.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.09
+      "median_turnover_cr": 10.36
     },
     {
       "symbol": "DALBHARAT",
@@ -30644,7 +30644,7 @@
       },
       "history_url": "history/ACI.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.4
+      "median_turnover_cr": 17.65
     },
     {
       "symbol": "ASTRAMICRO",
@@ -32335,7 +32335,7 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.91
+      "median_turnover_cr": 9.6
     },
     {
       "symbol": "AARTIIND",
@@ -32546,7 +32546,7 @@
       },
       "history_url": "history/MAHLOG.json",
       "blue_sky": false,
-      "median_turnover_cr": 4.24
+      "median_turnover_cr": 4.18
     },
     {
       "symbol": "SANSTAR",
@@ -33289,7 +33289,7 @@
       },
       "history_url": "history/JINDRILL.json",
       "blue_sky": false,
-      "median_turnover_cr": 23.9
+      "median_turnover_cr": 17.65
     },
     {
       "symbol": "PTC",
@@ -33394,7 +33394,7 @@
       },
       "history_url": "history/PTC.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.94
+      "median_turnover_cr": 17.08
     },
     {
       "symbol": "RATNAMANI",
@@ -33749,7 +33749,7 @@
       },
       "history_url": "history/TIMKEN.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.38
+      "median_turnover_cr": 10.23
     },
     {
       "symbol": "SENORES",
@@ -34074,7 +34074,7 @@
       },
       "history_url": "history/DREDGECORP.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.7
+      "median_turnover_cr": 7.4
     },
     {
       "symbol": "SKIPPER",
@@ -34682,127 +34682,6 @@
           "status": "skipped"
         }
       }
-    },
-    {
-      "symbol": "HATSUN",
-      "entry_date": "2026-09-11",
-      "entry_price": 1224.4,
-      "pivot": 1206.3,
-      "rs_pct": 85.9,
-      "base_weeks": 94.6,
-      "base_start": "2024-10-16",
-      "base_end_date": "2026-09-11",
-      "base_number": 1,
-      "market_cap_cr": 21364.2,
-      "base_high": 1240.2,
-      "base_low": 855.3,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "25_12_10": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "50_8_15": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "50_12_15": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "closed",
-          "exit_date": "2026-09-18",
-          "exit_price": 1143.4,
-          "exit_reason": "4% close stop",
-          "return_pct": -6.62
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -6.62
-        }
-      },
-      "history_url": "history/HATSUN.json",
-      "blue_sky": false,
-      "median_turnover_cr": 12.34
     },
     {
       "symbol": "CHOLAHLDNG",
@@ -35722,6 +35601,127 @@
       }
     },
     {
+      "symbol": "HATSUN",
+      "entry_date": "2026-09-11",
+      "entry_price": 1224.4,
+      "pivot": 1206.3,
+      "rs_pct": 85.8,
+      "base_weeks": 94.6,
+      "base_start": "2024-10-16",
+      "base_end_date": "2026-09-11",
+      "base_number": 1,
+      "market_cap_cr": 21364.2,
+      "base_high": 1240.2,
+      "base_low": 855.3,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "skipped"
+        },
+        "25_4_15": {
+          "status": "skipped"
+        },
+        "25_8_5": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "25_12_10": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "skipped"
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "50_8_15": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "50_12_15": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "closed",
+          "exit_date": "2026-09-18",
+          "exit_price": 1143.4,
+          "exit_reason": "4% close stop",
+          "return_pct": -6.62
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "open",
+          "current_price": 1130.2,
+          "gain_pct": -7.69
+        }
+      },
+      "history_url": "history/HATSUN.json",
+      "blue_sky": false,
+      "median_turnover_cr": 12.34
+    },
+    {
       "symbol": "AETHER",
       "entry_date": "2026-03-18",
       "entry_price": 1068.55,
@@ -35838,8 +35838,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1625.2,
-          "gain_pct": 52.09
+          "current_price": 1638.1,
+          "gain_pct": 53.3
         },
         "100_8_5": {
           "status": "skipped"
@@ -35849,8 +35849,8 @@
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 1625.2,
-          "gain_pct": 52.09
+          "current_price": 1638.1,
+          "gain_pct": 53.3
         },
         "100_12_5": {
           "status": "skipped"
@@ -35864,7 +35864,7 @@
       },
       "history_url": "history/AETHER.json",
       "blue_sky": false,
-      "median_turnover_cr": 34.29
+      "median_turnover_cr": 33.51
     },
     {
       "symbol": "INOXINDIA",
@@ -35964,13 +35964,13 @@
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 2099.7,
-          "gain_pct": 68.64
+          "current_price": 2139.0,
+          "gain_pct": 71.79
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 2099.7,
-          "gain_pct": 68.64
+          "current_price": 2139.0,
+          "gain_pct": 71.79
         },
         "100_8_5": {
           "status": "skipped"
@@ -36351,8 +36351,8 @@
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1028.0,
-          "gain_pct": 174.35
+          "current_price": 1068.0,
+          "gain_pct": 185.03
         },
         "50_8_5": {
           "status": "skipped"
@@ -36377,13 +36377,13 @@
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 1028.0,
-          "gain_pct": 174.35
+          "current_price": 1068.0,
+          "gain_pct": 185.03
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1028.0,
-          "gain_pct": 174.35
+          "current_price": 1068.0,
+          "gain_pct": 185.03
         },
         "100_8_5": {
           "status": "skipped"
@@ -36406,7 +36406,7 @@
       },
       "history_url": "history/SHILPAMED.json",
       "blue_sky": true,
-      "median_turnover_cr": 102.87
+      "median_turnover_cr": 106.85
     },
     {
       "symbol": "AZAD",
@@ -36876,7 +36876,7 @@
       },
       "history_url": "history/PTC.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.94
+      "median_turnover_cr": 17.08
     },
     {
       "symbol": "FUSION",
@@ -37169,8 +37169,8 @@
         }
       },
       "history_url": "history/NEOGEN.json",
-      "blue_sky": true,
-      "median_turnover_cr": 33.46
+      "blue_sky": false,
+      "median_turnover_cr": 35.08
     },
     {
       "symbol": "TRITURBINE",
@@ -37486,7 +37486,7 @@
       },
       "history_url": "history/MRPL.json",
       "blue_sky": false,
-      "median_turnover_cr": 99.07
+      "median_turnover_cr": 94.56
     },
     {
       "symbol": "WAAREEENER",
@@ -37591,7 +37591,7 @@
       },
       "history_url": "history/WAAREEENER.json",
       "blue_sky": false,
-      "median_turnover_cr": 124.71
+      "median_turnover_cr": 124.96
     },
     {
       "symbol": "PTCIL",
@@ -37994,7 +37994,7 @@
       },
       "history_url": "history/NOCIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.08
+      "median_turnover_cr": 18.37
     },
     {
       "symbol": "SPANDANA",
@@ -39569,138 +39569,7 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.91
-    },
-    {
-      "symbol": "AEGISVOPAK",
-      "entry_date": "2026-09-15",
-      "entry_price": 303.5,
-      "pivot": 301.8,
-      "rs_pct": 84.9,
-      "base_weeks": 5.8,
-      "base_start": "2026-08-04",
-      "base_end_date": "2026-09-15",
-      "base_number": 1,
-      "market_cap_cr": 28636.7,
-      "base_high": 311.0,
-      "base_low": 258.3,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_4_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_8_5": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_8_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_8_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_12_5": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_12_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "25_12_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_4_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_8_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_12_5": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_12_10": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "50_12_15": {
-          "status": "open",
-          "current_price": 317.0,
-          "gain_pct": 4.45
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      },
-      "history_url": "history/AEGISVOPAK.json",
-      "blue_sky": true,
-      "median_turnover_cr": 22.45
+      "median_turnover_cr": 9.6
     },
     {
       "symbol": "OIL",
@@ -40006,6 +39875,137 @@
           "status": "skipped"
         }
       }
+    },
+    {
+      "symbol": "AEGISVOPAK",
+      "entry_date": "2026-09-15",
+      "entry_price": 303.5,
+      "pivot": 301.8,
+      "rs_pct": 84.8,
+      "base_weeks": 5.8,
+      "base_start": "2026-08-04",
+      "base_end_date": "2026-09-15",
+      "base_number": 1,
+      "market_cap_cr": 28636.7,
+      "base_high": 311.0,
+      "base_low": 258.3,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_4_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_8_5": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_8_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_8_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_12_5": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_12_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "25_12_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_4_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_8_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_12_5": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_12_10": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "50_12_15": {
+          "status": "open",
+          "current_price": 317.5,
+          "gain_pct": 4.61
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/AEGISVOPAK.json",
+      "blue_sky": false,
+      "median_turnover_cr": 22.45
     },
     {
       "symbol": "NITINSPIN",
@@ -40707,7 +40707,7 @@
       },
       "history_url": "history/KROSS.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.06
+      "median_turnover_cr": 10.18
     },
     {
       "symbol": "VOLTAMP",
@@ -40812,7 +40812,7 @@
       },
       "history_url": "history/VOLTAMP.json",
       "blue_sky": false,
-      "median_turnover_cr": 30.05
+      "median_turnover_cr": 28.61
     },
     {
       "symbol": "SENORES",
@@ -40943,8 +40943,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1399.9,
-          "gain_pct": 77.65
+          "current_price": 1395.0,
+          "gain_pct": 77.03
         },
         "100_8_5": {
           "status": "skipped"
@@ -42213,7 +42213,7 @@
       },
       "history_url": "history/BANDHANBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 110.07
+      "median_turnover_cr": 110.85
     },
     {
       "symbol": "FEDFINA",
@@ -42710,33 +42710,33 @@
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": 16.59
+          "current_price": 176.3,
+          "gain_pct": 17.72
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": 16.59
+          "current_price": 176.3,
+          "gain_pct": 17.72
         },
         "100_12_5": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": 16.59
+          "current_price": 176.3,
+          "gain_pct": 17.72
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": 16.59
+          "current_price": 176.3,
+          "gain_pct": 17.72
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": 16.59
+          "current_price": 176.3,
+          "gain_pct": 17.72
         }
       },
       "history_url": "history/VINCOFE.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.61
+      "median_turnover_cr": 39.27
     },
     {
       "symbol": "SAGILITY",
@@ -43554,7 +43554,7 @@
       },
       "history_url": "history/AVADHSUGAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 11.87
+      "median_turnover_cr": 11.01
     },
     {
       "symbol": "IPCALAB",
@@ -44160,13 +44160,13 @@
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 1761.0,
-          "gain_pct": 23.31
+          "current_price": 1768.0,
+          "gain_pct": 23.8
         }
       },
       "history_url": "history/TATVA.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.74
+      "median_turnover_cr": 6.83
     },
     {
       "symbol": "PTC",
@@ -45369,13 +45369,13 @@
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -3.95
+          "current_price": 1130.2,
+          "gain_pct": -5.06
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -3.95
+          "current_price": 1130.2,
+          "gain_pct": -5.06
         },
         "25_12_5": {
           "status": "skipped"
@@ -45385,8 +45385,8 @@
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 1143.4,
-          "gain_pct": -3.95
+          "current_price": 1130.2,
+          "gain_pct": -5.06
         },
         "50_4_5": {
           "status": "skipped"
@@ -45548,6 +45548,121 @@
           "status": "skipped"
         }
       }
+    },
+    {
+      "symbol": "TI",
+      "entry_date": "2026-09-21",
+      "entry_price": 581.5,
+      "pivot": 575.65,
+      "rs_pct": 83.7,
+      "base_weeks": 3.8,
+      "base_start": "2026-08-24",
+      "base_end_date": "2026-09-21",
+      "base_number": 1,
+      "market_cap_cr": 8969.2,
+      "base_high": 594.55,
+      "base_low": 500.65,
+      "is_fresh_today": true,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "25_4_15": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "25_8_15": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "50_4_15": {
+          "status": "open",
+          "current_price": 581.5,
+          "gain_pct": 0.0
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/TI.json",
+      "blue_sky": false,
+      "median_turnover_cr": 33.42
     },
     {
       "symbol": "STYLEBAAZA",
@@ -47393,7 +47508,7 @@
       },
       "history_url": "history/SUNDRMFAST.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.22
+      "median_turnover_cr": 14.11
     },
     {
       "symbol": "DMART",
@@ -47729,18 +47844,18 @@
         },
         "100_4_5": {
           "status": "open",
-          "current_price": 2770.0,
-          "gain_pct": 19.94
+          "current_price": 2774.0,
+          "gain_pct": 20.12
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 2770.0,
-          "gain_pct": 19.94
+          "current_price": 2774.0,
+          "gain_pct": 20.12
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 2770.0,
-          "gain_pct": 19.94
+          "current_price": 2774.0,
+          "gain_pct": 20.12
         },
         "100_8_5": {
           "status": "skipped"
@@ -47756,13 +47871,13 @@
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 2770.0,
-          "gain_pct": 19.94
+          "current_price": 2774.0,
+          "gain_pct": 20.12
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 2770.0,
-          "gain_pct": 19.94
+          "current_price": 2774.0,
+          "gain_pct": 20.12
         }
       },
       "history_url": "history/CAPLIPOINT.json",
@@ -47884,7 +47999,7 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.91
+      "median_turnover_cr": 9.6
     },
     {
       "symbol": "STYLEBAAZA",
@@ -49276,7 +49391,7 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.91
+      "median_turnover_cr": 9.6
     },
     {
       "symbol": "IDEAFORGE",
@@ -50237,7 +50352,7 @@
       },
       "history_url": "history/ENTERO.json",
       "blue_sky": false,
-      "median_turnover_cr": 38.77
+      "median_turnover_cr": 41.51
     },
     {
       "symbol": "ZENTEC",
@@ -50468,7 +50583,7 @@
       },
       "history_url": "history/EXIDEIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 85.91
+      "median_turnover_cr": 84.72
     },
     {
       "symbol": "CIEINDIA",
@@ -52025,8 +52140,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 314.65,
-          "gain_pct": 42.18
+          "current_price": 314.8,
+          "gain_pct": 42.24
         },
         "100_8_5": {
           "status": "skipped"
@@ -52049,7 +52164,7 @@
       },
       "history_url": "history/KTKBANK.json",
       "blue_sky": false,
-      "median_turnover_cr": 66.87
+      "median_turnover_cr": 65.82
     },
     {
       "symbol": "PREMEXPLN",
@@ -52837,7 +52952,7 @@
       },
       "history_url": "history/JINDRILL.json",
       "blue_sky": false,
-      "median_turnover_cr": 23.9
+      "median_turnover_cr": 17.65
     },
     {
       "symbol": "ASHOKLEY",
@@ -55107,33 +55222,33 @@
         },
         "100_8_5": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         },
         "100_12_5": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 725.0,
-          "gain_pct": 16.98
+          "current_price": 721.0,
+          "gain_pct": 16.34
         }
       },
       "history_url": "history/VISHNU.json",
@@ -56027,7 +56142,7 @@
       },
       "history_url": "history/SURYODAY.json",
       "blue_sky": false,
-      "median_turnover_cr": 4.26
+      "median_turnover_cr": 3.64
     },
     {
       "symbol": "SENCO",
@@ -56348,7 +56463,7 @@
       },
       "history_url": "history/VOLTAS.json",
       "blue_sky": false,
-      "median_turnover_cr": 64.41
+      "median_turnover_cr": 74.37
     },
     {
       "symbol": "BALRAMCHIN",
@@ -56497,7 +56612,7 @@
       },
       "history_url": "history/BALRAMCHIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 189.84
+      "median_turnover_cr": 145.86
     },
     {
       "symbol": "ADVENZYMES",
@@ -56810,7 +56925,7 @@
       },
       "history_url": "history/SFL.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.72
+      "median_turnover_cr": 9.52
     },
     {
       "symbol": "SFL",
@@ -56915,7 +57030,7 @@
       },
       "history_url": "history/SFL.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.72
+      "median_turnover_cr": 9.52
     },
     {
       "symbol": "GMMPFAUDLR",
@@ -57632,7 +57747,7 @@
       },
       "history_url": "history/LALPATHLAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.33
+      "median_turnover_cr": 35.29
     },
     {
       "symbol": "ARVIND",
@@ -58946,13 +59061,13 @@
         },
         "25_12_10": {
           "status": "open",
-          "current_price": 552.85,
-          "gain_pct": 16.65
+          "current_price": 551.5,
+          "gain_pct": 16.36
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 552.85,
-          "gain_pct": 16.65
+          "current_price": 551.5,
+          "gain_pct": 16.36
         },
         "50_4_5": {
           "status": "skipped"
@@ -58962,8 +59077,8 @@
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 552.85,
-          "gain_pct": 16.65
+          "current_price": 551.5,
+          "gain_pct": 16.36
         },
         "50_8_5": {
           "status": "skipped"
@@ -59804,7 +59919,7 @@
       },
       "history_url": "history/ICIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 22.89
+      "median_turnover_cr": 20.95
     },
     {
       "symbol": "DHAMPURSUG",
@@ -59925,7 +60040,7 @@
       },
       "history_url": "history/DHAMPURSUG.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.97
+      "median_turnover_cr": 11.58
     },
     {
       "symbol": "FINEORG",
@@ -60226,7 +60341,7 @@
       },
       "history_url": "history/EXIDEIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 85.91
+      "median_turnover_cr": 84.72
     },
     {
       "symbol": "ASTERDM",
@@ -60545,8 +60660,8 @@
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "25_8_5": {
           "status": "skipped"
@@ -60556,8 +60671,8 @@
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "25_12_5": {
           "status": "skipped"
@@ -60579,31 +60694,31 @@
         },
         "50_8_5": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "50_12_5": {
           "status": "skipped"
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1110.2,
-          "gain_pct": 1.24
+          "current_price": 1130.0,
+          "gain_pct": 3.05
         },
         "100_4_5": {
           "status": "skipped"
@@ -60820,7 +60935,7 @@
       },
       "history_url": "history/J&KBANK.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.5
+      "median_turnover_cr": 27.53
     },
     {
       "symbol": "HCLTECH",
@@ -60957,7 +61072,7 @@
       },
       "history_url": "history/HCLTECH.json",
       "blue_sky": false,
-      "median_turnover_cr": 261.72
+      "median_turnover_cr": 269.7
     },
     {
       "symbol": "MARINE",
@@ -61772,7 +61887,7 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.91
+      "median_turnover_cr": 9.6
     },
     {
       "symbol": "TBOTEK",
@@ -62255,8 +62370,8 @@
         },
         "100_4_10": {
           "status": "open",
-          "current_price": 825.5,
-          "gain_pct": 32.95
+          "current_price": 817.0,
+          "gain_pct": 31.58
         },
         "100_4_15": {
           "status": "skipped"
@@ -62266,26 +62381,26 @@
         },
         "100_8_10": {
           "status": "open",
-          "current_price": 825.5,
-          "gain_pct": 32.95
+          "current_price": 817.0,
+          "gain_pct": 31.58
         },
         "100_8_15": {
           "status": "open",
-          "current_price": 825.5,
-          "gain_pct": 32.95
+          "current_price": 817.0,
+          "gain_pct": 31.58
         },
         "100_12_5": {
           "status": "skipped"
         },
         "100_12_10": {
           "status": "open",
-          "current_price": 825.5,
-          "gain_pct": 32.95
+          "current_price": 817.0,
+          "gain_pct": 31.58
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 825.5,
-          "gain_pct": 32.95
+          "current_price": 817.0,
+          "gain_pct": 31.58
         }
       },
       "history_url": "history/STOVEKRAFT.json",
@@ -62395,7 +62510,7 @@
       },
       "history_url": "history/BOSCHLTD.json",
       "blue_sky": false,
-      "median_turnover_cr": 139.35
+      "median_turnover_cr": 138.02
     },
     {
       "symbol": "CANTABIL",
@@ -63446,7 +63561,7 @@
       },
       "history_url": "history/CGPOWER.json",
       "blue_sky": false,
-      "median_turnover_cr": 201.12
+      "median_turnover_cr": 204.24
     },
     {
       "symbol": "EPL",
@@ -63545,145 +63660,6 @@
           "status": "skipped"
         }
       }
-    },
-    {
-      "symbol": "FOSECOIND",
-      "entry_date": "2026-09-16",
-      "entry_price": 6846.5,
-      "pivot": 6432.5,
-      "rs_pct": 79.9,
-      "base_weeks": 50.8,
-      "base_start": "2025-09-05",
-      "base_end_date": "2026-09-16",
-      "base_number": 1,
-      "market_cap_cr": 3466.0,
-      "base_high": 7040.0,
-      "base_low": 4300.0,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_4_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_4_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_8_5": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_8_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_8_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_12_5": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_12_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "25_12_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_4_5": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_4_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_4_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_8_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "50_12_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "100_4_5": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "100_4_10": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "100_4_15": {
-          "status": "open",
-          "current_price": 6725.0,
-          "gain_pct": -1.77
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      },
-      "history_url": "history/FOSECOIND.json",
-      "blue_sky": false,
-      "median_turnover_cr": 8.21
     },
     {
       "symbol": "BLACKBUCK",
@@ -64094,7 +64070,7 @@
       },
       "history_url": "history/AKUMS.json",
       "blue_sky": false,
-      "median_turnover_cr": 26.08
+      "median_turnover_cr": 26.26
     },
     {
       "symbol": "EQUITASBNK",
@@ -64291,6 +64267,145 @@
           "status": "skipped"
         }
       }
+    },
+    {
+      "symbol": "FOSECOIND",
+      "entry_date": "2026-09-16",
+      "entry_price": 6846.5,
+      "pivot": 6432.5,
+      "rs_pct": 79.8,
+      "base_weeks": 50.8,
+      "base_start": "2025-09-05",
+      "base_end_date": "2026-09-16",
+      "base_number": 1,
+      "market_cap_cr": 3466.0,
+      "base_high": 7040.0,
+      "base_low": 4300.0,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_4_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_4_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_8_5": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_8_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_8_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_12_5": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_12_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "25_12_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_4_5": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_4_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_4_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_8_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "50_12_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "100_4_5": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "100_4_10": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "100_4_15": {
+          "status": "open",
+          "current_price": 6629.0,
+          "gain_pct": -3.18
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/FOSECOIND.json",
+      "blue_sky": false,
+      "median_turnover_cr": 10.55
     },
     {
       "symbol": "GODREJCP",
@@ -65019,14 +65134,18 @@
           "status": "skipped"
         },
         "25_8_10": {
-          "status": "open",
-          "current_price": 1648.0,
-          "gain_pct": -7.79
+          "status": "closed",
+          "exit_date": "2026-09-21",
+          "exit_price": 1639.0,
+          "exit_reason": "8% close stop",
+          "return_pct": -8.29
         },
         "25_8_15": {
-          "status": "open",
-          "current_price": 1648.0,
-          "gain_pct": -7.79
+          "status": "closed",
+          "exit_date": "2026-09-21",
+          "exit_price": 1639.0,
+          "exit_reason": "8% close stop",
+          "return_pct": -8.29
         },
         "25_12_5": {
           "status": "skipped"
@@ -65036,8 +65155,8 @@
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 1648.0,
-          "gain_pct": -7.79
+          "current_price": 1639.0,
+          "gain_pct": -8.29
         },
         "50_4_5": {
           "status": "skipped"
@@ -65062,13 +65181,13 @@
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 1648.0,
-          "gain_pct": -7.79
+          "current_price": 1639.0,
+          "gain_pct": -8.29
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1648.0,
-          "gain_pct": -7.79
+          "current_price": 1639.0,
+          "gain_pct": -8.29
         },
         "100_4_5": {
           "status": "skipped"
@@ -67103,7 +67222,7 @@
       },
       "history_url": "history/JSWINFRA.json",
       "blue_sky": false,
-      "median_turnover_cr": 81.53
+      "median_turnover_cr": 83.57
     },
     {
       "symbol": "TIMKEN",
@@ -68423,7 +68542,7 @@
       },
       "history_url": "history/TECHNOE.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.44
+      "median_turnover_cr": 13.28
     },
     {
       "symbol": "CGCL",
@@ -68580,33 +68699,33 @@
         },
         "50_8_5": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "50_12_5": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "50_12_10": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1705.0,
-          "gain_pct": 9.63
+          "current_price": 1718.0,
+          "gain_pct": 10.47
         },
         "100_4_5": {
           "status": "skipped"
@@ -68637,7 +68756,7 @@
         }
       },
       "history_url": "history/AUROPHARMA.json",
-      "blue_sky": true,
+      "blue_sky": false,
       "median_turnover_cr": 113.91
     },
     {
@@ -69221,8 +69340,8 @@
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 779.05,
-          "gain_pct": 55.62
+          "current_price": 820.95,
+          "gain_pct": 63.99
         },
         "50_12_5": {
           "status": "skipped"
@@ -69232,8 +69351,8 @@
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 779.05,
-          "gain_pct": 55.62
+          "current_price": 820.95,
+          "gain_pct": 63.99
         },
         "100_4_5": {
           "status": "skipped"
@@ -69269,7 +69388,7 @@
       },
       "history_url": "history/AKUMS.json",
       "blue_sky": false,
-      "median_turnover_cr": 26.08
+      "median_turnover_cr": 26.26
     },
     {
       "symbol": "ADANIGREEN",
@@ -70183,7 +70302,7 @@
       },
       "history_url": "history/AWHCL.json",
       "blue_sky": false,
-      "median_turnover_cr": 2.63
+      "median_turnover_cr": 2.79
     },
     {
       "symbol": "TORNTPOWER",
@@ -70296,104 +70415,6 @@
       "market_cap_cr": 12619.0,
       "base_high": 1188.0,
       "base_low": 745.1,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      }
-    },
-    {
-      "symbol": "QUADFUTURE",
-      "entry_date": "2026-09-11",
-      "entry_price": 478.5,
-      "pivot": 453.9,
-      "rs_pct": 78.3,
-      "base_weeks": 9.4,
-      "base_start": "2026-07-08",
-      "base_end_date": "2026-09-11",
-      "base_number": 1,
-      "market_cap_cr": 1533.9,
-      "base_high": 511.8,
-      "base_low": 334.45,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -70686,7 +70707,7 @@
       },
       "history_url": "history/TARC.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.36
+      "median_turnover_cr": 6.3
     },
     {
       "symbol": "NATCOPHARM",
@@ -70887,7 +70908,7 @@
       },
       "history_url": "history/NATCOPHARM.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.22
+      "median_turnover_cr": 34.54
     },
     {
       "symbol": "AUROPHARMA",
@@ -71098,6 +71119,104 @@
       "market_cap_cr": 4050.7,
       "base_high": 945.0,
       "base_low": 739.1,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "skipped"
+        },
+        "25_4_15": {
+          "status": "skipped"
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "skipped"
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      }
+    },
+    {
+      "symbol": "QUADFUTURE",
+      "entry_date": "2026-09-11",
+      "entry_price": 478.5,
+      "pivot": 453.9,
+      "rs_pct": 78.2,
+      "base_weeks": 9.4,
+      "base_start": "2026-07-08",
+      "base_end_date": "2026-09-11",
+      "base_number": 1,
+      "market_cap_cr": 1533.9,
+      "base_high": 511.8,
+      "base_low": 334.45,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -71502,7 +71621,7 @@
       },
       "history_url": "history/ARTEMISMED.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.26
+      "median_turnover_cr": 11.69
     },
     {
       "symbol": "KROSS",
@@ -73565,13 +73684,13 @@
         },
         "50_4_10": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 12.1
+          "current_price": 1208.8,
+          "gain_pct": 10.84
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1222.5,
-          "gain_pct": 12.1
+          "current_price": 1208.8,
+          "gain_pct": 10.84
         },
         "50_8_5": {
           "status": "skipped"
@@ -73621,7 +73740,7 @@
       },
       "history_url": "history/SUNDRMFAST.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.22
+      "median_turnover_cr": 14.11
     },
     {
       "symbol": "EDELWEISS",
@@ -74501,7 +74620,7 @@
       },
       "history_url": "history/ATUL.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.11
+      "median_turnover_cr": 15.58
     },
     {
       "symbol": "ATUL",
@@ -75296,7 +75415,7 @@
       },
       "history_url": "history/JINDRILL.json",
       "blue_sky": false,
-      "median_turnover_cr": 23.9
+      "median_turnover_cr": 17.65
     },
     {
       "symbol": "TIPSMUSIC",
@@ -75567,7 +75686,7 @@
       },
       "history_url": "history/GODREJCP.json",
       "blue_sky": false,
-      "median_turnover_cr": 105.83
+      "median_turnover_cr": 102.56
     },
     {
       "symbol": "NTPCGREEN",
@@ -76186,7 +76305,7 @@
       },
       "history_url": "history/VAIBHAVGBL.json",
       "blue_sky": false,
-      "median_turnover_cr": 4.07
+      "median_turnover_cr": 4.04
     },
     {
       "symbol": "ECLERX",
@@ -76457,7 +76576,7 @@
       },
       "history_url": "history/AJANTPHARM.json",
       "blue_sky": false,
-      "median_turnover_cr": 23.08
+      "median_turnover_cr": 24.51
     },
     {
       "symbol": "SHYAMMETL",
@@ -76880,7 +76999,7 @@
       },
       "history_url": "history/POLYPLEX.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.27
+      "median_turnover_cr": 6.08
     },
     {
       "symbol": "BALUFORGE",
@@ -76989,7 +77108,7 @@
       },
       "history_url": "history/BALUFORGE.json",
       "blue_sky": false,
-      "median_turnover_cr": 88.61
+      "median_turnover_cr": 80.02
     },
     {
       "symbol": "BANDHANBNK",
@@ -77444,7 +77563,7 @@
       },
       "history_url": "history/SANDUMA.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.55
+      "median_turnover_cr": 8.32
     },
     {
       "symbol": "BAJAJ-AUTO",
@@ -77617,7 +77736,7 @@
       },
       "history_url": "history/BAJAJ-AUTO.json",
       "blue_sky": false,
-      "median_turnover_cr": 255.03
+      "median_turnover_cr": 248.59
     },
     {
       "symbol": "NAZARA",
@@ -80117,7 +80236,7 @@
       },
       "history_url": "history/VENTIVE.json",
       "blue_sky": false,
-      "median_turnover_cr": 1.53
+      "median_turnover_cr": 1.39
     },
     {
       "symbol": "PFC",
@@ -81116,31 +81235,31 @@
       "outcomes": {
         "25_4_5": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "25_8_5": {
           "status": "skipped"
         },
         "25_8_10": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "25_12_5": {
           "status": "skipped"
@@ -81168,8 +81287,8 @@
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 238.8,
-          "gain_pct": 3.14
+          "current_price": 258.26,
+          "gain_pct": 11.54
         },
         "50_12_5": {
           "status": "skipped"
@@ -81210,7 +81329,7 @@
       },
       "history_url": "history/KROSS.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.06
+      "median_turnover_cr": 10.18
     },
     {
       "symbol": "CANTABIL",
@@ -82374,7 +82493,7 @@
       },
       "history_url": "history/THERMAX.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.45
+      "median_turnover_cr": 44.84
     },
     {
       "symbol": "KIRLPNU",
@@ -83165,7 +83284,7 @@
       },
       "history_url": "history/THERMAX.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.45
+      "median_turnover_cr": 44.84
     },
     {
       "symbol": "PNGJL",
@@ -83674,7 +83793,7 @@
       },
       "history_url": "history/FSL.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.72
+      "median_turnover_cr": 19.79
     },
     {
       "symbol": "TBOTEK",
@@ -83732,33 +83851,33 @@
         },
         "50_4_5": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_4_10": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_8_5": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "50_12_5": {
           "status": "skipped"
@@ -83768,8 +83887,8 @@
         },
         "50_12_15": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "100_4_5": {
           "status": "skipped"
@@ -83779,8 +83898,8 @@
         },
         "100_4_15": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         },
         "100_8_5": {
           "status": "skipped"
@@ -83799,8 +83918,8 @@
         },
         "100_12_15": {
           "status": "open",
-          "current_price": 1715.0,
-          "gain_pct": 12.64
+          "current_price": 1705.0,
+          "gain_pct": 11.98
         }
       },
       "history_url": "history/TBOTEK.json",
@@ -84114,7 +84233,7 @@
       },
       "history_url": "history/SAMHI.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.75
+      "median_turnover_cr": 13.94
     },
     {
       "symbol": "PAISALO",
@@ -85071,7 +85190,7 @@
       },
       "history_url": "history/ICICIPRULI.json",
       "blue_sky": false,
-      "median_turnover_cr": 59.91
+      "median_turnover_cr": 55.43
     },
     {
       "symbol": "MOIL",
@@ -85490,7 +85609,7 @@
       },
       "history_url": "history/ENDURANCE.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.76
+      "median_turnover_cr": 24.48
     },
     {
       "symbol": "SHYAMMETL",
@@ -85863,7 +85982,7 @@
       },
       "history_url": "history/THERMAX.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.45
+      "median_turnover_cr": 44.84
     },
     {
       "symbol": "OLECTRA",
@@ -86466,7 +86585,7 @@
       },
       "history_url": "history/DABUR.json",
       "blue_sky": false,
-      "median_turnover_cr": 68.12
+      "median_turnover_cr": 71.41
     },
     {
       "symbol": "SONACOMS",
@@ -90135,7 +90254,7 @@
       },
       "history_url": "history/IRB.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.14
+      "median_turnover_cr": 17.74
     },
     {
       "symbol": "PAISALO",
@@ -91758,7 +91877,7 @@
       },
       "history_url": "history/DABUR.json",
       "blue_sky": false,
-      "median_turnover_cr": 68.12
+      "median_turnover_cr": 71.41
     },
     {
       "symbol": "LTFOODS",
@@ -96661,7 +96780,7 @@
       },
       "history_url": "history/SENCO.json",
       "blue_sky": false,
-      "median_turnover_cr": 21.19
+      "median_turnover_cr": 20.61
     },
     {
       "symbol": "TBOTEK",
@@ -97686,8 +97805,8 @@
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 952.55,
-          "gain_pct": -1.62
+          "current_price": 945.0,
+          "gain_pct": -2.4
         },
         "25_12_5": {
           "status": "skipped"
@@ -97755,7 +97874,7 @@
       },
       "history_url": "history/KSL.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.69
+      "median_turnover_cr": 10.52
     },
     {
       "symbol": "PNGJL",
@@ -98096,7 +98215,7 @@
       },
       "history_url": "history/OBEROIRLTY.json",
       "blue_sky": false,
-      "median_turnover_cr": 59.36
+      "median_turnover_cr": 59.77
     },
     {
       "symbol": "ENTERO",
@@ -98742,13 +98861,13 @@
         },
         "50_8_10": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": -0.03
+          "current_price": 176.3,
+          "gain_pct": 0.94
         },
         "50_8_15": {
           "status": "open",
-          "current_price": 174.6,
-          "gain_pct": -0.03
+          "current_price": 176.3,
+          "gain_pct": 0.94
         },
         "50_12_5": {
           "status": "skipped"
@@ -98789,7 +98908,7 @@
       },
       "history_url": "history/VINCOFE.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.61
+      "median_turnover_cr": 39.27
     },
     {
       "symbol": "VENUSPIPES",
@@ -99000,104 +99119,6 @@
       "market_cap_cr": 15911.8,
       "base_high": 589.0,
       "base_low": 408.25,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      }
-    },
-    {
-      "symbol": "TEGA",
-      "entry_date": "2026-06-02",
-      "entry_price": 1827.1,
-      "pivot": 1817.7,
-      "rs_pct": 73.8,
-      "base_weeks": 11.8,
-      "base_start": "2026-03-02",
-      "base_end_date": "2026-06-02",
-      "base_number": 1,
-      "market_cap_cr": 12682.0,
-      "base_high": 1880.0,
-      "base_low": 1522.2,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -101371,7 +101392,7 @@
       },
       "history_url": "history/NESTLEIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 154.92
+      "median_turnover_cr": 138.17
     },
     {
       "symbol": "DRREDDY",
@@ -101488,7 +101509,7 @@
       },
       "history_url": "history/DRREDDY.json",
       "blue_sky": false,
-      "median_turnover_cr": 137.12
+      "median_turnover_cr": 157.57
     },
     {
       "symbol": "THERMAX",
@@ -102102,7 +102123,7 @@
       },
       "history_url": "history/DLINKINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 2.3
+      "median_turnover_cr": 2.19
     },
     {
       "symbol": "GNFC",
@@ -103709,7 +103730,7 @@
       },
       "history_url": "history/TRIVENI.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.54
+      "median_turnover_cr": 19.43
     },
     {
       "symbol": "ZENTEC",
@@ -103934,13 +103955,13 @@
         },
         "25_4_10": {
           "status": "open",
-          "current_price": 768.8,
-          "gain_pct": 32.16
+          "current_price": 757.0,
+          "gain_pct": 30.14
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 768.8,
-          "gain_pct": 32.16
+          "current_price": 757.0,
+          "gain_pct": 30.14
         },
         "25_8_5": {
           "status": "skipped"
@@ -104017,7 +104038,7 @@
       },
       "history_url": "history/WSTCSTPAPR.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.28
+      "median_turnover_cr": 19.55
     },
     {
       "symbol": "NLCINDIA",
@@ -104378,7 +104399,7 @@
       },
       "history_url": "history/NTPCGREEN.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.2
+      "median_turnover_cr": 13.39
     },
     {
       "symbol": "NTPCGREEN",
@@ -109029,7 +109050,7 @@
       },
       "history_url": "history/TRIVENI.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.54
+      "median_turnover_cr": 19.43
     },
     {
       "symbol": "SKYGOLD",
@@ -109134,7 +109155,7 @@
       },
       "history_url": "history/SKYGOLD.json",
       "blue_sky": false,
-      "median_turnover_cr": 65.45
+      "median_turnover_cr": 65.35
     },
     {
       "symbol": "TVSSCS",
@@ -109443,104 +109464,6 @@
       "market_cap_cr": 10237.4,
       "base_high": 710.0,
       "base_low": 460.15,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      }
-    },
-    {
-      "symbol": "MAHSEAMLES",
-      "entry_date": "2026-09-11",
-      "entry_price": 728.9,
-      "pivot": 719.35,
-      "rs_pct": 72.1,
-      "base_weeks": 55.0,
-      "base_start": "2025-08-01",
-      "base_end_date": "2026-09-11",
-      "base_number": 1,
-      "market_cap_cr": 8328.2,
-      "base_high": 738.0,
-      "base_low": 500.7,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -110031,6 +109954,104 @@
       "market_cap_cr": 6205.0,
       "base_high": 811.55,
       "base_low": 682.65,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "skipped"
+        },
+        "25_4_15": {
+          "status": "skipped"
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "skipped"
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      }
+    },
+    {
+      "symbol": "MAHSEAMLES",
+      "entry_date": "2026-09-11",
+      "entry_price": 728.9,
+      "pivot": 719.35,
+      "rs_pct": 72.0,
+      "base_weeks": 55.0,
+      "base_start": "2025-08-01",
+      "base_end_date": "2026-09-11",
+      "base_number": 1,
+      "market_cap_cr": 8328.2,
+      "base_high": 738.0,
+      "base_low": 500.7,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -110732,7 +110753,7 @@
       },
       "history_url": "history/PIDILITIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 93.94
+      "median_turnover_cr": 92.6
     },
     {
       "symbol": "PFC",
@@ -111768,8 +111789,8 @@
         },
         "25_4_15": {
           "status": "open",
-          "current_price": 1807.0,
-          "gain_pct": 8.13
+          "current_price": 1840.5,
+          "gain_pct": 10.13
         },
         "25_8_5": {
           "status": "skipped"
@@ -111779,8 +111800,8 @@
         },
         "25_8_15": {
           "status": "open",
-          "current_price": 1807.0,
-          "gain_pct": 8.13
+          "current_price": 1840.5,
+          "gain_pct": 10.13
         },
         "25_12_5": {
           "status": "skipped"
@@ -111790,8 +111811,8 @@
         },
         "25_12_15": {
           "status": "open",
-          "current_price": 1807.0,
-          "gain_pct": 8.13
+          "current_price": 1840.5,
+          "gain_pct": 10.13
         },
         "50_4_5": {
           "status": "skipped"
@@ -111801,8 +111822,8 @@
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 1807.0,
-          "gain_pct": 8.13
+          "current_price": 1840.5,
+          "gain_pct": 10.13
         },
         "50_8_5": {
           "status": "skipped"
@@ -111852,7 +111873,7 @@
       },
       "history_url": "history/AXISCADES.json",
       "blue_sky": false,
-      "median_turnover_cr": 27.96
+      "median_turnover_cr": 28.99
     },
     {
       "symbol": "JINDALSAW",
@@ -113789,8 +113810,8 @@
         },
         "50_4_15": {
           "status": "open",
-          "current_price": 188.46,
-          "gain_pct": 0.87
+          "current_price": 189.7,
+          "gain_pct": 1.53
         },
         "50_8_5": {
           "status": "skipped"
@@ -116050,104 +116071,6 @@
       }
     },
     {
-      "symbol": "NOCIL",
-      "entry_date": "2026-09-10",
-      "entry_price": 195.31,
-      "pivot": 188.84,
-      "rs_pct": 70.9,
-      "base_weeks": 11.0,
-      "base_start": "2026-06-24",
-      "base_end_date": "2026-09-10",
-      "base_number": 1,
-      "market_cap_cr": 2974.0,
-      "base_high": 200.49,
-      "base_low": 158.8,
-      "is_fresh_today": false,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "skipped"
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      }
-    },
-    {
       "symbol": "OIL",
       "entry_date": "2026-01-13",
       "entry_price": 447.9,
@@ -116454,6 +116377,104 @@
       "market_cap_cr": 15876.8,
       "base_high": 990.0,
       "base_low": 806.05,
+      "is_fresh_today": false,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "skipped"
+        },
+        "25_4_15": {
+          "status": "skipped"
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "skipped"
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      }
+    },
+    {
+      "symbol": "NOCIL",
+      "entry_date": "2026-09-10",
+      "entry_price": 195.31,
+      "pivot": 188.84,
+      "rs_pct": 70.8,
+      "base_weeks": 11.0,
+      "base_start": "2026-06-24",
+      "base_end_date": "2026-09-10",
+      "base_number": 1,
+      "market_cap_cr": 2974.0,
+      "base_high": 200.49,
+      "base_low": 158.8,
       "is_fresh_today": false,
       "outcomes": {
         "25_4_5": {
@@ -118606,7 +118627,7 @@
       },
       "history_url": "history/CONCORDBIO.json",
       "blue_sky": false,
-      "median_turnover_cr": 15.09
+      "median_turnover_cr": 15.39
     },
     {
       "symbol": "ECLERX",
