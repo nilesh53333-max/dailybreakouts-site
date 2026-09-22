@@ -17,18 +17,17 @@
     15
   ],
   "default_combo": {
-    "trail_dma": null,
-    "stop_pct": null,
-    "max_positions": 10,
-    "note": "Combined 100 DMA/8%/5 + 25 DMA/4%/5 mix -- two independent sleeves, 10 positions total"
+    "trail_dma": 50,
+    "stop_pct": 4,
+    "max_positions": 5
   },
-  "default_combo_method": "Fixed -- independent sleeves chosen over a single combo (better downside in weak years) and over an Alternating shared book (avoids crowding-out)",
+  "default_combo_method": "Fixed -- outperforms the earlier 100/8/5+25/4/5 mix on both total return and 2025 downside once 2018-2019 data was correctly excluded",
   "default_combo_active_period": "N/A (fixed combo)",
   "counts": {
     "forming": 160,
     "fresh": 5,
-    "open": 9,
-    "closed": 71
+    "open": 5,
+    "closed": 39
   },
   "forming_list_truncated": true,
   "stages": {
