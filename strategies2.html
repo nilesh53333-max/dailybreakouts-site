@@ -94,16 +94,14 @@
     .dashboard-grid{
       display:grid;
       grid-template-columns:repeat(12,minmax(0,1fr));
-      /* Keep the live scanner row independent of the number of stocks.
-         View-all rows scroll inside the list instead of stretching the chart. */
-      grid-template-rows:auto clamp(430px,55vh,560px) auto minmax(340px,auto);
+      grid-template-rows:auto minmax(430px,auto) auto minmax(340px,auto);
       align-items:stretch;
       gap:10px 14px;
       overflow:visible;
     }
     .live-title{grid-column:1/-1;grid-row:1;}
-    #quad-stocklist{grid-column:1/span 5;grid-row:2;min-width:0;min-height:0;overflow:hidden;}
-    #quad-chart{grid-column:6/span 7;grid-row:2;min-width:0;min-height:0;overflow:hidden;}
+    #quad-stocklist{grid-column:1/span 5;grid-row:2;min-width:0;}
+    #quad-chart{grid-column:6/span 7;grid-row:2;min-width:0;}
     .backtest-title{grid-column:1/-1;grid-row:3;margin-top:8px;}
     #quad-backtest{grid-column:1/span 5;grid-row:4;min-width:0;}
     #quad-equity{grid-column:6/span 7;grid-row:4;min-width:0;}
@@ -112,7 +110,7 @@
     /* Fixed cap, NOT flex:1 -- deliberately independent of however much
        space the quadrant would otherwise offer, so a 10-row table can
        never force the whole grid taller. ~5 rows + sticky header. */
-    .capped-table-card{flex:1 1 0;min-height:0;max-height:100%;overflow-y:auto;overscroll-behavior:contain;}
+    .capped-table-card{flex:1;min-height:0;max-height:none;overflow-y:auto;}
     /* The chart itself is the one element that should actually GROW to
        fill remaining space in its quadrant, once header/buttons/stats
        (all flex:0 0 auto) have taken their natural height. */
@@ -129,7 +127,7 @@
     main.content-col{padding:4px 14px 4px;}
     h1{font-size:16px;}
     .sub{font-size:11px;margin-bottom:6px;}
-    .capped-table-card{max-height:100%;}
+    .capped-table-card{max-height:none;}
     .lifecycle-cards{gap:6px;margin-bottom:6px;}
     .stage-card{padding:5px 10px;}
     .stage-card .count{font-size:15px;}
@@ -570,9 +568,19 @@ function sliceHistory(history, range, baseStartDate, baseEndDate){
     const idx = history.findIndex(d => d.date >= baseStartDate);
     if(idx >= 0){
       const from = Math.max(0, idx - 50); // ~50 sessions of pre-base context, matches backend's PRE_BASE_CONTEXT
-      // Continue through the latest scan-date candle. The old +40-session
-      // cap made older FIT Base/Flag/Cup charts look as if data was stale.
-      return history.slice(from);
+      // Cap the END too, at a reasonable window past the breakout --
+      // without this, a pattern that broke out weeks/months ago (with
+      // the stock continuing to run since) would show its ENTIRE
+      // subsequent history here, making the actual pattern shrink to a
+      // tiny, unrecognizable sliver on a much wider chart. "Fit Base"
+      // should show the pattern clearly; 6M/1Y/5Y already handle "how
+      // has it done since".
+      let to = history.length;
+      if(baseEndDate){
+        const endIdx = history.findIndex(d => d.date >= baseEndDate);
+        if(endIdx >= 0) to = Math.min(history.length, endIdx + 40);
+      }
+      return history.slice(from, to);
     }
     return history;
   }
