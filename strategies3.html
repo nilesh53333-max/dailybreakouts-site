@@ -243,7 +243,7 @@
   <div class="logo disp">daily<span>breakouts</span></div>
   <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
   <nav class="topnav">
-    <a href="#" class="topnav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <a href="strategies.html" class="topnav-item active">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
       Home
     </a>
@@ -258,7 +258,7 @@
   </div>
 
   <nav class="strategy-tabs-bar" aria-label="Trading strategies">
-    <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
+    <a href="#" class="item active" id="sidebar-item-vcm" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
     <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;">Classic Bull Flag</a>
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;">Cup and Handle</a>
   </nav>
@@ -359,9 +359,6 @@ function switchStrategy(name){
   document.getElementById('sidebar-item-vcm').classList.toggle('active', name==='vcm');
   document.getElementById('sidebar-item-bullflag').classList.toggle('active', name==='bullflag');
   document.getElementById('sidebar-item-cupandhandle').classList.toggle('active', name==='cupandhandle');
-  document.getElementById('sidebar-item-vcm').setAttribute('aria-current', name==='vcm' ? 'page' : 'false');
-  document.getElementById('sidebar-item-bullflag').setAttribute('aria-current', name==='bullflag' ? 'page' : 'false');
-  document.getElementById('sidebar-item-cupandhandle').setAttribute('aria-current', name==='cupandhandle' ? 'page' : 'false');
   document.getElementById('main-strategy-title').textContent = cfg.title;
   document.getElementById('backtest-strategy-title').textContent = `📊 Backtest ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
@@ -377,6 +374,19 @@ function switchStrategy(name){
 
   renderBacktest();
   loadBreakouts();
+}
+
+// ---- everything now lives in one 2x2 dashboard grid; sidebar links
+// just scroll to the relevant quadrant if the layout has fallen back
+// to stacked mode on a narrower screen.
+function toggleMobileSidebar(){
+  document.querySelector('.sidebar').classList.toggle('open');
+  document.getElementById('mobile-sidebar-overlay').classList.toggle('open');
+}
+
+function switchTab(name){
+  const target = document.getElementById(name === 'breakouts' ? 'quad-stocklist' : 'quad-backtest');
+  if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
 // ---- backtest panel ----
@@ -516,22 +526,13 @@ function renderStageCards(){
   document.getElementById('lifecycle-cards').innerHTML = order.map(key => {
     const meta = STAGE_META[key];
     const isActive = key === ACTIVE_STAGE;
-    return `<div class="stage-card ${isActive?'active':''}" data-stage="${key}" role="button" tabindex="0" aria-pressed="${isActive}">
+    return `<div class="stage-card ${isActive?'active':''}" data-stage="${key}">
       <div><span class="count num">${counts[key]}</span> <span class="title">${meta.title}</span></div>
       <div class="desc">${meta.desc}</div>
     </div>`;
   }).join('');
   document.querySelectorAll('.stage-card').forEach(card => {
-    const activate = () => {
-      ACTIVE_STAGE = card.dataset.stage;
-      CURRENT_CHART_ROW = null;
-      renderStageCards();
-      renderStageTable();
-    };
-    card.addEventListener('click', activate);
-    card.addEventListener('keydown', event => {
-      if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); activate(); }
-    });
+    card.addEventListener('click', () => { ACTIVE_STAGE = card.dataset.stage; renderStageCards(); renderStageTable(); });
   });
 }
 
@@ -583,19 +584,7 @@ function sliceHistory(history, range, baseStartDate, baseEndDate){
 let CURRENT_CHART_ROW = null;
 let CURRENT_CHART_RANGE = 'FIT';
 let SHOW_BASE_ZONE = true;
-let ACTIVE_LWCHART = null;
-let ACTIVE_CHART_RESIZE_OBSERVER = null;
-
-function disposeActiveChart(){
-  if(ACTIVE_CHART_RESIZE_OBSERVER){
-    ACTIVE_CHART_RESIZE_OBSERVER.disconnect();
-    ACTIVE_CHART_RESIZE_OBSERVER = null;
-  }
-  if(ACTIVE_LWCHART){
-    try{ ACTIVE_LWCHART.remove(); }catch(_e){}
-    ACTIVE_LWCHART = null;
-  }
-}
+let ACTIVE_LWCHART = null;   // the current LightweightCharts instance, so we can dispose it on redraw
 
 function renderChartFor(row){
   const panel = document.getElementById('stage-chart-panel');
@@ -612,7 +601,7 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
   const baseLabel = row.base_weeks ? `${row.base_weeks} wks` : '';
   const container = document.getElementById(containerId);
   if(!container || !window.LightweightCharts) return;
-  disposeActiveChart();
+  if(container._resizeObserver) container._resizeObserver.disconnect();
   container.innerHTML = '';
 
   // Height comes from whatever CSS flex has actually allocated this
@@ -658,7 +647,7 @@ function buildLightweightChart(containerId, sliced, row, isStillOpen){
       }
     });
     chartResizeObserver.observe(container);
-    ACTIVE_CHART_RESIZE_OBSERVER = chartResizeObserver;
+    container._resizeObserver = chartResizeObserver;
   }
 
   const candleSeries = chart.addCandlestickSeries({
@@ -990,7 +979,6 @@ async function drawChartPanel(){
   const row = CURRENT_CHART_ROW;
   const panel = document.getElementById('stage-chart-panel');
   if(!row || !panel) return;
-  disposeActiveChart();
 
   // Backward compatible: if this row still has history embedded directly
   // (an older JSON format), use it without fetching anything.
@@ -1141,7 +1129,6 @@ function renderStageTable(){
   const buckets = bucketSignalsByMaxPositions();
   const rows = ACTIVE_STAGE === 'forming' ? (LIFECYCLE_DATA.stages.forming || []) : buckets[ACTIVE_STAGE];
   if(!rows || rows.length === 0){
-    disposeActiveChart();
     el.innerHTML = `<div class="empty">Nothing in "${STAGE_META[ACTIVE_STAGE].title}" right now.</div>`;
     if(chartPanel) chartPanel.innerHTML = `<div class="quadrant-card"><div class="empty">Nothing to chart.</div></div>`;
     return;
@@ -1221,17 +1208,10 @@ function renderStageTable(){
     });
   });
 
-  if(hasChart && displayRows.length){
-    // Expanding/collapsing the list must not replace the user's selected
-    // stock or reset its chart range. A stage change clears the selection.
-    const selectedStillExists = CURRENT_CHART_ROW && rows.some(r => r.symbol === CURRENT_CHART_ROW.symbol);
-    if(selectedStillExists){
-      document.querySelectorAll('#stage-table tbody tr').forEach(tr =>
-        tr.classList.toggle('selected', tr.dataset.symbol === CURRENT_CHART_ROW.symbol)
-      );
-    }else{
-      renderChartFor(displayRows[0]);
-    }
+  if(hasChart){
+    // Only chart rows that actually have chart data (Fresh entries that
+    // never got a trade slot still have history attached, so this is safe).
+    if(displayRows.length) renderChartFor(displayRows[0]);
   }
 }
 
