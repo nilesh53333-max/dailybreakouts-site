@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="DailyBreakouts scans Indian stocks for volatility contraction, bull flag, and cup-and-handle patterns with transparent historical backtests.">
 <title>DailyBreakouts — Home</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23142850'/%3E%3Crect x='7' y='16' width='4' height='10' fill='%2316A34A'/%3E%3Crect x='14' y='9' width='4' height='17' fill='%2316A34A'/%3E%3Crect x='21' y='4' width='4' height='22' fill='%2316A34A'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -25,7 +23,7 @@
   .logo-tagline{color:#94A3B8;font-size:10.5px;line-height:1.2;max-width:150px;margin-right:8px;}
   .topnav{display:flex;gap:4px;flex:1 1 auto;}
   .topnav-item{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:7px;font-size:13.5px;color:#CBD5E1;white-space:nowrap;}
-  .topnav-item.active{background:rgba(255,255,255,.08);color:#FFFFFF;font-weight:600;box-shadow:inset 0 -2px 0 var(--green);}
+  .topnav-item.active{background:var(--accent);color:#FFFFFF;font-weight:600;}
   .topsearch{display:flex;align-items:center;gap:8px;background:#1E3A5F;border:1px solid #2C4A70;border-radius:8px;padding:8px 12px;width:280px;}
   .topsearch input{border:none;background:transparent;color:#E5E7EB;font-size:13px;outline:none;width:100%;}
   .avatar{width:34px;height:34px;border-radius:50%;background:var(--green);border:none;color:#FFFFFF;font-weight:700;font-size:14px;flex:0 0 auto;}
@@ -64,7 +62,6 @@
 
   .empty{padding:40px;text-align:center;color:var(--muted);font-size:13.5px;}
   .note{font-size:11.5px;color:var(--muted);margin-top:10px;}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 
   .breakouts-layout{display:flex;gap:18px;align-items:flex-start;}
   .breakouts-table-col{flex:1.3;}
@@ -81,8 +78,6 @@
   .strategy-tabs-bar .item{padding:8px 13px;border-radius:7px;font-size:13px;color:#475569;white-space:nowrap;border:1px solid transparent;}
   .strategy-tabs-bar .item:hover{background:#F8FAFC;}
   .strategy-tabs-bar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border-color:var(--green);}
-  .chart-toolbar{display:flex;gap:4px;margin-bottom:4px;flex-wrap:wrap;align-items:center;}
-  .site-disclaimer{margin-top:18px;padding-top:12px;border-top:1px solid var(--border);color:var(--muted);font-size:10.5px;line-height:1.5;}
 
   /* >=1440px: real viewport-constrained 2x2 dashboard. Every ancestor in
      the chain down to each quadrant needs min-height:0 -- without it,
@@ -187,7 +182,6 @@
     .controls{flex-wrap:wrap;}
     .field select{min-height:36px;}
     .btn-primary,.btn-secondary,.range-btn{min-height:34px;}
-    .chart-toolbar #base-zone-toggle{margin-left:0 !important;}
   }
   table tr.selectable{cursor:pointer;}
   table tr.selectable:hover{background:#FAFAF7;}
@@ -235,9 +229,11 @@
   .stage-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;cursor:pointer;transition:border-color .15s;}
   .stage-card:hover{border-color:var(--accent);}
   .stage-card.active{background:#EFF6F1;border-color:var(--green);}
+  .stage-card .tap{font-size:9.5px;color:var(--muted);text-align:right;margin-bottom:2px;}
+  .stage-card.active .tap{color:var(--green);font-weight:600;}
   .stage-card .count{font-size:18px;font-weight:700;line-height:1.2;}
   .stage-card .title{font-size:12px;font-weight:600;line-height:1.2;}
-  .stage-card .desc{font-size:10.5px;color:var(--muted);font-style:normal;line-height:1.25;margin-top:1px;}
+  .stage-card .desc{font-size:10.5px;color:var(--muted);font-style:italic;line-height:1.25;margin-top:1px;}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 </head>
@@ -245,7 +241,7 @@
 
 <header>
   <div class="logo disp">daily<span>breakouts</span></div>
-  <div class="logo-tagline">Indian market breakout scanner</div>
+  <div class="logo-tagline">Real Patterns. Real Stocks. Real Opportunities.</div>
   <nav class="topnav">
     <a href="#" class="topnav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
@@ -258,7 +254,7 @@
 <main class="content-col">
   <div class="compact-strip">
     <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
-    <div class="sub" id="dynamic-sub">Loading latest scanner data…</div>
+    <div class="sub" id="dynamic-sub">Volatility-contraction breakouts with strong relative strength. Spot today's opportunities or backtest historical performance.</div>
   </div>
 
   <nav class="strategy-tabs-bar" aria-label="Trading strategies">
@@ -289,8 +285,8 @@
     <!-- BOTTOM LEFT: backtest controls + metrics + yearly table -->
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
-        <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">Backtest · Volatility Contraction</div>
-        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Historical performance · 4% close stop</div>
+        <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">📊 Backtest Volatility Contraction</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -320,9 +316,6 @@
     </div>
 
   </div>
-  <footer class="site-disclaimer">
-    For research and educational use only. Pattern signals and backtested results are not investment advice, and past performance does not guarantee future returns.
-  </footer>
 </main>
 </div>
 
@@ -336,21 +329,21 @@ const BACKTEST_DATA_CUPANDHANDLE = {"combos": [{"trail": 25, "stop": 4, "maxpos"
 const STRATEGY_CONFIG = {
   vcm: {
     title: "Volatility Contraction",
-    sub_static: "Historical performance · 4% close stop",
+    sub_static: "Fixed 100 DMA / 4% stop / 10 positions -- consistently outperformed every rolling/switching alternative tested.",
     lifecycle_json: "./breakout_lifecycle.json",
     backtest_data: BACKTEST_DATA_VCM,
     default_combo: {trail:100, stop:4, maxpos:10},
   },
   bullflag: {
     title: "Classic Bull Flag",
-    sub_static: "Historical performance · 4% close stop",
+    sub_static: "Parallel downward-sloping flag channel, volume-confirmed breakout.",
     lifecycle_json: "./breakout_lifecycle_bullflag.json",
     backtest_data: BACKTEST_DATA_BULLFLAG,
     default_combo: {trail:null, stop:4, maxpos:10, isMix:true, yearlyKey:"alt_25_50"},
   },
   cupandhandle: {
     title: "Cup and Handle",
-    sub_static: "Historical performance · 4% close stop",
+    sub_static: "Months-long U-shaped base, then a short handle -- fixed 50 DMA / 4% stop / 5 positions.",
     lifecycle_json: "./breakout_lifecycle_cup_and_handle.json",
     backtest_data: BACKTEST_DATA_CUPANDHANDLE,
     default_combo: {trail:50, stop:4, maxpos:5},
@@ -370,7 +363,7 @@ function switchStrategy(name){
   document.getElementById('sidebar-item-bullflag').setAttribute('aria-current', name==='bullflag' ? 'page' : 'false');
   document.getElementById('sidebar-item-cupandhandle').setAttribute('aria-current', name==='cupandhandle' ? 'page' : 'false');
   document.getElementById('main-strategy-title').textContent = cfg.title;
-  document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
+  document.getElementById('backtest-strategy-title').textContent = `📊 Backtest ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
 
   // Reset state that's specific to the previous strategy's data before
@@ -379,7 +372,7 @@ function switchStrategy(name){
   // new strategy) leaks across the switch.
   CURRENT_CHART_ROW = null;
   LIFECYCLE_DATA = null;
-  ACTIVE_STAGE = 'fresh';
+  ACTIVE_STAGE = 'forming';
   for(const k in HISTORY_CACHE) delete HISTORY_CACHE[k];
 
   renderBacktest();
@@ -390,18 +383,6 @@ function switchStrategy(name){
 function fmtPct(v){ return (v>=0?'+':'') + v.toFixed(2) + '%'; }
 function fmtPctYr(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
 function colorFor(v){ return v >= 0 ? 'var(--green)' : 'var(--red)'; }
-function publicExitReason(reason){
-  const text = String(reason || '').trim();
-  if(/close stop/i.test(text)) return text;
-  if(/DMA|moving average/i.test(text)) return 'Closed below DMA';
-  return 'Strategy exit';
-}
-function formatIsoDate(value){
-  if(!value) return '';
-  const [year,month,day] = String(value).slice(0,10).split('-').map(Number);
-  if(!year || !month || !day) return String(value);
-  return new Intl.DateTimeFormat('en-IN',{day:'numeric',month:'short',year:'numeric'}).format(new Date(Date.UTC(year,month-1,day)));
-}
 
 function findCombo(trail, stop, maxpos, isMix){
   const combos = STRATEGY_CONFIG[ACTIVE_STRATEGY].backtest_data.combos;
@@ -500,7 +481,7 @@ const STAGE_META = {
   forming: { title: 'Forming',      desc: 'resting before a breakout' },
   fresh:   { title: 'Fresh breakouts', desc: 'closed above pivot today' },
   open:    { title: 'Open Trades',  desc: 'currently held, given your settings' },
-  closed:  { title: 'Closed Trades', desc: 'completed trades this year' },
+  closed:  { title: 'Closed Trades 2026', desc: 'exited this year -- stop or trail' },
 };
 
 // Buckets LIFECYCLE_DATA.signals_2026 into Fresh/Open/Closed using each
@@ -559,7 +540,16 @@ function computeChartStats(row, sliced){
   const today = sliced[sliced.length-1];
   const yest = sliced[sliced.length-2];
   const oneDayGain = ((today.c/yest.c)-1)*100;
+  const closeInRange = (today.h>today.l) ? (today.c-today.l)/(today.h-today.l) : null;
   const nowVsPivot = row.pivot ? ((today.c/row.pivot)-1)*100 : null;
+
+  const vols = sliced.slice(-21,-1).map(d=>d.v);
+  const avgVol20 = vols.length ? vols.reduce((a,b)=>a+b,0)/vols.length : null;
+  const volX = avgVol20 ? today.v/avgVol20 : null;
+
+  const closes50 = sliced.slice(-50).map(d=>d.c);
+  const ma50 = closes50.length>=50 ? closes50.reduce((a,b)=>a+b,0)/closes50.length : null;
+  const priceVsMa50 = ma50 ? ((today.c/ma50)-1)*100 : null;
 
   // Breakout-day gain: the % move ON the day it actually broke out, found
   // by matching entry_date/base_start in the history (not "gain since entry").
@@ -571,7 +561,7 @@ function computeChartStats(row, sliced){
       breakoutDayGain = ((sliced[idx].c/sliced[idx-1].c)-1)*100;
     }
   }
-  return {oneDayGain, nowVsPivot, breakoutDayGain};
+  return {oneDayGain, closeInRange, nowVsPivot, volX, priceVsMa50, breakoutDayGain};
 }
 
 function sliceHistory(history, range, baseStartDate, baseEndDate){
@@ -616,7 +606,7 @@ function renderChartFor(row){
   drawChartPanel();
 }
 
-function buildLightweightChart(containerId, sliced, row){
+function buildLightweightChart(containerId, sliced, row, isStillOpen){
   const pivot = row.pivot;
   const baseStartDate = row.base_start;
   const baseLabel = row.base_weeks ? `${row.base_weeks} wks` : '';
@@ -694,26 +684,18 @@ function buildLightweightChart(containerId, sliced, row){
     });
   }
 
-  const tradeMarkers = [];
-  if(row.entry_date){
-    const entryBar = sliced.find(d => d.date === row.entry_date);
-    if(entryBar){
-      tradeMarkers.push({
-        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: 'Entry',
-      });
+  if(isStillOpen && sliced.length){
+    let markerBar = sliced[sliced.length-1];
+    let markerText = baseLabel || '';
+    if((ACTIVE_STRATEGY === 'bullflag' || ACTIVE_STRATEGY === 'cupandhandle') && row.entry_date){
+      const breakoutBar = sliced.find(d => d.date === row.entry_date);
+      if(breakoutBar) markerBar = breakoutBar;
+      markerText = 'Breakout';
     }
-  }
-  if(ACTIVE_STAGE === 'closed' && row._outcome && row._outcome.exit_date){
-    const exitBar = sliced.find(d => d.date === row._outcome.exit_date);
-    if(exitBar){
-      tradeMarkers.push({
-        time: exitBar.date, position: 'aboveBar', color: '#DC2626', shape: 'arrowDown', text: 'Exit',
-      });
-    }
-  }
-  if(tradeMarkers.length){
-    tradeMarkers.sort((a,b) => a.time.localeCompare(b.time));
-    candleSeries.setMarkers(tradeMarkers);
+    candleSeries.setMarkers([{
+      time: markerBar.date, position: 'aboveBar', color: '#16A34A', shape: 'arrowUp',
+      text: markerText,
+    }]);
   }
 
   chart.timeScale().fitContent();
@@ -1054,16 +1036,21 @@ function renderChartPanelWithHistory(row, fullHistory){
 
   const isBreakoutStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
   const badgeHtml = isBreakoutStage
-    ? `<span style="background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">Breakout · pivot ₹${row.pivot}</span>`
+    ? `<span style="background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">Breakout</span>
+       <span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Broke out above ₹${row.pivot} pivot</span>`
     : (ACTIVE_STAGE==='forming'
-        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Near pivot</span>` : '');
+        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Approaching pivot</span>` : '');
 
   const baseLabel = row.base_weeks ? `${row.base_weeks} wks base` : '';
 
   const ohlcLine = today
     ? `${today.date} &nbsp; O ${today.o} &nbsp; H ${today.h} &nbsp; L ${today.l} &nbsp; C ${today.c}`
     : '';
-  const volumeLine = `Volume ${today ? (today.v/1e6).toFixed(2)+'M' : '—'}`;
+  const volRsMcapLine = `Vol ${today ? (today.v/1e6).toFixed(2)+'M' : '—'} &nbsp;&nbsp; RS ${row.rs_pct ?? '—'} &nbsp;&nbsp; Mkt Cap ${row.market_cap_cr ? '₹'+row.market_cap_cr.toLocaleString('en-IN')+' Cr' : '—'}`;
+
+  const medianTurnoverCr = row.median_turnover_cr ?? (sliced.length >= 20
+    ? sliced.slice(-20).map(d => d.c*d.v/1e7).sort((a,b)=>a-b)[Math.floor(Math.min(20,sliced.length)/2)]
+    : null);
 
   const isBullFlag = ACTIVE_STRATEGY === 'bullflag';
   const isCupHandle = ACTIVE_STRATEGY === 'cupandhandle';
@@ -1080,36 +1067,51 @@ function renderChartPanelWithHistory(row, fullHistory){
 
   const bullFlagStatsHtml = stats ? `
     <div class="chart-stats-2col">
-      ${statRow('Flagpole gain', 'Price advance before the consolidation.', row.impulse_gain_pct!=null?'+'+Number(row.impulse_gain_pct).toFixed(2)+'%':'—', 'var(--green)')}
-      ${statRow('Flag length', 'Trading sessions in the visible flag.', row.flag_sessions!=null?Number(row.flag_sessions).toFixed(0)+' days':(row.base_weeks!=null?row.base_weeks+' wks':'—'))}
-      ${statRow('Retracement', 'Pullback from the preceding advance.', row.retracement_pct!=null?Number(row.retracement_pct).toFixed(2)+'%':'—')}
-      ${statRow('Now vs pivot', 'Current close versus the visible pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Flagpole gain', 'Impulse/pole gain measured by the Bull Flag detector.', row.impulse_gain_pct!=null?'+'+Number(row.impulse_gain_pct).toFixed(2)+'%':'—', 'var(--green)')}
+      ${statRow('Flag length', 'Number of trading sessions in the detector-defined flag.', row.flag_sessions!=null?Number(row.flag_sessions).toFixed(0)+' days':(row.base_weeks!=null?row.base_weeks+' wks':'—'))}
+      ${statRow('Retracement', 'How much of the flagpole advance was retraced during the flag.', row.retracement_pct!=null?Number(row.retracement_pct).toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume', 'Breakout volume versus average volume during the detected flag.', row.breakout_vol_ratio!=null?Number(row.breakout_vol_ratio).toFixed(2)+'×':(stats.volX!=null?stats.volX.toFixed(2)+'×':'—'))}
+      ${statRow('Now vs pivot', 'Current close versus the detector-defined pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('RS rating', 'Relative strength percentile versus the scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
     </div>` : '';
 
   const standardStatsHtml = stats ? `
     <div class="chart-stats-2col">
-      ${statRow('Pattern length', 'Approximate duration of the visible base.', row.base_weeks!=null?Number(row.base_weeks).toFixed(1)+' wks':'—')}
-      ${statRow('Pattern depth', 'High-to-low depth of the visible base.', row.base_high && row.base_low ? ((row.base_high-row.base_low)/row.base_high*100).toFixed(2)+'%' : '—')}
-      ${statRow('Breakout-day gain', 'Price move on the breakout day.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
-      ${statRow('Now vs pivot', 'Current close versus the visible pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Breakout-day gain', 'The % move on the day it actually broke out, not since entry.', stats.breakoutDayGain!=null?(stats.breakoutDayGain>=0?'+':'')+stats.breakoutDayGain.toFixed(2)+'%':'—', stats.breakoutDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('1-day gain', "Today's close vs yesterday's close.", (stats.oneDayGain>=0?'+':'')+stats.oneDayGain.toFixed(2)+'%', stats.oneDayGain>=0?'var(--green)':'var(--red)')}
+      ${statRow('Now vs pivot', 'Current close vs the pivot it broke out above.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Breakout volume', "Volume vs the 20-session average, at today's bar.", stats.volX!=null?stats.volX.toFixed(2)+'×':'—')}
+      ${statRow('Close-in-range', "Where today's close sits in today's range (1.0 = at the high).", stats.closeInRange!=null?stats.closeInRange.toFixed(2):'—')}
+      ${statRow('RS rating', 'Relative strength percentile vs the whole scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Price vs 50-MA', "Current close vs the 50-day moving average.", stats.priceVsMa50!=null?(stats.priceVsMa50>=0?'+':'')+stats.priceVsMa50.toFixed(2)+'%':'—', stats.priceVsMa50>=0?'var(--green)':'var(--red)')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
     </div>` : '';
 
   const cupHandleStatsHtml = stats ? `
     <div class="chart-stats-2col">
-      ${statRow('Cup duration', 'Trading sessions in the visible cup.', row.cup_sessions!=null?Number(row.cup_sessions).toFixed(0)+' days':'—')}
-      ${statRow('Cup depth', 'Price depth from the rim to the cup low.', row.cup_depth_pct!=null?Number(row.cup_depth_pct).toFixed(2)+'%':'—')}
-      ${statRow('Handle length', 'Trading sessions in the visible handle.', row.handle_sessions!=null?Number(row.handle_sessions).toFixed(0)+' days':'—')}
-      ${statRow('Now vs pivot', 'Current close versus the visible pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('Prior advance', 'Gain over the 252 sessions before the cup began, measured by the detector.', row.prior_gain_pct!=null?'+'+Number(row.prior_gain_pct).toFixed(2)+'%':'—', 'var(--green)')}
+      ${statRow('Cup duration', 'Number of trading sessions in the detector-defined cup.', row.cup_sessions!=null?Number(row.cup_sessions).toFixed(0)+' days':'—')}
+      ${statRow('Cup depth', 'How far the cup fell from its left rim to its low.', row.cup_depth_pct!=null?Number(row.cup_depth_pct).toFixed(2)+'%':'—')}
+      ${statRow('Handle length', 'Number of trading sessions in the detector-defined handle.', row.handle_sessions!=null?Number(row.handle_sessions).toFixed(0)+' days':'—')}
+      ${statRow('Breakout extension', 'Close on the breakout day versus the right rim (pivot).', row.breakout_extension_pct!=null?'+'+Number(row.breakout_extension_pct).toFixed(2)+'%':(stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—'))}
+      ${statRow('Now vs pivot', 'Current close versus the detector-defined right rim (pivot).', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+      ${statRow('RS rating', 'Relative strength percentile versus the scanned universe.', row.rs_pct ?? '—')}
+      ${statRow('Median turnover', 'Median daily value traded (price × volume) over the last 20 sessions.', medianTurnoverCr!=null?'₹'+medianTurnoverCr.toFixed(2)+'cr/day':'—')}
     </div>` : '';
 
   const statsHtml = isBullFlag ? bullFlagStatsHtml : (ACTIVE_STRATEGY==='cupandhandle' ? cupHandleStatsHtml : standardStatsHtml);
+
+  const isOpenStage = (ACTIVE_STAGE === 'fresh' || ACTIVE_STAGE === 'climbing');
+  const blueSkyBadge = '';
 
   const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
 
   panel.innerHTML = `<div class="card" style="position:relative;">
     <div class="stock-header" style="margin-bottom:2px;">
       <div>
-        <div class="disp stock-name" style="font-size:15px;">${row.symbol}</div>
+        <div class="disp stock-name" style="font-size:15px;">${row.symbol} <span style="color:var(--muted);font-weight:400;font-size:12px;">☆</span></div>
       </div>
       <div style="display:flex;gap:6px;align-items:center;">
         ${badgeHtml}
@@ -1118,15 +1120,16 @@ function renderChartPanelWithHistory(row, fullHistory){
       </div>
     </div>
     <div class="num" style="font-size:10px;color:var(--muted);">${ohlcLine}</div>
-    <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:2px;">${volumeLine}</div>
-    <div class="chart-toolbar">${rangeBtns}${baseZoneToggle}</div>
+    <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:2px;">${volRsMcapLine}</div>
+    <div style="display:flex;gap:4px;margin-bottom:4px;">${rangeBtns}${baseZoneToggle}</div>
     <div id="${chartId}" style="position:relative;flex:1;min-height:175px;"></div>
     <div id="${chartId}-tooltip" class="chart-tooltip"></div>
     ${(row.base_high==null || row.base_low==null || row.base_start==null) ? `<div class="note" style="color:var(--red);margin-top:4px;font-size:10px;">${isBullFlag?'Flag':'Base'} data unavailable.</div>` : ''}
     ${statsHtml}
+    ${blueSkyBadge}
   </div>`;
 
-  buildLightweightChart(chartId, sliced, row);
+  buildLightweightChart(chartId, sliced, row, isOpenStage);
 }
 
 let EXPANDED_STAGES = {};
@@ -1159,7 +1162,7 @@ function renderStageTable(){
       <td class="r num">${(r.age_sessions/5).toFixed(1)} wks</td>
     </tr>`).join('');
   } else if(ACTIVE_STAGE === 'closed'){
-    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th><th class="r">RS</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
@@ -1167,10 +1170,11 @@ function renderStageTable(){
       <td class="num" style="font-size:11px;color:var(--muted);">${o.exit_date}</td>
       <td class="r num">${o.exit_price.toFixed(2)}</td>
       <td class="r num" style="color:${o.return_pct>=0?'var(--green)':'var(--red)'}">${o.return_pct>=0?'+':''}${o.return_pct.toFixed(2)}%</td>
-      <td style="font-size:11px;color:var(--muted);">${publicExitReason(o.exit_reason)}</td>
+      <td style="font-size:11px;color:var(--muted);">${o.exit_reason}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`;}).join('');
   } else if(ACTIVE_STAGE === 'fresh'){
-    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Trade status</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Trade status</th><th class="r">RS</th>`;
     body = displayRows.map(r => {
       const o = r._outcome;
       const traded = o && o.status === 'open';
@@ -1182,16 +1186,18 @@ function renderStageTable(){
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
       <td>${statusHtml}</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`;}).join('');
   } else {
     // open
-    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th>`;
+    head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Current ₹</th><th class="r">Gain</th><th class="r">RS</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
       <td class="r num">${o.current_price.toFixed(2)}</td>
       <td class="r num" style="color:${o.gain_pct>=0?'var(--green)':'var(--red)'}">${o.gain_pct>=0?'+':''}${o.gain_pct.toFixed(2)}%</td>
+      <td class="r num">${r.rs_pct ?? '—'}</td>
     </tr>`;}).join('');
   }
 
@@ -1247,17 +1253,16 @@ async function loadBreakouts(){
 
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
     const dc = cfg.default_combo;
-    const scanDate = formatIsoDate(data.as_of_date || data.scan_date || data.date);
-    const scanYear = String(data.as_of_date || data.scan_date || '').slice(0,4);
-    STAGE_META.closed.title = scanYear ? `Closed Trades ${scanYear}` : 'Closed Trades';
+    const comboLabel = dc.isMix
+      ? cfg.sub_static
+      : `${dc.trail} DMA/${dc.stop}%/${dc.maxpos} positions`;
     document.getElementById('dynamic-sub').textContent =
-      `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · 4% close stop · Select a stage to view stocks.`;
+      `${freshToday} fresh breakouts today (using ${cfg.title}'s combo: ${comboLabel}) — tap a stage below to see the names.`;
 
     renderStageCards();
     renderStageTable();
   }catch(e){
-    console.error(`Unable to load ${cfg.title} scanner data`, e);
-    el.innerHTML = `<div class="card"><div class="empty">Scanner data is temporarily unavailable.<br>Please refresh the page in a moment.</div></div>`;
+    el.innerHTML = `<div class="card"><div class="empty">${cfg.lifecycle_json} not found yet.<br><br>Run the matching lifecycle script for ${cfg.title} to generate it, then reload this page.</div></div>`;
   }
 }
 loadBreakouts();
