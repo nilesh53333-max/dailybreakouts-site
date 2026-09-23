@@ -1256,13 +1256,13 @@ function renderStageTable(){
     </tr>`).join('');
   } else if(ACTIVE_STAGE === 'closed'){
     head = `<th>Stock</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th>`;
-    body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
+    body = displayRows.map(r => { const o=r._outcome; const ret=Number(o.return_pct ?? o.gain_pct ?? 0); return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${o.exit_date}</td>
       <td class="r num">${o.exit_price.toFixed(2)}</td>
-      <td class="r num" style="color:${o.return_pct>=0?'var(--green)':'var(--red)'}">${o.return_pct>=0?'+':''}${o.return_pct.toFixed(2)}%</td>
+      <td class="r num" style="color:${ret>=0?'var(--green)':'var(--red)'}">${ret>=0?'+':''}${ret.toFixed(2)}%</td>
       <td style="font-size:11px;color:var(--muted);">${publicExitReason(o.exit_reason)}</td>
     </tr>`;}).join('');
   } else if(ACTIVE_STAGE === 'fresh'){
