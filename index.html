@@ -942,13 +942,23 @@ function buildLightweightChart(containerId, sliced, row){
       const firstIdx = anchorIndex(row.first_bottom_date);
       const neckIdx = anchorIndex(row.neckline_date);
       const secondIdx = anchorIndex(row.second_bottom_date);
-      const breakoutIdx = anchorIndex(row.entry_date || row.base_end_date);
+      const hasConfirmedBreakout = !!(row.entry_date || row.base_end_date);
+      // Forming patterns intentionally have no breakout/entry date yet. End
+      // the W at the latest candle so the current recovery remains visible.
+      const breakoutIdx = hasConfirmedBreakout
+        ? anchorIndex(row.entry_date || row.base_end_date)
+        : sliced.length - 1;
       const indices = [firstIdx, neckIdx, secondIdx, breakoutIdx];
       const anchorsValid = indices.every(i => i >= 0 && sliced[i]);
 
       if(anchorsValid){
         const xs = indices.map(i => chart.timeScale().timeToCoordinate(sliced[i].date));
-        const prices = [sliced[firstIdx].l, row.pivot, sliced[secondIdx].l, row.pivot];
+        const prices = [
+          sliced[firstIdx].l,
+          row.pivot,
+          sliced[secondIdx].l,
+          hasConfirmedBreakout ? row.pivot : sliced[breakoutIdx].c
+        ];
         const ys = prices.map(p => candleSeries.priceToCoordinate(p));
         const coordsValid = [...xs,...ys].every(v => typeof v==='number' && isFinite(v));
         if(coordsValid){
@@ -986,7 +996,7 @@ function buildLightweightChart(containerId, sliced, row){
 
           const labelDiv = document.createElement('div');
           labelDiv.id = containerId+'-zonelabel';
-          labelDiv.textContent = 'Double Bottom · W';
+          labelDiv.textContent = hasConfirmedBreakout ? 'Double Bottom · W' : 'Forming Double Bottom · W';
           labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,xs[0])}px;top:${Math.max(6,ys[1]-24)}px;color:#1D4ED8;background:rgba(255,255,255,.92);border:1px solid rgba(37,99,235,.18);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
           container.appendChild(labelDiv);
         }
