@@ -700,7 +700,8 @@
       },
       "history_url": "history/AJANTPHARM.json",
       "blue_sky": false,
-      "median_turnover_cr": 21.52
+      "median_turnover_cr": 21.52,
+      "breakout_date": "2026-01-01"
     },
     {
       "symbol": "CARERATING",
@@ -869,7 +870,8 @@
       },
       "history_url": "history/CARERATING.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.53
+      "median_turnover_cr": 5.53,
+      "breakout_date": "2026-01-02"
     },
     {
       "symbol": "IIFLCAPS",
@@ -1033,7 +1035,8 @@
       },
       "history_url": "history/IIFLCAPS.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.82
+      "median_turnover_cr": 13.82,
+      "breakout_date": "2026-01-05"
     },
     {
       "symbol": "IEX",
@@ -1202,7 +1205,8 @@
       },
       "history_url": "history/IEX.json",
       "blue_sky": false,
-      "median_turnover_cr": 57.62
+      "median_turnover_cr": 57.62,
+      "breakout_date": "2026-01-07"
     },
     {
       "symbol": "EQUITASBNK",
@@ -1446,7 +1450,8 @@
       },
       "history_url": "history/EQUITASBNK.json",
       "blue_sky": false,
-      "median_turnover_cr": 23.84
+      "median_turnover_cr": 23.84,
+      "breakout_date": "2026-01-13"
     },
     {
       "symbol": "BEL",
@@ -1690,7 +1695,8 @@
       },
       "history_url": "history/BEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 691.07
+      "median_turnover_cr": 691.07,
+      "breakout_date": "2026-01-28"
     },
     {
       "symbol": "SHARDACROP",
@@ -1924,7 +1930,8 @@
       },
       "history_url": "history/SHARDACROP.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.07
+      "median_turnover_cr": 13.07,
+      "breakout_date": "2026-01-29"
     },
     {
       "symbol": "APARINDS",
@@ -2148,7 +2155,8 @@
       },
       "history_url": "history/APARINDS.json",
       "blue_sky": false,
-      "median_turnover_cr": 58.2
+      "median_turnover_cr": 58.2,
+      "breakout_date": "2026-02-03"
     },
     {
       "symbol": "MEDPLUS",
@@ -2372,7 +2380,8 @@
       },
       "history_url": "history/MEDPLUS.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.56
+      "median_turnover_cr": 6.56,
+      "breakout_date": "2026-02-03"
     },
     {
       "symbol": "ARVIND",
@@ -2563,7 +2572,8 @@
       },
       "history_url": "history/ARVIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.62
+      "median_turnover_cr": 13.62,
+      "breakout_date": "2026-02-04"
     },
     {
       "symbol": "GRWRHITECH",
@@ -2772,7 +2782,8 @@
       },
       "history_url": "history/GRWRHITECH.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.9
+      "median_turnover_cr": 14.9,
+      "breakout_date": "2026-02-04"
     },
     {
       "symbol": "BBOX",
@@ -2941,7 +2952,8 @@
       },
       "history_url": "history/BBOX.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.58
+      "median_turnover_cr": 16.58,
+      "breakout_date": "2026-02-11"
     },
     {
       "symbol": "NAM-INDIA",
@@ -3115,7 +3127,8 @@
       },
       "history_url": "history/NAM-INDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 70.89
+      "median_turnover_cr": 70.89,
+      "breakout_date": "2026-02-11"
     },
     {
       "symbol": "ROLEXRINGS",
@@ -3279,7 +3292,8 @@
       },
       "history_url": "history/ROLEXRINGS.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.47
+      "median_turnover_cr": 5.47,
+      "breakout_date": "2026-02-11"
     },
     {
       "symbol": "TIMETECHNO",
@@ -3433,7 +3447,8 @@
       },
       "history_url": "history/TIMETECHNO.json",
       "blue_sky": false,
-      "median_turnover_cr": 40.48
+      "median_turnover_cr": 40.48,
+      "breakout_date": "2026-02-11"
     },
     {
       "symbol": "ZFCVINDIA",
@@ -3632,7 +3647,8 @@
       },
       "history_url": "history/ZFCVINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.36
+      "median_turnover_cr": 12.36,
+      "breakout_date": "2026-02-11"
     },
     {
       "symbol": "VOLTAS",
@@ -3806,7 +3822,8 @@
       },
       "history_url": "history/VOLTAS.json",
       "blue_sky": false,
-      "median_turnover_cr": 99.22
+      "median_turnover_cr": 99.22,
+      "breakout_date": "2026-02-12"
     },
     {
       "symbol": "ASTRAL",
@@ -3935,7 +3952,8 @@
       },
       "history_url": "history/ASTRAL.json",
       "blue_sky": false,
-      "median_turnover_cr": 68.33
+      "median_turnover_cr": 68.33,
+      "breakout_date": "2026-02-16"
     },
     {
       "symbol": "ENGINERSIN",
@@ -4079,7 +4097,8 @@
       },
       "history_url": "history/ENGINERSIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 40.63
+      "median_turnover_cr": 40.63,
+      "breakout_date": "2026-02-16"
     },
     {
       "symbol": "MBAPL",
@@ -4238,7 +4257,8 @@
       },
       "history_url": "history/MBAPL.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.38
+      "median_turnover_cr": 7.38,
+      "breakout_date": "2026-02-16"
     },
     {
       "symbol": "RALLIS",
@@ -4372,7 +4392,8 @@
       },
       "history_url": "history/RALLIS.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.26
+      "median_turnover_cr": 18.26,
+      "breakout_date": "2026-02-16"
     },
     {
       "symbol": "CIEINDIA",
@@ -4506,7 +4527,8 @@
       },
       "history_url": "history/CIEINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.91
+      "median_turnover_cr": 5.91,
+      "breakout_date": "2026-02-17"
     },
     {
       "symbol": "ELGIEQUIP",
@@ -4620,7 +4642,8 @@
       },
       "history_url": "history/ELGIEQUIP.json",
       "blue_sky": false,
-      "median_turnover_cr": 19.0
+      "median_turnover_cr": 19.0,
+      "breakout_date": "2026-02-18"
     },
     {
       "symbol": "GOODLUCK",
@@ -4739,7 +4762,8 @@
       },
       "history_url": "history/GOODLUCK.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.14
+      "median_turnover_cr": 8.14,
+      "breakout_date": "2026-02-18"
     },
     {
       "symbol": "NATCOPHARM",
@@ -4958,7 +4982,8 @@
       },
       "history_url": "history/NATCOPHARM.json",
       "blue_sky": false,
-      "median_turnover_cr": 46.77
+      "median_turnover_cr": 46.77,
+      "breakout_date": "2026-02-25"
     },
     {
       "symbol": "DATAPATTNS",
@@ -5142,7 +5167,8 @@
       },
       "history_url": "history/DATAPATTNS.json",
       "blue_sky": false,
-      "median_turnover_cr": 177.96
+      "median_turnover_cr": 177.96,
+      "breakout_date": "2026-02-26"
     },
     {
       "symbol": "FORTIS",
@@ -5296,7 +5322,8 @@
       },
       "history_url": "history/FORTIS.json",
       "blue_sky": false,
-      "median_turnover_cr": 113.82
+      "median_turnover_cr": 113.82,
+      "breakout_date": "2026-02-26"
     },
     {
       "symbol": "FUSION",
@@ -5420,7 +5447,8 @@
       },
       "history_url": "history/FUSION.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.63
+      "median_turnover_cr": 5.63,
+      "breakout_date": "2026-02-26"
     },
     {
       "symbol": "VOLTAMP",
@@ -5564,7 +5592,8 @@
       },
       "history_url": "history/VOLTAMP.json",
       "blue_sky": false,
-      "median_turnover_cr": 31.08
+      "median_turnover_cr": 31.08,
+      "breakout_date": "2026-02-26"
     },
     {
       "symbol": "KPIL",
@@ -5703,7 +5732,8 @@
       },
       "history_url": "history/KPIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.06
+      "median_turnover_cr": 18.06,
+      "breakout_date": "2026-02-27"
     },
     {
       "symbol": "SARDAEN",
@@ -5817,7 +5847,8 @@
       },
       "history_url": "history/SARDAEN.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.85
+      "median_turnover_cr": 18.85,
+      "breakout_date": "2026-02-27"
     },
     {
       "symbol": "SIEMENS",
@@ -5926,7 +5957,8 @@
       },
       "history_url": "history/SIEMENS.json",
       "blue_sky": false,
-      "median_turnover_cr": 128.66
+      "median_turnover_cr": 128.66,
+      "breakout_date": "2026-02-27"
     },
     {
       "symbol": "SUNTV",
@@ -6040,7 +6072,8 @@
       },
       "history_url": "history/SUNTV.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.87
+      "median_turnover_cr": 10.87,
+      "breakout_date": "2026-02-27"
     },
     {
       "symbol": "TIMKEN",
@@ -6194,7 +6227,8 @@
       },
       "history_url": "history/TIMKEN.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.03
+      "median_turnover_cr": 10.03,
+      "breakout_date": "2026-02-27"
     },
     {
       "symbol": "AGIIL",
@@ -6428,7 +6462,8 @@
       },
       "history_url": "history/AGIIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 39.53
+      "median_turnover_cr": 39.53,
+      "breakout_date": "2026-03-05"
     },
     {
       "symbol": "PARAS",
@@ -6637,7 +6672,8 @@
       },
       "history_url": "history/PARAS.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.8
+      "median_turnover_cr": 17.8,
+      "breakout_date": "2026-03-06"
     },
     {
       "symbol": "ACMESOLAR",
@@ -6861,7 +6897,8 @@
       },
       "history_url": "history/ACMESOLAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.48
+      "median_turnover_cr": 9.48,
+      "breakout_date": "2026-03-13"
     },
     {
       "symbol": "EMCURE",
@@ -7087,7 +7124,8 @@
       },
       "history_url": "history/EMCURE.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.32
+      "median_turnover_cr": 25.32,
+      "breakout_date": "2026-03-27"
     },
     {
       "symbol": "IPCALAB",
@@ -7321,7 +7359,8 @@
       },
       "history_url": "history/IPCALAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 29.26
+      "median_turnover_cr": 29.26,
+      "breakout_date": "2026-03-30"
     },
     {
       "symbol": "NLCINDIA",
@@ -7550,7 +7589,8 @@
       },
       "history_url": "history/NLCINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 55.15
+      "median_turnover_cr": 55.15,
+      "breakout_date": "2026-04-01"
     },
     {
       "symbol": "ADANIPOWER",
@@ -7774,7 +7814,8 @@
       },
       "history_url": "history/ADANIPOWER.json",
       "blue_sky": false,
-      "median_turnover_cr": 376.36
+      "median_turnover_cr": 376.36,
+      "breakout_date": "2026-04-02"
     },
     {
       "symbol": "EPL",
@@ -7988,7 +8029,8 @@
       },
       "history_url": "history/EPL.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.99
+      "median_turnover_cr": 14.99,
+      "breakout_date": "2026-04-08"
     },
     {
       "symbol": "KAJARIACER",
@@ -8190,7 +8232,8 @@
       },
       "history_url": "history/KAJARIACER.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.33
+      "median_turnover_cr": 25.33,
+      "breakout_date": "2026-04-08"
     },
     {
       "symbol": "GAEL",
@@ -8394,7 +8437,8 @@
       },
       "history_url": "history/GAEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.64
+      "median_turnover_cr": 8.64,
+      "breakout_date": "2026-04-09"
     },
     {
       "symbol": "SONACOMS",
@@ -8556,7 +8600,8 @@
       },
       "history_url": "history/SONACOMS.json",
       "blue_sky": false,
-      "median_turnover_cr": 94.86
+      "median_turnover_cr": 94.86,
+      "breakout_date": "2026-04-10"
     },
     {
       "symbol": "KIRLOSBROS",
@@ -8730,7 +8775,8 @@
       },
       "history_url": "history/KIRLOSBROS.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.07
+      "median_turnover_cr": 10.07,
+      "breakout_date": "2026-04-13"
     },
     {
       "symbol": "VOLTAMP",
@@ -8909,7 +8955,8 @@
       },
       "history_url": "history/VOLTAMP.json",
       "blue_sky": false,
-      "median_turnover_cr": 28.83
+      "median_turnover_cr": 28.83,
+      "breakout_date": "2026-04-13"
     },
     {
       "symbol": "SUNFLAG",
@@ -9073,7 +9120,8 @@
       },
       "history_url": "history/SUNFLAG.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.29
+      "median_turnover_cr": 5.29,
+      "breakout_date": "2026-04-15"
     },
     {
       "symbol": "ENGINERSIN",
@@ -9227,7 +9275,8 @@
       },
       "history_url": "history/ENGINERSIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 66.26
+      "median_turnover_cr": 66.26,
+      "breakout_date": "2026-04-17"
     },
     {
       "symbol": "TIINDIA",
@@ -9366,7 +9415,8 @@
       },
       "history_url": "history/TIINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 76.2
+      "median_turnover_cr": 76.2,
+      "breakout_date": "2026-04-20"
     },
     {
       "symbol": "SUNFLAG",
@@ -9475,7 +9525,8 @@
       },
       "history_url": "history/SUNFLAG.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.24
+      "median_turnover_cr": 7.24,
+      "breakout_date": "2026-04-21"
     },
     {
       "symbol": "TEMBO",
@@ -9609,7 +9660,8 @@
       },
       "history_url": "history/TEMBO.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.37
+      "median_turnover_cr": 10.37,
+      "breakout_date": "2026-04-21"
     },
     {
       "symbol": "TRIVENI",
@@ -9738,7 +9790,8 @@
       },
       "history_url": "history/TRIVENI.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.89
+      "median_turnover_cr": 17.89,
+      "breakout_date": "2026-04-22"
     },
     {
       "symbol": "ADANIENT",
@@ -9862,7 +9915,8 @@
       },
       "history_url": "history/ADANIENT.json",
       "blue_sky": false,
-      "median_turnover_cr": 480.57
+      "median_turnover_cr": 480.57,
+      "breakout_date": "2026-04-23"
     },
     {
       "symbol": "ADVENZYMES",
@@ -10001,7 +10055,8 @@
       },
       "history_url": "history/ADVENZYMES.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.26
+      "median_turnover_cr": 5.26,
+      "breakout_date": "2026-04-27"
     },
     {
       "symbol": "VIJAYA",
@@ -10122,7 +10177,8 @@
       },
       "history_url": "history/VIJAYA.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.2
+      "median_turnover_cr": 13.2,
+      "breakout_date": "2026-04-30"
     },
     {
       "symbol": "AVALON",
@@ -10243,7 +10299,8 @@
       },
       "history_url": "history/AVALON.json",
       "blue_sky": false,
-      "median_turnover_cr": 20.24
+      "median_turnover_cr": 20.24,
+      "breakout_date": "2026-05-04"
     },
     {
       "symbol": "FLUOROCHEM",
@@ -10352,7 +10409,8 @@
       },
       "history_url": "history/FLUOROCHEM.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.09
+      "median_turnover_cr": 14.09,
+      "breakout_date": "2026-05-04"
     },
     {
       "symbol": "MOTILALOFS",
@@ -10461,7 +10519,8 @@
       },
       "history_url": "history/MOTILALOFS.json",
       "blue_sky": false,
-      "median_turnover_cr": 86.75
+      "median_turnover_cr": 86.75,
+      "breakout_date": "2026-05-04"
     },
     {
       "symbol": "RATNAVEER",
@@ -10575,7 +10634,8 @@
       },
       "history_url": "history/RATNAVEER.json",
       "blue_sky": false,
-      "median_turnover_cr": 25.11
+      "median_turnover_cr": 25.11,
+      "breakout_date": "2026-05-04"
     },
     {
       "symbol": "UNIVCABLES",
@@ -10724,7 +10784,8 @@
       },
       "history_url": "history/UNIVCABLES.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.78
+      "median_turnover_cr": 7.78,
+      "breakout_date": "2026-05-05"
     },
     {
       "symbol": "POLYCAB",
@@ -10908,7 +10969,8 @@
       },
       "history_url": "history/POLYCAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 374.61
+      "median_turnover_cr": 374.61,
+      "breakout_date": "2026-05-07"
     },
     {
       "symbol": "GRAPHITE",
@@ -11057,7 +11119,8 @@
       },
       "history_url": "history/GRAPHITE.json",
       "blue_sky": false,
-      "median_turnover_cr": 103.5
+      "median_turnover_cr": 103.5,
+      "breakout_date": "2026-05-08"
     },
     {
       "symbol": "IDEA",
@@ -11198,7 +11261,8 @@
       },
       "history_url": "history/IDEA.json",
       "blue_sky": false,
-      "median_turnover_cr": 427.18
+      "median_turnover_cr": 427.18,
+      "breakout_date": "2026-05-11"
     },
     {
       "symbol": "KIMS",
@@ -11322,7 +11386,8 @@
       },
       "history_url": "history/KIMS.json",
       "blue_sky": false,
-      "median_turnover_cr": 24.72
+      "median_turnover_cr": 24.72,
+      "breakout_date": "2026-05-11"
     },
     {
       "symbol": "BIOCON",
@@ -11461,7 +11526,8 @@
       },
       "history_url": "history/BIOCON.json",
       "blue_sky": false,
-      "median_turnover_cr": 96.02
+      "median_turnover_cr": 96.02,
+      "breakout_date": "2026-05-13"
     },
     {
       "symbol": "V2RETAIL",
@@ -11625,7 +11691,8 @@
       },
       "history_url": "history/V2RETAIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 30.95
+      "median_turnover_cr": 30.95,
+      "breakout_date": "2026-05-13"
     },
     {
       "symbol": "AJANTPHARM",
@@ -11759,7 +11826,8 @@
       },
       "history_url": "history/AJANTPHARM.json",
       "blue_sky": false,
-      "median_turnover_cr": 24.46
+      "median_turnover_cr": 24.46,
+      "breakout_date": "2026-05-14"
     },
     {
       "symbol": "CAPLIPOINT",
@@ -11878,7 +11946,8 @@
       },
       "history_url": "history/CAPLIPOINT.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.4
+      "median_turnover_cr": 12.4,
+      "breakout_date": "2026-05-14"
     },
     {
       "symbol": "IDEA",
@@ -12008,7 +12077,8 @@
       },
       "history_url": "history/IDEA.json",
       "blue_sky": false,
-      "median_turnover_cr": 548.12
+      "median_turnover_cr": 548.12,
+      "breakout_date": "2026-05-14"
     },
     {
       "symbol": "IPCALAB",
@@ -12202,7 +12272,8 @@
       },
       "history_url": "history/IPCALAB.json",
       "blue_sky": false,
-      "median_turnover_cr": 37.82
+      "median_turnover_cr": 37.82,
+      "breakout_date": "2026-05-18"
     },
     {
       "symbol": "SHYAMMETL",
@@ -12365,7 +12436,8 @@
       },
       "history_url": "history/SHYAMMETL.json",
       "blue_sky": false,
-      "median_turnover_cr": 60.2
+      "median_turnover_cr": 60.2,
+      "breakout_date": "2026-05-20"
     },
     {
       "symbol": "ENDURANCE",
@@ -12514,7 +12586,8 @@
       },
       "history_url": "history/ENDURANCE.json",
       "blue_sky": false,
-      "median_turnover_cr": 34.47
+      "median_turnover_cr": 34.47,
+      "breakout_date": "2026-05-22"
     },
     {
       "symbol": "ENTERO",
@@ -12633,7 +12706,8 @@
       },
       "history_url": "history/ENTERO.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.63
+      "median_turnover_cr": 8.63,
+      "breakout_date": "2026-05-22"
     },
     {
       "symbol": "FEDFINA",
@@ -12787,7 +12861,8 @@
       },
       "history_url": "history/FEDFINA.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.63
+      "median_turnover_cr": 17.63,
+      "breakout_date": "2026-05-25"
     },
     {
       "symbol": "SAMMAANCAP",
@@ -12896,7 +12971,8 @@
       },
       "history_url": "history/SAMMAANCAP.json",
       "blue_sky": false,
-      "median_turnover_cr": 252.95
+      "median_turnover_cr": 252.95,
+      "breakout_date": "2026-05-25"
     },
     {
       "symbol": "VINCOFE",
@@ -13012,7 +13088,8 @@
       },
       "history_url": "history/VINCOFE.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.02
+      "median_turnover_cr": 16.02,
+      "breakout_date": "2026-05-26"
     },
     {
       "symbol": "TEGA",
@@ -13231,7 +13308,8 @@
       },
       "history_url": "history/TEGA.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.68
+      "median_turnover_cr": 5.68,
+      "breakout_date": "2026-06-01"
     },
     {
       "symbol": "ICIL",
@@ -13418,7 +13496,8 @@
       },
       "history_url": "history/ICIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.83
+      "median_turnover_cr": 9.83,
+      "breakout_date": "2026-06-02"
     },
     {
       "symbol": "UNIMECH",
@@ -13607,7 +13686,8 @@
       },
       "history_url": "history/UNIMECH.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.85
+      "median_turnover_cr": 5.85,
+      "breakout_date": "2026-06-09"
     },
     {
       "symbol": "GAIL",
@@ -13816,7 +13896,8 @@
       },
       "history_url": "history/GAIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 179.04
+      "median_turnover_cr": 179.04,
+      "breakout_date": "2026-06-15"
     },
     {
       "symbol": "AVL",
@@ -14010,7 +14091,8 @@
       },
       "history_url": "history/AVL.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.37
+      "median_turnover_cr": 10.37,
+      "breakout_date": "2026-06-16"
     },
     {
       "symbol": "MMTC",
@@ -14164,7 +14246,8 @@
       },
       "history_url": "history/MMTC.json",
       "blue_sky": false,
-      "median_turnover_cr": 15.8
+      "median_turnover_cr": 15.8,
+      "breakout_date": "2026-06-16"
     },
     {
       "symbol": "RIIL",
@@ -14293,7 +14376,8 @@
       },
       "history_url": "history/RIIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.7
+      "median_turnover_cr": 5.7,
+      "breakout_date": "2026-06-16"
     },
     {
       "symbol": "VAIBHAVGBL",
@@ -14447,7 +14531,8 @@
       },
       "history_url": "history/VAIBHAVGBL.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.8
+      "median_turnover_cr": 6.8,
+      "breakout_date": "2026-06-17"
     },
     {
       "symbol": "KIRLOSBROS",
@@ -14576,7 +14661,8 @@
       },
       "history_url": "history/KIRLOSBROS.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.96
+      "median_turnover_cr": 8.96,
+      "breakout_date": "2026-06-18"
     },
     {
       "symbol": "INDHOTEL",
@@ -14685,7 +14771,8 @@
       },
       "history_url": "history/INDHOTEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 141.08
+      "median_turnover_cr": 141.08,
+      "breakout_date": "2026-06-19"
     },
     {
       "symbol": "JBMA",
@@ -14814,7 +14901,8 @@
       },
       "history_url": "history/JBMA.json",
       "blue_sky": false,
-      "median_turnover_cr": 52.88
+      "median_turnover_cr": 52.88,
+      "breakout_date": "2026-06-19"
     },
     {
       "symbol": "TVSSCS",
@@ -14928,7 +15016,8 @@
       },
       "history_url": "history/TVSSCS.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.06
+      "median_turnover_cr": 10.06,
+      "breakout_date": "2026-06-19"
     },
     {
       "symbol": "MGL",
@@ -15072,7 +15161,8 @@
       },
       "history_url": "history/MGL.json",
       "blue_sky": false,
-      "median_turnover_cr": 26.95
+      "median_turnover_cr": 26.95,
+      "breakout_date": "2026-06-22"
     },
     {
       "symbol": "CHOLAFIN",
@@ -15221,7 +15311,8 @@
       },
       "history_url": "history/CHOLAFIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 237.42
+      "median_turnover_cr": 237.42,
+      "breakout_date": "2026-06-24"
     },
     {
       "symbol": "PGIL",
@@ -15387,7 +15478,8 @@
       },
       "history_url": "history/PGIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.54
+      "median_turnover_cr": 10.54,
+      "breakout_date": "2026-06-24"
     },
     {
       "symbol": "MARUTI",
@@ -15586,7 +15678,8 @@
       },
       "history_url": "history/MARUTI.json",
       "blue_sky": false,
-      "median_turnover_cr": 549.03
+      "median_turnover_cr": 549.03,
+      "breakout_date": "2026-06-30"
     },
     {
       "symbol": "DELHIVERY",
@@ -15765,7 +15858,8 @@
       },
       "history_url": "history/DELHIVERY.json",
       "blue_sky": false,
-      "median_turnover_cr": 99.64
+      "median_turnover_cr": 99.64,
+      "breakout_date": "2026-07-01"
     },
     {
       "symbol": "AADHARHFC",
@@ -15884,7 +15978,8 @@
       },
       "history_url": "history/AADHARHFC.json",
       "blue_sky": false,
-      "median_turnover_cr": 19.61
+      "median_turnover_cr": 19.61,
+      "breakout_date": "2026-07-02"
     },
     {
       "symbol": "FIVESTAR",
@@ -15998,7 +16093,8 @@
       },
       "history_url": "history/FIVESTAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 50.8
+      "median_turnover_cr": 50.8,
+      "breakout_date": "2026-07-02"
     },
     {
       "symbol": "GNA",
@@ -16127,7 +16223,8 @@
       },
       "history_url": "history/GNA.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.43
+      "median_turnover_cr": 7.43,
+      "breakout_date": "2026-07-02"
     },
     {
       "symbol": "JAMNAAUTO",
@@ -16276,7 +16373,8 @@
       },
       "history_url": "history/JAMNAAUTO.json",
       "blue_sky": false,
-      "median_turnover_cr": 24.18
+      "median_turnover_cr": 24.18,
+      "breakout_date": "2026-07-02"
     },
     {
       "symbol": "3MINDIA",
@@ -16400,7 +16498,8 @@
       },
       "history_url": "history/3MINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.62
+      "median_turnover_cr": 8.62,
+      "breakout_date": "2026-07-03"
     },
     {
       "symbol": "POONAWALLA",
@@ -16549,7 +16648,8 @@
       },
       "history_url": "history/POONAWALLA.json",
       "blue_sky": false,
-      "median_turnover_cr": 58.13
+      "median_turnover_cr": 58.13,
+      "breakout_date": "2026-07-06"
     },
     {
       "symbol": "ITDC",
@@ -16683,7 +16783,8 @@
       },
       "history_url": "history/ITDC.json",
       "blue_sky": false,
-      "median_turnover_cr": 8.46
+      "median_turnover_cr": 8.46,
+      "breakout_date": "2026-07-07"
     },
     {
       "symbol": "PAYTM",
@@ -16794,7 +16895,8 @@
       },
       "history_url": "history/PAYTM.json",
       "blue_sky": false,
-      "median_turnover_cr": 266.5
+      "median_turnover_cr": 266.5,
+      "breakout_date": "2026-07-07"
     },
     {
       "symbol": "SENCO",
@@ -16983,7 +17085,8 @@
       },
       "history_url": "history/SENCO.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.43
+      "median_turnover_cr": 16.43,
+      "breakout_date": "2026-07-13"
     },
     {
       "symbol": "UJJIVANSFB",
@@ -17209,7 +17312,8 @@
       },
       "history_url": "history/UJJIVANSFB.json",
       "blue_sky": false,
-      "median_turnover_cr": 69.8
+      "median_turnover_cr": 69.8,
+      "breakout_date": "2026-07-13"
     },
     {
       "symbol": "OMAXE",
@@ -17408,7 +17512,8 @@
       },
       "history_url": "history/OMAXE.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.09
+      "median_turnover_cr": 7.09,
+      "breakout_date": "2026-07-14"
     },
     {
       "symbol": "MRPL",
@@ -17577,7 +17682,8 @@
       },
       "history_url": "history/MRPL.json",
       "blue_sky": false,
-      "median_turnover_cr": 57.43
+      "median_turnover_cr": 57.43,
+      "breakout_date": "2026-07-16"
     },
     {
       "symbol": "BAJFINANCE",
@@ -17741,7 +17847,8 @@
       },
       "history_url": "history/BAJFINANCE.json",
       "blue_sky": false,
-      "median_turnover_cr": 891.04
+      "median_turnover_cr": 891.04,
+      "breakout_date": "2026-07-17"
     },
     {
       "symbol": "TECHM",
@@ -17880,7 +17987,8 @@
       },
       "history_url": "history/TECHM.json",
       "blue_sky": false,
-      "median_turnover_cr": 344.26
+      "median_turnover_cr": 344.26,
+      "breakout_date": "2026-07-17"
     },
     {
       "symbol": "JSFB",
@@ -18039,7 +18147,8 @@
       },
       "history_url": "history/JSFB.json",
       "blue_sky": false,
-      "median_turnover_cr": 35.08
+      "median_turnover_cr": 35.08,
+      "breakout_date": "2026-07-20"
     },
     {
       "symbol": "PNB",
@@ -18160,7 +18269,8 @@
       },
       "history_url": "history/PNB.json",
       "blue_sky": false,
-      "median_turnover_cr": 146.78
+      "median_turnover_cr": 146.78,
+      "breakout_date": "2026-07-20"
     },
     {
       "symbol": "ANANTRAJ",
@@ -18269,7 +18379,8 @@
       },
       "history_url": "history/ANANTRAJ.json",
       "blue_sky": false,
-      "median_turnover_cr": 105.32
+      "median_turnover_cr": 105.32,
+      "breakout_date": "2026-07-21"
     },
     {
       "symbol": "KARURVYSYA",
@@ -18408,7 +18519,8 @@
       },
       "history_url": "history/KARURVYSYA.json",
       "blue_sky": false,
-      "median_turnover_cr": 65.69
+      "median_turnover_cr": 65.69,
+      "breakout_date": "2026-07-21"
     },
     {
       "symbol": "M&MFIN",
@@ -18517,7 +18629,8 @@
       },
       "history_url": "history/M&MFIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 91.49
+      "median_turnover_cr": 91.49,
+      "breakout_date": "2026-07-21"
     },
     {
       "symbol": "JKPAPER",
@@ -18671,7 +18784,8 @@
       },
       "history_url": "history/JKPAPER.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.55
+      "median_turnover_cr": 14.55,
+      "breakout_date": "2026-07-27"
     },
     {
       "symbol": "PVRINOX",
@@ -18839,7 +18953,8 @@
       },
       "history_url": "history/PVRINOX.json",
       "blue_sky": false,
-      "median_turnover_cr": 19.45
+      "median_turnover_cr": 19.45,
+      "breakout_date": "2026-07-27"
     },
     {
       "symbol": "RATNAVEER",
@@ -19037,7 +19152,8 @@
       },
       "history_url": "history/RATNAVEER.json",
       "blue_sky": false,
-      "median_turnover_cr": 15.17
+      "median_turnover_cr": 15.17,
+      "breakout_date": "2026-07-27"
     },
     {
       "symbol": "SAGILITY",
@@ -19232,7 +19348,8 @@
       },
       "history_url": "history/SAGILITY.json",
       "blue_sky": false,
-      "median_turnover_cr": 108.74
+      "median_turnover_cr": 108.74,
+      "breakout_date": "2026-07-30"
     },
     {
       "symbol": "BALKRISIND",
@@ -19426,7 +19543,8 @@
       },
       "history_url": "history/BALKRISIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 36.78
+      "median_turnover_cr": 36.78,
+      "breakout_date": "2026-07-31"
     },
     {
       "symbol": "ETHOSLTD",
@@ -19580,7 +19698,8 @@
       },
       "history_url": "history/ETHOSLTD.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.06
+      "median_turnover_cr": 5.06,
+      "breakout_date": "2026-08-03"
     },
     {
       "symbol": "ENDURANCE",
@@ -19724,7 +19843,8 @@
       },
       "history_url": "history/ENDURANCE.json",
       "blue_sky": false,
-      "median_turnover_cr": 31.72
+      "median_turnover_cr": 31.72,
+      "breakout_date": "2026-08-04"
     },
     {
       "symbol": "360ONE",
@@ -19848,7 +19968,8 @@
       },
       "history_url": "history/360ONE.json",
       "blue_sky": false,
-      "median_turnover_cr": 132.26
+      "median_turnover_cr": 132.26,
+      "breakout_date": "2026-08-05"
     },
     {
       "symbol": "FIEMIND",
@@ -19992,7 +20113,8 @@
       },
       "history_url": "history/FIEMIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.41
+      "median_turnover_cr": 9.41,
+      "breakout_date": "2026-08-05"
     },
     {
       "symbol": "INDGN",
@@ -20150,7 +20272,8 @@
       },
       "history_url": "history/INDGN.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.59
+      "median_turnover_cr": 7.59,
+      "breakout_date": "2026-08-10"
     },
     {
       "symbol": "POLICYBZR",
@@ -20314,7 +20437,8 @@
       },
       "history_url": "history/POLICYBZR.json",
       "blue_sky": false,
-      "median_turnover_cr": 137.46
+      "median_turnover_cr": 137.46,
+      "breakout_date": "2026-08-11"
     },
     {
       "symbol": "KRN",
@@ -20435,7 +20559,8 @@
       },
       "history_url": "history/KRN.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.81
+      "median_turnover_cr": 7.81,
+      "breakout_date": "2026-08-12"
     },
     {
       "symbol": "VINDHYATEL",
@@ -20569,7 +20694,8 @@
       },
       "history_url": "history/VINDHYATEL.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.98
+      "median_turnover_cr": 6.98,
+      "breakout_date": "2026-08-12"
     },
     {
       "symbol": "PTCIL",
@@ -20746,7 +20872,8 @@
       },
       "history_url": "history/PTCIL.json",
       "blue_sky": false,
-      "median_turnover_cr": 18.62
+      "median_turnover_cr": 18.62,
+      "breakout_date": "2026-08-17"
     },
     {
       "symbol": "ASAHIINDIA",
@@ -20898,7 +21025,8 @@
       },
       "history_url": "history/ASAHIINDIA.json",
       "blue_sky": false,
-      "median_turnover_cr": 7.75
+      "median_turnover_cr": 7.75,
+      "breakout_date": "2026-08-18"
     },
     {
       "symbol": "DWARKESH",
@@ -21087,7 +21215,8 @@
       },
       "history_url": "history/DWARKESH.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.59
+      "median_turnover_cr": 5.59,
+      "breakout_date": "2026-08-19"
     },
     {
       "symbol": "SOLARA",
@@ -21220,7 +21349,8 @@
       },
       "history_url": "history/SOLARA.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.67
+      "median_turnover_cr": 6.67,
+      "breakout_date": "2026-08-20"
     },
     {
       "symbol": "GIPCL",
@@ -21386,7 +21516,8 @@
       },
       "history_url": "history/GIPCL.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.37
+      "median_turnover_cr": 6.37,
+      "breakout_date": "2026-08-24"
     },
     {
       "symbol": "DCBBANK",
@@ -21511,7 +21642,8 @@
       },
       "history_url": "history/DCBBANK.json",
       "blue_sky": false,
-      "median_turnover_cr": 19.36
+      "median_turnover_cr": 19.36,
+      "breakout_date": "2026-08-25"
     },
     {
       "symbol": "GOKULAGRO",
@@ -21625,7 +21757,8 @@
       },
       "history_url": "history/GOKULAGRO.json",
       "blue_sky": false,
-      "median_turnover_cr": 13.29
+      "median_turnover_cr": 13.29,
+      "breakout_date": "2026-08-25"
     },
     {
       "symbol": "MAZDOCK",
@@ -21739,7 +21872,8 @@
       },
       "history_url": "history/MAZDOCK.json",
       "blue_sky": false,
-      "median_turnover_cr": 168.76
+      "median_turnover_cr": 168.76,
+      "breakout_date": "2026-08-25"
     },
     {
       "symbol": "LUMAXIND",
@@ -21873,7 +22007,8 @@
       },
       "history_url": "history/LUMAXIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 10.13
+      "median_turnover_cr": 10.13,
+      "breakout_date": "2026-08-26"
     },
     {
       "symbol": "JTLIND",
@@ -22002,7 +22137,8 @@
       },
       "history_url": "history/JTLIND.json",
       "blue_sky": false,
-      "median_turnover_cr": 14.24
+      "median_turnover_cr": 14.24,
+      "breakout_date": "2026-08-28"
     },
     {
       "symbol": "HARSHA",
@@ -22165,7 +22301,8 @@
       },
       "history_url": "history/HARSHA.json",
       "blue_sky": false,
-      "median_turnover_cr": 6.02
+      "median_turnover_cr": 6.02,
+      "breakout_date": "2026-08-31"
     },
     {
       "symbol": "ENGINERSIN",
@@ -22313,7 +22450,8 @@
       },
       "history_url": "history/ENGINERSIN.json",
       "blue_sky": false,
-      "median_turnover_cr": 60.95
+      "median_turnover_cr": 60.95,
+      "breakout_date": "2026-09-01"
     },
     {
       "symbol": "MAHSEAMLES",
@@ -22440,7 +22578,8 @@
       },
       "history_url": "history/MAHSEAMLES.json",
       "blue_sky": false,
-      "median_turnover_cr": 12.43
+      "median_turnover_cr": 12.43,
+      "breakout_date": "2026-09-02"
     },
     {
       "symbol": "EDELWEISS",
@@ -22579,7 +22718,8 @@
       },
       "history_url": "history/EDELWEISS.json",
       "blue_sky": false,
-      "median_turnover_cr": 43.12
+      "median_turnover_cr": 43.12,
+      "breakout_date": "2026-09-03"
     },
     {
       "symbol": "EXICOM",
@@ -22743,7 +22883,8 @@
       },
       "history_url": "history/EXICOM.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.17
+      "median_turnover_cr": 16.17,
+      "breakout_date": "2026-09-07"
     },
     {
       "symbol": "STAR",
@@ -22854,7 +22995,8 @@
       },
       "history_url": "history/STAR.json",
       "blue_sky": false,
-      "median_turnover_cr": 21.27
+      "median_turnover_cr": 21.27,
+      "breakout_date": "2026-09-07"
     },
     {
       "symbol": "WOCKPHARMA",
@@ -22973,7 +23115,8 @@
       },
       "history_url": "history/WOCKPHARMA.json",
       "blue_sky": false,
-      "median_turnover_cr": 106.12
+      "median_turnover_cr": 106.12,
+      "breakout_date": "2026-09-07"
     },
     {
       "symbol": "HINDOILEXP",
@@ -23082,7 +23225,8 @@
       },
       "history_url": "history/HINDOILEXP.json",
       "blue_sky": false,
-      "median_turnover_cr": 9.38
+      "median_turnover_cr": 9.38,
+      "breakout_date": "2026-09-08"
     },
     {
       "symbol": "MIDHANI",
@@ -23211,7 +23355,8 @@
       },
       "history_url": "history/MIDHANI.json",
       "blue_sky": false,
-      "median_turnover_cr": 28.3
+      "median_turnover_cr": 28.3,
+      "breakout_date": "2026-09-08"
     },
     {
       "symbol": "MAHSEAMLES",
@@ -23330,7 +23475,8 @@
       },
       "history_url": "history/MAHSEAMLES.json",
       "blue_sky": false,
-      "median_turnover_cr": 17.08
+      "median_turnover_cr": 17.08,
+      "breakout_date": "2026-09-10"
     },
     {
       "symbol": "SMSPHARMA",
@@ -23519,7 +23665,8 @@
       },
       "history_url": "history/SMSPHARMA.json",
       "blue_sky": false,
-      "median_turnover_cr": 5.27
+      "median_turnover_cr": 5.27,
+      "breakout_date": "2026-09-11"
     },
     {
       "symbol": "SUPRIYA",
@@ -23670,7 +23817,8 @@
       },
       "history_url": "history/SUPRIYA.json",
       "blue_sky": false,
-      "median_turnover_cr": 16.66
+      "median_turnover_cr": 16.66,
+      "breakout_date": "2026-09-21"
     },
     {
       "symbol": "USHAMART",
@@ -23813,7 +23961,8 @@
       },
       "history_url": "history/USHAMART.json",
       "blue_sky": false,
-      "median_turnover_cr": 33.87
+      "median_turnover_cr": 33.87,
+      "breakout_date": "2026-09-21"
     }
   ]
 }
