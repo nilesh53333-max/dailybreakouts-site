@@ -410,6 +410,7 @@ const STRATEGY_CONFIG = {
     lifecycle_json: "./breakout_lifecycle_double_bottom.json",
     backtest_data: BACKTEST_DATA_DOUBLEBOTTOM,
     default_combo: {trail:25, stop:8, maxpos:5},
+    lifecycle_ready: false,
   },
 };
 let ACTIVE_STRATEGY = 'vcm';
@@ -439,9 +440,28 @@ function switchStrategy(name){
   LIFECYCLE_DATA = null;
   ACTIVE_STAGE = 'fresh';
   for(const k in HISTORY_CACHE) delete HISTORY_CACHE[k];
+  disposeActiveChart();
+  document.getElementById('lifecycle-cards').innerHTML = '';
+  document.getElementById('stage-chart-panel').innerHTML = '';
+  document.getElementById('stage-table-container').innerHTML =
+    `<div class="empty">Loading ${cfg.title} scanner data…</div>`;
 
   renderBacktest();
-  loadBreakouts();
+  if(cfg.lifecycle_ready === false){
+    document.getElementById('dynamic-sub').textContent =
+      'Historical backtest is available · Live Double Bottom scanner data is being prepared.';
+    document.getElementById('lifecycle-cards').innerHTML = `
+      <div class="quadrant-card" style="grid-column:1/-1;padding:12px 14px;">
+        <div style="font-size:12px;font-weight:700;color:var(--accent);">Live scanner coming next</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;">The 25 DMA / 8% stop / 5-position historical backtest is available below.</div>
+      </div>`;
+    document.getElementById('stage-table-container').innerHTML =
+      `<div class="empty">Double Bottom live signals will appear here after the lifecycle scan is connected.</div>`;
+    document.getElementById('stage-chart-panel').innerHTML =
+      `<div class="quadrant-card"><div class="empty">Select another strategy for live charts.<br>Double Bottom backtest remains available below.</div></div>`;
+  }else{
+    loadBreakouts();
+  }
 }
 
 // ---- backtest panel ----
