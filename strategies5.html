@@ -57,7 +57,6 @@
   .badge.fresh{background:#FDF3E7;color:#B4700C;}
   .badge.tight{background:#EEF3FB;color:#2C5FA8;}
   .badge.extended{background:#F4EDF9;color:#7A3FA0;}
-  .badge.capacity{background:#F1F5F9;color:#475569;font-weight:600;}
 
   .controls{display:flex;gap:14px;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap;}
   .field label{display:block;font-size:10.5px;color:var(--muted);margin-bottom:4px;}
@@ -78,13 +77,10 @@
   .dashboard-section-title::after{content:"";height:1px;background:var(--border);flex:1;}
   .quadrant{display:flex;flex-direction:column;gap:10px;}
   .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
-  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
-  .strategy-tabs-bar .item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:9px;font-size:13px;color:#475569;background:var(--card);border:1px solid var(--border);min-width:0;}
+  .strategy-tabs-bar{display:flex;gap:6px;overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:6px;margin:2px 0 14px;scrollbar-width:thin;}
+  .strategy-tabs-bar .item{padding:8px 13px;border-radius:7px;font-size:13px;color:#475569;white-space:nowrap;border:1px solid transparent;}
   .strategy-tabs-bar .item:hover{background:#F8FAFC;}
-  .strategy-tabs-bar .item.active{background:#F0FDF4;color:var(--text);border-color:var(--green);box-shadow:0 1px 3px rgba(15,23,42,.06);}
-  .strategy-name{font-weight:700;line-height:1.2;}
-  .strategy-desc{font-size:10.5px;color:var(--muted);font-weight:400;line-height:1.25;white-space:normal;}
-  .strategy-tabs-bar .item.active .strategy-desc{color:#3F6650;}
+  .strategy-tabs-bar .item.active{background:#ECFDF5;color:var(--text);font-weight:600;border-color:var(--green);}
   .chart-toolbar{display:flex;gap:4px;margin-bottom:4px;flex-wrap:wrap;align-items:center;}
   .site-disclaimer{margin-top:18px;padding-top:12px;border-top:1px solid var(--border);color:var(--muted);font-size:10.5px;line-height:1.5;}
 
@@ -159,23 +155,19 @@
   /* MOBILE (<900px): intentionally a different, single-column, touch
      interface -- not a squeezed version of the desktop grid. */
   @media (max-width: 899px){
-    header{height:48px;padding:0 14px;gap:10px;}
+    header{height:52px;padding:0 12px;gap:10px;}
     .mobile-search-btn{display:block;}
     .logo-tagline{display:none;}
     .topnav{display:none;}
     .topsearch{display:none;}
 
     .app-body{display:block;height:auto;overflow:visible;}
-    main.content-col{padding:10px;height:auto;overflow:visible;}
+    main.content-col{padding:12px;height:auto;overflow:visible;}
     .dashboard-grid{display:flex;flex-direction:column;gap:14px;height:auto;}
     .quadrant{overflow:visible;}
-    .quadrant-card{overflow-x:hidden;}
+    .quadrant-card{overflow-x:auto;}
 
-    h1{font-size:17px;}
-    .sub{font-size:11px;line-height:1.35 !important;margin-top:3px !important;}
-    .strategy-tabs-bar{display:flex;gap:8px;overflow-x:auto;margin:8px -10px 14px;padding:0 10px 5px;scroll-snap-type:x proximity;scrollbar-width:none;}
-    .strategy-tabs-bar::-webkit-scrollbar{display:none;}
-    .strategy-tabs-bar .item{flex:0 0 158px;scroll-snap-align:start;padding:9px 10px;}
+    h1{font-size:18px;}
     .lifecycle-cards{flex-wrap:wrap;}
     .stage-card{flex:1 1 45%;min-width:130px;}
 
@@ -184,42 +176,13 @@
     .bt-stats-row{grid-template-columns:repeat(2,1fr) !important;}
 
     .breakouts-table-col, .breakouts-chart-col{flex:none;width:100%;}
-    #stage-table{display:table;table-layout:auto;white-space:nowrap;}
-    #stage-table th,#stage-table td{padding:7px 6px;font-size:11px;}
-    #stage-table td:first-child{font-size:12px;}
-    #stage-table-container[data-stage="fresh"] th:nth-child(2),
-    #stage-table-container[data-stage="fresh"] td:nth-child(2){display:none;}
-    #stage-table-container[data-stage="forming"] th:nth-child(3),
-    #stage-table-container[data-stage="forming"] td:nth-child(3),
-    #stage-table-container[data-stage="forming"] th:nth-child(5),
-    #stage-table-container[data-stage="forming"] td:nth-child(5){display:none;}
-    #stage-table-container[data-stage="open"] th:nth-child(2),
-    #stage-table-container[data-stage="open"] td:nth-child(2),
-    #stage-table-container[data-stage="open"] th:nth-child(3),
-    #stage-table-container[data-stage="open"] td:nth-child(3){display:none;}
-    #stage-table-container[data-stage="closed"] th:nth-child(2),
-    #stage-table-container[data-stage="closed"] td:nth-child(2),
-    #stage-table-container[data-stage="closed"] th:nth-child(3),
-    #stage-table-container[data-stage="closed"] td:nth-child(3),
-    #stage-table-container[data-stage="closed"] th:nth-child(5),
-    #stage-table-container[data-stage="closed"] td:nth-child(5){display:none;}
-    #stage-table-container[data-stage="closed"] th:nth-child(7),
-    #stage-table-container[data-stage="closed"] td:nth-child(7){white-space:normal;min-width:80px;}
+    table{display:block;overflow-x:auto;white-space:nowrap;}
 
     /* Chart card becomes full width, generous touch-friendly height
        instead of inheriting a fixed flex-fill from the desktop grid. */
     #stage-chart-panel{height:auto;}
     #stage-chart-panel .card{height:auto;}
-    #stage-chart-panel .card > div[id^="chart-"]:not(.chart-tooltip){min-height:255px;}
-    .stock-header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-bottom:3px;}
-    .stock-quote{justify-content:flex-end;gap:5px !important;}
-    .chart-status-row{min-height:22px;margin:2px 0 4px;}
-    .chart-status-row:empty{display:none;}
-    .chart-toolbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;}
-    .chart-toolbar .range-btn{padding:5px 3px;font-size:11px;min-width:0;}
-    .chart-stats-2col{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 14px;margin-top:9px;}
-    .stat-row{font-size:10px;}
-    .stat-row .val{font-size:13px;}
+    #chart-fill-area, [id^="chart-"]{min-height:280px;}
 
     .controls{flex-wrap:wrap;}
     .field select{min-height:36px;}
@@ -283,6 +246,12 @@
 <header>
   <div class="logo disp">daily<span>breakouts</span></div>
   <div class="logo-tagline">Indian market breakout scanner</div>
+  <nav class="topnav">
+    <a href="#" class="topnav-item active" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      Home
+    </a>
+  </nav>
 </header>
 
 <div class="app-body">
@@ -293,9 +262,9 @@
   </div>
 
   <nav class="strategy-tabs-bar" aria-label="Trading strategies">
-    <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;"><span class="strategy-name">Volatility Contraction</span><span class="strategy-desc">A tightening price base</span></a>
-    <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;"><span class="strategy-name">Classic Bull Flag</span><span class="strategy-desc">A strong advance, then pullback</span></a>
-    <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
+    <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;">Volatility Contraction</a>
+    <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;">Classic Bull Flag</a>
+    <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;">Cup and Handle</a>
   </nav>
 
   <div class="dashboard-grid">
@@ -716,8 +685,8 @@ function buildLightweightChart(containerId, sliced, row){
   volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
   volSeries.setData(sliced.map(d => ({ time: d.date, value: d.v, color: d.c>=d.o ? 'rgba(22,163,74,0.4)' : 'rgba(220,38,38,0.4)' })));
 
-  const pivotColor = ACTIVE_STRATEGY === 'cupandhandle' ? '#DC2626' : '#16A34A';
   if(pivot){
+    const pivotColor = ACTIVE_STRATEGY === 'cupandhandle' ? '#DC2626' : '#16A34A';
     candleSeries.createPriceLine({
       price: pivot, color: pivotColor, lineWidth: 1,
       lineStyle: LightweightCharts.LineStyle.Dashed,
@@ -762,7 +731,7 @@ function buildLightweightChart(containerId, sliced, row){
     const tag = document.createElement('div');
     tag.id = containerId+'-pivotlabel';
     tag.textContent = `pivot ₹${pivot}`;
-    tag.style.cssText = `position:absolute;z-index:6;left:8px;top:${y-10}px;background:rgba(255,255,255,.94);color:${pivotColor};border:1px solid ${pivotColor};font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;box-shadow:0 1px 3px rgba(15,23,42,.10);pointer-events:none;white-space:nowrap;`;
+    tag.style.cssText = `position:absolute;z-index:6;left:8px;top:${y-10}px;background:#DC2626;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;box-shadow:0 1px 3px rgba(15,23,42,.16);pointer-events:none;`;
     container.appendChild(tag);
   }
   requestAnimationFrame(drawPivotLabel);
@@ -865,7 +834,7 @@ function buildLightweightChart(containerId, sliced, row){
         if(fitValid){
           const poly = document.createElementNS(svgNS, 'polygon');
           poly.setAttribute('points', `${fx1},${fUpperY1} ${fx2},${fUpperY2} ${fx2},${fLowerY2} ${fx1},${fLowerY1}`);
-          poly.setAttribute('fill', 'rgba(37,99,235,0.055)');
+          poly.setAttribute('fill', 'rgba(37,99,235,0.08)');
           poly.setAttribute('stroke', 'rgba(37,99,235,0.72)');
           poly.setAttribute('stroke-width', '1.5');
           svg.appendChild(poly);
@@ -921,7 +890,7 @@ function buildLightweightChart(containerId, sliced, row){
         // Very light fill between the two rims and the bowl.
         const fillPath = document.createElementNS(svgNS, 'path');
         fillPath.setAttribute('d', `${bowlD} L ${cx1} ${cyLeft} Z`);
-        fillPath.setAttribute('fill', 'rgba(37,99,235,0.04)');
+        fillPath.setAttribute('fill', 'rgba(37,99,235,0.065)');
         fillPath.setAttribute('stroke', 'none');
         svg.appendChild(fillPath);
 
@@ -989,7 +958,7 @@ function buildLightweightChart(containerId, sliced, row){
     } else if(valid){
       const zoneDiv = document.createElement('div');
       zoneDiv.id = containerId+'-zone';
-      zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.07);border:1px solid rgba(22,163,74,0.50);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+      zoneDiv.style.cssText = `position:absolute;z-index:5;left:${x1}px;top:${yTop}px;width:${(x2-x1)}px;height:${(yBot-yTop)}px;background:rgba(22,163,74,0.14);border:1.5px solid rgba(22,163,74,0.55);pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
       container.appendChild(zoneDiv);
       if(baseLabel){
         const labelDiv = document.createElement('div');
@@ -1142,12 +1111,12 @@ function renderChartPanelWithHistory(row, fullHistory){
       <div>
         <div class="disp stock-name" style="font-size:15px;">${row.symbol}</div>
       </div>
-      <div class="stock-quote" style="display:flex;gap:6px;align-items:center;">
+      <div style="display:flex;gap:6px;align-items:center;">
+        ${badgeHtml}
         <span class="num stock-price" style="font-size:14px;">₹${(priceNow||0).toFixed(2)}</span>
         ${stats && stats.oneDayGain!=null ? `<span class="num" style="font-weight:600;font-size:12px;color:${stats.oneDayGain>=0?'var(--green)':'var(--red)'}">(${stats.oneDayGain>=0?'+':''}${stats.oneDayGain.toFixed(2)}%)</span>` : ''}
       </div>
     </div>
-    <div class="chart-status-row">${badgeHtml}</div>
     <div class="num" style="font-size:10px;color:var(--muted);">${ohlcLine}</div>
     <div class="num" style="font-size:10px;color:var(--muted);margin-bottom:2px;">${volumeLine}</div>
     <div class="chart-toolbar">${rangeBtns}${baseZoneToggle}</div>
@@ -1165,7 +1134,6 @@ const STAGE_PAGE_SIZE = 10;
 
 function renderStageTable(){
   const el = document.getElementById('stage-table-container');
-  el.dataset.stage = ACTIVE_STAGE;
   const chartPanel = document.getElementById('stage-chart-panel');
   const buckets = bucketSignalsByMaxPositions();
   const rows = ACTIVE_STAGE === 'forming' ? (LIFECYCLE_DATA.stages.forming || []) : buckets[ACTIVE_STAGE];
@@ -1207,8 +1175,8 @@ function renderStageTable(){
       const o = r._outcome;
       const traded = o && o.status === 'open';
       const statusHtml = traded
-        ? `<span class="badge tight">Position open</span>`
-        : `<span class="badge capacity">Capacity full</span>`;
+        ? `<span class="badge tight">Traded</span>`
+        : `<span class="badge" style="background:#FEF2F2;color:var(--red);">No trade — book full</span>`;
       return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
