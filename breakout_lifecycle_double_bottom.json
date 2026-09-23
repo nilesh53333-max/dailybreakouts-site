@@ -185,6 +185,7 @@
           "status": "closed",
           "exit_date": "2026-02-03",
           "exit_price": 66.93,
+          "return_pct": -1.71,
           "gain_pct": -1.71,
           "exit_reason": "close below DMA"
         }
@@ -220,6 +221,7 @@
           "status": "closed",
           "exit_date": "2026-03-13",
           "exit_price": 439.4,
+          "return_pct": -3.12,
           "gain_pct": -3.12,
           "exit_reason": "close below DMA"
         }
@@ -255,6 +257,7 @@
           "status": "closed",
           "exit_date": "2026-03-02",
           "exit_price": 1136.0,
+          "return_pct": 15.24,
           "gain_pct": 15.24,
           "exit_reason": "close below DMA"
         }
@@ -290,6 +293,7 @@
           "status": "closed",
           "exit_date": "2026-03-10",
           "exit_price": 9996.0,
+          "return_pct": 2.3,
           "gain_pct": 2.3,
           "exit_reason": "close below DMA"
         }
@@ -325,6 +329,7 @@
           "status": "closed",
           "exit_date": "2026-02-19",
           "exit_price": 830.5,
+          "return_pct": -3.82,
           "gain_pct": -3.82,
           "exit_reason": "close below DMA"
         }
@@ -391,6 +396,7 @@
           "status": "closed",
           "exit_date": "2026-02-24",
           "exit_price": 3962.8,
+          "return_pct": -9.23,
           "gain_pct": -9.23,
           "exit_reason": "8% stop"
         }
@@ -829,6 +835,7 @@
           "status": "closed",
           "exit_date": "2026-03-19",
           "exit_price": 938.05,
+          "return_pct": -4.22,
           "gain_pct": -4.22,
           "exit_reason": "close below DMA"
         }
@@ -864,6 +871,7 @@
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 3072.6,
+          "return_pct": -5.39,
           "gain_pct": -5.39,
           "exit_reason": "close below DMA"
         }
@@ -1147,6 +1155,7 @@
           "status": "closed",
           "exit_date": "2026-03-23",
           "exit_price": 293.45,
+          "return_pct": -5.86,
           "gain_pct": -5.86,
           "exit_reason": "close below DMA"
         }
@@ -1213,6 +1222,7 @@
           "status": "closed",
           "exit_date": "2026-05-08",
           "exit_price": 282.8,
+          "return_pct": 10.5,
           "gain_pct": 10.5,
           "exit_reason": "close below DMA"
         }
@@ -1248,6 +1258,7 @@
           "status": "closed",
           "exit_date": "2026-06-11",
           "exit_price": 1683.3,
+          "return_pct": 1.73,
           "gain_pct": 1.73,
           "exit_reason": "close below DMA"
         }
@@ -1283,6 +1294,7 @@
           "status": "closed",
           "exit_date": "2026-04-06",
           "exit_price": 1456.0,
+          "return_pct": -9.18,
           "gain_pct": -9.18,
           "exit_reason": "8% stop"
         }
@@ -1318,6 +1330,7 @@
           "status": "closed",
           "exit_date": "2026-06-05",
           "exit_price": 336.6,
+          "return_pct": 18.71,
           "gain_pct": 18.71,
           "exit_reason": "close below DMA"
         }
@@ -1353,6 +1366,7 @@
           "status": "closed",
           "exit_date": "2026-06-08",
           "exit_price": 225.85,
+          "return_pct": 41.01,
           "gain_pct": 41.01,
           "exit_reason": "close below DMA"
         }
@@ -1419,6 +1433,7 @@
           "status": "closed",
           "exit_date": "2026-05-05",
           "exit_price": 1062.4,
+          "return_pct": 0.2,
           "gain_pct": 0.2,
           "exit_reason": "close below DMA"
         }
@@ -1981,6 +1996,7 @@
           "status": "closed",
           "exit_date": "2026-05-18",
           "exit_price": 975.8,
+          "return_pct": -8.32,
           "gain_pct": -8.32,
           "exit_reason": "8% stop"
         }
@@ -2047,6 +2063,7 @@
           "status": "closed",
           "exit_date": "2026-05-29",
           "exit_price": 727.75,
+          "return_pct": -3.31,
           "gain_pct": -3.31,
           "exit_reason": "close below DMA"
         }
@@ -2299,6 +2316,7 @@
           "status": "closed",
           "exit_date": "2026-05-29",
           "exit_price": 1524.4,
+          "return_pct": -7.52,
           "gain_pct": -7.52,
           "exit_reason": "close below DMA"
         }
@@ -2520,6 +2538,7 @@
           "status": "closed",
           "exit_date": "2026-06-23",
           "exit_price": 1734.9,
+          "return_pct": -4.34,
           "gain_pct": -4.34,
           "exit_reason": "close below DMA"
         }
@@ -2555,6 +2574,7 @@
           "status": "closed",
           "exit_date": "2026-07-16",
           "exit_price": 396.05,
+          "return_pct": 14.24,
           "gain_pct": 14.24,
           "exit_reason": "close below DMA"
         }
@@ -2590,6 +2610,7 @@
           "status": "closed",
           "exit_date": "2026-07-28",
           "exit_price": 1180.8,
+          "return_pct": 2.58,
           "gain_pct": 2.58,
           "exit_reason": "close below DMA"
         }
@@ -2625,6 +2646,7 @@
           "status": "closed",
           "exit_date": "2026-07-08",
           "exit_price": 169.24,
+          "return_pct": -3.63,
           "gain_pct": -3.63,
           "exit_reason": "close below DMA"
         }
@@ -2660,6 +2682,7 @@
           "status": "closed",
           "exit_date": "2026-07-22",
           "exit_price": 635.35,
+          "return_pct": 7.39,
           "gain_pct": 7.39,
           "exit_reason": "close below DMA"
         }
@@ -2974,6 +2997,7 @@
           "status": "closed",
           "exit_date": "2026-07-23",
           "exit_price": 974.9,
+          "return_pct": -6.42,
           "gain_pct": -6.42,
           "exit_reason": "close below DMA"
         }
@@ -3350,6 +3374,7 @@
           "status": "closed",
           "exit_date": "2026-08-24",
           "exit_price": 70.29,
+          "return_pct": 4.99,
           "gain_pct": 4.99,
           "exit_reason": "close below DMA"
         }
@@ -3416,6 +3441,7 @@
           "status": "closed",
           "exit_date": "2026-08-10",
           "exit_price": 162.96,
+          "return_pct": -6.1,
           "gain_pct": -6.1,
           "exit_reason": "close below DMA"
         }
@@ -3699,6 +3725,7 @@
           "status": "closed",
           "exit_date": "2026-09-07",
           "exit_price": 1156.5,
+          "return_pct": 2.84,
           "gain_pct": 2.84,
           "exit_reason": "close below DMA"
         }
@@ -3734,6 +3761,7 @@
           "status": "closed",
           "exit_date": "2026-07-31",
           "exit_price": 180.65,
+          "return_pct": -9.24,
           "gain_pct": -9.24,
           "exit_reason": "8% stop"
         }
@@ -3769,6 +3797,7 @@
           "status": "closed",
           "exit_date": "2026-08-13",
           "exit_price": 42.66,
+          "return_pct": -7.33,
           "gain_pct": -7.33,
           "exit_reason": "close below DMA"
         }
@@ -3804,6 +3833,7 @@
           "status": "closed",
           "exit_date": "2026-08-26",
           "exit_price": 2328.6,
+          "return_pct": -5.97,
           "gain_pct": -5.97,
           "exit_reason": "close below DMA"
         }
@@ -3963,6 +3993,7 @@
           "status": "closed",
           "exit_date": "2026-09-15",
           "exit_price": 570.85,
+          "return_pct": 0.25,
           "gain_pct": 0.25,
           "exit_reason": "close below DMA"
         }
@@ -4217,6 +4248,7 @@
           "status": "closed",
           "exit_date": "2026-09-16",
           "exit_price": 185.14,
+          "return_pct": 5.81,
           "gain_pct": 5.81,
           "exit_reason": "close below DMA"
         }
@@ -4345,6 +4377,7 @@
           "status": "closed",
           "exit_date": "2026-09-10",
           "exit_price": 5861.0,
+          "return_pct": -4.98,
           "gain_pct": -4.98,
           "exit_reason": "close below DMA"
         }
@@ -4535,6 +4568,7 @@
           "status": "closed",
           "exit_date": "2026-09-15",
           "exit_price": 169.0,
+          "return_pct": -8.43,
           "gain_pct": -8.43,
           "exit_reason": "8% stop"
         }
