@@ -1347,7 +1347,7 @@ async function loadBreakouts(){
     const scanYear = String(data.as_of_date || data.scan_date || '').slice(0,4);
     STAGE_META.closed.title = scanYear ? `Closed Trades ${scanYear}` : 'Closed Trades';
     document.getElementById('dynamic-sub').textContent =
-      `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · 4% close stop · Select a stage to view stocks.`;
+      `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · ${dc.stop}% close stop · Select a stage to view stocks.`;
 
     renderStageCards();
     renderStageTable();
