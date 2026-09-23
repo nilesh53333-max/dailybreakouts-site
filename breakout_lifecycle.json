@@ -89398,6 +89398,109 @@
       }
     },
     {
+      "symbol": "AARTIPHARM",
+      "entry_date": "2026-09-23",
+      "entry_price": 925.0,
+      "pivot": 888.7,
+      "rs_pct": 75.2,
+      "base_weeks": 5.6,
+      "base_start": "2026-08-13",
+      "base_end_date": "2026-09-23",
+      "base_number": 1,
+      "market_cap_cr": 7527.4,
+      "base_high": 927.95,
+      "base_low": 765.0,
+      "is_fresh_today": true,
+      "outcomes": {
+        "25_4_5": {
+          "status": "skipped"
+        },
+        "25_4_10": {
+          "status": "skipped"
+        },
+        "25_4_15": {
+          "status": "open",
+          "current_price": 925.0,
+          "gain_pct": 0.0
+        },
+        "25_8_5": {
+          "status": "skipped"
+        },
+        "25_8_10": {
+          "status": "skipped"
+        },
+        "25_8_15": {
+          "status": "skipped"
+        },
+        "25_12_5": {
+          "status": "skipped"
+        },
+        "25_12_10": {
+          "status": "skipped"
+        },
+        "25_12_15": {
+          "status": "skipped"
+        },
+        "50_4_5": {
+          "status": "skipped"
+        },
+        "50_4_10": {
+          "status": "skipped"
+        },
+        "50_4_15": {
+          "status": "skipped"
+        },
+        "50_8_5": {
+          "status": "skipped"
+        },
+        "50_8_10": {
+          "status": "skipped"
+        },
+        "50_8_15": {
+          "status": "skipped"
+        },
+        "50_12_5": {
+          "status": "skipped"
+        },
+        "50_12_10": {
+          "status": "skipped"
+        },
+        "50_12_15": {
+          "status": "skipped"
+        },
+        "100_4_5": {
+          "status": "skipped"
+        },
+        "100_4_10": {
+          "status": "skipped"
+        },
+        "100_4_15": {
+          "status": "skipped"
+        },
+        "100_8_5": {
+          "status": "skipped"
+        },
+        "100_8_10": {
+          "status": "skipped"
+        },
+        "100_8_15": {
+          "status": "skipped"
+        },
+        "100_12_5": {
+          "status": "skipped"
+        },
+        "100_12_10": {
+          "status": "skipped"
+        },
+        "100_12_15": {
+          "status": "skipped"
+        }
+      },
+      "history_url": "history/AARTIPHARM.json",
+      "blue_sky": false,
+      "median_turnover_cr": 34.55
+    },
+    {
       "symbol": "ICICIGI",
       "entry_date": "2026-01-06",
       "entry_price": 2010.0,
@@ -90474,109 +90577,6 @@
           "status": "skipped"
         }
       }
-    },
-    {
-      "symbol": "AARTIPHARM",
-      "entry_date": "2026-09-23",
-      "entry_price": 925.0,
-      "pivot": 888.7,
-      "rs_pct": 75.0,
-      "base_weeks": 5.6,
-      "base_start": "2026-08-13",
-      "base_end_date": "2026-09-23",
-      "base_number": 1,
-      "market_cap_cr": 7527.4,
-      "base_high": 927.95,
-      "base_low": 765.0,
-      "is_fresh_today": true,
-      "outcomes": {
-        "25_4_5": {
-          "status": "skipped"
-        },
-        "25_4_10": {
-          "status": "skipped"
-        },
-        "25_4_15": {
-          "status": "open",
-          "current_price": 925.0,
-          "gain_pct": 0.0
-        },
-        "25_8_5": {
-          "status": "skipped"
-        },
-        "25_8_10": {
-          "status": "skipped"
-        },
-        "25_8_15": {
-          "status": "skipped"
-        },
-        "25_12_5": {
-          "status": "skipped"
-        },
-        "25_12_10": {
-          "status": "skipped"
-        },
-        "25_12_15": {
-          "status": "skipped"
-        },
-        "50_4_5": {
-          "status": "skipped"
-        },
-        "50_4_10": {
-          "status": "skipped"
-        },
-        "50_4_15": {
-          "status": "skipped"
-        },
-        "50_8_5": {
-          "status": "skipped"
-        },
-        "50_8_10": {
-          "status": "skipped"
-        },
-        "50_8_15": {
-          "status": "skipped"
-        },
-        "50_12_5": {
-          "status": "skipped"
-        },
-        "50_12_10": {
-          "status": "skipped"
-        },
-        "50_12_15": {
-          "status": "skipped"
-        },
-        "100_4_5": {
-          "status": "skipped"
-        },
-        "100_4_10": {
-          "status": "skipped"
-        },
-        "100_4_15": {
-          "status": "skipped"
-        },
-        "100_8_5": {
-          "status": "skipped"
-        },
-        "100_8_10": {
-          "status": "skipped"
-        },
-        "100_8_15": {
-          "status": "skipped"
-        },
-        "100_12_5": {
-          "status": "skipped"
-        },
-        "100_12_10": {
-          "status": "skipped"
-        },
-        "100_12_15": {
-          "status": "skipped"
-        }
-      },
-      "history_url": "history/AARTIPHARM.json",
-      "blue_sky": false,
-      "median_turnover_cr": 34.55
     },
     {
       "symbol": "ASTRAZEN",
