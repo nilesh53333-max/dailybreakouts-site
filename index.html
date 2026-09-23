@@ -470,7 +470,9 @@ function fmtPctYr(v){ return (v>=0?'+':'') + v.toFixed(1) + '%'; }
 function colorFor(v){ return v >= 0 ? 'var(--green)' : 'var(--red)'; }
 function publicExitReason(reason){
   const text = String(reason || '').trim();
-  if(/close stop/i.test(text)) return text;
+  // "4% close stop" (Bull Flag) and "8% stop" (Double Bottom) are both
+  // real stop exits -- show them as written, not as a generic exit.
+  if(/close stop/i.test(text) || /\d+(?:\.\d+)?%\s*stop/i.test(text)) return text;
   if(/DMA|moving average/i.test(text)) return 'Closed below DMA';
   return 'Strategy exit';
 }
@@ -1426,7 +1428,7 @@ async function loadBreakouts(){
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
     const dc = cfg.default_combo;
     const scanDate = formatIsoDate(data.as_of_date || data.scan_date || data.date);
-    const scanYear = String(data.as_of_date || data.scan_date || '').slice(0,4);
+    const scanYear = String(data.as_of_date || data.scan_date || data.date || data.year || '').slice(0,4);
     STAGE_META.closed.title = scanYear ? `Closed Trades ${scanYear}` : 'Closed Trades';
     document.getElementById('dynamic-sub').textContent =
       `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · ${dc.stop}% close stop · Select a stage to view stocks.`;
