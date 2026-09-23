@@ -934,6 +934,63 @@ function buildLightweightChart(containerId, sliced, row){
           container.appendChild(labelDiv);
         }
       }
+    } else if(valid && ACTIVE_STRATEGY === 'doublebottom'){
+      // Double Bottom presentation: connect the detector's real anchors
+      // (first low -> neckline -> second low -> breakout) so this cannot be
+      // mistaken for the generic rectangular VCM base.
+      const anchorIndex = date => date ? sliced.findIndex(d => d.date >= date) : -1;
+      const firstIdx = anchorIndex(row.first_bottom_date);
+      const neckIdx = anchorIndex(row.neckline_date);
+      const secondIdx = anchorIndex(row.second_bottom_date);
+      const breakoutIdx = anchorIndex(row.entry_date || row.base_end_date);
+      const indices = [firstIdx, neckIdx, secondIdx, breakoutIdx];
+      const anchorsValid = indices.every(i => i >= 0 && sliced[i]);
+
+      if(anchorsValid){
+        const xs = indices.map(i => chart.timeScale().timeToCoordinate(sliced[i].date));
+        const prices = [sliced[firstIdx].l, row.pivot, sliced[secondIdx].l, row.pivot];
+        const ys = prices.map(p => candleSeries.priceToCoordinate(p));
+        const coordsValid = [...xs,...ys].every(v => typeof v==='number' && isFinite(v));
+        if(coordsValid){
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.id = containerId+'-zone';
+          svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
+
+          const path = document.createElementNS(svgNS, 'path');
+          path.setAttribute('d', `M ${xs[0]} ${ys[0]} L ${xs[1]} ${ys[1]} L ${xs[2]} ${ys[2]} L ${xs[3]} ${ys[3]}`);
+          path.setAttribute('fill', 'none');
+          path.setAttribute('stroke', 'rgba(37,99,235,0.90)');
+          path.setAttribute('stroke-width', '2');
+          path.setAttribute('stroke-linecap', 'round');
+          path.setAttribute('stroke-linejoin', 'round');
+          svg.appendChild(path);
+
+          // A subtle neckline makes the breakout level instantly readable.
+          const neckline = document.createElementNS(svgNS, 'line');
+          neckline.setAttribute('x1', xs[0]); neckline.setAttribute('y1', ys[1]);
+          neckline.setAttribute('x2', xs[3]); neckline.setAttribute('y2', ys[1]);
+          neckline.setAttribute('stroke', 'rgba(22,163,74,0.72)');
+          neckline.setAttribute('stroke-width', '1.25');
+          neckline.setAttribute('stroke-dasharray', '5 4');
+          svg.appendChild(neckline);
+
+          xs.forEach((x, i) => {
+            const dot = document.createElementNS(svgNS, 'circle');
+            dot.setAttribute('cx', x); dot.setAttribute('cy', ys[i]); dot.setAttribute('r', '3.2');
+            dot.setAttribute('fill', '#FFFFFF'); dot.setAttribute('stroke', i===1||i===3 ? '#16A34A' : '#2563EB');
+            dot.setAttribute('stroke-width', '1.7');
+            svg.appendChild(dot);
+          });
+          container.appendChild(svg);
+
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          labelDiv.textContent = 'Double Bottom · W';
+          labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,xs[0])}px;top:${Math.max(6,ys[1]-24)}px;color:#1D4ED8;background:rgba(255,255,255,.92);border:1px solid rgba(37,99,235,.18);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
+        }
+      }
     } else if(valid && ACTIVE_STRATEGY === 'cupandhandle'){
       // Cup and Handle presentation. The detector supplies the anchors;
       // rendering stays deliberately subtle so it explains the pattern
@@ -1121,6 +1178,12 @@ async function drawChartPanel(){
       const res = await fetch(url, {cache:'no-store'});
       if(res.ok){
         hist = await res.json();
+        // Older Double Bottom history files used Lightweight Charts' `time`
+        // key, while this dashboard consistently reads `date`. Accept both
+        // formats so already-deployed histories render without regeneration.
+        if(Array.isArray(hist)){
+          hist = hist.map(d => d.date ? d : ({...d, date:d.time}));
+        }
         break;
       }
       lastStatus = `${res.status} ${res.statusText}`.trim();
@@ -1162,11 +1225,12 @@ function renderChartPanelWithHistory(row, fullHistory){
 
   const isBullFlag = ACTIVE_STRATEGY === 'bullflag';
   const isCupHandle = ACTIVE_STRATEGY === 'cupandhandle';
-  const fitLabel = isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : 'Fit Base');
+  const isDoubleBottom = ACTIVE_STRATEGY === 'doublebottom';
+  const fitLabel = isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base'));
   const rangeBtns = [['FIT',fitLabel],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
-  const zoneLabel = isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : 'Base zone');
+  const zoneLabel = isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone'));
   const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
 
   const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
@@ -1197,7 +1261,15 @@ function renderChartPanelWithHistory(row, fullHistory){
       ${statRow('Now vs pivot', 'Current close versus the visible pivot.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
     </div>` : '';
 
-  const statsHtml = isBullFlag ? bullFlagStatsHtml : (ACTIVE_STRATEGY==='cupandhandle' ? cupHandleStatsHtml : standardStatsHtml);
+  const doubleBottomStatsHtml = stats ? `
+    <div class="chart-stats-2col">
+      ${statRow('Pattern length', 'Trading duration from the first low to breakout.', row.base_weeks!=null?Number(row.base_weeks).toFixed(1)+' wks':'—')}
+      ${statRow('Pattern depth', 'Depth from neckline to the lower bottom.', row.pattern_depth_pct!=null?Number(row.pattern_depth_pct).toFixed(2)+'%':'—')}
+      ${statRow('Bottom difference', 'Difference between the two detected lows.', row.bottom_difference_pct!=null?Number(row.bottom_difference_pct).toFixed(2)+'%':'—')}
+      ${statRow('Now vs neckline', 'Current close versus the breakout neckline.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
+    </div>` : '';
+
+  const statsHtml = isBullFlag ? bullFlagStatsHtml : (isCupHandle ? cupHandleStatsHtml : (isDoubleBottom ? doubleBottomStatsHtml : standardStatsHtml));
 
   const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
 
