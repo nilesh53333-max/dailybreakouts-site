@@ -424,8 +424,7 @@ function switchStrategy(name){
   CURRENT_CHART_ROW = null;
   LIFECYCLE_DATA = null;
   ACTIVE_STAGE = 'fresh';
-  // HISTORY_CACHE is keyed by file URL (history/<SYMBOL>.json is shared by
-  // all strategies), so it is kept across switches -- no refetch needed.
+  for(const k in HISTORY_CACHE) delete HISTORY_CACHE[k];
   disposeActiveChart();
   document.getElementById('lifecycle-cards').innerHTML = '';
   document.getElementById('stage-chart-panel').innerHTML = '';
@@ -557,7 +556,6 @@ renderBacktest();
 
 
 let LIFECYCLE_DATA = null;
-const LIFECYCLE_CACHE = {};  // lifecycle JSON URL -> parsed data (this visit)
 let ACTIVE_STAGE = 'fresh';
 let SELECTED_TRAIL_DMA = 25;
 let SELECTED_STOP_PCT = 8;
@@ -1144,69 +1142,7 @@ function toggleBaseZone(){
   });
 }
 
-const HISTORY_CACHE = {};     // history URL -> history array (kept for the whole page visit)
-const HISTORY_PENDING = {};   // history URL -> in-flight Promise (dedupes click + prefetch)
-
-// Version tag = the lifecycle scan date. The browser may cache a history file
-// until the next daily scan changes this tag, so repeat views are instant but
-// a new day's data is never served stale.
-function historyVersion(){
-  const d = LIFECYCLE_DATA && (LIFECYCLE_DATA.as_of_date || LIFECYCLE_DATA.scan_date || LIFECYCLE_DATA.date);
-  return d ? String(d) : '';
-}
-function historyKey(row){
-  return row && row.history_url ? String(row.history_url).replace(/^\.\//, '') : '';
-}
-
-function fetchHistoryFor(row){
-  const key = historyKey(row);
-  if(!key) return Promise.resolve([]);
-  if(HISTORY_CACHE[key]) return Promise.resolve(HISTORY_CACHE[key]);
-  if(HISTORY_PENDING[key]) return HISTORY_PENDING[key];
-  const v = historyVersion();
-  const q = v ? `?v=${encodeURIComponent(v)}` : '';
-  // Try the path emitted by the scanner first. The root-relative fallback
-  // also works when this page is served from /strategies/ instead of /.
-  const candidates = [...new Set([row.history_url, `./${key}`, `/${key}`])];
-  HISTORY_PENDING[key] = (async () => {
-    let lastStatus = '';
-    for(const url of candidates){
-      const res = await fetch(url + q);
-      if(res.ok){
-        let hist = await res.json();
-        // Older Double Bottom history files used Lightweight Charts' `time`
-        // key, while this dashboard consistently reads `date`. Accept both.
-        if(Array.isArray(hist)) hist = hist.map(d => d.date ? d : ({...d, date:d.time}));
-        HISTORY_CACHE[key] = hist;
-        return hist;
-      }
-      lastStatus = `${res.status} ${res.statusText}`.trim();
-    }
-    throw new Error(`history fetch failed (${lastStatus || 'network error'})`);
-  })().finally(() => { delete HISTORY_PENDING[key]; });
-  return HISTORY_PENDING[key];
-}
-
-// Background prefetch: a few requests at a time, never blocks the page.
-const PREFETCH_QUEUE = [];
-let PREFETCH_ACTIVE = 0;
-const PREFETCH_CONCURRENCY = 3;
-function prefetchHistory(row, urgent){
-  const key = historyKey(row);
-  if(!key || row.history || HISTORY_CACHE[key] || HISTORY_PENDING[key]) return;
-  if(urgent){ fetchHistoryFor(row).catch(()=>{}); return; }
-  if(PREFETCH_QUEUE.some(r => historyKey(r) === key)) return;
-  PREFETCH_QUEUE.push(row);
-  pumpPrefetch();
-}
-function pumpPrefetch(){
-  while(PREFETCH_ACTIVE < PREFETCH_CONCURRENCY && PREFETCH_QUEUE.length){
-    const row = PREFETCH_QUEUE.shift();
-    if(HISTORY_CACHE[historyKey(row)]) continue;
-    PREFETCH_ACTIVE++;
-    fetchHistoryFor(row).catch(()=>{}).finally(() => { PREFETCH_ACTIVE--; pumpPrefetch(); });
-  }
-}
+const HISTORY_CACHE = {};  // symbol -> history array, fetched once per page load
 
 async function drawChartPanel(){
   const row = CURRENT_CHART_ROW;
@@ -1220,19 +1156,45 @@ async function drawChartPanel(){
     renderChartPanelWithHistory(row, row.history);
     return;
   }
-  if(!row.history_url){
-    renderChartPanelWithHistory(row, []);
+
+  if(HISTORY_CACHE[row.symbol]){
+    renderChartPanelWithHistory(row, HISTORY_CACHE[row.symbol]);
     return;
   }
-  const key = historyKey(row);
-  if(HISTORY_CACHE[key]){
-    renderChartPanelWithHistory(row, HISTORY_CACHE[key]);
+
+  if(!row.history_url){
+    renderChartPanelWithHistory(row, []);
     return;
   }
 
   panel.innerHTML = `<div class="quadrant-card"><div class="empty">Loading chart…</div></div>`;
   try{
-    const hist = await fetchHistoryFor(row);
+    // Try the path emitted by the scanner first. The root-relative fallback
+    // also works when this page is served from /strategies/ instead of /.
+    const cleanHistoryUrl = String(row.history_url).replace(/^\.\//, '');
+    const historyCandidates = [...new Set([
+      row.history_url,
+      `./${cleanHistoryUrl}`,
+      `/${cleanHistoryUrl}`
+    ])];
+    let hist = null;
+    let lastStatus = '';
+    for(const url of historyCandidates){
+      const res = await fetch(url, {cache:'no-store'});
+      if(res.ok){
+        hist = await res.json();
+        // Older Double Bottom history files used Lightweight Charts' `time`
+        // key, while this dashboard consistently reads `date`. Accept both
+        // formats so already-deployed histories render without regeneration.
+        if(Array.isArray(hist)){
+          hist = hist.map(d => d.date ? d : ({...d, date:d.time}));
+        }
+        break;
+      }
+      lastStatus = `${res.status} ${res.statusText}`.trim();
+    }
+    if(!hist) throw new Error(`history fetch failed (${lastStatus || 'network error'})`);
+    HISTORY_CACHE[row.symbol] = hist;
     // The person may have clicked a different row while this was loading --
     // only render if this fetch's row is still the one currently selected.
     if(CURRENT_CHART_ROW && CURRENT_CHART_ROW.symbol === row.symbol){
@@ -1240,9 +1202,7 @@ async function drawChartPanel(){
     }
   }catch(e){
     console.error(`Unable to load chart history for ${row.symbol}: ${row.history_url}`, e);
-    if(CURRENT_CHART_ROW && CURRENT_CHART_ROW.symbol === row.symbol){
-      panel.innerHTML = `<div class="quadrant-card"><div class="empty">Chart data is unavailable for ${row.symbol}.<br><small>Missing file: ${row.history_url}</small></div></div>`;
-    }
+    panel.innerHTML = `<div class="quadrant-card"><div class="empty">Chart data is unavailable for ${row.symbol}.<br><small>Missing file: ${row.history_url}</small></div></div>`;
   }
 }
 
@@ -1422,22 +1382,11 @@ function renderStageTable(){
     <table id="stage-table"><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>
     ${pagingLink}`;
   document.querySelectorAll('#stage-table tbody tr').forEach(tr => {
-    const rowFor = () => rows.find(r => r.symbol === tr.dataset.symbol);
     tr.addEventListener('click', () => {
-      const row = rowFor();
+      const row = rows.find(r => r.symbol === tr.dataset.symbol);
       if(row) renderChartFor(row);
     });
-    // Start downloading the chart the moment the pointer/finger lands on a
-    // row, so by the time the click fires the data is usually already here.
-    const warm = () => { const row = rowFor(); if(row) prefetchHistory(row, true); };
-    tr.addEventListener('mouseenter', warm);
-    tr.addEventListener('touchstart', warm, {passive:true});
   });
-  // Quietly preload the charts of the rows on screen.
-  if(hasChart){
-    const idle = window.requestIdleCallback || (fn => setTimeout(fn, 300));
-    idle(() => displayRows.slice(0, 15).forEach(r => prefetchHistory(r, false)));
-  }
 
   if(hasChart && displayRows.length){
     // Expanding/collapsing the list must not replace the user's selected
@@ -1457,16 +1406,9 @@ async function loadBreakouts(){
   const el = document.getElementById('stage-table-container');
   const cfg = STRATEGY_CONFIG[ACTIVE_STRATEGY];
   try{
-    // 'no-cache' = ask the server if the file changed (ETag). Unchanged files
-    // come back as a tiny 304 instead of re-downloading 2-4 MB. Parsed data is
-    // also kept for this visit, so switching strategies back and forth is instant.
-    let data = LIFECYCLE_CACHE[cfg.lifecycle_json];
-    if(!data){
-      const res = await fetch(cfg.lifecycle_json, {cache:'no-cache'});
-      if(!res.ok) throw new Error('not found');
-      data = await res.json();
-      LIFECYCLE_CACHE[cfg.lifecycle_json] = data;
-    }
+    const res = await fetch(cfg.lifecycle_json, {cache:'no-store'});
+    if(!res.ok) throw new Error('not found');
+    const data = await res.json();
     LIFECYCLE_DATA = data;
     // Each strategy uses its OWN fixed default combo (VCM: 6-month
     // rolling worst-ranked pick; Bull Flag: lowest-correlation combo)
