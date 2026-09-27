@@ -78,7 +78,7 @@
   .dashboard-section-title::after{content:"";height:1px;background:var(--border);flex:1;}
   .quadrant{display:flex;flex-direction:column;gap:10px;}
   .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
-  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
+  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
   .strategy-tabs-bar .item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:9px;font-size:13px;color:#475569;background:var(--card);border:1px solid var(--border);min-width:0;}
   .strategy-tabs-bar .item:hover{background:#F8FAFC;}
   .strategy-tabs-bar .item.active{background:#F0FDF4;color:var(--text);border-color:var(--green);box-shadow:0 1px 3px rgba(15,23,42,.06);}
@@ -296,7 +296,8 @@
     <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;"><span class="strategy-name">Volatility Contraction</span><span class="strategy-desc">A tightening price base</span></a>
     <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;"><span class="strategy-name">Classic Bull Flag</span><span class="strategy-desc">A strong advance, then pullback</span></a>
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
-    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom + HTF</span><span class="strategy-desc">Two similar lows, or a high tight flag</span></a>
+    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom</span><span class="strategy-desc">A recovery from two similar lows</span></a>
+    <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag</span><span class="strategy-desc">A near-vertical run, then a tight pause</span></a>
   </nav>
 
   <div class="dashboard-grid">
@@ -389,12 +390,21 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   doublebottom: {
-    title: "Double Bottom + High Tight Flag",
+    title: "Double Bottom",
     live_key: "DB",
-    stop_text: "DB + HTF shared book · 100 DMA · 8% close stop",
-    sub_static: "Live rules · 3:15 PM · Double Bottom + High Tight Flag in one book · 100 DMA trail · 8% close stop · compounding",
+    stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots",
+    sub_static: "Live rules · 3:15 PM · ₹5L book, 10 slots · 100 DMA trail · 8% close stop · compounding",
     lifecycle_json: "./breakout_lifecycle_double_bottom.json",
-    default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
+    default_combo: {trail:null, stop:null, maxpos:10, yearlyKey:"live"},
+    lifecycle_ready: true,
+  },
+  htf: {
+    title: "High Tight Flag",
+    live_key: "HTF",
+    stop_text: "100 DMA · 8% close stop · ₹5L, 5 slots",
+    sub_static: "Live rules · 3:15 PM · ₹5L book, 5 slots · 100 DMA trail · 8% close stop · compounding",
+    lifecycle_json: "./breakout_lifecycle_htf.json",
+    default_combo: {trail:null, stop:null, maxpos:5, yearlyKey:"live"},
     lifecycle_ready: true,
   },
 };
@@ -409,10 +419,12 @@ function switchStrategy(name){
   document.getElementById('sidebar-item-bullflag').classList.toggle('active', name==='bullflag');
   document.getElementById('sidebar-item-cupandhandle').classList.toggle('active', name==='cupandhandle');
   document.getElementById('sidebar-item-doublebottom').classList.toggle('active', name==='doublebottom');
+  document.getElementById('sidebar-item-htf').classList.toggle('active', name==='htf');
   document.getElementById('sidebar-item-vcm').setAttribute('aria-current', name==='vcm' ? 'page' : 'false');
   document.getElementById('sidebar-item-bullflag').setAttribute('aria-current', name==='bullflag' ? 'page' : 'false');
   document.getElementById('sidebar-item-cupandhandle').setAttribute('aria-current', name==='cupandhandle' ? 'page' : 'false');
   document.getElementById('sidebar-item-doublebottom').setAttribute('aria-current', name==='doublebottom' ? 'page' : 'false');
+  document.getElementById('sidebar-item-htf').setAttribute('aria-current', name==='htf' ? 'page' : 'false');
   document.getElementById('main-strategy-title').textContent = cfg.title;
   document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
@@ -537,10 +549,10 @@ function renderEquityPoints(points){
 
 // Shared books mix patterns (Double Bottom book = DB + High Tight Flag): show which one.
 function patternBadge(r){
-  if(!r || !r.pattern) return '';
+  if(!r || !r.pattern || ACTIVE_STRATEGY === 'htf') return '';
   const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : r.pattern);
   const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom' : r.pattern);
-  return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#FEF3C7':'#EEF2FF'};color:${r.pattern==='HTF'?'#92400E':'#3730A3'};">${lbl}</span>`;
+  return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#CCFBF1':'#EEF2FF'};color:${r.pattern==='HTF'?'#115E59':'#3730A3'};">${lbl}</span>`;
 }
 
 function renderBacktest(){
@@ -591,9 +603,9 @@ function renderBacktest(){
     <div class="row"><span class="lbl">Win rate</span><span class="val num">${wr}</span></div>
     <div class="row"><span class="lbl">Profit factor</span><span class="val num">${pf}</span></div>
     <div class="row"><span class="lbl">Closed trades</span><span class="val num">${s.closed_trades}</span></div>
-    <div class="row"><span class="lbl">Open now</span><span class="val num">${(st.open_positions||[]).length} / 15</span></div>
+    <div class="row"><span class="lbl">Open now</span><span class="val num">${(st.open_positions||[]).length} / ${st.max_positions || 15}</span></div>
     <div class="row"><span class="lbl">Exit rule</span><span class="val" style="font-size:10px;">${cfg.stop_text}</span></div>
-    ${port ? `<div class="row"><span class="lbl">All 4 together (₹40L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
+    ${port ? `<div class="row"><span class="lbl">All books together (₹40L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
 }
 renderBacktest();
 loadLiveState();
@@ -990,19 +1002,19 @@ function buildLightweightChart(containerId, sliced, row){
           const pole = document.createElementNS(svgNS, 'line');
           pole.setAttribute('x1', px1); pole.setAttribute('y1', py1);
           pole.setAttribute('x2', px2); pole.setAttribute('y2', py2);
-          pole.setAttribute('stroke', 'rgba(217,119,6,0.9)'); pole.setAttribute('stroke-width', '2');
+          pole.setAttribute('stroke', 'rgba(13,148,136,0.9)'); pole.setAttribute('stroke-width', '2');
           svg.appendChild(pole);
           const flag = document.createElementNS(svgNS, 'rect');
           flag.setAttribute('x', px2); flag.setAttribute('y', py2);
           flag.setAttribute('width', Math.max(2, px3 - px2)); flag.setAttribute('height', Math.max(2, pyLow - py2));
-          flag.setAttribute('fill', 'rgba(245,158,11,0.10)'); flag.setAttribute('stroke', 'rgba(217,119,6,0.8)');
+          flag.setAttribute('fill', 'rgba(13,148,136,0.09)'); flag.setAttribute('stroke', 'rgba(13,148,136,0.75)');
           flag.setAttribute('stroke-width', '1.25');
           svg.appendChild(flag);
           container.appendChild(svg);
           const labelDiv = document.createElement('div');
           labelDiv.id = containerId+'-zonelabel';
           labelDiv.textContent = `High Tight Flag${row.pole_gain_pct ? ' · pole +' + Math.round(row.pole_gain_pct) + '%' : ''}`;
-          labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,px1)}px;top:${Math.max(6,py2-24)}px;color:#B45309;background:rgba(255,255,255,.92);border:1px solid rgba(217,119,6,.25);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,px1)}px;top:${Math.max(6,py2-24)}px;color:#0F766E;background:rgba(255,255,255,.92);border:1px solid rgba(13,148,136,.25);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
           container.appendChild(labelDiv);
         }
       }
