@@ -870,7 +870,7 @@ function buildLightweightChart(containerId, sliced, row){
     const entryBar = sliced.find(d => d.date === row.entry_date);
     if(entryBar){
       tradeMarkers.push({
-        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: 'Entry',
+        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: (ACTIVE_STAGE === 'fresh' ? 'Breakout' : 'Entry'),
       });
     }
   }
