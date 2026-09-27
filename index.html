@@ -78,7 +78,7 @@
   .dashboard-section-title::after{content:"";height:1px;background:var(--border);flex:1;}
   .quadrant{display:flex;flex-direction:column;gap:10px;}
   .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
-  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
+  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
   .strategy-tabs-bar .item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:9px;font-size:13px;color:#475569;background:var(--card);border:1px solid var(--border);min-width:0;}
   .strategy-tabs-bar .item:hover{background:#F8FAFC;}
   .strategy-tabs-bar .item.active{background:#F0FDF4;color:var(--text);border-color:var(--green);box-shadow:0 1px 3px rgba(15,23,42,.06);}
@@ -298,6 +298,7 @@
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
     <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom</span><span class="strategy-desc">A recovery from two similar lows</span></a>
     <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag</span><span class="strategy-desc">A near-vertical run, then a tight pause</span></a>
+    <a href="#" class="item" id="sidebar-item-lp" onclick="switchStrategy('lp');return false;"><span class="strategy-name">Leader Pullback</span><span class="strategy-desc">A market leader bouncing off support</span></a>
   </nav>
 
   <div class="dashboard-grid">
@@ -407,6 +408,15 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:5, yearlyKey:"live"},
     lifecycle_ready: true,
   },
+  lp: {
+    title: "Leader Pullback",
+    live_key: "LP",
+    stop_text: "ALL9 exits · ₹10L, 15 slots",
+    sub_static: "Live rules · 3:15 PM · RS leaders bouncing off 21 EMA / 50 DMA · ALL9 exits · compounding",
+    lifecycle_json: "./breakout_lifecycle_lp.json",
+    default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
+    lifecycle_ready: true,
+  },
 };
 let ACTIVE_STRATEGY = 'vcm';
 
@@ -420,11 +430,13 @@ function switchStrategy(name){
   document.getElementById('sidebar-item-cupandhandle').classList.toggle('active', name==='cupandhandle');
   document.getElementById('sidebar-item-doublebottom').classList.toggle('active', name==='doublebottom');
   document.getElementById('sidebar-item-htf').classList.toggle('active', name==='htf');
+  document.getElementById('sidebar-item-lp').classList.toggle('active', name==='lp');
   document.getElementById('sidebar-item-vcm').setAttribute('aria-current', name==='vcm' ? 'page' : 'false');
   document.getElementById('sidebar-item-bullflag').setAttribute('aria-current', name==='bullflag' ? 'page' : 'false');
   document.getElementById('sidebar-item-cupandhandle').setAttribute('aria-current', name==='cupandhandle' ? 'page' : 'false');
   document.getElementById('sidebar-item-doublebottom').setAttribute('aria-current', name==='doublebottom' ? 'page' : 'false');
   document.getElementById('sidebar-item-htf').setAttribute('aria-current', name==='htf' ? 'page' : 'false');
+  document.getElementById('sidebar-item-lp').setAttribute('aria-current', name==='lp' ? 'page' : 'false');
   document.getElementById('main-strategy-title').textContent = cfg.title;
   document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
@@ -549,7 +561,7 @@ function renderEquityPoints(points){
 
 // Shared books mix patterns (Double Bottom book = DB + High Tight Flag): show which one.
 function patternBadge(r){
-  if(!r || !r.pattern || ACTIVE_STRATEGY === 'htf') return '';
+  if(!r || !r.pattern || ACTIVE_STRATEGY === 'htf' || ACTIVE_STRATEGY === 'lp') return '';
   const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : r.pattern);
   const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom' : r.pattern);
   return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#CCFBF1':'#EEF2FF'};color:${r.pattern==='HTF'?'#115E59':'#3730A3'};">${lbl}</span>`;
@@ -605,7 +617,7 @@ function renderBacktest(){
     <div class="row"><span class="lbl">Closed trades</span><span class="val num">${s.closed_trades}</span></div>
     <div class="row"><span class="lbl">Open now</span><span class="val num">${(st.open_positions||[]).length} / ${st.max_positions || 15}</span></div>
     <div class="row"><span class="lbl">Exit rule</span><span class="val" style="font-size:10px;">${cfg.stop_text}</span></div>
-    ${port ? `<div class="row"><span class="lbl">All books together (₹40L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
+    ${port ? `<div class="row"><span class="lbl">All books together (₹${Math.round(port.start_capital/1e5)}L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
 }
 renderBacktest();
 loadLiveState();
@@ -807,6 +819,27 @@ function buildLightweightChart(containerId, sliced, row){
   volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
   volSeries.setData(sliced.map(d => ({ time: d.date, value: d.v, color: d.c>=d.o ? 'rgba(22,163,74,0.4)' : 'rgba(220,38,38,0.4)' })));
 
+  if(row.pattern === 'LP'){
+    // Leader Pullback: the two support lines the stock pulled back to
+    const src = row._fullHistory || sliced;
+    const ema = {}, sma = {};
+    let e = null, sum = 0;
+    const k = 2 / 22;
+    src.forEach((d, i) => {
+      e = (e === null) ? d.c : (d.c - e) * k + e;
+      ema[d.date] = e;
+      sum += d.c; if(i >= 50) sum -= src[i - 50].c;
+      if(i >= 49) sma[d.date] = sum / 50;
+    });
+    const line = (map, color, w) => {
+      const s = chart.addLineSeries({ color, lineWidth: w, priceLineVisible: false, lastValueVisible: false,
+                                      crosshairMarkerVisible: false });
+      s.setData(sliced.filter(d => map[d.date] != null).map(d => ({ time: d.date, value: map[d.date] })));
+    };
+    line(sma, 'rgba(99,102,241,0.85)', 2);      // 50 DMA -- indigo
+    line(ema, 'rgba(245,158,11,0.95)', 2);      // 21 EMA -- amber
+  }
+
   const pivotColor = ACTIVE_STRATEGY === 'cupandhandle' ? '#DC2626' : '#16A34A';
   if(pivot){
     candleSeries.createPriceLine({
@@ -817,6 +850,13 @@ function buildLightweightChart(containerId, sliced, row){
   }
 
   const tradeMarkers = [];
+  if(row.pattern === 'LP' && row.touch_date){
+    const touchBar = sliced.find(d => d.date >= row.touch_date);
+    if(touchBar){
+      tradeMarkers.push({ time: touchBar.date, position: 'belowBar', color: '#F59E0B', shape: 'circle',
+                          text: `Support · ${row.support || ''}` });
+    }
+  }
   if(row.entry_date){
     const entryBar = sliced.find(d => d.date === row.entry_date);
     if(entryBar){
@@ -975,6 +1015,46 @@ function buildLightweightChart(containerId, sliced, row){
           const days = row.flag_sessions ?? flagIndices.length;
           labelDiv.textContent = `${days}d flag`;
           labelDiv.style.cssText = `position:absolute;z-index:5;left:${flagX1}px;top:${(upperEndY!=null?upperEndY-17:yTop-17)}px;width:${Math.max(40,flagX2-flagX1)}px;text-align:center;color:#2563EB;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
+        }
+      }
+    } else if(valid && row.pattern === 'LP'){
+      // Leader Pullback: a soft box from the swing high down to the support touch,
+      // i.e. the dip the leader made before bouncing (lines + marker are drawn with the chart).
+      const idxOf = date => date ? sliced.findIndex(d => d.date >= date) : -1;
+      const sIdx = idxOf(row.base_start);
+      const tIdx = idxOf(row.touch_date);
+      if(sIdx >= 0 && tIdx >= sIdx){
+        const ts = chart.timeScale();
+        const x1 = ts.timeToCoordinate(sliced[sIdx].date);
+        const x2 = ts.timeToCoordinate(sliced[Math.min(sliced.length - 1, Math.max(tIdx, baseEndIdx))].date);
+        const yTop = candleSeries.priceToCoordinate(row.base_high);
+        const yBot = candleSeries.priceToCoordinate(row.base_low);
+        if([x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))){
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.id = containerId+'-zone';
+          svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
+          const box = document.createElementNS(svgNS, 'rect');
+          box.setAttribute('x', x1); box.setAttribute('y', yTop);
+          box.setAttribute('width', Math.max(2, x2 - x1)); box.setAttribute('height', Math.max(2, yBot - yTop));
+          box.setAttribute('fill', 'rgba(99,102,241,0.07)'); box.setAttribute('stroke', 'rgba(99,102,241,0.55)');
+          box.setAttribute('stroke-width', '1'); box.setAttribute('stroke-dasharray', '5 4'); box.setAttribute('rx', '4');
+          svg.appendChild(box);
+          // arrow from the swing high down to the support touch
+          const arrow = document.createElementNS(svgNS, 'line');
+          const tx = ts.timeToCoordinate(sliced[tIdx].date);
+          arrow.setAttribute('x1', x1); arrow.setAttribute('y1', yTop);
+          arrow.setAttribute('x2', typeof tx === 'number' ? tx : x2); arrow.setAttribute('y2', yBot);
+          arrow.setAttribute('stroke', 'rgba(99,102,241,0.6)'); arrow.setAttribute('stroke-width', '1.25');
+          arrow.setAttribute('stroke-dasharray', '3 3');
+          svg.appendChild(arrow);
+          container.appendChild(svg);
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          const pb = row.pullback_pct != null ? ` · −${Number(row.pullback_pct).toFixed(1)}% dip` : '';
+          labelDiv.textContent = `Leader Pullback · ${row.support || 'support'}${pb}`;
+          labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,x1)}px;top:${Math.max(6,yTop-24)}px;color:#4338CA;background:rgba(255,255,255,.92);border:1px solid rgba(99,102,241,.25);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
           container.appendChild(labelDiv);
         }
       }
@@ -1345,6 +1425,7 @@ function renderChartPanelWithHistory(row, fullHistory){
   const panel = document.getElementById('stage-chart-panel');
   if(!row || !panel) return;
 
+  row._fullHistory = fullHistory;          // Leader Pullback draws 21 EMA / 50 DMA from the full series
   const sliced = sliceHistory(fullHistory, CURRENT_CHART_RANGE, row.base_start, row.base_end_date);
   const stats = computeChartStats(row, sliced);
   const today = sliced.length ? sliced[sliced.length-1] : null;
@@ -1366,12 +1447,13 @@ function renderChartPanelWithHistory(row, fullHistory){
   const isBullFlag = ACTIVE_STRATEGY === 'bullflag';
   const isCupHandle = ACTIVE_STRATEGY === 'cupandhandle';
   const isHTF = row.pattern === 'HTF';
+  const isLP = row.pattern === 'LP';
   const isDoubleBottom = ACTIVE_STRATEGY === 'doublebottom' && !isHTF;
-  const fitLabel = isHTF ? 'Fit Flag' : (isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base')));
+  const fitLabel = isLP ? 'Fit Pullback' : isHTF ? 'Fit Flag' : (isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base')));
   const rangeBtns = [['FIT',fitLabel],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
-  const zoneLabel = isHTF ? 'HTF pattern' : (isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone')));
+  const zoneLabel = isLP ? 'Pullback zone' : isHTF ? 'HTF pattern' : (isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone')));
   const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
 
   const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
