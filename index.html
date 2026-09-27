@@ -750,6 +750,16 @@ function renderChartFor(row){
   drawChartPanel();
 }
 
+// Fit all candles, then leave a few empty bars on the right so the breakout
+// candle, the pattern drawing and its labels are never squeezed into the edge.
+const RIGHT_PAD_BARS = 6;
+function fitWithRightPad(chart){
+  const ts = chart.timeScale();
+  ts.fitContent();
+  const r = ts.getVisibleLogicalRange();
+  if(r) ts.setVisibleLogicalRange({ from: r.from, to: r.to + RIGHT_PAD_BARS });
+}
+
 function buildLightweightChart(containerId, sliced, row){
   const pivot = row.pivot;
   const baseStartDate = row.base_start;
@@ -797,7 +807,7 @@ function buildLightweightChart(containerId, sliced, row){
         const h = entry.contentRect.height;
         if(w > 0 && h > 0){
           chart.applyOptions({ width: w, height: h });
-          chart.timeScale().fitContent();
+          fitWithRightPad(chart);
         }
       }
     });
@@ -878,7 +888,7 @@ function buildLightweightChart(containerId, sliced, row){
     candleSeries.setMarkers(tradeMarkers);
   }
 
-  chart.timeScale().fitContent();
+  fitWithRightPad(chart);
 
   // Base-zone: ALWAYS uses the detector's own base_high/base_low/base_start/
   // base_end_date -- never derived by scanning the visible candles. If any
