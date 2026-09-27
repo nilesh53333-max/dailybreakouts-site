@@ -966,6 +966,46 @@ function buildLightweightChart(containerId, sliced, row){
           container.appendChild(labelDiv);
         }
       }
+    } else if(valid && row.pattern === 'HTF'){
+      // High Tight Flag (shared DB + HTF book): pole = straight line from the
+      // pole's lowest low to the pole top; flag = box from the pole top to the
+      // breakout (or the latest candle while still forming), between the flag
+      // low and the pivot. All anchors come from the detector.
+      const idxOf = date => date ? sliced.findIndex(d => d.date >= date) : -1;
+      const poleStartIdx = idxOf(row.base_start);
+      const poleTopIdx = idxOf(row.pole_top_date || row.flag_start);
+      if(poleStartIdx >= 0 && poleTopIdx > poleStartIdx && baseEndIdx >= poleTopIdx){
+        const ts = chart.timeScale();
+        const px1 = ts.timeToCoordinate(sliced[poleStartIdx].date);
+        const px2 = ts.timeToCoordinate(sliced[poleTopIdx].date);
+        const px3 = ts.timeToCoordinate(sliced[baseEndIdx].date);
+        const py1 = candleSeries.priceToCoordinate(sliced[poleStartIdx].l);
+        const py2 = candleSeries.priceToCoordinate(row.base_high);
+        const pyLow = candleSeries.priceToCoordinate(row.base_low);
+        if([px1,px2,px3,py1,py2,pyLow].every(v => typeof v === 'number' && isFinite(v))){
+          const svgNS = 'http://www.w3.org/2000/svg';
+          const svg = document.createElementNS(svgNS, 'svg');
+          svg.id = containerId+'-zone';
+          svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
+          const pole = document.createElementNS(svgNS, 'line');
+          pole.setAttribute('x1', px1); pole.setAttribute('y1', py1);
+          pole.setAttribute('x2', px2); pole.setAttribute('y2', py2);
+          pole.setAttribute('stroke', 'rgba(217,119,6,0.9)'); pole.setAttribute('stroke-width', '2');
+          svg.appendChild(pole);
+          const flag = document.createElementNS(svgNS, 'rect');
+          flag.setAttribute('x', px2); flag.setAttribute('y', py2);
+          flag.setAttribute('width', Math.max(2, px3 - px2)); flag.setAttribute('height', Math.max(2, pyLow - py2));
+          flag.setAttribute('fill', 'rgba(245,158,11,0.10)'); flag.setAttribute('stroke', 'rgba(217,119,6,0.8)');
+          flag.setAttribute('stroke-width', '1.25');
+          svg.appendChild(flag);
+          container.appendChild(svg);
+          const labelDiv = document.createElement('div');
+          labelDiv.id = containerId+'-zonelabel';
+          labelDiv.textContent = `High Tight Flag${row.pole_gain_pct ? ' · pole +' + Math.round(row.pole_gain_pct) + '%' : ''}`;
+          labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,px1)}px;top:${Math.max(6,py2-24)}px;color:#B45309;background:rgba(255,255,255,.92);border:1px solid rgba(217,119,6,.25);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
+          container.appendChild(labelDiv);
+        }
+      }
     } else if(valid && ACTIVE_STRATEGY === 'doublebottom'){
       // Double Bottom presentation: connect the detector's real anchors
       // (first low -> neckline -> second low -> breakout) so this cannot be
@@ -1313,12 +1353,13 @@ function renderChartPanelWithHistory(row, fullHistory){
 
   const isBullFlag = ACTIVE_STRATEGY === 'bullflag';
   const isCupHandle = ACTIVE_STRATEGY === 'cupandhandle';
-  const isDoubleBottom = ACTIVE_STRATEGY === 'doublebottom';
-  const fitLabel = isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base'));
+  const isHTF = row.pattern === 'HTF';
+  const isDoubleBottom = ACTIVE_STRATEGY === 'doublebottom' && !isHTF;
+  const fitLabel = isHTF ? 'Fit Flag' : (isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base')));
   const rangeBtns = [['FIT',fitLabel],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
-  const zoneLabel = isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone'));
+  const zoneLabel = isHTF ? 'HTF pattern' : (isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone')));
   const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
 
   const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
