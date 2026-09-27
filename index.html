@@ -159,6 +159,10 @@
   /* MOBILE (<900px): intentionally a different, single-column, touch
      interface -- not a squeezed version of the desktop grid. */
   @media (max-width: 899px){
+    /* Mobile: a long list (e.g. 155 forming stocks after "View all") scrolls inside
+       its own box instead of pushing the chart thousands of pixels down the page. */
+    #stage-table-container.capped-table-card{max-height:min(420px, 55vh);overflow-y:auto;
+      overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
     header{height:48px;padding:0 14px;gap:10px;}
     .mobile-search-btn{display:block;}
     .logo-tagline{display:none;}
@@ -324,7 +328,7 @@
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
         <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">Backtest · Volatility Contraction</div>
-        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Historical performance · 4% close stop</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Live rules · 3:15 PM · ALL9 exits (trail 25/50/100 DMA × stop 4/8/12%) · compounding</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -1617,6 +1621,11 @@ function renderStageTable(){
     tr.addEventListener('click', () => {
       const row = rowFor();
       if(row) renderChartFor(row);
+      // Mobile: the chart sits below the list -- bring it into view after a tap.
+      if(row && window.matchMedia('(max-width: 899px)').matches){
+        const panel = document.getElementById('stage-chart-panel');
+        if(panel) setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+      }
     });
     // Start downloading the chart the moment the pointer/finger lands on a
     // row, so by the time the click fires the data is usually already here.
