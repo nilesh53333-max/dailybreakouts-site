@@ -296,7 +296,7 @@
     <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;"><span class="strategy-name">Volatility Contraction</span><span class="strategy-desc">A tightening price base</span></a>
     <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;"><span class="strategy-name">Classic Bull Flag</span><span class="strategy-desc">A strong advance, then pullback</span></a>
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
-    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom</span><span class="strategy-desc">A recovery from two similar lows</span></a>
+    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom + HTF</span><span class="strategy-desc">Two similar lows, or a high tight flag</span></a>
   </nav>
 
   <div class="dashboard-grid">
@@ -389,10 +389,10 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   doublebottom: {
-    title: "Double Bottom",
+    title: "Double Bottom + High Tight Flag",
     live_key: "DB",
-    stop_text: "100 DMA · 8% close stop",
-    sub_static: "Live rules · 3:15 PM · 100 DMA trail · 8% close stop · compounding",
+    stop_text: "DB + HTF shared book · 100 DMA · 8% close stop",
+    sub_static: "Live rules · 3:15 PM · Double Bottom + High Tight Flag in one book · 100 DMA trail · 8% close stop · compounding",
     lifecycle_json: "./breakout_lifecycle_double_bottom.json",
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
     lifecycle_ready: true,
@@ -533,6 +533,14 @@ function renderEquityPoints(points){
   return `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
     <polygon points="${fill}" fill="var(--green)" opacity="0.12"/>
     <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="1.6"/>${labels.join('')}</svg>`;
+}
+
+// Shared books mix patterns (Double Bottom book = DB + High Tight Flag): show which one.
+function patternBadge(r){
+  if(!r || !r.pattern) return '';
+  const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : r.pattern);
+  const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom' : r.pattern);
+  return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#FEF3C7':'#EEF2FF'};color:${r.pattern==='HTF'?'#92400E':'#3730A3'};">${lbl}</span>`;
 }
 
 function renderBacktest(){
@@ -1400,7 +1408,7 @@ function renderStageTable(){
   if(ACTIVE_STAGE === 'forming'){
     head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
     body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
-      <td style="font-weight:600;">${r.symbol}</td>
+      <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="r num">${r.close.toFixed(2)}</td>
       <td class="r num" style="color:var(--muted);">${r.pivot.toFixed(2)}</td>
       <td class="r num">${r.dist_to_pivot_pct.toFixed(2)}%</td>
@@ -1409,7 +1417,7 @@ function renderStageTable(){
   } else if(ACTIVE_STAGE === 'closed'){
     head = `<th>Stock</th><th>Set</th><th>Entry date</th><th class="r">Entry ₹</th><th>Exit date</th><th class="r">Exit ₹</th><th class="r">Return</th><th>Reason</th>`;
     body = displayRows.map(r => { const o=r._outcome; const ret=Number(o.return_pct ?? o.gain_pct ?? 0); return `<tr class="selectable" data-symbol="${r.symbol}">
-      <td style="font-weight:600;">${r.symbol}</td>
+      <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${o.set || '—'}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price.toFixed(2)}</td>
@@ -1428,7 +1436,7 @@ function renderStageTable(){
         ? `<span class="badge tight">Position open · ${o.set}</span>`
         : `<span class="badge capacity">${why}</span>`;
       return `<tr class="selectable" data-symbol="${r.symbol}">
-      <td style="font-weight:600;">${r.symbol}</td>
+      <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num">${r.entry_price != null ? r.entry_price.toFixed(2) : '—'}</td>
       <td>${statusHtml}</td>
@@ -1437,7 +1445,7 @@ function renderStageTable(){
     // open
     head = `<th>Stock</th><th>Set</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Stop ₹</th><th class="r">Current ₹</th><th class="r">Gain</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
-      <td style="font-weight:600;">${r.symbol}</td>
+      <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="num" style="font-size:11px;color:var(--muted);" title="Trail ${o.trail_dma} DMA${o.trail_active?' (active)':''} · ${o.stop_pct}% close stop">${o.set || '—'}</td>
       <td class="num" style="font-size:11px;color:var(--muted);">${r.entry_date}</td>
       <td class="r num" style="color:var(--muted);">${r.entry_price.toFixed(2)}</td>
