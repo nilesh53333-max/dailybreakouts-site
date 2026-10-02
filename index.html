@@ -159,10 +159,6 @@
   /* MOBILE (<900px): intentionally a different, single-column, touch
      interface -- not a squeezed version of the desktop grid. */
   @media (max-width: 899px){
-    /* Mobile: a long list (e.g. 155 forming stocks after "View all") scrolls inside
-       its own box instead of pushing the chart thousands of pixels down the page. */
-    #stage-table-container.capped-table-card{max-height:min(420px, 55vh);overflow-y:auto;
-      overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
     header{height:48px;padding:0 14px;gap:10px;}
     .mobile-search-btn{display:block;}
     .logo-tagline{display:none;}
@@ -300,7 +296,7 @@
     <a href="#" class="item active" id="sidebar-item-vcm" aria-current="page" onclick="switchStrategy('vcm');return false;"><span class="strategy-name">Volatility Contraction</span><span class="strategy-desc">A tightening price base</span></a>
     <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;"><span class="strategy-name">Classic Bull Flag</span><span class="strategy-desc">A strong advance, then pullback</span></a>
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
-    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double &amp; Triple Bottom</span><span class="strategy-desc">A recovery from two or three similar lows</span></a>
+    <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double Bottom</span><span class="strategy-desc">A recovery from two similar lows</span></a>
     <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag</span><span class="strategy-desc">A near-vertical run, then a tight pause</span></a>
     <a href="#" class="item" id="sidebar-item-lp" onclick="switchStrategy('lp');return false;"><span class="strategy-name">Leader Pullback</span><span class="strategy-desc">A market leader bouncing off support</span></a>
   </nav>
@@ -328,7 +324,7 @@
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
         <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">Backtest · Volatility Contraction</div>
-        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Live rules · 3:15 PM · ALL9 exits (trail 25/50/100 DMA × stop 4/8/12%) · compounding</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Historical performance · 4% close stop</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -395,7 +391,7 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   doublebottom: {
-    title: "Double & Triple Bottom",
+    title: "Double Bottom",
     live_key: "DB",
     stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots",
     sub_static: "Live rules · 3:15 PM · ₹5L book, 10 slots · 100 DMA trail · 8% close stop · compounding",
@@ -566,9 +562,8 @@ function renderEquityPoints(points){
 // Shared books mix patterns (Double Bottom book = DB + High Tight Flag): show which one.
 function patternBadge(r){
   if(!r || !r.pattern || ACTIVE_STRATEGY === 'htf' || ACTIVE_STRATEGY === 'lp') return '';
-  const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : (r.pattern === 'TB' ? 'TB' : r.pattern));
-  const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom'
-            : (r.pattern === 'TB' ? 'Triple Bottom' : r.pattern));
+  const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : r.pattern);
+  const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom' : r.pattern);
   return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#CCFBF1':'#EEF2FF'};color:${r.pattern==='HTF'?'#115E59':'#3730A3'};">${lbl}</span>`;
 }
 
@@ -755,15 +750,6 @@ function renderChartFor(row){
   drawChartPanel();
 }
 
-// Fit all candles, then leave a few empty bars on the right so the breakout
-// candle, the pattern drawing and its labels are never squeezed into the edge.
-const RIGHT_PAD_BARS = 6;
-function fitWithRightPad(chart){
-  // rightOffset is honoured by fitContent(): all candles fit, plus a few empty bars on the right
-  chart.timeScale().applyOptions({ rightOffset: RIGHT_PAD_BARS });
-  chart.timeScale().fitContent();
-}
-
 function buildLightweightChart(containerId, sliced, row){
   const pivot = row.pivot;
   const baseStartDate = row.base_start;
@@ -811,7 +797,7 @@ function buildLightweightChart(containerId, sliced, row){
         const h = entry.contentRect.height;
         if(w > 0 && h > 0){
           chart.applyOptions({ width: w, height: h });
-          fitWithRightPad(chart);
+          chart.timeScale().fitContent();
         }
       }
     });
@@ -875,7 +861,7 @@ function buildLightweightChart(containerId, sliced, row){
     const entryBar = sliced.find(d => d.date === row.entry_date);
     if(entryBar){
       tradeMarkers.push({
-        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: (ACTIVE_STAGE === 'fresh' ? 'Breakout' : 'Entry'),
+        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: 'Entry',
       });
     }
   }
@@ -892,7 +878,7 @@ function buildLightweightChart(containerId, sliced, row){
     candleSeries.setMarkers(tradeMarkers);
   }
 
-  fitWithRightPad(chart);
+  chart.timeScale().fitContent();
 
   // Base-zone: ALWAYS uses the detector's own base_high/base_low/base_start/
   // base_end_date -- never derived by scanning the visible candles. If any
@@ -1031,54 +1017,6 @@ function buildLightweightChart(containerId, sliced, row){
           labelDiv.style.cssText = `position:absolute;z-index:5;left:${flagX1}px;top:${(upperEndY!=null?upperEndY-17:yTop-17)}px;width:${Math.max(40,flagX2-flagX1)}px;text-align:center;color:#2563EB;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
           container.appendChild(labelDiv);
         }
-      }
-    } else if(valid && row.pattern === 'TB'){
-      // Triple Bottom: soft box over the pattern, the three lows marked 1-2-3, dashed neckline
-      const ts = chart.timeScale();
-      const idxOf = date => date ? sliced.findIndex(d => d.date >= date) : -1;
-      const sIdx = idxOf(row.base_start);
-      const eIdx = Math.max(sIdx, baseEndIdx);
-      const x1 = sIdx >= 0 ? ts.timeToCoordinate(sliced[sIdx].date) : null;
-      const x2 = eIdx >= 0 ? ts.timeToCoordinate(sliced[Math.min(sliced.length - 1, eIdx)].date) : null;
-      const yTop = candleSeries.priceToCoordinate(row.base_high);
-      const yBot = candleSeries.priceToCoordinate(row.base_low);
-      if([x1,x2,yTop,yBot].every(v => typeof v === 'number' && isFinite(v))){
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const svg = document.createElementNS(svgNS, 'svg');
-        svg.id = containerId+'-zone';
-        svg.style.cssText = `position:absolute;z-index:5;left:0;top:0;width:100%;height:100%;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};overflow:visible;`;
-        const box = document.createElementNS(svgNS, 'rect');
-        box.setAttribute('x', x1); box.setAttribute('y', yTop);
-        box.setAttribute('width', Math.max(2, x2 - x1)); box.setAttribute('height', Math.max(2, yBot - yTop + 6));
-        box.setAttribute('fill', 'rgba(37,99,235,0.06)'); box.setAttribute('stroke', 'rgba(37,99,235,0.35)');
-        box.setAttribute('stroke-dasharray', '5 4'); box.setAttribute('rx', '4');
-        svg.appendChild(box);
-        const neck = document.createElementNS(svgNS, 'line');
-        neck.setAttribute('x1', x1); neck.setAttribute('x2', x2); neck.setAttribute('y1', yTop); neck.setAttribute('y2', yTop);
-        neck.setAttribute('stroke', 'rgba(37,99,235,0.85)'); neck.setAttribute('stroke-width', '1.5');
-        neck.setAttribute('stroke-dasharray', '6 4');
-        svg.appendChild(neck);
-        [[row.tb_l1, row.tb_low1, '1'], [row.tb_l2, row.tb_low2, '2'], [row.tb_l3, row.tb_low3, '3']].forEach(([dt, px, n]) => {
-          const i = idxOf(dt);
-          if(i < 0 || px == null) return;
-          const cx = ts.timeToCoordinate(sliced[i].date), cy = candleSeries.priceToCoordinate(px);
-          if(typeof cx !== 'number' || typeof cy !== 'number') return;
-          const dot = document.createElementNS(svgNS, 'circle');
-          dot.setAttribute('cx', cx); dot.setAttribute('cy', cy + 9); dot.setAttribute('r', 8);
-          dot.setAttribute('fill', '#2563EB');
-          svg.appendChild(dot);
-          const t = document.createElementNS(svgNS, 'text');
-          t.setAttribute('x', cx); t.setAttribute('y', cy + 13); t.setAttribute('text-anchor', 'middle');
-          t.setAttribute('font-size', '10'); t.setAttribute('font-weight', '700'); t.setAttribute('fill', '#fff');
-          t.textContent = n;
-          svg.appendChild(t);
-        });
-        container.appendChild(svg);
-        const labelDiv = document.createElement('div');
-        labelDiv.id = containerId+'-zonelabel';
-        labelDiv.textContent = 'Triple Bottom · 3 similar lows · neckline';
-        labelDiv.style.cssText = `position:absolute;z-index:6;left:${Math.max(8,x1)}px;top:${Math.max(6,yTop-24)}px;color:#1D4ED8;background:rgba(255,255,255,.92);border:1px solid rgba(37,99,235,.25);border-radius:5px;padding:2px 6px;font-size:10px;font-weight:700;pointer-events:none;display:${SHOW_BASE_ZONE?'block':'none'};`;
-        container.appendChild(labelDiv);
       }
     } else if(valid && row.pattern === 'LP'){
       // Leader Pullback: a soft box from the swing high down to the support touch,
@@ -1628,8 +1566,7 @@ function renderStageTable(){
     body = displayRows.map(r => {
       const o = r._outcome;
       const traded = o && o.status === 'open';
-      const why = ({'already held': 'Already held', 'not enough cash': 'Not enough cash',
-                    'no price today': 'No price today'})[o && o.reason] || 'Book full';
+      const why = o && o.reason === 'already held' ? 'Already held' : 'Book full';
       const statusHtml = traded
         ? `<span class="badge tight">Position open · ${o.set}</span>`
         : `<span class="badge capacity">${why}</span>`;
@@ -1671,11 +1608,6 @@ function renderStageTable(){
     tr.addEventListener('click', () => {
       const row = rowFor();
       if(row) renderChartFor(row);
-      // Mobile: the chart sits below the list -- bring it into view after a tap.
-      if(row && window.matchMedia('(max-width: 899px)').matches){
-        const panel = document.getElementById('stage-chart-panel');
-        if(panel) setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 60);
-      }
     });
     // Start downloading the chart the moment the pointer/finger lands on a
     // row, so by the time the click fires the data is usually already here.
