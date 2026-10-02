@@ -1664,7 +1664,7 @@ function renderStageTable(){
   if(!rows || rows.length === 0){
     disposeActiveChart();
     el.innerHTML = `<div class="empty">Nothing in "${STAGE_META[ACTIVE_STAGE].title}" right now.</div>`;
-    if(chartPanel) chartPanel.innerHTML = `<div class="quadrant-card"><div class="empty">Nothing to chart.</div></div>`;
+    if(chartPanel) chartPanel.innerHTML = `<div class="quadrant-card"><div class="empty">Pick another stage above to see its charts.</div></div>`;
     return;
   }
 
@@ -1804,6 +1804,14 @@ async function loadBreakouts(){
     STAGE_META.closed.title = scanYear ? `Closed Trades ${scanYear}` : 'Closed Trades';
     document.getElementById('dynamic-sub').textContent =
       `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · ${cfg.stop_text} · 3:15 PM · Select a stage to view stocks.`;
+
+    // Opening view: on a day with no fresh breakouts the page used to land on two empty boxes.
+    // Fall back to what the book holds now (open trades), then the watchlist, then this year's trades.
+    if(ACTIVE_STAGE === 'fresh' && !freshToday){
+      const b = bucketSignalsByMaxPositions();
+      const forming = (data.stages && data.stages.forming) || [];
+      ACTIVE_STAGE = b.open.length ? 'open' : forming.length ? 'forming' : b.closed.length ? 'closed' : 'fresh';
+    }
 
     renderStageCards();
     renderStageTable();
