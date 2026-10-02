@@ -1408,6 +1408,22 @@ function buildLightweightChart(containerId, sliced, row){
   // scrolls or zooms -- without this, enabling handleScroll/handleScale
   // would leave the zone drawn at its original, now-stale position.
   chart.timeScale().subscribeVisibleTimeRangeChange(drawBaseZone);
+  // The PRICE axis can also move with no time-range event: the ResizeObserver above changes the
+  // chart height once the page layout settles (slow load, window resize, phone rotation), and the
+  // person can drag the price scale. That left pattern drawings and the pivot tag at stale heights,
+  // floating above or below the candles. Watch the real price->pixel mapping and redraw on change.
+  const geomRefs = [pivot, sliced.length ? sliced[0].l : null].filter(v => v != null);
+  let lastGeom = '';
+  (function watchPriceAxis(){
+    if(ACTIVE_LWCHART !== chart || !container.isConnected) return;   // chart replaced or disposed
+    const g = container.clientWidth + 'x' + container.clientHeight + '|' +
+              geomRefs.map(p => candleSeries.priceToCoordinate(p)).join(',');
+    if(g !== lastGeom){
+      if(lastGeom){ drawBaseZone(); drawPivotLabel(); }
+      lastGeom = g;
+    }
+    requestAnimationFrame(watchPriceAxis);
+  })();
 
   // Native crosshair-driven tooltip -- reliable across browsers since it
   // uses the library's own coordinate system, not manual hit-testing.
