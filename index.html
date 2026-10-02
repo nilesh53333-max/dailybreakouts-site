@@ -159,10 +159,6 @@
   /* MOBILE (<900px): intentionally a different, single-column, touch
      interface -- not a squeezed version of the desktop grid. */
   @media (max-width: 899px){
-    /* Mobile: a long list (e.g. 155 forming stocks after "View all") scrolls inside
-       its own box instead of pushing the chart thousands of pixels down the page. */
-    #stage-table-container.capped-table-card{max-height:min(420px, 55vh);overflow-y:auto;
-      overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
     header{height:48px;padding:0 14px;gap:10px;}
     .mobile-search-btn{display:block;}
     .logo-tagline{display:none;}
@@ -328,7 +324,7 @@
     <div class="quadrant" id="quad-backtest">
       <div class="quadrant-card compact-strip" style="flex:0 0 auto;padding:5px 10px;">
         <div class="disp" id="backtest-strategy-title" style="font-size:13px;font-weight:700;color:var(--accent);">Backtest · Volatility Contraction</div>
-        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Live rules · 3:15 PM · ALL9 exits (trail 25/50/100 DMA × stop 4/8/12%) · compounding</div>
+        <div id="backtest-strategy-sub" style="font-size:10px;color:var(--muted);margin-top:2px;">Historical performance · 4% close stop</div>
       </div>
 
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
@@ -754,15 +750,6 @@ function renderChartFor(row){
   drawChartPanel();
 }
 
-// Fit all candles, then leave a few empty bars on the right so the breakout
-// candle, the pattern drawing and its labels are never squeezed into the edge.
-const RIGHT_PAD_BARS = 6;
-function fitWithRightPad(chart){
-  // rightOffset is honoured by fitContent(): all candles fit, plus a few empty bars on the right
-  chart.timeScale().applyOptions({ rightOffset: RIGHT_PAD_BARS });
-  chart.timeScale().fitContent();
-}
-
 function buildLightweightChart(containerId, sliced, row){
   const pivot = row.pivot;
   const baseStartDate = row.base_start;
@@ -810,7 +797,7 @@ function buildLightweightChart(containerId, sliced, row){
         const h = entry.contentRect.height;
         if(w > 0 && h > 0){
           chart.applyOptions({ width: w, height: h });
-          fitWithRightPad(chart);
+          chart.timeScale().fitContent();
         }
       }
     });
@@ -874,7 +861,7 @@ function buildLightweightChart(containerId, sliced, row){
     const entryBar = sliced.find(d => d.date === row.entry_date);
     if(entryBar){
       tradeMarkers.push({
-        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: (ACTIVE_STAGE === 'fresh' ? 'Breakout' : 'Entry'),
+        time: entryBar.date, position: 'belowBar', color: '#16A34A', shape: 'arrowUp', text: 'Entry',
       });
     }
   }
@@ -891,7 +878,7 @@ function buildLightweightChart(containerId, sliced, row){
     candleSeries.setMarkers(tradeMarkers);
   }
 
-  fitWithRightPad(chart);
+  chart.timeScale().fitContent();
 
   // Base-zone: ALWAYS uses the detector's own base_high/base_low/base_start/
   // base_end_date -- never derived by scanning the visible candles. If any
@@ -1621,11 +1608,6 @@ function renderStageTable(){
     tr.addEventListener('click', () => {
       const row = rowFor();
       if(row) renderChartFor(row);
-      // Mobile: the chart sits below the list -- bring it into view after a tap.
-      if(row && window.matchMedia('(max-width: 899px)').matches){
-        const panel = document.getElementById('stage-chart-panel');
-        if(panel) setTimeout(() => panel.scrollIntoView({behavior:'smooth', block:'start'}), 60);
-      }
     });
     // Start downloading the chart the moment the pointer/finger lands on a
     // row, so by the time the click fires the data is usually already here.
