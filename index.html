@@ -78,7 +78,7 @@
   .dashboard-section-title::after{content:"";height:1px;background:var(--border);flex:1;}
   .quadrant{display:flex;flex-direction:column;gap:10px;}
   .quadrant-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;}
-  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
+  .strategy-tabs-bar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:4px 0 16px;}
   .strategy-tabs-bar .item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:9px;font-size:13px;color:#475569;background:var(--card);border:1px solid var(--border);min-width:0;}
   .strategy-tabs-bar .item:hover{background:#F8FAFC;}
   .strategy-tabs-bar .item.active{background:#F0FDF4;color:var(--text);border-color:var(--green);box-shadow:0 1px 3px rgba(15,23,42,.06);}
@@ -303,6 +303,7 @@
     <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double &amp; Triple Bottom</span><span class="strategy-desc">A recovery from two or three similar lows</span></a>
     <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag &amp; Inverse H&amp;S</span><span class="strategy-desc">A near-vertical run and tight pause, or an inverse head &amp; shoulders</span></a>
     <a href="#" class="item" id="sidebar-item-lp" onclick="switchStrategy('lp');return false;"><span class="strategy-name">Leader Pullback</span><span class="strategy-desc">A market leader bouncing off support</span></a>
+    <a href="#" class="item" id="sidebar-item-etf" onclick="switchStrategy('etf');return false;"><span class="strategy-name">ETF Trend</span><span class="strategy-desc">Gold, US, HK, silver &amp; bonds above their 200 DMA</span></a>
   </nav>
 
   <div class="dashboard-grid">
@@ -421,6 +422,15 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
     lifecycle_ready: true,
   },
+  etf: {
+    title: "ETF Trend",
+    live_key: "ETF",
+    stop_text: "Monthly check · hold above 200 DMA · ₹10L, 1/6 each",
+    sub_static: "Gold · Nasdaq 100 · Hang Seng · Silver · Gilt · FANG+ ETFs · last trading day of each month: hold above the 200 DMA, else cash · moves independently of the stock books",
+    lifecycle_json: "./breakout_lifecycle_etf.json",
+    default_combo: {trail:null, stop:null, maxpos:6, yearlyKey:"live"},
+    lifecycle_ready: true,
+  },
 };
 let ACTIVE_STRATEGY = 'vcm';
 
@@ -429,18 +439,12 @@ function switchStrategy(name){
   ACTIVE_STRATEGY = name;
   const cfg = STRATEGY_CONFIG[name];
 
-  document.getElementById('sidebar-item-vcm').classList.toggle('active', name==='vcm');
-  document.getElementById('sidebar-item-bullflag').classList.toggle('active', name==='bullflag');
-  document.getElementById('sidebar-item-cupandhandle').classList.toggle('active', name==='cupandhandle');
-  document.getElementById('sidebar-item-doublebottom').classList.toggle('active', name==='doublebottom');
-  document.getElementById('sidebar-item-htf').classList.toggle('active', name==='htf');
-  document.getElementById('sidebar-item-lp').classList.toggle('active', name==='lp');
-  document.getElementById('sidebar-item-vcm').setAttribute('aria-current', name==='vcm' ? 'page' : 'false');
-  document.getElementById('sidebar-item-bullflag').setAttribute('aria-current', name==='bullflag' ? 'page' : 'false');
-  document.getElementById('sidebar-item-cupandhandle').setAttribute('aria-current', name==='cupandhandle' ? 'page' : 'false');
-  document.getElementById('sidebar-item-doublebottom').setAttribute('aria-current', name==='doublebottom' ? 'page' : 'false');
-  document.getElementById('sidebar-item-htf').setAttribute('aria-current', name==='htf' ? 'page' : 'false');
-  document.getElementById('sidebar-item-lp').setAttribute('aria-current', name==='lp' ? 'page' : 'false');
+  Object.keys(STRATEGY_CONFIG).forEach(key => {
+    const item = document.getElementById('sidebar-item-' + key);
+    if(!item) return;
+    item.classList.toggle('active', name === key);
+    item.setAttribute('aria-current', name === key ? 'page' : 'false');
+  });
   document.getElementById('main-strategy-title').textContent = cfg.title;
   document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
@@ -565,7 +569,7 @@ function renderEquityPoints(points){
 
 // Shared books mix patterns (DB book = DB + Triple Bottom, HTF book = HTF + Inverse H&S): show which one.
 function patternBadge(r){
-  if(!r || !r.pattern || ACTIVE_STRATEGY === 'lp') return '';
+  if(!r || !r.pattern || ACTIVE_STRATEGY === 'lp' || ACTIVE_STRATEGY === 'etf') return '';
   const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : (r.pattern === 'TB' ? 'TB' : r.pattern));
   const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom'
             : (r.pattern === 'TB' ? 'Triple Bottom' : (r.pattern === 'IHS' ? 'Inverse Head & Shoulders' : r.pattern)));
@@ -854,6 +858,15 @@ function buildLightweightChart(containerId, sliced, row){
     };
     line(sma, 'rgba(99,102,241,0.85)', 2);      // 50 DMA -- indigo
     line(ema, 'rgba(245,158,11,0.95)', 2);      // 21 EMA -- amber
+  }
+  if(row.pattern === 'ETF'){
+    // ETF Trend: the 200 DMA is the whole rule -- held above it, sold below it at month end
+    const src = row._fullHistory || sliced;
+    const dma = {}; let sum = 0;
+    src.forEach((d, i) => { sum += d.c; if(i >= 200) sum -= src[i - 200].c; if(i >= 199) dma[d.date] = sum / 200; });
+    const s = chart.addLineSeries({ color: 'rgba(124,58,237,0.9)', lineWidth: 2, priceLineVisible: false,
+                                    lastValueVisible: false, crosshairMarkerVisible: false, title: '200 DMA' });
+    s.setData(sliced.filter(d => dma[d.date] != null).map(d => ({ time: d.date, value: dma[d.date] })));
   }
 
   const pivotColor = ACTIVE_STRATEGY === 'cupandhandle' ? '#DC2626' : '#16A34A';
@@ -1567,7 +1580,7 @@ function renderChartPanelWithHistory(row, fullHistory){
   const badgeHtml = isBreakoutStage
     ? `<span style="background:#ECFDF5;color:var(--green);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;">Breakout${row.pivot!=null ? ` · pivot ₹${row.pivot}` : ''}</span>`
     : (ACTIVE_STAGE==='forming'
-        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">Near pivot</span>` : '');
+        ? `<span style="background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;">${row.pattern==='ETF' ? 'Below 200 DMA' : 'Near pivot'}</span>` : '');
 
   const baseLabel = row.base_weeks ? `${row.base_weeks} wks base` : '';
 
@@ -1582,12 +1595,13 @@ function renderChartPanelWithHistory(row, fullHistory){
   const isLP = row.pattern === 'LP';
   const isIHS = row.pattern === 'IHS';
   const isDoubleBottom = ACTIVE_STRATEGY === 'doublebottom' && !isHTF;
-  const fitLabel = isIHS ? 'Fit H&S' : isLP ? 'Fit Pullback' : isHTF ? 'Fit Flag' : (isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base')));
+  const fitLabel = row.pattern === 'ETF' ? 'Fit' : isIHS ? 'Fit H&S' : isLP ? 'Fit Pullback' : isHTF ? 'Fit Flag' : (isBullFlag ? 'Fit Flag' : (isCupHandle ? 'Fit Cup' : (isDoubleBottom ? 'Fit W' : 'Fit Base')));
   const rangeBtns = [['FIT',fitLabel],['6M','6M'],['1Y','1Y'],['5Y','5Y']].map(([r,label]) =>
     `<button class="range-btn ${CURRENT_CHART_RANGE===r?'active':''}" onclick="CURRENT_CHART_RANGE='${r}';drawChartPanel();">${label}</button>`
   ).join('');
   const zoneLabel = isIHS ? 'H&S pattern' : isLP ? 'Pullback zone' : isHTF ? 'HTF pattern' : (isBullFlag ? 'Flag zone' : (isCupHandle ? 'Cup zone' : (isDoubleBottom ? 'W pattern' : 'Base zone')));
-  const baseZoneToggle = `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
+  const baseZoneToggle = row.pattern === 'ETF' ? '' :     // ETF book: nothing to toggle, the 200 DMA line is the rule
+    `<button id="base-zone-toggle" class="range-btn ${SHOW_BASE_ZONE?'active':''}" onclick="toggleBaseZone();" style="margin-left:auto;">${zoneLabel}</button>`;
 
   const infoIcon = (tip) => `<span class="info-icon" title="${tip}">ⓘ</span>`;
   const statRow = (label, tip, val, color) =>
@@ -1625,7 +1639,19 @@ function renderChartPanelWithHistory(row, fullHistory){
       ${statRow('Now vs neckline', 'Current close versus the breakout neckline.', stats.nowVsPivot!=null?(stats.nowVsPivot>=0?'+':'')+stats.nowVsPivot.toFixed(2)+'%':'—')}
     </div>` : '';
 
-  const statsHtml = isBullFlag ? bullFlagStatsHtml : (isCupHandle ? cupHandleStatsHtml : (isDoubleBottom ? doubleBottomStatsHtml : standardStatsHtml));
+  // ETF book: the 200 DMA is the whole rule -- show where the ETF stands against it
+  const lo = row._outcome || {};
+  const dmaNow = lo.trail_dma_value ?? row.pivot;
+  const vsDma = (dmaNow && priceNow) ? (priceNow / dmaNow - 1) * 100 : null;
+  const etfStatsHtml = `
+    <div class="chart-stats-2col">
+      ${statRow('200 DMA', 'Held while the month-end close is above this; sold below it.', dmaNow!=null ? '₹'+Number(dmaNow).toFixed(2) : '—')}
+      ${statRow('vs 200 DMA', 'Latest close versus the 200-day average.', vsDma!=null ? (vsDma>=0?'+':'')+vsDma.toFixed(2)+'%' : '—', vsDma>=0?'var(--green)':'var(--red)')}
+      ${statRow('Weight', 'Share of the ETF book in this position.', lo.weight_pct!=null ? Number(lo.weight_pct).toFixed(1)+'%' : '—')}
+      ${statRow('Held since', 'Bought at that month-end close.', row.entry_date && lo.status==='open' ? row.entry_date : '—')}
+    </div>`;
+  const statsHtml = row.pattern === 'ETF' ? etfStatsHtml
+    : isBullFlag ? bullFlagStatsHtml : (isCupHandle ? cupHandleStatsHtml : (isDoubleBottom ? doubleBottomStatsHtml : standardStatsHtml));
 
   const chartId = 'chart-'+row.symbol.replace(/[^a-zA-Z0-9]/g,'');
 
@@ -1645,7 +1671,7 @@ function renderChartPanelWithHistory(row, fullHistory){
     <div class="chart-toolbar">${rangeBtns}${baseZoneToggle}</div>
     <div id="${chartId}" style="position:relative;flex:1;min-height:175px;"></div>
     <div id="${chartId}-tooltip" class="chart-tooltip"></div>
-    ${(row.base_high==null || row.base_low==null || row.base_start==null) ? `<div class="note" style="color:var(--red);margin-top:4px;font-size:10px;">${isBullFlag?'Flag':'Base'} data unavailable.</div>` : ''}
+    ${(row.pattern!=='ETF' && (row.base_high==null || row.base_low==null || row.base_start==null)) ? `<div class="note" style="color:var(--red);margin-top:4px;font-size:10px;">${isBullFlag?'Flag':'Base'} data unavailable.</div>` : ''}
     ${statsHtml}
   </div>`;
 
@@ -1674,7 +1700,9 @@ function renderStageTable(){
   const hasChart = true;
   let head, body;
   if(ACTIVE_STAGE === 'forming'){
-    head = `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
+    head = ACTIVE_STRATEGY === 'etf'
+      ? `<th>ETF</th><th class="r">Close ₹</th><th class="r">200 DMA ₹</th><th class="r">Needs to rise</th><th class="r">Below for</th>`
+      : `<th>Stock</th><th class="r">Close ₹</th><th class="r">Pivot ₹</th><th class="r">Dist. to pivot</th><th class="r">Base age</th>`;
     body = displayRows.map(r => `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="r num">${r.close.toFixed(2)}</td>
@@ -1712,7 +1740,7 @@ function renderStageTable(){
     </tr>`;}).join('');
   } else {
     // open
-    head = `<th>Stock</th><th>Set</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">Stop ₹</th><th class="r">Current ₹</th><th class="r">Gain</th>`;
+    head = `<th>${ACTIVE_STRATEGY==='etf'?'ETF':'Stock'}</th><th>Set</th><th>Entry date</th><th class="r">Entry ₹</th><th class="r">${ACTIVE_STRATEGY==='etf'?'200 DMA ₹':'Stop ₹'}</th><th class="r">Current ₹</th><th class="r">Gain</th>`;
     body = displayRows.map(r => { const o=r._outcome; return `<tr class="selectable" data-symbol="${r.symbol}">
       <td style="font-weight:600;">${r.symbol}${patternBadge(r)}</td>
       <td class="num" style="font-size:11px;color:var(--muted);" title="Trail ${o.trail_dma} DMA${o.trail_active?' (active)':''} · ${o.stop_pct}% close stop">${o.set || '—'}</td>
@@ -1796,6 +1824,12 @@ async function loadBreakouts(){
     SELECTED_STOP_PCT = cfg.default_combo.stop;
     SELECTED_MAX_POSITIONS = cfg.default_combo.maxpos;
     STAGE_META.fresh.desc = 'signals at 3:15 PM today';
+    // The ETF book is not a breakout scanner: name its stages for what they hold
+    const isEtf = ACTIVE_STRATEGY === 'etf';
+    STAGE_META.forming.title = isEtf ? 'Watchlist' : 'Forming';
+    STAGE_META.forming.desc = isEtf ? 'below 200 DMA, checked at month end' : 'resting before a breakout';
+    STAGE_META.fresh.title = isEtf ? 'Bought today' : 'Fresh breakouts';
+    if(isEtf) STAGE_META.fresh.desc = 'only on the last trading day of a month';
 
     const freshToday = bucketSignalsByMaxPositions().fresh.length;
     const dc = cfg.default_combo;
@@ -1803,7 +1837,7 @@ async function loadBreakouts(){
     const scanYear = String(data.as_of_date || data.scan_date || data.date || data.year || '').slice(0,4);
     STAGE_META.closed.title = scanYear ? `Closed Trades ${scanYear}` : 'Closed Trades';
     document.getElementById('dynamic-sub').textContent =
-      `${scanDate ? `As of ${scanDate} · ` : ''}${freshToday} fresh breakout${freshToday===1?'':'s'} · ${cfg.stop_text} · 3:15 PM · Select a stage to view stocks.`;
+      `${scanDate ? `As of ${scanDate} · ` : ''}${ACTIVE_STRATEGY==='etf' ? 'ETF trend book' : `${freshToday} fresh breakout${freshToday===1?'':'s'}`} · ${cfg.stop_text} · ${ACTIVE_STRATEGY==='etf' ? 'month-end close' : '3:15 PM'} · Select a stage to view stocks.`;
 
     // Opening view: on a day with no fresh breakouts the page used to land on two empty boxes.
     // Fall back to what the book holds now (open trades), then the watchlist, then this year's trades.
