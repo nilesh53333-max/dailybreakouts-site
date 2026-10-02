@@ -301,7 +301,7 @@
     <a href="#" class="item" id="sidebar-item-bullflag" onclick="switchStrategy('bullflag');return false;"><span class="strategy-name">Classic Bull Flag</span><span class="strategy-desc">A strong advance, then pullback</span></a>
     <a href="#" class="item" id="sidebar-item-cupandhandle" onclick="switchStrategy('cupandhandle');return false;"><span class="strategy-name">Cup and Handle</span><span class="strategy-desc">A rounded base with a short handle</span></a>
     <a href="#" class="item" id="sidebar-item-doublebottom" onclick="switchStrategy('doublebottom');return false;"><span class="strategy-name">Double &amp; Triple Bottom</span><span class="strategy-desc">A recovery from two or three similar lows</span></a>
-    <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag</span><span class="strategy-desc">A near-vertical run, then a tight pause</span></a>
+    <a href="#" class="item" id="sidebar-item-htf" onclick="switchStrategy('htf');return false;"><span class="strategy-name">High Tight Flag &amp; Inverse H&amp;S</span><span class="strategy-desc">A near-vertical run and tight pause, or an inverse head &amp; shoulders</span></a>
     <a href="#" class="item" id="sidebar-item-lp" onclick="switchStrategy('lp');return false;"><span class="strategy-name">Leader Pullback</span><span class="strategy-desc">A market leader bouncing off support</span></a>
   </nav>
 
@@ -404,12 +404,12 @@ const STRATEGY_CONFIG = {
     lifecycle_ready: true,
   },
   htf: {
-    title: "High Tight Flag",
+    title: "High Tight Flag & Inverse H&S",
     live_key: "HTF",
-    stop_text: "100 DMA · 8% close stop · ₹5L, 5 slots",
-    sub_static: "Live rules · 3:15 PM · ₹5L book, 5 slots · 100 DMA trail · 8% close stop · compounding",
+    stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots (IHS max 5)",
+    sub_static: "Live rules · 3:15 PM · ₹5L book, 10 slots, Inverse H&S max 5 · 100 DMA trail · 8% close stop · compounding",
     lifecycle_json: "./breakout_lifecycle_htf.json",
-    default_combo: {trail:null, stop:null, maxpos:5, yearlyKey:"live"},
+    default_combo: {trail:null, stop:null, maxpos:10, yearlyKey:"live"},
     lifecycle_ready: true,
   },
   lp: {
@@ -563,12 +563,12 @@ function renderEquityPoints(points){
     <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="1.6"/>${labels.join('')}</svg>`;
 }
 
-// Shared books mix patterns (Double Bottom book = DB + High Tight Flag): show which one.
+// Shared books mix patterns (DB book = DB + Triple Bottom, HTF book = HTF + Inverse H&S): show which one.
 function patternBadge(r){
-  if(!r || !r.pattern || ACTIVE_STRATEGY === 'htf' || ACTIVE_STRATEGY === 'lp') return '';
+  if(!r || !r.pattern || ACTIVE_STRATEGY === 'lp') return '';
   const lbl = r.pattern === 'HTF' ? 'HTF' : (r.pattern === 'DB' ? 'W' : (r.pattern === 'TB' ? 'TB' : r.pattern));
   const tip = r.pattern === 'HTF' ? 'High Tight Flag' : (r.pattern === 'DB' ? 'Double Bottom'
-            : (r.pattern === 'TB' ? 'Triple Bottom' : r.pattern));
+            : (r.pattern === 'TB' ? 'Triple Bottom' : (r.pattern === 'IHS' ? 'Inverse Head & Shoulders' : r.pattern)));
   return ` <span title="${tip}" style="font-size:9px;font-weight:700;padding:1px 5px;border-radius:4px;margin-left:4px;background:${r.pattern==='HTF'?'#CCFBF1':'#EEF2FF'};color:${r.pattern==='HTF'?'#115E59':'#3730A3'};">${lbl}</span>`;
 }
 
