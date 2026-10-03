@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bull Flag Pattern: Rules, Live Examples &amp; Backtest (Indian Stocks) — DailyBreakouts</title>
+<meta name="description" content="How to spot a Bull Flag chart pattern in 4 rules, with live Bull Flag breakouts in NSE stocks today and an honest backtest of 639 trades since 2020.">
+<link rel="canonical" href="https://dailybreakouts.com/bull-flag.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DailyBreakouts">
+<meta property="og:url" content="https://dailybreakouts.com/bull-flag.html">
+<meta property="og:title" content="The Bull Flag pattern — 4 rules, live examples and a real backtest">
+<meta property="og:description" content="Pole, flag, volume, breakout: how to spot a Bull Flag, today's live examples in Indian stocks, and how it actually performed since 2020.">
+<meta property="og:image" content="https://dailybreakouts.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23142850'/%3E%3Crect x='7' y='16' width='4' height='10' fill='%2316A34A'/%3E%3Crect x='14' y='9' width='4' height='17' fill='%2316A34A'/%3E%3Crect x='21' y='4' width='4' height='22' fill='%2316A34A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"What is a Bull Flag pattern?","acceptedAnswer":{"@type":"Answer","text":"A Bull Flag is a continuation chart pattern: a sharp rally (the pole) followed by a short, orderly pullback that drifts slightly down (the flag). A close above the top of the flag on strong volume is the breakout."}},
+ {"@type":"Question","name":"How reliable is the Bull Flag pattern?","acceptedAnswer":{"@type":"Answer","text":"In the DailyBreakouts backtest of Indian stocks since 2020, about 1 in 3 Bull Flag breakouts worked. The pattern was profitable overall because the winners ran much further than the losers fell, which is why every trade needs a stop."}},
+ {"@type":"Question","name":"What is the difference between a Bull Flag and a Pennant?","acceptedAnswer":{"@type":"Answer","text":"A Bull Flag's pause is a small channel that drifts DOWN with roughly parallel lines. A Pennant's pause is a small triangle whose highs fall and lows rise until they meet."}},
+ {"@type":"Question","name":"How long should a Bull Flag last?","acceptedAnswer":{"@type":"Answer","text":"The DailyBreakouts scanner looks for flags of 5 to 15 trading sessions after a pole of at least 20% over 3 to 8 weeks. Much longer pauses are usually bases, not flags."}}
+]}
+</script>
+<style>
+  :root{ --ink:#132A4C; --paper:#EEF2F8; --card:#FFFFFF; --border:#E2E8F0; --accent:#2563EB;
+         --green:#16A34A; --red:#DC2626; --muted:#64748B; --text:#0F172A; --cyan:#0891B2; --amber:#D97706; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:'IBM Plex Sans',sans-serif;line-height:1.55;}
+  a{color:var(--accent);}
+  header{height:56px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
+  header .logo{color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;text-decoration:none;}
+  header .logo span{color:var(--green);}
+  header .cta{color:#fff;background:var(--green);padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;}
+  main{max-width:920px;margin:0 auto;padding:22px 18px 40px;}
+  h1{font-family:'Space Grotesk',sans-serif;font-size:30px;line-height:1.2;margin:6px 0 10px;}
+  h2{font-family:'Space Grotesk',sans-serif;font-size:21px;margin:34px 0 10px;}
+  .lead{font-size:16px;color:#334155;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;}
+  .num{font-family:'IBM Plex Mono',monospace;}
+  .rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+  .rule{display:flex;gap:12px;align-items:flex-start;}
+  .rule .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;}
+  .rule b{font-family:'Space Grotesk',sans-serif;font-size:16px;}
+  .rule p{margin:2px 0 0;color:#334155;font-size:14px;}
+  .examples{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;}
+  .ex h3{margin:0;font-family:'Space Grotesk',sans-serif;font-size:17px;display:flex;justify-content:space-between;align-items:baseline;}
+  .ex .tag{font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;background:#ECFDF5;color:var(--green);}
+  .ex .tag.open{background:#EFF6FF;color:var(--accent);}
+  .ex .meta{font-size:12px;color:var(--muted);margin:2px 0 6px;}
+  .ex svg{width:100%;height:150px;display:block;}
+  .stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;}
+  .stat .v{font-size:20px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+  .stat .l{font-size:12px;color:var(--muted);}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  th,td{padding:7px 8px;border-bottom:1px solid var(--border);text-align:left;}
+  td.r,th.r{text-align:right;}
+  .note{font-size:13px;color:var(--muted);}
+  .faq details{border-bottom:1px solid var(--border);padding:10px 0;}
+  .faq summary{font-weight:600;cursor:pointer;}
+  .disclaimer{margin-top:30px;padding-top:12px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;}
+  .up{color:var(--green);} .dn{color:var(--red);}
+  @media (max-width:640px){ h1{font-size:24px;} .rules{grid-template-columns:1fr;} header .cta{padding:6px 10px;font-size:12px;} }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="./">daily<span>breakouts</span></a>
+  <a class="cta" href="./">Live scanner →</a>
+</header>
+<main>
+  <div class="note">Pattern guide · Indian stocks (NSE)</div>
+  <h1>The Bull Flag pattern: 4 rules, live examples and a real backtest</h1>
+  <p class="lead">A Bull Flag is a <b>sharp rally</b> (the <i>pole</i>) followed by a <b>short, orderly pause</b> that drifts slightly down
+    (the <i>flag</i>). When price closes above the top of the flag on strong volume, the pattern has <b>broken out</b>.
+    Below are the exact rules our scanner uses, the Bull Flags it found in Indian stocks right now, and how the pattern actually performed since 2020.</p>
+
+  <div class="card" style="margin-top:14px;">
+    <svg viewBox="0 0 640 260" role="img" aria-label="Diagram of a Bull Flag: pole, flag, pivot and breakout" style="width:100%;height:auto;">
+      <rect x="0" y="0" width="640" height="260" fill="#FAFAF7"/>
+      <polyline points="40,230 90,200 130,150 170,90 200,55" fill="none" stroke="#0891B2" stroke-width="5" stroke-linecap="round"/>
+      <polygon points="200,55 420,95 420,140 200,100" fill="rgba(8,145,178,0.10)" stroke="rgba(8,145,178,0.6)" stroke-dasharray="5 4"/>
+      <polyline points="200,55 240,95 275,72 310,108 345,85 380,118 420,100" fill="none" stroke="#0891B2" stroke-width="4" stroke-linejoin="round"/>
+      <line x1="200" y1="55" x2="600" y2="55" stroke="#D97706" stroke-width="2" stroke-dasharray="7 5"/>
+      <polyline points="420,100 460,60 500,30 560,12" fill="none" stroke="#16A34A" stroke-width="5" stroke-linecap="round"/>
+      <g font-family="Space Grotesk, sans-serif" font-weight="700" font-size="16">
+        <text x="70" y="140" fill="#0891B2">POLE</text><text x="270" y="160" fill="#0891B2">FLAG</text>
+        <text x="540" y="48" fill="#D97706">PIVOT</text><text x="470" y="95" fill="#16A34A">BREAKOUT</text>
+      </g>
+      <g fill="#94A3B8">
+        <rect x="60" y="238" width="10" height="16"/><rect x="100" y="232" width="10" height="22"/><rect x="140" y="226" width="10" height="28"/><rect x="180" y="230" width="10" height="24"/>
+        <rect x="240" y="244" width="10" height="10"/><rect x="290" y="246" width="10" height="8"/><rect x="340" y="247" width="10" height="7"/><rect x="390" y="248" width="10" height="6"/>
+        <rect x="440" y="220" width="10" height="34" fill="#16A34A"/>
+      </g>
+    </svg>
+    <div class="note" style="margin-top:6px;">Volume (grey bars) is heavy in the pole, dries up in the flag, and expands on the breakout.</div>
+  </div>
+
+  <h2>The 4 rules</h2>
+  <div class="card rules">
+    <div class="rule"><span class="n">1</span><div><b>Pole</b><p>A sharp rally of <b>20% or more</b> in 3 to 8 weeks (15–40 sessions).</p></div></div>
+    <div class="rule"><span class="n">2</span><div><b>Flag</b><p><b>5–15 sessions</b> that drift <b>down</b>, giving back <b>less than half</b> of the pole.</p></div></div>
+    <div class="rule"><span class="n">3</span><div><b>Volume</b><p>Volume <b>dries up</b> inside the flag — the second half quieter than the first.</p></div></div>
+    <div class="rule"><span class="n">4</span><div><b>Breakout</b><p>A close <b>above the flag's high</b> on at least <b>1.5× the flag's average volume</b>.</p></div></div>
+  </div>
+  <p class="note">The scanner also requires the stock to be above its 50 and 200-day averages, among the strongest 30% of stocks (relative strength ≥ 70),
+    with a market cap of ₹500 cr+ and ₹5 cr+ median daily turnover.</p>
+
+  <h2>Live Bull Flags right now</h2>
+  <p class="note" id="ex-note">Loading today's scanner data…</p>
+  <div class="examples" id="examples"></div>
+
+  <h2>How did the Bull Flag actually do? (backtest)</h2>
+  <div class="card">
+    <div class="stats" id="bt-stats"></div>
+    <p class="note" id="bt-note" style="margin:10px 0 0;"></p>
+  </div>
+  <div class="card" style="margin-top:12px;">
+    <table><thead><tr><th>Year</th><th class="r">Bull Flag book</th><th class="r">NIFTY 500</th></tr></thead><tbody id="bt-years"></tbody></table>
+    <p class="note" style="margin:10px 0 0;">₹10 lakh book, up to 15 positions, decided at 3:15 PM, compounding, real exchange charges included.
+      Past results do not guarantee future returns.</p>
+  </div>
+
+  <h2>The part nobody tells you</h2>
+  <div class="card">
+    <p style="margin:0;"><b>Only about 1 in 3 Bull Flags actually works.</b> Most breakouts fail and hit their stop. The pattern still worked overall
+      because the winners ran much further than the losers fell. That's why every Bull Flag trade needs a stop decided <i>before</i> entry —
+      and why one trade proves nothing.</p>
+  </div>
+
+  <h2>How DailyBreakouts tracks it</h2>
+  <div class="card">
+    <p style="margin:0;">Signals are checked at <b>3:15 PM</b> on every trading day. Each breakout gets an exit rule fixed on day one: a close stop of
+      4, 8 or 12% below entry, and once in profit, a trailing exit when it closes below its 25, 50 or 100-day average.
+      See every live Bull Flag, with its chart and exit level, on the <a href="./">scanner</a>.</p>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="card faq">
+    <details open><summary>What is a Bull Flag pattern?</summary><p>A continuation pattern: a sharp rally (the pole) followed by a short, orderly pullback that drifts slightly down (the flag). A close above the top of the flag on strong volume is the breakout.</p></details>
+    <details><summary>How reliable is the Bull Flag?</summary><p>In our backtest of Indian stocks since 2020, about 1 in 3 breakouts worked. It was profitable overall because winners ran much further than losers fell.</p></details>
+    <details><summary>Bull Flag vs Pennant — what's the difference?</summary><p>A flag's pause is a small channel drifting down with roughly parallel lines; a pennant's pause is a small triangle whose highs fall and lows rise until they meet.</p></details>
+    <details><summary>How long should a Bull Flag last?</summary><p>Our scanner looks for flags of 5–15 sessions after a 20%+ pole over 3–8 weeks. Much longer pauses are usually bases, not flags.</p></details>
+  </div>
+
+  <div class="disclaimer">For research and educational use only. Pattern signals and backtested results are not investment advice or a recommendation to buy or sell,
+    and past performance does not guarantee future returns. DailyBreakouts is not SEBI-registered. Do your own research.</div>
+</main>
+
+<script>
+const pct = v => (v >= 0 ? '+' : '') + Number(v).toFixed(1) + '%';
+const fmtDate = s => s ? new Date(s + 'T00:00:00').toLocaleDateString('en-IN', {day: 'numeric', month: 'short', year: 'numeric'}) : '';
+
+// Small candle chart of one example: pole (line), flag (box), pivot (dashed) and the breakout candle
+function miniChart(hist, r){
+  const end = hist.findIndex(d => d.date >= (r.entry_date || r.breakout_date));
+  const stop = end >= 0 ? Math.min(hist.length, end + 12) : hist.length;
+  const startIdx = Math.max(0, (hist.findIndex(d => d.date >= (r.impulse_start || r.base_start)) || 0) - 8);
+  const bars = hist.slice(startIdx, stop);
+  if(bars.length < 5) return '';
+  const W = 300, H = 150, pad = 6;
+  const hi = Math.max(...bars.map(b => b.h)), lo = Math.min(...bars.map(b => b.l));
+  const x = i => pad + i * (W - 2 * pad) / (bars.length - 1);
+  const y = v => pad + (hi - v) / ((hi - lo) || 1) * (H - 2 * pad);
+  const idx = d => bars.findIndex(b => b.date >= d);
+  const bw = Math.max(1.5, (W - 2 * pad) / bars.length * 0.6);
+  let s = bars.map((b, i) => {
+    const c = b.c >= b.o ? '#16A34A' : '#DC2626';
+    return `<line x1="${x(i)}" x2="${x(i)}" y1="${y(b.h)}" y2="${y(b.l)}" stroke="${c}" stroke-width="1"/>`
+         + `<rect x="${x(i) - bw / 2}" y="${y(Math.max(b.o, b.c))}" width="${bw}" height="${Math.max(1, Math.abs(y(b.o) - y(b.c)))}" fill="${c}"/>`;
+  }).join('');
+  const ps = idx(r.impulse_start || r.base_start), fs = idx(r.flag_start), fe = idx(r.flag_end || r.entry_date);
+  if(ps >= 0 && fs > ps)
+    s += `<line x1="${x(ps)}" y1="${y(bars[ps].l)}" x2="${x(fs)}" y2="${y(r.flag_high || bars[fs].h)}" stroke="#0891B2" stroke-width="2.5"/>`;
+  if(fs >= 0 && fe > fs && r.flag_high && r.flag_low)
+    s += `<rect x="${x(fs)}" y="${y(r.flag_high)}" width="${x(fe) - x(fs)}" height="${y(r.flag_low) - y(r.flag_high)}" fill="rgba(8,145,178,0.12)" stroke="rgba(8,145,178,0.7)" stroke-dasharray="4 3"/>`;
+  if(r.pivot) s += `<line x1="${pad}" x2="${W - pad}" y1="${y(r.pivot)}" y2="${y(r.pivot)}" stroke="#D97706" stroke-dasharray="5 4" stroke-width="1.2"/>`;
+  if(end >= startIdx) { const e = end - startIdx; s += `<circle cx="${x(e)}" cy="${y(bars[e].l) + 7}" r="3.5" fill="#16A34A"/>`; }
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Bull Flag chart of ${r.symbol}">${s}</svg>`;
+}
+
+async function getJSON(u){ const r = await fetch(u, {cache: 'no-cache'}); if(!r.ok) throw new Error(u); return r.json(); }
+
+async function loadExamples(){
+  const note = document.getElementById('ex-note'), box = document.getElementById('examples');
+  try{
+    const L = await getJSON('./breakout_lifecycle_bullflag.json');
+    const rows = L.signals_2026 || [];
+    const fresh = rows.filter(r => r.is_fresh_today);       // every breakout today, even if the book was already full
+    const open = rows.filter(r => r.outcomes && r.outcomes.live && r.outcomes.live.status === 'open' && !fresh.includes(r))
+                     .sort((a, b) => (b.entry_date || '').localeCompare(a.entry_date || ''));
+    const picks = fresh.concat(open).filter(r => r.flag_start && r.history_url).slice(0, 6);
+    note.textContent = `${fresh.length} fresh Bull Flag breakout${fresh.length === 1 ? '' : 's'} on ${fmtDate(L.date)} · `
+                     + `${rows.filter(r => r.outcomes && r.outcomes.live && r.outcomes.live.status === 'open').length} held by the Bull Flag book. Newest first.`;
+    for(const r of picks){
+      let chart = '';
+      try{ chart = miniChart(await getJSON('./' + r.history_url), r); }catch(e){}
+      const isFresh = fresh.includes(r);
+      box.insertAdjacentHTML('beforeend', `<div class="card ex">
+        <h3>${r.symbol}<span class="tag ${isFresh ? '' : 'open'}">${isFresh ? 'Breakout today' : 'Open'}</span></h3>
+        <div class="meta">${r.impulse_gain_pct != null ? 'Pole +' + Math.round(r.impulse_gain_pct) + '%' : ''}
+          ${r.flag_sessions != null ? ' · ' + r.flag_sessions + '-day flag' : ''} · breakout ${fmtDate(r.entry_date || r.breakout_date)}</div>
+        ${chart}</div>`);
+    }
+  }catch(e){ note.textContent = 'Live examples are temporarily unavailable — see the scanner for today\'s list.'; }
+}
+
+async function loadBacktest(){
+  try{
+    const S = await getJSON('./live_state.json');
+    const st = S.strategies.BF, s = st.summary;
+    const stat = (v, l, c = '') => `<div class="stat"><div class="v ${c}">${v}</div><div class="l">${l}</div></div>`;
+    // NIFTY 500 over the same window, from the weekly benchmark series
+    let bCagr = null;
+    const bYear = {};
+    const b = S.benchmark && S.benchmark.equity;
+    if(b && b.length > 2){
+      const f = b[0], l = b[b.length - 1], yrs = (new Date(l.date) - new Date(f.date)) / (365.25 * 864e5);
+      bCagr = (Math.pow(l.value / f.value, 1 / yrs) - 1) * 100;
+      let prev = f.value, cur = null, last = f.value;            // calendar-year returns from weekly closes
+      b.forEach(p => { const yr = p.date.slice(0, 4); if(cur && yr !== cur){ bYear[cur] = (last / prev - 1) * 100; prev = last; } cur = yr; last = p.value; });
+      if(cur) bYear[cur] = (last / prev - 1) * 100;
+    }
+    document.getElementById('bt-stats').innerHTML =
+        stat(s.closed_trades, 'trades since 2020')
+      + stat(Number(s.win_rate_pct).toFixed(0) + '%', 'win rate')
+      + stat(Number(s.profit_factor).toFixed(2), 'profit factor')
+      + stat(pct(s.cagr_pct), 'CAGR (book)', s.cagr_pct >= 0 ? 'up' : 'dn')
+      + stat(Number(s.max_dd_pct).toFixed(1) + '%', 'max drawdown', 'dn')
+      + (bCagr != null ? stat(pct(bCagr), 'NIFTY 500 CAGR') : '');
+    document.getElementById('bt-note').textContent =
+      `Win rate ${Number(s.win_rate_pct).toFixed(0)}% means about 1 in ${Math.round(100 / s.win_rate_pct)} trades worked; `
+      + `profit factor ${Number(s.profit_factor).toFixed(2)} means the winners made about ${Number(s.profit_factor).toFixed(1)}× what the losers lost. As of ${fmtDate(st.as_of)}.`;
+    document.getElementById('bt-years').innerHTML = Object.keys(st.yearly).sort().map(y =>
+      `<tr><td class="num">${y}</td><td class="r num ${st.yearly[y] >= 0 ? 'up' : 'dn'}">${pct(st.yearly[y])}</td>`
+      + `<td class="r num">${bYear[y] != null ? pct(bYear[y]) : '—'}</td></tr>`).join('');
+  }catch(e){ document.getElementById('bt-note').textContent = 'Backtest data is temporarily unavailable.'; }
+}
+loadExamples(); loadBacktest();
+</script>
+</body>
+</html>

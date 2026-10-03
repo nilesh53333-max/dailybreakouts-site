@@ -3,8 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="DailyBreakouts scans Indian stocks for volatility contraction, bull flag, and cup-and-handle patterns with transparent historical backtests.">
+<meta name="description" content="Free daily scanner for chart-pattern breakouts in Indian stocks (NSE): Bull Flag, Cup & Handle, Volatility Contraction, Double & Triple Bottom, High Tight Flag, Inverse Head & Shoulders and Leader Pullback, with transparent backtests since 2020.">
 <title>DailyBreakouts — Indian Market Breakout Scanner</title>
+<link rel="canonical" href="https://dailybreakouts.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DailyBreakouts">
+<meta property="og:url" content="https://dailybreakouts.com/">
+<meta property="og:title" content="DailyBreakouts — chart-pattern breakouts in Indian stocks, every day">
+<meta property="og:description" content="Bull Flag, Cup & Handle, VCP, Double Bottom and more — scanned at 3:15 PM every trading day, with charts and backtests since 2020. Educational, free.">
+<meta property="og:image" content="https://dailybreakouts.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DailyBreakouts — chart-pattern breakouts in Indian stocks">
+<meta name="twitter:description" content="Daily pattern scanner for NSE stocks with charts and backtests. Educational, free.">
+<meta name="twitter:image" content="https://dailybreakouts.com/og-image.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23142850'/%3E%3Crect x='7' y='16' width='4' height='10' fill='%2316A34A'/%3E%3Crect x='14' y='9' width='4' height='17' fill='%2316A34A'/%3E%3Crect x='21' y='4' width='4' height='22' fill='%2316A34A'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
@@ -257,6 +270,18 @@
   .content-col{width:100%;max-width:1680px;margin:0 auto;min-width:0;display:flex;flex-direction:column;}
 
   .summary-strip{display:flex;gap:12px;margin-bottom:18px;}
+  .portfolio-strip{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;background:var(--ink);color:#E2E8F0;border-radius:10px;
+    padding:9px 16px;margin:0 0 12px;font-size:12px;}
+  .portfolio-strip:empty{display:none;}
+  .portfolio-strip .ps-title{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#fff;font-size:13px;}
+  .portfolio-strip .ps-item{display:flex;align-items:baseline;gap:5px;white-space:nowrap;}
+  .portfolio-strip .ps-l{color:#94A3B8;font-size:11px;}
+  .portfolio-strip .ps-v{font-family:'IBM Plex Mono',monospace;font-weight:600;color:#fff;}
+  .portfolio-strip .ps-v.up{color:#4ADE80;} .portfolio-strip .ps-v.dn{color:#F87171;}
+  .portfolio-strip .ps-note{color:#94A3B8;font-size:10.5px;margin-left:auto;}
+  .eq-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:10.5px;color:var(--muted);margin-top:4px;}
+  .eq-legend i{display:inline-block;width:16px;height:0;border-top:2px solid var(--green);vertical-align:middle;margin-right:4px;}
+  .eq-legend i.b{border-top:2px dashed #94A3B8;}
   .summary-strip .stat{flex:1;}
   .btn-primary{background:var(--green);border:none;border-radius:8px;padding:0 18px;font-size:13px;font-weight:600;color:#FFFFFF;cursor:pointer;white-space:nowrap;}
   .btn-secondary{background:#ECFDF5;border:1px solid var(--green);border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;color:var(--green);cursor:pointer;}
@@ -269,7 +294,9 @@
   .keystats .row .lbl{color:var(--muted);}
   .keystats .row .val{font-weight:600;}
 
-  .compact-strip h1{margin:0;line-height:1.15;}
+  .compact-strip h1{margin:0;line-height:1.15;display:inline-block;margin-right:10px;}
+  .strategy-guide{font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap;}
+  .strategy-guide:hover{text-decoration:underline;}
   .compact-strip .sub{margin:1px 0 0;line-height:1.2;}
   .lifecycle-cards{display:flex;gap:8px;margin-bottom:10px;}
   .stage-card{flex:1;}
@@ -291,8 +318,10 @@
 
 <div class="app-body">
 <main class="content-col">
+  <div id="portfolio-strip" class="portfolio-strip" aria-label="All books together"></div>
   <div class="compact-strip">
     <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
+    <a id="strategy-guide" class="strategy-guide" href="#" style="display:none;"></a>
     <div class="sub" id="dynamic-sub">Loading latest scanner data…</div>
   </div>
 
@@ -380,6 +409,7 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   bullflag: {
+    guide: "bull-flag.html",
     title: "Classic Bull Flag",
     live_key: "BF",
     stop_text: "ALL9 exits",
@@ -446,6 +476,9 @@ function switchStrategy(name){
     item.setAttribute('aria-current', name === key ? 'page' : 'false');
   });
   document.getElementById('main-strategy-title').textContent = cfg.title;
+  const guide = document.getElementById('strategy-guide');
+  if(guide){ guide.style.display = cfg.guide ? '' : 'none'; guide.href = cfg.guide || '#';
+             guide.textContent = cfg.guide ? `How to spot a ${cfg.title} →` : ''; }
   document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
 
@@ -544,12 +577,51 @@ async function loadLiveState(){
     LIVE_STATE = await res.json();
   }catch(e){ console.error('live_state.json unavailable', e); LIVE_STATE = {strategies:{}}; }
   renderBacktest();
+  renderPortfolioStrip();
+}
+
+// Top strip: every book together -- the system's headline numbers, plus what happened today
+function renderPortfolioStrip(){
+  const el = document.getElementById('portfolio-strip');
+  const port = LIVE_STATE && LIVE_STATE.portfolio && LIVE_STATE.portfolio.summary;
+  if(!el || !port) return;
+  const books = Object.values(LIVE_STATE.strategies || {});
+  const open = books.reduce((n, b) => n + (b.open_positions || []).length, 0);
+  const ins = books.reduce((n, b) => n + (b.entries_today || []).length, 0);
+  const outs = books.reduce((n, b) => n + (b.exits_today || []).length, 0);
+  const bench = benchmarkFor(LIVE_STATE.portfolio.equity);
+  const lakh = v => v >= 1e7 ? '₹' + (v / 1e7).toFixed(2) + ' Cr' : '₹' + (v / 1e5).toLocaleString('en-IN', {maximumFractionDigits: 1}) + 'L';
+  const item = (l, v, cls='') => `<span class="ps-item"><span class="ps-l">${l}</span><span class="ps-v ${cls}">${v}</span></span>`;
+  el.innerHTML = `<span class="ps-title">All ${books.length} books</span>`
+    + item('Value', `${lakh(port.start_capital)} → ${lakh(port.end_value)}`)
+    + item('CAGR', fmtPct(port.cagr_pct), port.cagr_pct >= 0 ? 'up' : 'dn')
+    + item('Max DD', Number(port.max_dd_pct).toFixed(1) + '%', 'dn')
+    + (bench && bench.cagr != null ? item(`${bench.name} CAGR`, fmtPct(bench.cagr)) : '')
+    + item('Open', open)
+    + item('Today', `${ins} in · ${outs} out`)
+    + `<span class="ps-note">Backtest since 2020 · live rules · as of ${formatIsoDate(LIVE_STATE.as_of) || LIVE_STATE.as_of}</span>`;
+}
+
+// NIFTY 500 rescaled to the book's starting value, on the same weekly dates (or null if unavailable)
+function benchmarkFor(points){
+  const b = LIVE_STATE && LIVE_STATE.benchmark && LIVE_STATE.benchmark.equity;
+  if(!b || !points || points.length < 2) return null;
+  const first = b.find(x => x.date >= points[0].date);
+  if(!first) return null;
+  const scale = points[0].value / first.value;
+  const map = {}; b.forEach(x => { if(x.date >= points[0].date) map[x.date] = x.value * scale; });
+  const series = points.map(p => map[p.date] ?? null);
+  const last = [...b].reverse().find(x => x.date <= points[points.length-1].date);
+  const yrs = (new Date(last.date) - new Date(first.date)) / (365.25 * 864e5);
+  const cagr = yrs > 0.5 ? (Math.pow(last.value / first.value, 1 / yrs) - 1) * 100 : null;
+  return {series, cagr, name: LIVE_STATE.benchmark.name, asOf: last.date};
 }
 
 function renderEquityPoints(points){
   const w = 560, h = 130, padL = 4, padR = 4, padT = 14, padB = 18;
   if(!points || points.length < 2) return '';
-  const vals = points.map(p => p.value);
+  const bench = benchmarkFor(points);
+  const vals = points.map(p => p.value).concat(bench ? bench.series.filter(v => v != null) : []);
   const minV = Math.min(...vals), maxV = Math.max(...vals), range = (maxV - minV) || 1;
   const xOf = i => padL + i * (w - padL - padR) / (points.length - 1);
   const yOf = v => padT + (maxV - v) / range * (h - padT - padB);
@@ -562,9 +634,12 @@ function renderEquityPoints(points){
     if(y !== lastYear){ lastYear = y;
       labels.push(`<text x="${xOf(i).toFixed(1)}" y="${h-2}" font-size="9" fill="var(--muted)" text-anchor="start" font-family="IBM Plex Mono">${y}</text>`); }
   });
+  const bpts = bench ? bench.series.map((v,i) => v == null ? null : `${xOf(i).toFixed(1)},${yOf(v).toFixed(1)}`).filter(Boolean).join(' ') : '';
   return `<svg width="100%" height="${h}" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
     <polygon points="${fill}" fill="var(--green)" opacity="0.12"/>
-    <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="1.6"/>${labels.join('')}</svg>`;
+    ${bpts ? `<polyline points="${bpts}" fill="none" stroke="#94A3B8" stroke-width="1.3" stroke-dasharray="4 3" vector-effect="non-scaling-stroke"/>` : ''}
+    <polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="1.6"/>${labels.join('')}</svg>
+    ${bench ? `<div class="eq-legend"><span><i></i>This book</span><span><i class="b"></i>${bench.name}, same start${bench.cagr != null ? ` · CAGR ${fmtPct(bench.cagr)}` : ''}</span></div>` : ''}`;
 }
 
 // Shared books mix patterns (DB book = DB + Triple Bottom, HTF book = HTF + Inverse H&S): show which one.
@@ -628,6 +703,7 @@ function renderBacktest(){
     <div class="row"><span class="lbl">Closed trades</span><span class="val num">${s.closed_trades}</span></div>
     <div class="row"><span class="lbl">Open now</span><span class="val num">${(st.open_positions||[]).length} / ${st.max_positions || 15}</span></div>
     <div class="row"><span class="lbl">Exit rule</span><span class="val" style="font-size:10px;">${cfg.stop_text}</span></div>
+    ${(() => { const b = benchmarkFor(st.equity); return b && b.cagr != null ? `<div class="row"><span class="lbl">${b.name}, same period</span><span class="val num">CAGR ${fmtPct(b.cagr)}</span></div>` : ''; })()}
     ${port ? `<div class="row"><span class="lbl">All books together (₹${Math.round(port.start_capital/1e5)}L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
 }
 renderBacktest();
