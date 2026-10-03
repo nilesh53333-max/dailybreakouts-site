@@ -296,7 +296,7 @@
 
   .compact-strip h1{margin:0;line-height:1.15;display:inline-block;margin-right:10px;}
   .strategy-guide{font-size:12px;font-weight:600;color:var(--accent);white-space:nowrap;}
-  .strategy-guide:hover{text-decoration:underline;}
+  .strategy-guide a{color:var(--accent);} .strategy-guide a:hover{text-decoration:underline;}
   .compact-strip .sub{margin:1px 0 0;line-height:1.2;}
   .lifecycle-cards{display:flex;gap:8px;margin-bottom:10px;}
   .stage-card{flex:1;}
@@ -321,7 +321,7 @@
   <div id="portfolio-strip" class="portfolio-strip" aria-label="All books together"></div>
   <div class="compact-strip">
     <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
-    <a id="strategy-guide" class="strategy-guide" href="#" style="display:none;"></a>
+    <span id="strategy-guide" class="strategy-guide" style="display:none;"></span>
     <div class="sub" id="dynamic-sub">Loading latest scanner data…</div>
   </div>
 
@@ -401,6 +401,7 @@
 
 const STRATEGY_CONFIG = {
   vcm: {
+    guides: [["Volatility Contraction", "volatility-contraction.html"]],
     title: "Volatility Contraction",
     live_key: "VCM",
     stop_text: "ALL9 exits",
@@ -409,7 +410,7 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   bullflag: {
-    guide: "bull-flag.html",
+    guides: [["Bull Flag", "bull-flag.html"]],
     title: "Classic Bull Flag",
     live_key: "BF",
     stop_text: "ALL9 exits",
@@ -418,6 +419,7 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   cupandhandle: {
+    guides: [["Cup and Handle", "cup-and-handle.html"]],
     title: "Cup and Handle",
     live_key: "CH",
     stop_text: "ALL9 exits",
@@ -426,6 +428,7 @@ const STRATEGY_CONFIG = {
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
   },
   doublebottom: {
+    guides: [["Double Bottom", "double-bottom.html"], ["Triple Bottom", "triple-bottom.html"]],
     title: "Double & Triple Bottom",
     live_key: "DB",
     stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots",
@@ -435,6 +438,7 @@ const STRATEGY_CONFIG = {
     lifecycle_ready: true,
   },
   htf: {
+    guides: [["High Tight Flag", "high-tight-flag.html"], ["Inverse H&S", "inverse-head-and-shoulders.html"]],
     title: "High Tight Flag & Inverse H&S",
     live_key: "HTF",
     stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots (IHS max 5)",
@@ -444,6 +448,7 @@ const STRATEGY_CONFIG = {
     lifecycle_ready: true,
   },
   lp: {
+    guides: [["Leader Pullback", "leader-pullback.html"]],
     title: "Leader Pullback",
     live_key: "LP",
     stop_text: "ALL9 exits · ₹10L, 15 slots",
@@ -463,6 +468,16 @@ const STRATEGY_CONFIG = {
   },
 };
 let ACTIVE_STRATEGY = 'vcm';
+document.addEventListener('DOMContentLoaded', () => renderGuideLinks(STRATEGY_CONFIG[ACTIVE_STRATEGY]));
+
+// "How to spot: ..." links from a tab to its pattern guide page(s)
+function renderGuideLinks(cfg){
+  const guide = document.getElementById('strategy-guide');
+  if(!guide) return;
+  const g = (cfg && cfg.guides) || [];
+  guide.style.display = g.length ? '' : 'none';
+  guide.innerHTML = g.map(([t, u], i) => `<a href="${u}">${i ? '' : 'How to spot: '}${t}</a>`).join(' · ') + (g.length ? ' →' : '');
+}
 
 function switchStrategy(name){
   if(!STRATEGY_CONFIG[name] || name===ACTIVE_STRATEGY) return;
@@ -476,9 +491,7 @@ function switchStrategy(name){
     item.setAttribute('aria-current', name === key ? 'page' : 'false');
   });
   document.getElementById('main-strategy-title').textContent = cfg.title;
-  const guide = document.getElementById('strategy-guide');
-  if(guide){ guide.style.display = cfg.guide ? '' : 'none'; guide.href = cfg.guide || '#';
-             guide.textContent = cfg.guide ? `How to spot a ${cfg.title} →` : ''; }
+  renderGuideLinks(cfg);
   document.getElementById('backtest-strategy-title').textContent = `Backtest · ${cfg.title}`;
   document.getElementById('backtest-strategy-sub').textContent = cfg.sub_static;
 

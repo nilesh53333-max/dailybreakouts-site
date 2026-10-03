@@ -2,4 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://dailybreakouts.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
   <url><loc>https://dailybreakouts.com/bull-flag.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/volatility-contraction.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/cup-and-handle.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/double-bottom.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/triple-bottom.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/high-tight-flag.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/inverse-head-and-shoulders.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://dailybreakouts.com/leader-pullback.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
