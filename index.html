@@ -279,6 +279,11 @@
   .portfolio-strip .ps-v{font-family:'IBM Plex Mono',monospace;font-weight:600;color:#fff;}
   .portfolio-strip .ps-v.up{color:#4ADE80;} .portfolio-strip .ps-v.dn{color:#F87171;}
   .portfolio-strip .ps-note{color:#94A3B8;font-size:10.5px;margin-left:auto;}
+  .portfolio-strip .ps-chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .portfolio-strip .ps-chip{background:rgba(74,222,128,.14);color:#BBF7D0;border:1px solid rgba(74,222,128,.35);border-radius:999px;
+    padding:2px 9px;font-size:11.5px;text-decoration:none;white-space:nowrap;}
+  .portfolio-strip .ps-chip b{color:#4ADE80;margin-left:3px;}
+  .portfolio-strip .ps-chip:hover{background:rgba(74,222,128,.25);}
   .eq-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:10.5px;color:var(--muted);margin-top:4px;}
   .eq-legend i{display:inline-block;width:16px;height:0;border-top:2px solid var(--green);vertical-align:middle;margin-right:4px;}
   .eq-legend i.b{border-top:2px dashed #94A3B8;}
@@ -318,7 +323,7 @@
 
 <div class="app-body">
 <main class="content-col">
-  <div id="portfolio-strip" class="portfolio-strip" aria-label="All books together"></div>
+  <div id="portfolio-strip" class="portfolio-strip" aria-label="Today's breakouts"></div>
   <div class="compact-strip">
     <h1 class="disp" id="main-strategy-title">Volatility Contraction</h1>
     <span id="strategy-guide" class="strategy-guide" style="display:none;"></span>
@@ -364,9 +369,9 @@
       <div class="grid-4 compact-strip bt-stats-row" id="bt-stats"></div>
 
       <div class="quadrant-card">
-        <div style="font-size:10.5px;font-weight:600;color:var(--muted);margin-bottom:6px;">Year-by-year (compounding, starts <span id="bt-start-cap">₹10L</span> · live rules at 3:15 PM)</div>
+        <div style="font-size:10.5px;font-weight:600;color:var(--muted);margin-bottom:6px;">Year-by-year return (live rules at 3:15 PM)</div>
         <table>
-          <thead><tr><th>Year</th><th class="r">P&amp;L (₹)</th><th class="r">Return</th></tr></thead>
+          <thead><tr><th>Year</th><th class="r">Return</th><th class="r">NIFTY 500</th></tr></thead>
           <tbody id="bt-year-rows"></tbody>
         </table>
       </div>
@@ -431,8 +436,8 @@ const STRATEGY_CONFIG = {
     guides: [["Double Bottom", "double-bottom.html"], ["Triple Bottom", "triple-bottom.html"]],
     title: "Double & Triple Bottom",
     live_key: "DB",
-    stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots",
-    sub_static: "Live rules · 3:15 PM · ₹5L book, 10 slots · 100 DMA trail · 8% close stop · compounding",
+    stop_text: "100 DMA · 8% close stop · 10 slots",
+    sub_static: "Live rules · 3:15 PM · 10 slots · 100 DMA trail · 8% close stop · compounding",
     lifecycle_json: "./breakout_lifecycle_double_bottom.json",
     default_combo: {trail:null, stop:null, maxpos:10, yearlyKey:"live"},
     lifecycle_ready: true,
@@ -441,8 +446,8 @@ const STRATEGY_CONFIG = {
     guides: [["High Tight Flag", "high-tight-flag.html"], ["Inverse H&S", "inverse-head-and-shoulders.html"]],
     title: "High Tight Flag & Inverse H&S",
     live_key: "HTF",
-    stop_text: "100 DMA · 8% close stop · ₹5L, 10 slots (IHS max 5)",
-    sub_static: "Live rules · 3:15 PM · ₹5L book, 10 slots, Inverse H&S max 5 · 100 DMA trail · 8% close stop · compounding",
+    stop_text: "100 DMA · 8% close stop · 10 slots (IHS max 5)",
+    sub_static: "Live rules · 3:15 PM · 10 slots, Inverse H&S max 5 · 100 DMA trail · 8% close stop · compounding",
     lifecycle_json: "./breakout_lifecycle_htf.json",
     default_combo: {trail:null, stop:null, maxpos:10, yearlyKey:"live"},
     lifecycle_ready: true,
@@ -451,7 +456,7 @@ const STRATEGY_CONFIG = {
     guides: [["Leader Pullback", "leader-pullback.html"]],
     title: "Leader Pullback",
     live_key: "LP",
-    stop_text: "ALL9 exits · ₹10L, 15 slots",
+    stop_text: "ALL9 exits · 15 slots",
     sub_static: "Live rules · 3:15 PM · RS leaders bouncing off 21 EMA / 50 DMA · ALL9 exits · compounding",
     lifecycle_json: "./breakout_lifecycle_lp.json",
     default_combo: {trail:null, stop:null, maxpos:15, yearlyKey:"live"},
@@ -460,7 +465,7 @@ const STRATEGY_CONFIG = {
   etf: {
     title: "ETF Trend",
     live_key: "ETF",
-    stop_text: "Monthly check · hold above 200 DMA · ₹10L, 1/6 each",
+    stop_text: "Monthly check · hold above 200 DMA · 1/6 each",
     sub_static: "Gold · Nasdaq 100 · Hang Seng · Silver · Gilt · FANG+ ETFs · last trading day of each month: hold above the 200 DMA, else cash · moves independently of the stock books",
     lifecycle_json: "./breakout_lifecycle_etf.json",
     default_combo: {trail:null, stop:null, maxpos:6, yearlyKey:"live"},
@@ -593,26 +598,42 @@ async function loadLiveState(){
   renderPortfolioStrip();
 }
 
-// Top strip: every book together -- the system's headline numbers, plus what happened today
-function renderPortfolioStrip(){
+// Top strip: TODAY's breakouts across all patterns (no money -- the product is the breakouts)
+async function renderPortfolioStrip(){
   const el = document.getElementById('portfolio-strip');
-  const port = LIVE_STATE && LIVE_STATE.portfolio && LIVE_STATE.portfolio.summary;
-  if(!el || !port) return;
-  const books = Object.values(LIVE_STATE.strategies || {});
-  const open = books.reduce((n, b) => n + (b.open_positions || []).length, 0);
-  const ins = books.reduce((n, b) => n + (b.entries_today || []).length, 0);
-  const outs = books.reduce((n, b) => n + (b.exits_today || []).length, 0);
-  const bench = benchmarkFor(LIVE_STATE.portfolio.equity);
-  const lakh = v => v >= 1e7 ? '₹' + (v / 1e7).toFixed(2) + ' Cr' : '₹' + (v / 1e5).toLocaleString('en-IN', {maximumFractionDigits: 1}) + 'L';
-  const item = (l, v, cls='') => `<span class="ps-item"><span class="ps-l">${l}</span><span class="ps-v ${cls}">${v}</span></span>`;
-  el.innerHTML = `<span class="ps-title">All ${books.length} books</span>`
-    + item('Value', `${lakh(port.start_capital)} → ${lakh(port.end_value)}`)
-    + item('CAGR', fmtPct(port.cagr_pct), port.cagr_pct >= 0 ? 'up' : 'dn')
-    + item('Max DD', Number(port.max_dd_pct).toFixed(1) + '%', 'dn')
-    + (bench && bench.cagr != null ? item(`${bench.name} CAGR`, fmtPct(bench.cagr)) : '')
-    + item('Open', open)
-    + item('Today', `${ins} in · ${outs} out`)
-    + `<span class="ps-note">Backtest since 2020 · live rules · as of ${formatIsoDate(LIVE_STATE.as_of) || LIVE_STATE.as_of}</span>`;
+  if(!el || !LIVE_STATE || !LIVE_STATE.strategies) return;
+  const NAMES = {VCM: 'Volatility Contraction', BF: 'Bull Flag', CH: 'Cup & Handle', DB: 'Double Bottom', TB: 'Triple Bottom',
+                 HTF: 'High Tight Flag', IHS: 'Inverse H&S', LP: 'Leader Pullback'};
+  const tabs = Object.entries(STRATEGY_CONFIG).filter(([k]) => k !== 'etf');
+  const perPattern = {}, tabOf = {};
+  let fresh = 0, tracked = 0;
+  for(const [tab, cfg] of tabs){
+    const b = LIVE_STATE.strategies[cfg.live_key];
+    if(!b) continue;
+    tracked += (b.open_positions || []).length;
+    for(const s of (b.signals_today || [])){
+      const pat = s.pattern || cfg.live_key;
+      perPattern[pat] = (perPattern[pat] || 0) + 1; tabOf[pat] = tab; fresh++;
+    }
+  }
+  // forming = setups close to a breakout, from each tab's own scanner file
+  let forming = 0;
+  await Promise.all(tabs.map(async ([tab, cfg]) => {
+    try{
+      let d = LIFECYCLE_CACHE[cfg.lifecycle_json];
+      if(!d){ const r = await fetch(cfg.lifecycle_json, {cache: 'no-cache'}); d = await r.json(); LIFECYCLE_CACHE[cfg.lifecycle_json] = d; }
+      forming += ((d.stages && d.stages.forming) || []).length;
+    }catch(e){}
+  }));
+  const chips = Object.entries(perPattern).sort((a, b) => b[1] - a[1])
+    .map(([pat, n]) => `<a href="#" class="ps-chip" onclick="switchStrategy('${tabOf[pat]}');return false;">${NAMES[pat] || pat} <b>${n}</b></a>`).join('');
+  const item = (l, v) => `<span class="ps-item"><span class="ps-v">${v}</span><span class="ps-l">${l}</span></span>`;
+  el.innerHTML = `<span class="ps-title">Today · ${formatIsoDate(LIVE_STATE.as_of) || LIVE_STATE.as_of}</span>`
+    + item(fresh === 1 ? 'fresh breakout' : 'fresh breakouts', fresh)
+    + (chips ? `<span class="ps-chips">${chips}</span>` : `<span class="ps-l">No breakouts today — patience is a position.</span>`)
+    + item('close to a breakout', forming)
+    + item('being tracked', tracked)
+    + `<span class="ps-note">Scanned at 3:15 PM every trading day</span>`;
 }
 
 // NIFTY 500 rescaled to the book's starting value, on the same weekly dates (or null if unavailable)
@@ -677,38 +698,36 @@ function renderBacktest(){
   const s = st.summary;
   const pf = s.profit_factor != null ? Number(s.profit_factor).toFixed(2) : '—';
   const wr = s.win_rate_pct != null ? Number(s.win_rate_pct).toFixed(2) + '%' : '—';
-  const capEl = document.getElementById('bt-start-cap');
-  if(capEl && s.start_capital) capEl.textContent = `₹${Math.round(s.start_capital / 1e5)}L`;
   document.getElementById('bt-stats').innerHTML = `
     <div class="stat"><div class="v" style="color:${colorFor(s.cagr_pct)}">${fmtPct(s.cagr_pct)}</div><div class="l">CAGR</div></div>
-    <div class="stat"><div class="v" style="color:${colorFor(s.total_return_pct)}">${fmtPct(s.total_return_pct)}</div><div class="l">Total return</div></div>
+    <div class="stat"><div class="v">${(st.open_positions||[]).length}</div><div class="l">Open now</div></div>
     <div class="stat"><div class="v" style="color:var(--red)">${Number(s.max_dd_pct).toFixed(2)}%</div><div class="l">Max DD</div></div>
     <div class="stat"><div class="v">${s.closed_trades}</div><div class="l">Trades</div></div>
     <div class="stat"><div class="v">${wr}</div><div class="l">Win rate</div></div>
     <div class="stat"><div class="v">${pf}</div><div class="l">Profit factor</div></div>`;
 
-  // P&L per year from the equity points (value at year end - value at year start)
-  const yearEnd = {};
-  (st.equity || []).forEach(p => { yearEnd[p.date.slice(0,4)] = p.value; });
-  let prevVal = s.start_capital;
+  // yearly % return next to NIFTY 500's calendar-year return (no rupee amounts)
+  const bYear = {};
+  const bq = LIVE_STATE.benchmark && LIVE_STATE.benchmark.equity;
+  if(bq && bq.length > 2){
+    let prev = bq[0].value, cur = null, last = bq[0].value;
+    bq.forEach(q => { const yr = q.date.slice(0, 4); if(cur && yr !== cur){ bYear[cur] = (last / prev - 1) * 100; prev = last; } cur = yr; last = q.value; });
+    if(cur) bYear[cur] = (last / prev - 1) * 100;
+  }
   document.getElementById('bt-year-rows').innerHTML = Object.keys(st.yearly).sort().map(y => {
     const ret = st.yearly[y];
-    const endVal = yearEnd[y] != null ? yearEnd[y] : prevVal * (1 + ret/100);
-    const pnl = endVal - prevVal; prevVal = endVal;
     return `<tr>
       <td class="num">${y}</td>
-      <td class="r num" style="color:${colorFor(pnl)}">${pnl>=0?'+':''}${Math.round(pnl).toLocaleString('en-IN')}</td>
       <td class="r num" style="color:${colorFor(ret)}">${fmtPctYr(ret)}</td>
+      <td class="r num" style="color:var(--muted)">${bYear[y] != null ? fmtPctYr(bYear[y]) : '—'}</td>
     </tr>`;
   }).join('');
 
   document.getElementById('bt-equity-chart').innerHTML = renderEquityPoints(st.equity);
-  document.getElementById('bt-ending-equity').textContent = '₹' + Math.round(s.end_value).toLocaleString('en-IN');
+  document.getElementById('bt-ending-equity').textContent = '';     // no rupee headline -- the curve shows the shape
 
   const port = LIVE_STATE.portfolio && LIVE_STATE.portfolio.summary;
   document.getElementById('bt-keystats').innerHTML = `
-    <div class="row"><span class="lbl">Starting capital</span><span class="val num">₹${Math.round(s.start_capital).toLocaleString('en-IN')}</span></div>
-    <div class="row"><span class="lbl">Ending value</span><span class="val num">₹${Math.round(s.end_value).toLocaleString('en-IN')}</span></div>
     <div class="row"><span class="lbl">CAGR</span><span class="val num" style="color:${colorFor(s.cagr_pct)}">${fmtPct(s.cagr_pct)}</span></div>
     <div class="row"><span class="lbl">Max drawdown</span><span class="val num" style="color:var(--red)">${Number(s.max_dd_pct).toFixed(2)}%</span></div>
     <div class="row"><span class="lbl">Win rate</span><span class="val num">${wr}</span></div>
@@ -717,7 +736,7 @@ function renderBacktest(){
     <div class="row"><span class="lbl">Open now</span><span class="val num">${(st.open_positions||[]).length} / ${st.max_positions || 15}</span></div>
     <div class="row"><span class="lbl">Exit rule</span><span class="val" style="font-size:10px;">${cfg.stop_text}</span></div>
     ${(() => { const b = benchmarkFor(st.equity); return b && b.cagr != null ? `<div class="row"><span class="lbl">${b.name}, same period</span><span class="val num">CAGR ${fmtPct(b.cagr)}</span></div>` : ''; })()}
-    ${port ? `<div class="row"><span class="lbl">All books together (₹${Math.round(port.start_capital/1e5)}L)</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
+    ${port ? `<div class="row"><span class="lbl">All patterns together</span><span class="val num">CAGR ${fmtPct(port.cagr_pct)} · DD ${Number(port.max_dd_pct).toFixed(1)}%</span></div>` : ''}`;
 }
 renderBacktest();
 loadLiveState();

@@ -264,7 +264,7 @@ async function loadBacktest(){
       + (bCagr != null ? stat(pct(bCagr), 'NIFTY 500 CAGR') : '');
     document.getElementById('bt-note').textContent =
       `Win rate ${wr.toFixed(0)}% means about 1 in ${one} trades worked; profit factor ${Number(s.profit_factor).toFixed(2)} means the winners made about `
-      + `${Number(s.profit_factor).toFixed(1)}× what the losers lost. ₹${Math.round(s.start_capital / 1e5)} lakh book, as of ${fmtDate(st.as_of)}.`;
+      + `${Number(s.profit_factor).toFixed(1)}× what the losers lost. As of ${fmtDate(st.as_of)}.`;
     document.getElementById('honest').innerHTML = `<b>Only about 1 in ${one} trades in this book actually worked.</b> Most signals failed and hit their stop. `
       + `It still made money overall because the winners ran much further than the losers fell (profit factor ${Number(s.profit_factor).toFixed(2)}). `
       + `That's why every trade needs a stop decided <i>before</i> entry — and why one trade proves nothing.`;
